@@ -1,0 +1,55 @@
+.modal-footer {
+  padding: $modal-inner-padding * .5;
+}
+
+.modal {
+  .modal-header {
+    .close {
+      background: transparent;
+      border: none;
+      font-size: 1.5em;
+      padding: 0;
+    }
+  }
+
+  .card {
+    .select2-container {
+      display: block;
+    }
+  }
+}
+
+.modal {
+  &.add-commision {
+
+    .form-control,
+    .form-select {
+      background-color: var(--bs-gray-900);
+    }
+  }
+
+  .custom-close-btn {
+    top: -.5rem;
+    right: -.5rem;
+  }
+
+}
+
+.bed-details-section {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .detail-row {
+    margin-bottom: .625rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,594 @@
+# Copyright (C) 2024 iqonic
+# This file is distributed under the same license as the KiviCare - Clinic & Patient Management System Pro (EHR) plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: KiviCare - Clinic & Patient Management System Pro (EHR) 2.5.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kivicare-pro\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-03-15T10:19:47+05:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: kiviCare-clinic-&-patient-management-system-pro\n"
+
+#. Plugin Name of the plugin
+msgid "KiviCare - Clinic & Patient Management System Pro (EHR)"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://iqonic.design"
+msgstr ""
+
+#. Description of the plugin
+msgid "KiviCare - Clinic & Patient Management System Pro (EHR) is an add on with extended feature for clinic and patient management (EHR) plugin."
+msgstr ""
+
+#. Author of the plugin
+msgid "iqonic"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://iqonic.design/"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:147
+#: proApp/baseClasses/KCProActivate.php:156
+msgid "Warning:"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:147
+#: proApp/baseClasses/KCProActivate.php:156
+msgid "KiviCare - Clinic & Patient Management System Pro"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:147
+msgid " Requires Plugin Version :  "
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:147
+msgid "KiviCare - Clinic & Patient Management System (EHR) V"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:147
+msgid "your current plugin version is"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:156
+msgid "Requires"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:156
+msgid "KiviCare - Clinic & Patient Management System (EHR)"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:165
+msgid "Warning: kiviCare-clinic-&-patient-management-system-pro"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:165
+msgid " is deactivate Because kivicare-clinic-management-system is not active"
+msgstr ""
+
+#: proApp/baseClasses/KCProActivate.php:165
+msgid "Note:kivicare-clinic-management-system plugin is active still receiving this message then Make sure that kivicare-clinic-management-system plugin folder is same as \" kivicare-clinic-management-system\" in wp-content/plugins."
+msgstr ""
+
+#: proApp/filters/KCProBillingFilters.php:277
+#: proApp/filters/KCProBillingFilters.php:394
+msgid "No encounter found"
+msgstr ""
+
+#: proApp/filters/KCProBillingFilters.php:307
+msgid "Total Value"
+msgstr ""
+
+#: proApp/filters/KCProBillingFilters.php:316
+msgid "Encounter list"
+msgstr ""
+
+#: proApp/filters/KCProBillingFilters.php:401
+msgid "Encounter list without bills"
+msgstr ""
+
+#: proApp/filters/KCProCommonFilters.php:50
+msgid "failed to Checkout Clinic"
+msgstr ""
+
+#: proApp/filters/KCProCommonFilters.php:66
+msgid "Patient Clinic Updated"
+msgstr ""
+
+#: proApp/filters/KCProCommonFilters.php:115
+msgid "Patient clinic updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProCommonFilters.php:118
+msgid "Clinic Not selected"
+msgstr ""
+
+#: proApp/filters/KCProDashboardFilters.php:64
+msgid "doctor dashboard"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:54
+msgid "Import Type not supported"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:70
+msgid "Data Import Failed"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:91
+msgid "File is empty"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:97
+msgid "Only column  data in file"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:116
+msgid "Required "
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:116
+msgid " column not available in file"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:159
+msgid "Same data already exists Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:165
+msgid "doctor id not valid Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:169
+msgid "Same service already exists to doctor Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:175
+msgid "Module type is not valid Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:179
+msgid "Input type is not valid Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:183
+msgid "Select/choice type input field options not available Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:189
+msgid "Clinic admin email is already used by other users Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:193
+msgid "Clinic  email is already used by other users Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:197
+msgid "Clinic admin email is already used by other clinic Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:201
+msgid "Clinic  email is already used by other clinic Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:207
+#: proApp/filters/KCProDataImportFilters.php:217
+#: proApp/filters/KCProDataImportFilters.php:227
+msgid "Email is already used by other users Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:211
+#: proApp/filters/KCProDataImportFilters.php:221
+#: proApp/filters/KCProDataImportFilters.php:231
+msgid "Failed to saved user data Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:237
+msgid "Same medicine already exists Rows"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:243
+msgid "Clinic not found"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:247
+msgid "Doctor not found"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:251
+msgid "Patient not found"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:255
+msgid "Invalid appointment details"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:259
+msgid "Failed to import data"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:263
+msgid "Already exists same appointment data"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:281
+msgid "No Data Imported"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:281
+msgid " Data Import Successfully"
+msgstr ""
+
+#: proApp/filters/KCProDataImportFilters.php:300
+msgid "Demo import files"
+msgstr ""
+
+#: proApp/filters/KCProDoctorReviewFilters.php:58
+msgid "Data Founded"
+msgstr ""
+
+#: proApp/filters/KCProDoctorReviewFilters.php:64
+msgid "Date Not Found"
+msgstr ""
+
+#: proApp/filters/KCProDoctorReviewFilters.php:90
+msgid "Thank you for your review"
+msgstr ""
+
+#: proApp/filters/KCProDoctorReviewFilters.php:118
+msgid "doctor review/rating details"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:52
+msgid "Google setting saved successfully"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:58
+msgid "Google setting not saved"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:93
+msgid "Google Calendar Connected"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:116
+msgid "Google Calendar Disconnected"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:182
+msgid "template post not exists"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:205
+msgid "Appointment"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:327
+msgid "Google template  saved successfully."
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:337
+msgid "Patient Calender Enable"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:337
+msgid "Patient Calender Disabled"
+msgstr ""
+
+#: proApp/filters/KCProGoogleCalenderFilters.php:343
+msgid "Patient Calender disable"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:77
+msgid "Language updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:83
+msgid "Language updated"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:165
+#: proApp/filters/KCProLanaguageFilters.php:167
+msgid "Days"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:166
+msgid " Years"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:177
+msgid "Successfully print prescription"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:183
+#: proApp/filters/KCProLanaguageFilters.php:191
+msgid "No Data Found"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:197
+msgid "Failed to print"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:209
+msgid "Theme Color updated"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:215
+msgid "Theme Color not updated"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:227
+msgid "Theme logo updated"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:233
+msgid "Failed to update theme logo"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:246
+msgid "Theme loader updated"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:252
+msgid "Failed to update theme loader"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:269
+msgid "Theme mode updated"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:309
+#: proApp/filters/KCProLanaguageFilters.php:326
+msgid "Configuration saved"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:314
+#: proApp/filters/KCProLanaguageFilters.php:331
+msgid "Configuration not saved"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:536
+msgid "SMS template  saved successfully."
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:616
+msgid "Language File Updated successfully."
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:621
+msgid "Failed to update file"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:653
+msgid "Sms Option Not Enable"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:685
+msgid "Whatsapp Option Not Enable"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:728
+#: proApp/filters/KCProLanaguageFilters.php:743
+#: proApp/filters/KCProLanaguageFilters.php:758
+msgid "Failed to save"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:732
+#: proApp/filters/KCProLanaguageFilters.php:747
+#: proApp/filters/KCProLanaguageFilters.php:762
+msgid "Setting Saved"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:783
+#: proApp/filters/KCProLanaguageFilters.php:798
+msgid "Custom notification dynamic keys saved successfully"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:791
+#: proApp/filters/KCProLanaguageFilters.php:806
+msgid "Custom notification dynamic keys list"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:816
+msgid "Custom notification setting updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:818
+msgid "Invalid custom notification type"
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:865
+#: proApp/filters/KCProLanaguageFilters.php:949
+msgid "HTTP Request Error: "
+msgstr ""
+
+#: proApp/filters/KCProLanaguageFilters.php:901
+msgid "Configuration not found for "
+msgstr ""
+
+#: proApp/filters/KCProMultiClinicFilters.php:63
+msgid "Clinic has been saved successfully"
+msgstr ""
+
+#: proApp/filters/KCProMultiClinicFilters.php:100
+msgid "Clinic has  been updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProMultiClinicFilters.php:143
+msgid "Clinic data"
+msgstr ""
+
+#: proApp/filters/KCProMultiClinicFilters.php:150
+#: proApp/filters/KCProTaxFilter.php:144
+msgid "No data found"
+msgstr ""
+
+#: proApp/filters/KCProMultiClinicFilters.php:246
+msgid "No clinic session list found"
+msgstr ""
+
+#: proApp/filters/KCProMultiClinicFilters.php:256
+msgid "Clinic session list"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:76
+#: proApp/filters/KCProPatientEncounterTemplate.php:84
+msgid "You don't have permission to access"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:158
+msgid "Encounter Template Added Successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:166
+msgid "Encounter Template has been deleted successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:168
+#: proApp/filters/KCProPatientEncounterTemplate.php:437
+msgid "Not data removed"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:298
+#: proApp/filters/KCProPatientEncounterTemplate.php:320
+#: proApp/filters/KCProPatientEncounterTemplate.php:335
+msgid "Medical history saved successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:356
+msgid "Medical history deleted successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:359
+msgid "SomeThing Went Wrong"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:362
+msgid "Medical history Not Found "
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:378
+msgid "Medical history"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:407
+msgid "Prescription has been updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:409
+msgid "Same Value Already Present"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:414
+msgid "Prescription has been added successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientEncounterTemplate.php:435
+msgid "Prescription has been deleted successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:37
+#: proApp/filters/KCProPatientReport.php:139
+msgid "Same medical file name already exists,please enter different file name"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:52
+msgid "Report Added Successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:58
+msgid "Report Not Added"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:120
+msgid "Report Deleted Successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:125
+msgid "Report not Deleted Successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:148
+msgid "Report Update Successfully"
+msgstr ""
+
+#: proApp/filters/KCProPatientReport.php:154
+msgid "SomeThing Wents Wrongs"
+msgstr ""
+
+#: proApp/filters/KCProReportFilters.php:125
+#: proApp/filters/KCProReportFilters.php:285
+#: proApp/filters/KCProReportFilters.php:478
+msgid "Clinic Revenue"
+msgstr ""
+
+#: proApp/filters/KCProReportFilters.php:644
+msgid "appointment Count"
+msgstr ""
+
+#: proApp/filters/KCProReportFilters.php:803
+msgid "clinic appointment Count"
+msgstr ""
+
+#: proApp/filters/KCProRolePermissionFilters.php:227
+msgid "Permission updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProRolePermissionFilters.php:235
+msgid "Data not found"
+msgstr ""
+
+#: proApp/filters/KCProSettingFilters.php:44
+#: proApp/filters/KCProSettingFilters.php:60
+msgid "Failed to update  setting"
+msgstr ""
+
+#: proApp/filters/KCProSettingFilters.php:54
+msgid "Setting update successfully"
+msgstr ""
+
+#: proApp/filters/KCProSettingFilters.php:102
+msgid "Wordpress logo updated"
+msgstr ""
+
+#: proApp/filters/KCProSettingFilters.php:109
+msgid "Failed to update Wordpress logo"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:148
+msgid "Tax lists"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:186
+#: proApp/filters/KCProTaxFilter.php:208
+#: proApp/filters/KCProTaxFilter.php:223
+#: proApp/filters/KCProTaxFilter.php:239
+#: proApp/filters/KCProTaxFilter.php:258
+msgid "Same tax already exists, please add a unique name"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:193
+msgid "Tax updated successfully"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:266
+msgid "Tax saved successfully"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:320
+msgid "tax data"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:340
+msgid "Tax deleted successfully"
+msgstr ""
+
+#: proApp/filters/KCProTaxFilter.php:445
+msgid "Calculated tax data"
+msgstr ""

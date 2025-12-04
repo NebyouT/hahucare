@@ -1,0 +1,76 @@
+// table select2
+.dataTable {
+  .select2-container {
+    .select2-selection--single {
+      .select2-selection__rendered {
+        padding: 0.625rem 0.625rem 0.625rem 1.5rem;
+      }
+      .select2-selection__arrow {
+        right: auto;
+        left: 0.125rem;
+      }
+    }
+  }
+  .select2-container--default {
+    .select2-selection--single {
+      .select2-selection__arrow {
+        left: 0.5rem;
+      }
+    }
+  }
+}
+
+.iti--allow-dropdown .iti__flag-container,
+.iti--separate-dial-code .iti__flag-container {
+  right: 0;
+  left: auto;
+}
+
+.iti--allow-dropdown input[type='tel'],
+.iti--separate-dial-code input[type='tel'] {
+  padding-right: 80px;
+  padding-left: 0 !important;
+  direction: rtl;
+}
+
+.iti__country {
+  text-align: right;
+}
+
+.select2-container--default {
+  .select2-selection--single {
+    .select2-selection__arrow {
+      left: 0.8rem;
+    }
+    .select2-selection__clear {
+      margin-right: 0;
+      margin-left: 20px;
+      padding-right: 0px;
+    }
+  }
+  .select2-selection--multiple {
+    padding-right: 0.875rem;
+    padding-left: 1.563rem;
+
+    .select2-selection__choice__display {
+      padding-right: 5px;
+      padding-left: 2px;
+    }
+
+    .select2-selection__choice__remove {
+      border-left: none;
+    }
+
+    &::after {
+      left: 0.625rem;
+      right: auto;
+    }
+    .select2-selection__choice {
+      margin-left: 0;
+    }
+    .select2-selection__clear {
+      right: auto;
+      left: 16px;
+    }
+  }
+}

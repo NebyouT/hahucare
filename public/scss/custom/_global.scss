@@ -1,0 +1,485 @@
+#select-all-table {
+
+  &.form-check-input:checked,
+  &.form-check-input[type=checkbox]:indeterminate {
+    border-color: var(--bs-white);
+  }
+}
+
+.flatpickr-calendar {
+
+  &.arrowTop {
+    &:before {
+      border-bottom-color: var(--bs-border-color);
+    }
+
+    &::after {
+      border-bottom-color: var(--bs-border-color);
+    }
+  }
+
+  &.hasTime {
+    .flatpickr-time {
+      border: 1px solid var(--bs-border-color);
+      align-items: center;
+
+      .flatpickr-am-pm {
+        width: 20%;
+      }
+    }
+  }
+
+}
+
+.font-size-16 {
+  font-size: 16px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.border-top-gray-700 {
+  border-top: 1px solid var(--bs-gray-700);
+}
+
+.border-bottom-gray-700 {
+  border-bottom: 1px solid var(--bs-gray-700) !important;
+}
+
+.multiselect {
+  .multiselect-tags {
+    .multiselect-tag {
+      white-space: break-spaces;
+    }
+  }
+
+  input.multiselect-tags-search {
+    background: var(--bs-gray-900);
+  }
+}
+
+.input-select-image-box {
+  margin-bottom: 0 !important;
+}
+
+.form-logo {
+  width: 130px;
+}
+
+.tui-image-editor-container {
+  .tui-image-editor-submenu {
+    .tui-image-editor-submenu-item {
+      .tui-image-editor-button.apply {
+        label {
+          vertical-align: 0 !important;
+        }
+      }
+
+      .tui-image-editor-button.cancel {
+        label {
+          vertical-align: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+.bg-gray-900 {
+  background-color: var(--bs-gray-900);
+}
+
+.font-size-10 {
+  font-size: 0.625rem;
+}
+
+.font-size-12 {
+  font-size: 0.75rem;
+}
+
+.font-size-14 {
+  font-size: 0.875rem;
+}
+
+.font-size-18 {
+  font-size: 1.125rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+.line-count-1 {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-count-2 {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-count-3 {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.line-count-4 {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.line-count-5 {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+.card-block {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  &.card-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+  &.card-height-half {
+    height: calc(50% - 2rem);
+  }
+
+  &.card-height {
+    height: calc(100% - 2rem);
+  }
+}
+
+.font-size-10 {
+  font-size: 0.625rem;
+}
+
+.font-size-12 {
+  font-size: 0.75rem;
+}
+
+.font-size-14 {
+  font-size: 0.875rem;
+}
+
+.overflow-x-visible {
+  overflow-x: visible;
+}
+
+.applied-tax {
+  i {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+  }
+
+  &[aria-expanded="false"] {
+    i {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.excounter-note {
+  .form-control {
+    padding-right: 5em;
+  }
+
+  button {
+    position: absolute;
+    top: 50%;
+    left: auto;
+    right: .5em;
+    transform: translateY(-50%);
+  }
+
+  .form-control {
+    padding-right: 5em;
+  }
+
+  button {
+    position: absolute;
+    top: 50%;
+    left: auto;
+    right: .5em;
+    transform: translateY(-50%);
+  }
+}
+
+.appointment_date {
+  .flatpickr-calendar {
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+.status-filter {
+  .select2-container {
+    min-width: 6rem;
+  }
+}
+
+// Order Detail View Styles
+.order-details {
+  padding: 0;
+
+  .order-info {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bs-gray-200);
+  }
+
+  .section {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .info-item {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+  }
+
+  .supplier-info {
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+// jeet css
+.bg-gray-900 {
+  background-color: var(--bs-gray-900) !important;
+}
+
+.bg-gray-900[read-only] {
+  background-color: var(--bs-gray-900) !important;
+}
+
+.bg-gray-100 {
+  background-color: var(--bs-gray-100);
+}
+
+.text-muted {
+  color: var(--bs-gray-400) !important;
+}
+
+// Doctor Session Form Styles
+.clinic-custom-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.clinic-search-input {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.clinic-dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--bs-gray-900);
+  border: 1px solid var(--bs-primary);
+  border-radius: 0.375rem;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.clinic-dropdown-list.select-hidden {
+  display: none;
+}
+
+.clinic-dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: var(--bs-gray-900);
+  color: var(--bs-body-color);
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.clinic-dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--bs-primary);
+}
+
+.clinic-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.select-hidden {
+  display: none;
+}
+
+// bed status styles
+.bed-status-container {
+  .bed-status-content {
+    .bed-status-total {
+      padding: 10px 30px;
+      border-radius: var(--bs-border-radius);
+      font-weight: 600;
+
+    }
+
+    .btn-check:checked+.btn,
+    :not(.btn-check)+.btn:active,
+    .btn:first-child:active,
+    .btn.active,
+    .btn.show {
+      color: var(--bs-white);
+    }
+  }
+
+  .list-of-bed-content {
+    .bed-content {
+      padding-top: 40px;
+      margin-top: 40px;
+      border-top: 1px solid var(--bs-border-color);
+
+      &:first-child {
+        margin-top: 0;
+        border-top: none;
+        padding-top: 0;
+      }
+    }
+
+    .bed-status-card {
+      position: relative;
+      padding: 30px 16px;
+      text-align: center;
+
+      .bed-maintenance {
+        position: absolute;
+        inset-block-start: 10px;
+        inset-inline-end: 12px;
+        font-size: 1.5rem;
+        color: var(--bs-heading-color);
+      }
+
+      &.available {
+        .bed-icon {
+          color: var(--bs-success);
+        }
+
+        &.active {
+          background-color: var(--bs-success);
+
+          .bed-icon {
+            color: var(--bs-white);
+          }
+
+          .bed-identifier {
+            color: var(--bs-white);
+          }
+        }
+      }
+
+      &.unavailable {
+        .bed-icon {
+          color: var(--bs-warning);
+        }
+
+        .bed-identifier {
+          color: var(--bs-warning);
+        }
+      }
+
+      &.occupied {
+        .bed-icon {
+          color: var(--bs-danger);
+        }
+
+        .bed-identifier {
+          color: var(--bs-danger);
+        }
+      }
+
+      &.maintenance {
+        .bed-icon {
+          color: var(--bs-primary);
+        }
+      }
+
+      .bed-icon {
+        font-size: 2.9rem;
+      }
+    }
+
+  }
+
+
+}
+
+@include media-breakpoint-down(md) {
+
+  // bed status styles
+  .bed-status-container {
+    .list-of-bed-content {
+      .bed-content {
+        padding-top: 24px;
+        margin-top: 24px;
+
+        &:first-child {
+          margin-top: 0;
+          border-top: none;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+
+}
