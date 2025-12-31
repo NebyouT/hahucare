@@ -13,6 +13,10 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'chapa' => [
+    'secret' => env('CHAPA_SECRET_KEY'),
+    'public' => env('CHAPA_PUBLIC_KEY'),
+],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

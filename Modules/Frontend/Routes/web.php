@@ -24,7 +24,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/payment/chapa/webhook', [\Modules\Frontend\Http\Controllers\ChapaController::class, 'handleChapaWebhook'])->name('payment.chapa.webhook');
 Route::get('/login', [UserController::class, 'login'])->name('login-page');
 Route::get('/register', [UserController::class, 'registration'])->name('register-page');
 Route::get('/forgot-password', [UserController::class, 'forgotpassword'])->name('forgot-password');

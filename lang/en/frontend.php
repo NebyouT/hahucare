@@ -37,7 +37,7 @@ return[
     'contact_us'=>'Contact Us',
     'data_deletion'=>'Data Deletion Request',
     'top_category'=>'Top Categories',
-    'kivicare'=>'KiviCare',
+    'kivicare'=>'Hahucare',
     'filter_by'=>'Filter By:',
     'my_appointments'=>'My Appointments',
     'doctors'=>'Doctors',

@@ -197,6 +197,7 @@
                                                             'razor_payment_method' => 'Razorpay',
                                                             'str_payment_method' => 'Stripe',
                                                             'paystack_payment_method' => 'Paystack',
+                                                            'Chapa' => 'chapa_payment_method',
                                                             'paypal_payment_method' => 'Paypal',
                                                             'flutterwave_payment_method' => 'Flutterwave',
                                                             'airtel_payment_method' => 'Airtel',
@@ -617,6 +618,7 @@
                                         $displayPaymentMethod = null;
                                         $paymentMethods = [
                                             'razor_payment_method' => 'Razorpay',
+                                            'Chapa' => 'chapa_payment_method',
                                             'str_payment_method' => 'Stripe',
                                             'paystack_payment_method' => 'Paystack',
                                             'paypal_payment_method' => 'Paypal',
@@ -626,6 +628,7 @@
                                             'midtrans_payment_method' => 'Midtrans',
                                             'cinet_payment_method' => 'Cinet',
                                             'sadad_payment_method' => 'Sadad',
+                                            'Chapa' => 'chapa_payment_method',
                                             'cash' => 'Cash',
                                             'wallet' => 'Wallet',
                                         ];
@@ -1331,6 +1334,15 @@
                                             alt="{{ $method }}" style="width: 20px; height: 20px;">
                                         <span class="h6 fw-semibold m-0">{{ $method }}</span>
                                     </label>
+                                    <div class="form-check payment-method-items ...">
+  <label class="form-check-label" for="method-Chapa">
+    <img src="{{ asset('dummy-images/payment_icons/chapa.svg') }}" alt="Chapa" style="width:20px;height:20px;">
+    <span class="h6 fw-semibold m-0">Chapa</span>
+  </label>
+  <input class="form-check-input payment-radio" type="radio" name="payment_method" value="Chapa" id="method-Chapa">
+</div>
+                                    
+                                    ul
                                     <input class="form-check-input" type="radio" name="payment_method"
                                         value="{{ $method }}" id="method-{{ $method }}"
                                         @if ($method === 'cash') checked @endif>

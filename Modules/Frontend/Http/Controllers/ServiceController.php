@@ -246,7 +246,8 @@ class ServiceController extends Controller
         // List of available payment methods
         $paymentMethodsList = [
             'cash' => 'cash_payment_method',  // Always available
-            'Wallet' => 'wallet_payment_method', // Always available
+            'Wallet' => 'wallet_payment_method', 
+            'Chapa' => 'chapa_payment_method',// Always available
             'Stripe' => 'str_payment_method',
             'Paystack' => 'paystack_payment_method',
             'PayPal' => 'paypal_payment_method',

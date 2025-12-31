@@ -43,7 +43,8 @@
         "spatie/laravel-webhook-server": "^3.8",
         "stripe/stripe-php": "^16.4",
         "twilio/sdk": "^8.3",
-        "yajra/laravel-datatables-oracle": "^11.0"
+        "yajra/laravel-datatables-oracle": "^11.0",
+        "yaphet17/chapa": "^1.0"
     },
     "require-dev": {
       "barryvdh/laravel-ide-helper": "^3.0",

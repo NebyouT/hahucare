@@ -41,8 +41,8 @@
     "FAQ": true,
     "Blog": true,
     "FrontendSetting": true,
-    "Pharma": false,
+    "Pharma": true,
     "Plugins": true,
     "Bed": true,
-    "kivicare-pro": true
+    "kivicare-pro": false
 }

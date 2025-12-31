@@ -326,16 +326,17 @@ class AppointmentController extends Controller
         $paymentMethodsList = [
             'cash' => 'cash_payment_method',
             'Wallet' => 'wallet_payment_method',
-            'Stripe' => 'str_payment_method',
-            'Paystack' => 'paystack_payment_method',
-            'PayPal' => 'paypal_payment_method',
-            'Flutterwave' => 'flutterwave_payment_method',
-            'Airtel' => 'airtel_payment_method',
-            'PhonePay' => 'phonepay_payment_method',
-            'Midtrans' => 'midtrans_payment_method',
-            'Cinet' => 'cinet_payment_method',
-            'Sadad' => 'sadad_payment_method',
-            'Razor' => 'razor_payment_method',
+            'Chapa' => 'chapa_payment_method',
+            //'Stripe' => 'str_payment_method',
+           // 'Paystack' => 'paystack_payment_method',
+            //'PayPal' => 'paypal_payment_method',
+           // 'Flutterwave' => 'flutterwave_payment_method',
+          //  'Airtel' => 'airtel_payment_method',
+           // 'PhonePay' => 'phonepay_payment_method',
+          //  'Midtrans' => 'midtrans_payment_method',
+          //  'Cinet' => 'cinet_payment_method',
+          //  'Sadad' => 'sadad_payment_method',
+           // 'Razor' => 'razor_payment_method',
         ];
 
         $paymentMethods = ['Wallet'];
@@ -878,6 +879,7 @@ class AppointmentController extends Controller
         $paymentHandlers = [
             'cash' => 'CashPayment',
             'Wallet' => 'WalletPayment',
+            'Chapa' => 'ChapaPayment',
             'Stripe' => 'StripePayment',
             'Razor Pay' => 'RazorpayPayment',
             'Paystack' => 'PaystackPayment',
@@ -977,6 +979,7 @@ class AppointmentController extends Controller
         $paymentHandlers = [
             'cash' => 'CashPayment',
             'Wallet' => 'WalletPayment',
+            'Chapa' => 'ChapaPayment',
             'Stripe' => 'StripePayment',
             'Razor' => 'RazorpayPayment',
             'Paystack' => 'PaystackPayment',
@@ -1028,6 +1031,14 @@ class AppointmentController extends Controller
         $message = __('messages.save_appointment');
         return response()->json(['message' => $message, 'data' => $paymentData, 'status' => true], 200);
     }
+    
+    // chapa payment  added by NebyouT
+    
+    public function ChapaPayment(Request $request, $paymentData, $price)
+{
+    // Ensure the ChapaController class exists — it should implement ChapaPayment(Request, $paymentData, $price)
+    return app(\Modules\Frontend\Http\Controllers\ChapaController::class)->ChapaPayment($request, $paymentData, $price);
+}
 
     //stripe payment
 
@@ -2136,6 +2147,8 @@ class AppointmentController extends Controller
         $gateway = $request->input('gateway');
 
         switch ($gateway) {
+            case 'chapa':
+    return app(\Modules\Frontend\Http\Controllers\ChapaController::class)->handleChapaSuccess($request);
             case 'stripe':
                 return $this->handleStripeSuccess($request);
             case 'razorpay':
@@ -2640,16 +2653,17 @@ class AppointmentController extends Controller
         $paymentMethodsList = [
             'Cash' => 'cash_payment_method',  // Always available
             'Wallet' => 'wallet_payment_method', // Always available
-            'Stripe' => 'str_payment_method',
-            'Paystack' => 'paystack_payment_method',
-            'PayPal' => 'paypal_payment_method',
-            'Flutterwave' => 'flutterwave_payment_method',
-            'Airtel' => 'airtel_payment_method',
-            'PhonePay' => 'phonepay_payment_method',
-            'Midtrans' => 'midtrans_payment_method',
-            'Cinet' => 'cinet_payment_method',
-            'Sadad' => 'sadad_payment_method',
-            'Razor' => 'razor_payment_method',
+           // 'Stripe' => 'str_payment_method',
+            'Chapa' => 'chapa_payment_method',
+            //'Paystack' => 'paystack_payment_method',
+           // 'PayPal' => 'paypal_payment_method',
+           // 'Flutterwave' => 'flutterwave_payment_method',
+           /// 'Airtel' => 'airtel_payment_method',
+            //'PhonePay' => 'phonepay_payment_method',
+            //'Midtrans' => 'midtrans_payment_method',
+           // 'Cinet' => 'cinet_payment_method',
+            //'Sadad' => 'sadad_payment_method',
+            //'Razor' => 'razor_payment_method',
         ];
 
         $enabledPaymentMethods = ['Cash', 'Wallet']; // Add Cash and Wallet by default

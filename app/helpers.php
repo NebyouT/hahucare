@@ -2300,6 +2300,8 @@ if (!function_exists('versionPlus')) {
 
 function checkPlugin($pluginName)
 {
+    
+    
     if (!Schema::hasTable('plugins')) {
         return 'inactive'; // or simply return
     }
