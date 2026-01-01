@@ -53,4 +53,11 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
 
+    'afromessage' => [
+        'token' => env('AFROMESSAGE_API_TOKEN'),
+        'identifier_id' => env('AFROMESSAGE_IDENTIFIER_ID'),
+        'base_url' => env('AFROMESSAGE_BASE_URL', 'https://api.afromessage.com/api/send'),
+        'sender' => env('AFROMESSAGE_SENDER', 'HahuCare'),
+    ],
+
 ];

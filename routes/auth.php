@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\OtpAuthController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SocialLoginController;
@@ -59,6 +60,17 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+// OTP Phone Login Routes (must be before social login routes to avoid conflicts)
+Route::middleware('guest')->group(function () {
+    Route::get('login/phone', [OtpAuthController::class, 'showPhoneForm'])->name('otp.phone.form');
+    Route::post('login/phone/send-otp', [OtpAuthController::class, 'sendOtp'])->name('otp.send');
+    Route::get('login/phone/verify', [OtpAuthController::class, 'showVerifyForm'])->name('otp.verify.form');
+    Route::post('login/phone/verify', [OtpAuthController::class, 'verifyOtp'])->name('otp.verify');
+    Route::post('login/phone/resend', [OtpAuthController::class, 'resendOtp'])->name('otp.resend');
+    Route::get('login/phone/register', [OtpAuthController::class, 'showRegisterForm'])->name('otp.register.form');
+    Route::post('login/phone/register', [OtpAuthController::class, 'register'])->name('otp.register');
 });
 
 // Social Login Routes

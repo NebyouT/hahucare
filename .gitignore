@@ -1,37 +1,48 @@
-node_modules
+# Laravel
+/vendor
+/vendor33
+/hahucare
+/node_modules
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
 .env
 .env.backup
-.phpunit.result.cache
-Homestead.json
 Homestead.yaml
+Homestead.json
+
+# Laravel IDE Helper (optional)
+/_ide_helper.php
+/_ide_helper_models.php
+
+# Composer
+composer.lock
+
+# Node / NPM
 npm-debug.log
 yarn-error.log
-/.idea
-/.vscode
-*.cache
+yarn-debug.log
+package-lock.json
+yarn.lock
+
+# OS / Editor files
 .DS_Store
+Thumbs.db
+*.log
+*.swp
+*.swo
+*.bak
+*.tmp
 
+# PHPStorm / VSCode
+.idea/
+.vscode/
 
-# Below Comments For Design Style & Scripts
-# /public/css/*
-# !/public/css/.gitkeep
-# /public/js/core/*
-# !/public/js/core/.gitkeep
+# Cache / Framework storage
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
 
-# /public/js/*.js*
-# !/public/js/.gitkeep
-
-# /public/js/iqonic-script/*.min.js*
-# !/public/js/iqonic-script/.gitkeep
-# !/public/js/setting-init.js
-
-# /public/modules/**/*
-# !/public/modules/.gitkeep
-# /public/mix-manifest.json
-node_modules
-node_modules
-/storage/media-library/**/*
+# Ignore public storage uploads (if you store images there)
+public/storage/*

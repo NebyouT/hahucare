@@ -18,6 +18,17 @@
         <!-- Social Login -->
         <x-auth-social-login />
 
+        <!-- Phone OTP Login -->
+        <div class="text-center mb-3">
+            <a href="{{ route('otp.phone.form') }}" class="btn btn-outline-success w-100">
+                <i class="fas fa-mobile-alt me-2"></i>{{ __('Login with Phone Number') }}
+            </a>
+        </div>
+
+        <div class="text-center mb-3">
+            <span class="text-muted">{{ __('or login with email') }}</span>
+        </div>
+
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 

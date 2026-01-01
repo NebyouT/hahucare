@@ -87,6 +87,16 @@
                                     </a>
                                     @endif
                                 </div>
+                                
+                                <!-- OTP Phone Login -->
+                                <div class="d-flex justify-content-center mt-4">
+                                    <a href="{{ route('otp.phone.form') }}" class="btn btn-outline-success w-100" style="border-radius: 8px; padding: 12px;">
+                                        <i class="ph ph-phone me-2"></i>{{ __("Login with Phone Number") }}
+                                    </a>
+                                </div>
+                                <div class="text-center mt-2 mb-3">
+                                    <small class="text-muted">{{ __("Get OTP on your phone to login") }}</small>
+                                </div>
                                 <div class="d-flex justify-content-center flex-wrap gap-1 mt-5 mb-3">
                                  <a href="{{ route('login-page', ['google2fa' => 1]) }}"
                                     class=" font-size-14 fw-bold">{{ __("messages.secure_login_google2fa") }}</a>
