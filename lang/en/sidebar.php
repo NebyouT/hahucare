@@ -30,6 +30,8 @@ return [
     'templates' => 'Templates',
     'app_banner' => 'App Banner',
     'access_control' => 'Access Control',
+    'role_management' => 'Role Management',
+    'legacy_permissions' => 'Legacy Permissions',
     'promotion'=>'promotion',
     'modules' => 'Modules',
     'product' => 'Product',

@@ -1130,6 +1130,32 @@ class GenerateMenus
                 ]);
             }
 
+            // --- ACCESS CONTROL ---
+            if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                $accessControl = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-shield-check',
+                    'title' => __('sidebar.access_control'),
+                    'nickname' => 'access_control',
+                    'order' => 10,
+                ]);
+                
+                $this->childMain($accessControl, [
+                    'icon' => 'ph ph-gear-six',
+                    'title' => __('sidebar.role_management'),
+                    'route' => 'backend.role-management.index',
+                    'active' => ['app/role-management'],
+                    'order' => 0,
+                ]);
+                
+                $this->childMain($accessControl, [
+                    'icon' => 'ph ph-devices',
+                    'title' => __('sidebar.legacy_permissions'),
+                    'route' => 'backend.permission-role.list',
+                    'active' => ['app/permission-role'],
+                    'order' => 1,
+                ]);
+            }
+
             // --- LOG/BACKUPS ---
             $location11 = $this->parentMenu($menu, [
                 'icon' => 'ph ph-note',
@@ -1169,17 +1195,6 @@ class GenerateMenus
                 'icon' => 'ph ph-note',
             ]);
         }
-
-            // --- ACCESS CONTROL ---
-            if (auth()->user()->hasRole('admin')) {
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-devices',
-                    'title' => __('sidebar.access_control'),
-                    'route' => 'backend.permission-role.list',
-                    'active' => ['app/permission-role'],
-                    'order' => 10,
-                ]);
-            }
 
             // Access Permission Check
             $menu->filter(function ($item) {

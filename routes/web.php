@@ -112,6 +112,17 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
         // Role & Permissions Crud
         Route::resource('permission', PermissionController::class);
         Route::resource('role', RoleController::class);
+        
+        // Enhanced Role Management
+        Route::group(['prefix' => 'role-management', 'as' => 'role-management.', 'middleware' => ['role:admin|demo_admin']], function () {
+            Route::get('/', [App\Http\Controllers\RoleManagementController::class, 'index'])->name('index');
+            Route::post('/create', [App\Http\Controllers\RoleManagementController::class, 'createRole'])->name('create');
+            Route::post('/{role}/permissions', [App\Http\Controllers\RoleManagementController::class, 'updatePermissions'])->name('permissions.update');
+            Route::get('/{role}/permissions', [App\Http\Controllers\RoleManagementController::class, 'getPermissions'])->name('permissions.get');
+            Route::post('/{role}/toggle', [App\Http\Controllers\RoleManagementController::class, 'toggleRole'])->name('toggle');
+            Route::delete('/{role}', [App\Http\Controllers\RoleManagementController::class, 'deleteRole'])->name('delete');
+            Route::get('/stats', [App\Http\Controllers\RoleManagementController::class, 'getRoleStats'])->name('stats');
+        });
 
         Route::group(['prefix' => 'module', 'as' => 'module.'], function () {
             Route::get('index_data', [ModuleController::class, 'index_data'])->name('index_data');

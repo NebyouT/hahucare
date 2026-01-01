@@ -26,18 +26,22 @@ return [
     'MODULES' => [
         [
             'module_name' => 'bed',
+            'type' => '',
             'is_custom_permission' => 0,
         ],
         [
             'module_name' => 'bed_type',
+            'type' => '',
             'is_custom_permission' => 0,
         ],
           [
             'module_name' => 'bed_master',
+            'type' => '',
             'is_custom_permission' => 0,
         ],
           [
             'module_name' => 'allocations',
+            'type' => '',
             'is_custom_permission' => 0,
         ],
         [
@@ -324,6 +328,7 @@ return [
 
         [
             'module_name' => 'Incidence Report',
+            'type' => '',
             'is_custom_permission' => 0,
         ],
     ],

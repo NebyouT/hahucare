@@ -75,7 +75,7 @@
 
                                     <tbody>
                                         @foreach($modules as $mKey => $module)
-                                            @if($module['type'] == '')
+                                            @if(isset($module['type']) && $module['type'] == '')
                                                 <tr>
                                                     <td>{{ucwords($module['module_name'])}}</td>
                                                     <td>
@@ -219,7 +219,7 @@
 
                                     <tbody>
                                         @foreach($modules as $mKey => $module)
-                                            @if($module['type'] == 'pharmacy')
+                                            @if(isset($module['type']) && $module['type'] == 'pharmacy')
                                                 <tr>
                                                     <td>{{ucwords($module['module_name'])}}</td>
                                                     <td>
