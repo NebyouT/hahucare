@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Ogeysiisyada',
+    'lbl_text' => 'Qoraal',
+    'lbl_module' => 'Module',
+    'lbl_update' => 'La cusboonaysiiyay AT',
+    'title_template' => 'Qaababka Ogeysiinta',
+    'lbl_id' => 'Aqoonsiga',
+    'lbl_label' => 'Summada',
+    'lbl_type' => 'Nooca',
+    'lbl_status' => 'Xaalada',
+    'lbl_action' => 'Ficil',
+    'lbl_to' => 'Ku',
+    'lbl_bcc' => 'Bcc',
+    'lbl_cc' => 'Cc',
+    'edit' => 'Wax ka beddel',
+    'parameters' => 'Qiyaasta Ogeysiinta',
+    'template' => 'Template',
+    'lbl_customer' => 'Macmiil',
+    'list' => 'Liiska',
+    'notification_deleted' => 'Ogeysiinta waa la tirtiray',
+    'lbl_patient' => 'Bukaan',
+    'email_templates' => 'Qaababka iimaylka',
+];

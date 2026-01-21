@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'lbl_language' => 'Xulashada Luuqadda',
+    'lbl_file' => 'Dooro Faylka la turjumayo',
+    'lbl_key' => 'Furaha',
+    'lbl_value' => 'Qiimaha',
+    'lbl_timezone' => 'TimeZone',
+    'lbl_data_table_limit' => 'Xadka XogtaTable',
+    'lbl_currency' => 'Lacagta',
+    'soon' => 'Dhawaan',
+    'lbl_body_chart'=>'Jaantuska Jirka',
+    'lbl_theme_mode'=>'Qaabka Mawduuca',
+    'Menubar_position'=>'Meesha Bar Menu',
+    'lbl_image_handling'=>'Dooro Nooca Sawirka',
+    'lbl_menu_items'=>'Menu',
+    'btn_add_new_images' => 'Kudar Sawirka Qaabka',
+    'tbl_header_name' => 'Magaca',
+    'tbl_header_image' => 'Sawirka',
+    'tbl_header_default' => 'Asal ahaan',
+    'tbl_header_action' => 'Ficil',
+    'image_template_section_title' => 'Qaabka sawirka',
+    'lbl_default' => 'Asal ahaan',
+    'btn_remove' => 'Ka saar',
+    'lbl_date_formate' => 'Qaabka Taariikhda',
+    'lbl_time_formate' => 'Qaabka Waqtiga',
+];

@@ -25,7 +25,13 @@ class LanguageFactory extends Factory
     public function definition()
     {
         return [
-            'name' => substr($this->faker->text(15), 0, -1),
+           // 'name' => substr($this->faker->text(15), 0, -1),
+           // this is added
+             'key' => 'welcome',
+            'value' => 'Welcome message',
+            'language' => 'en',
+            'file' => 'messages',
+            //this is added
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

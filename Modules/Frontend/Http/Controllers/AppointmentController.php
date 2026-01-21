@@ -326,17 +326,16 @@ class AppointmentController extends Controller
         $paymentMethodsList = [
             'cash' => 'cash_payment_method',
             'Wallet' => 'wallet_payment_method',
-            'Chapa' => 'chapa_payment_method',
-            //'Stripe' => 'str_payment_method',
-           // 'Paystack' => 'paystack_payment_method',
-            //'PayPal' => 'paypal_payment_method',
-           // 'Flutterwave' => 'flutterwave_payment_method',
-          //  'Airtel' => 'airtel_payment_method',
-           // 'PhonePay' => 'phonepay_payment_method',
-          //  'Midtrans' => 'midtrans_payment_method',
-          //  'Cinet' => 'cinet_payment_method',
-          //  'Sadad' => 'sadad_payment_method',
-           // 'Razor' => 'razor_payment_method',
+            'Stripe' => 'str_payment_method',
+            'Paystack' => 'paystack_payment_method',
+            'PayPal' => 'paypal_payment_method',
+            'Flutterwave' => 'flutterwave_payment_method',
+            'Airtel' => 'airtel_payment_method',
+            'PhonePay' => 'phonepay_payment_method',
+            'Midtrans' => 'midtrans_payment_method',
+            'Cinet' => 'cinet_payment_method',
+            'Sadad' => 'sadad_payment_method',
+            'Razor' => 'razor_payment_method',
         ];
 
         $paymentMethods = ['Wallet'];
@@ -795,20 +794,28 @@ class AppointmentController extends Controller
         $data = Appointment::create($data);
         $is_telemet = ClinicsService::where('id', $data['service_id'])->pluck('is_video_consultancy')->first();
         if ($is_telemet == 1) {
-            $setting = Setting::where('name', 'google_meet_method')->orwhere('name', 'is_zoom')->first();
-            if ($data && $setting) {
-                if ($setting->name == 'google_meet_method' && $setting->val == 1) {
-                    $meetLink = $this->generateMeetLink($request, $data['start_date_time'], $data['duration'], $data);
-                } else {
-                    $zoom_url = getzoomVideoUrl($data);
-                    if (!empty($zoom_url) && isset($zoom_url['start_url']) && isset($zoom_url['join_url'])) {
-                        $startUrl = $zoom_url['start_url'];
-                        $joinUrl = $zoom_url['join_url'];
+            $googleMeetSetting = Setting::where('name', 'google_meet_method')->first();
+            $zoomSetting = Setting::where('name', 'is_zoom')->first();
+            
+            // Check Google Meet first (priority)
+            if ($googleMeetSetting && $googleMeetSetting->val == 1) {
+                $meetLink = $this->generateMeetLink($request, $data['start_date_time'], $data['duration'], $data);
+                if ($meetLink) {
+                    $data->start_video_link = $meetLink['start_url'] ?? '';
+                    $data->join_video_link = $meetLink['join_url'] ?? '';
+                    $data->save();
+                }
+            } 
+            // Fallback to Zoom if Google Meet is disabled
+            else if ($zoomSetting && $zoomSetting->val == 1) {
+                $zoom_url = getzoomVideoUrl($data);
+                if (!empty($zoom_url) && isset($zoom_url['start_url']) && isset($zoom_url['join_url'])) {
+                    $startUrl = $zoom_url['start_url'];
+                    $joinUrl = $zoom_url['join_url'];
 
-                        $data->start_video_link = $startUrl;
-                        $data->join_video_link = $joinUrl;
-                        $data->save();
-                    }
+                    $data->start_video_link = $startUrl;
+                    $data->join_video_link = $joinUrl;
+                    $data->save();
                 }
             }
         }
@@ -879,7 +886,6 @@ class AppointmentController extends Controller
         $paymentHandlers = [
             'cash' => 'CashPayment',
             'Wallet' => 'WalletPayment',
-            'Chapa' => 'ChapaPayment',
             'Stripe' => 'StripePayment',
             'Razor Pay' => 'RazorpayPayment',
             'Paystack' => 'PaystackPayment',
@@ -979,7 +985,6 @@ class AppointmentController extends Controller
         $paymentHandlers = [
             'cash' => 'CashPayment',
             'Wallet' => 'WalletPayment',
-            'Chapa' => 'ChapaPayment',
             'Stripe' => 'StripePayment',
             'Razor' => 'RazorpayPayment',
             'Paystack' => 'PaystackPayment',
@@ -1031,14 +1036,6 @@ class AppointmentController extends Controller
         $message = __('messages.save_appointment');
         return response()->json(['message' => $message, 'data' => $paymentData, 'status' => true], 200);
     }
-    
-    // chapa payment  added by NebyouT
-    
-    public function ChapaPayment(Request $request, $paymentData, $price)
-{
-    // Ensure the ChapaController class exists — it should implement ChapaPayment(Request, $paymentData, $price)
-    return app(\Modules\Frontend\Http\Controllers\ChapaController::class)->ChapaPayment($request, $paymentData, $price);
-}
 
     //stripe payment
 
@@ -2147,8 +2144,6 @@ class AppointmentController extends Controller
         $gateway = $request->input('gateway');
 
         switch ($gateway) {
-            case 'chapa':
-    return app(\Modules\Frontend\Http\Controllers\ChapaController::class)->handleChapaSuccess($request);
             case 'stripe':
                 return $this->handleStripeSuccess($request);
             case 'razorpay':
@@ -2653,17 +2648,16 @@ class AppointmentController extends Controller
         $paymentMethodsList = [
             'Cash' => 'cash_payment_method',  // Always available
             'Wallet' => 'wallet_payment_method', // Always available
-           // 'Stripe' => 'str_payment_method',
-            'Chapa' => 'chapa_payment_method',
-            //'Paystack' => 'paystack_payment_method',
-           // 'PayPal' => 'paypal_payment_method',
-           // 'Flutterwave' => 'flutterwave_payment_method',
-           /// 'Airtel' => 'airtel_payment_method',
-            //'PhonePay' => 'phonepay_payment_method',
-            //'Midtrans' => 'midtrans_payment_method',
-           // 'Cinet' => 'cinet_payment_method',
-            //'Sadad' => 'sadad_payment_method',
-            //'Razor' => 'razor_payment_method',
+            'Stripe' => 'str_payment_method',
+            'Paystack' => 'paystack_payment_method',
+            'PayPal' => 'paypal_payment_method',
+            'Flutterwave' => 'flutterwave_payment_method',
+            'Airtel' => 'airtel_payment_method',
+            'PhonePay' => 'phonepay_payment_method',
+            'Midtrans' => 'midtrans_payment_method',
+            'Cinet' => 'cinet_payment_method',
+            'Sadad' => 'sadad_payment_method',
+            'Razor' => 'razor_payment_method',
         ];
 
         $enabledPaymentMethods = ['Cash', 'Wallet']; // Add Cash and Wallet by default

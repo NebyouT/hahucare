@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'lbl_language' => 'የቋንቋ አማራጭ',
+    'lbl_file' => 'የሚተረጎም ፋይልን ይምረጡ',
+    'lbl_key' => 'ቁልፍ',
+    'lbl_value' => 'ዋጋ',
+    'lbl_timezone' => 'የሰዓት ሰቅ',
+    'lbl_data_table_limit' => 'የውሂብ ሰንጠረዥ ገደቦች',
+    'lbl_currency' => 'ምንዛሪ',
+    'soon' => 'በቅርቡ',
+    'lbl_body_chart'=>'የሰውነት ገበታ',
+    'lbl_theme_mode'=>'ገጽታ ሁነታ',
+    'Menubar_position'=>'የምናሌ አሞሌ አቀማመጥ',
+    'lbl_image_handling'=>'የምስል አይነትን ይምረጡ',
+    'lbl_menu_items'=>'ምናሌ',
+    'btn_add_new_images' => 'የምስል አብነት አክል',
+    'tbl_header_name' => 'ስም',
+    'tbl_header_image' => 'ምስል',
+    'tbl_header_default' => 'ነባሪ',
+    'tbl_header_action' => 'ድርጊት',
+    'image_template_section_title' => 'የምስል አብነት',
+    'lbl_default' => 'ነባሪ',
+    'btn_remove' => 'አስወግድ',
+    'lbl_date_formate' => 'የቀን ቅርጸት',
+    'lbl_time_formate' => 'የጊዜ ቅርጸት',
+];

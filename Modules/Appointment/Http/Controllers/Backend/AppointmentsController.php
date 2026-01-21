@@ -364,19 +364,23 @@ class AppointmentsController extends Controller
 
         // Telemedicine link creation
         if ($service && $service->is_video_consultancy == 1) {
-            $setting = Setting::whereIn('name', ['google_meet_method', 'is_zoom'])->first();
-            if ($setting) {
-                if ($setting->name == 'google_meet_method' && $setting->val == 1) {
-                    $this->generateMeetLink($request, $appointment->start_date_time, $appointment->duration, $appointment);
-                } else {
-                    $zoom_url = getzoomVideoUrl($appointment);
-                    if (!empty($zoom_url['start_url']) && !empty($zoom_url['join_url'])) {
-                        $appointment->update([
-                            'start_video_link' => $zoom_url['start_url'],
-                            'join_video_link' => $zoom_url['join_url'],
-                        ]);
-                    }
+            $googleMeetSetting = Setting::where('name', 'google_meet_method')->first();
+            $zoomSetting = Setting::where('name', 'is_zoom')->first();
+            
+            // Check Google Meet first (priority)
+            if ($googleMeetSetting && $googleMeetSetting->val == 1) {
+                $this->generateMeetLink($request, $appointment->start_date_time, $appointment->duration, $appointment);
+            } 
+            // Fallback to Zoom if Google Meet is disabled
+            else if ($zoomSetting && $zoomSetting->val == 1) {
+                $zoom_url = getzoomVideoUrl($appointment);
+                if (!empty($zoom_url['start_url']) && !empty($zoom_url['join_url'])) {
+                    $appointment->update([
+                        'start_video_link' => $zoom_url['start_url'],
+                        'join_video_link' => $zoom_url['join_url'],
+                    ]);
                 }
+            }
             }
         }
 

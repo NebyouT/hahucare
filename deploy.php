@@ -1,4 +1,5 @@
 <?php
+echo "DEPLOY SCRIPT WORKING";
 
 // ================= SECURITY =================
 $secret = 'DEPLOY_SECRET_123';

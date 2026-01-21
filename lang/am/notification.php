@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'ማሳወቂያዎች',
+    'lbl_text' => 'ጽሑፍ',
+    'lbl_module' => 'ሞጁል',
+    'lbl_update' => 'የዘመነ AT',
+    'title_template' => 'የማሳወቂያ አብነቶች',
+    'lbl_id' => 'መታወቂያ',
+    'lbl_label' => 'መለያ',
+    'lbl_type' => 'ዓይነት',
+    'lbl_status' => 'ሁኔታ',
+    'lbl_action' => 'ድርጊት',
+    'lbl_to' => 'ለ',
+    'lbl_bcc' => 'ቢሲሲ',
+    'lbl_cc' => 'ሲ.ሲ',
+    'edit' => 'አርትዕ',
+    'parameters' => 'የማሳወቂያ መለኪያዎች',
+    'template' => 'አብነት',
+    'lbl_customer' => 'ደንበኛ',
+    'list' => 'ዝርዝር',
+    'notification_deleted' => 'ማሳወቂያ ተሰርዟል።',
+    'lbl_patient' => 'ታካሚ',
+    'email_templates' => 'የኢሜል አብነቶች',
+];

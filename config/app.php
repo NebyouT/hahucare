@@ -127,12 +127,17 @@ return [
     */
 
     'available_locales' => [
-        'ar' => 'العربی(AR)',
         'en' => 'English (EN)',
-        'el' => 'Greek (EL)',
-        'fr' => 'French (FR)',
-        'de' => 'German (DE)',
-    ],
+        'am' => 'አማርኛ (AM)',
+        'sm' => 'Somali (SM)',
+    'ar' => 'العربي(AR)',
+    
+    
+   // 'el' => 'Greek (EL)',
+   // 'fr' => 'French (FR)',
+   // 'de' => 'German (DE)',
+    // Your new language
+],
 
     /*
     |--------------------------------------------------------------------------
