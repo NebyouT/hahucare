@@ -282,8 +282,9 @@ class SettingController extends Controller
         $user->is_telmet = 1;
         $user->save();
 
-        // Redirect back to profile with success message
-        return redirect('/app/profile')->with('success', 'Google account connected successfully!');
+        // Redirect back to profile with success message and set localStorage
+        return redirect('/app/profile')->with('success', 'Google account connected successfully!')
+            ->cookie('google_oauth_success', 'true', 1);
     }
 
     public function storeToken(Request $request)

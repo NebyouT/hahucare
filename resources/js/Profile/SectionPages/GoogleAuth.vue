@@ -32,20 +32,21 @@ export default {
     this.checkLoginStatus()
   },
   methods: {
-    checkLoginStatus() {
-      const storedLogin = localStorage.getItem('isLoggedIn')
-      if (storedLogin) {
-        const storedTokenExpiry = localStorage.getItem('tokenExpiry')
-        const tokenExpiry = new Date(storedTokenExpiry)
-        const now = new Date()
-
-        if (tokenExpiry && tokenExpiry > now) {
+    async checkLoginStatus() {
+      try {
+        const response = await axios.get('/app/my-info')
+        if (response.data && response.data.data && response.data.data.is_telmet == 1) {
           this.isLoggedIn = true
+          localStorage.setItem('isLoggedIn', 'true')
+          localStorage.setItem('tokenExpiry', response.data.data.token_expires_at || new Date(Date.now() + 3600000).toISOString())
         } else {
           this.isLoggedIn = false
           localStorage.removeItem('isLoggedIn')
-          localStorage.removeItem('userDetails')
+          localStorage.removeItem('tokenExpiry')
         }
+      } catch (error) {
+        console.error('Error checking Google OAuth status:', error)
+        this.isLoggedIn = false
       }
     },
     async login() {

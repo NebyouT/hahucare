@@ -898,13 +898,12 @@ class AppointmentsController extends Controller
                 return null;
             }
 
-            // Get Google Meet settings
-            $googleMeetSettings = Setting::whereIn('name', ['google_meet_method', 'google_clientid', 'google_secret_key'])
-                ->pluck('val', 'name');
-            $settings = $googleMeetSettings->toArray();
+            // Get Google Meet credentials from environment variables
+            $clientId = env('GOOGLE_CLIENT_ID');
+            $clientSecret = env('GOOGLE_CLIENT_SECRET');
 
-            if (empty($settings['google_clientid']) || empty($settings['google_secret_key'])) {
-                \Log::error('Google Meet credentials not configured in settings');
+            if (empty($clientId) || empty($clientSecret)) {
+                \Log::error('Google Meet credentials not configured in environment variables');
                 return null;
             }
 
@@ -920,8 +919,8 @@ class AppointmentsController extends Controller
 
             // Initialize Google Client
             $client = new GoogleClient([
-                'client_id' => $settings['google_clientid'],
-                'client_secret' => $settings['google_secret_key'],
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
                 'redirect_uri' => 'postmessage',
                 'access_type' => 'offline',
                 'prompt' => 'consent',
