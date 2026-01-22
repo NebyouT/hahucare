@@ -527,30 +527,26 @@ class UserController extends Controller
 
                 $user->save();
             }
-            if ($user->login_type !== 'google') {
+            if ($user->login_type !== 'google' && $user->login_type !== null) {
                 return redirect('/user-login')->with('error', 'This account was not created using Google login.');
             }
 
             // Log the user in
             Auth::login($user, true);
-            Artisan::call('cache:clear');
-            Artisan::call('config:clear');
-            Artisan::call('view:clear');
-            Artisan::call('config:cache');
-            Artisan::call('route:clear');
+            
+            $request->session()->regenerate();
+            
             // Redirect based on user role or intended URL
             if (session()->has('url.intended')) {
                 return redirect()->intended();
             }
 
-            // Example: redirect to dashboard if normal user
-            if ($user->hasRole('user')) {
-                return redirect()->route('frontend.index'); // your dashboard/home route
-            }
+            // Redirect to home page
             return redirect()->route('frontend.index');
-        }catch (\Exception $e) {
-                return Redirect::to('/frontend.index')->with('error', 'Something went wrong!');
-            }
+        } catch (\Exception $e) {
+            \Log::error('Google login error: ' . $e->getMessage());
+            return redirect()->route('frontend.index')->with('error', 'Something went wrong with Google login. Please try again.');
+        }
     }
     public function destroy(Request $request)
     {

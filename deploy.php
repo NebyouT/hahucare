@@ -11,9 +11,10 @@ if (!isset($_GET['key']) || $_GET['key'] !== $secret) {
 
 // ================= DEPLOY =================
 $cmd = "
-$cmd = "
 cd /home/hahucaxq/public_html &&
 git pull origin master &&
+npm install &&
+npm run build &&
 php artisan migrate --force &&
 php artisan optimize:clear
 2>&1
