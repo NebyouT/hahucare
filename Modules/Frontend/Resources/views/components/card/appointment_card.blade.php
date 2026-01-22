@@ -32,14 +32,14 @@
                     <p class="mb-0 font-size-14 text-primary">#{{ $appointment->id }}</p>
                 </div>
             </li>
-            @if (optional($appointment->clinicservice)->is_video_consultancy)
+            @if (optional($appointment->clinicservice)->is_video_consultancy == 1)
                 <li>
-                    <button type="button" 
-                        class="appointments-videocall border-0 bg-transparent p-0"
+                    <a class="appointments-videocall" 
+                        href="javascript:void(0);"
                         onclick="openVideoMeeting('{{ $appointment->join_video_link ?? $appointment->meet_link }}', 'Video Consultation - Appointment #{{ $appointment->id }}')"
                         title="Join Video Consultation">
                         <i class="ph ph-video-camera align-middle"></i>
-                    </button>
+                    </a>
                 </li>
             @endif
         </ul>

@@ -222,13 +222,27 @@ class SettingController extends Controller
     public function googleId(Request $request)
     {
         $setting = Setting::where('type', 'google_meet_method')->where('name', 'google_clientid')->first();
+        
+        $redirectUri = env('GOOGLE_REDIRECT_URI');
+        $clientId = env('GOOGLE_CLIENT_ID');
+        $clientSecret = env('GOOGLE_CLIENT_SECRET');
+        
+        \Log::info('Google OAuth Configuration:', [
+            'redirect_uri' => $redirectUri,
+            'client_id' => $clientId,
+            'has_secret' => !empty($clientSecret)
+        ]);
+        
         $client = new Client([
-            'client_id' => env('GOOGLE_CLIENT_ID'),
-            'redirect_uri' => env('GOOGLE_REDIRECT'),
-            'scopes' => 'https://www.googleapis.com/auth/contacts', // Add required scopes here
-            'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+            'client_id' => $clientId,
+            'redirect_uri' => $redirectUri,
+            'scopes' => ['https://www.googleapis.com/auth/calendar.events', 'https://www.googleapis.com/auth/userinfo.email'],
+            'client_secret' => $clientSecret,
         ]);
         $authUrl = $client->createAuthUrl();
+        
+        \Log::info('Google OAuth Auth URL:', ['url' => $authUrl]);
+        
         return response()->json($authUrl);
     }
 
@@ -239,7 +253,8 @@ class SettingController extends Controller
 
         $client->setClientId(env('GOOGLE_CLIENT_ID'));
         $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-        $client->setRedirectUri(env('GOOGLE_REDIRECT'));
+        $client->setRedirectUri(env('GOOGLE_REDIRECT_URI'));
+        $client->addScope('https://www.googleapis.com/auth/calendar.events');
         $client->addScope('https://www.googleapis.com/auth/userinfo.email');
 
         if (!$request->filled('code')) {
@@ -254,17 +269,21 @@ class SettingController extends Controller
         // Extract access token and expiration time
         $token = $accessToken['access_token'];
         $expiresIn = $accessToken['expires_in'];
+        $refreshToken = $accessToken['refresh_token'] ?? null;
 
-        // Calculate expiration timestamp
-        $expiresAt = Carbon::createFromTimestamp($expiresIn)->toDateTimeString();
+        // Calculate expiration timestamp (expires_in is in seconds from now)
+        $expiresAt = now()->addSeconds($expiresIn);
 
         // Store the access token and expiration timestamp in the user's table
-        $user = Auth::user(); // Assuming you're using Laravel's authentication
-        $user->google_access_token = $token;
-        $user->expires_in = $expiresAt;
+        $user = Auth::user();
+        $user->google_access_token = json_encode($accessToken);
+        $user->google_refresh_token = $refreshToken;
+        $user->token_expires_at = $expiresAt;
+        $user->is_telmet = 1;
         $user->save();
 
-        return response()->json($accessToken);
+        // Redirect back to profile with success message
+        return redirect('/app/profile')->with('success', 'Google account connected successfully!');
     }
 
     public function storeToken(Request $request)
