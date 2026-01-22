@@ -792,32 +792,32 @@ return [
             [
                 'type' => 'text', // input fields type
                 'data' => 'is_sms_integration', // data type, string, int, boolean
-                'name' => 'sms_account_sid', // unique name for field
+                'name' => 'sms_api_token', // unique name for field
                 'label' => 'integration', // you know what label it is
                 'rules' => 'required|max:191', // validation rule of laravel
                 'class' => '', // any class for input
                 'value' => '', // default value if you want
-                'help' => 'Paste the only the Measurement Id of Google Analytics stream.', // Help text for the input field.
+                'help' => 'Enter your AfroMessage API Token.', // Help text for the input field.
             ],
             [
                 'type' => 'text', // input fields type
                 'data' => 'is_sms_integration', // data type, string, int, boolean
-                'name' => 'sms_auth_token', // unique name for field
+                'name' => 'sms_identifier_id', // unique name for field
                 'label' => 'integration', // you know what label it is
                 'rules' => 'required|max:191', // validation rule of laravel
                 'class' => '', // any class for input
                 'value' => '', // default value if you want
-                'help' => 'Paste the only the Measurement Id of Google Analytics stream.', // Help text for the input field.
+                'help' => 'Enter your AfroMessage Identifier ID.', // Help text for the input field.
             ],
             [
                 'type' => 'text', // input fields type
                 'data' => 'is_sms_integration', // data type, string, int, boolean
-                'name' => 'mobile_number', // unique name for field
+                'name' => 'sms_sender', // unique name for field
                 'label' => 'integration', // you know what label it is
                 'rules' => 'required|max:191', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => '', // default value if you want
-                'help' => 'Paste the only the Measurement Id of Google Analytics stream.', // Help text for the input field.
+                'value' => 'HahuCare', // default value if you want
+                'help' => 'Enter the sender name for SMS (e.g., HahuCare).', // Help text for the input field.
             ],
             [
                 'type' => 'checkbox', // input fields type

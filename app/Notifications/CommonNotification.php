@@ -17,7 +17,7 @@ use Google\Client as Google_Client;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use App\Models\Setting;
-use Twilio\Rest\Client;
+use App\Services\AfroMessageService;
 use App\Models\User;
 class CommonNotification extends Notification implements ShouldQueue
 {
@@ -333,39 +333,63 @@ class CommonNotification extends Notification implements ShouldQueue
 
     function sendSmsMessage($data) {
         $settings = Setting::where('type', 'is_sms_integration')
-            ->whereIn('name', ['sms_account_sid', 'sms_auth_token', 'mobile_number'])
+            ->whereIn('name', ['sms_api_token', 'sms_identifier_id', 'sms_sender'])
             ->pluck('val', 'name');
 
         $user = User::where('id', $data['person_id'])->first();
 
-        if (empty($settings['sms_account_sid']) || empty($settings['sms_auth_token']) || empty($settings['mobile_number'])) {
+        if (empty($settings['sms_api_token']) || empty($settings['sms_identifier_id']) || empty($settings['sms_sender'])) {
+            Log::warning('AfroMessage SMS credentials not configured in settings');
             return false;
         }
 
         if (empty($data['person_id']) || empty($data['message'])) {
+            Log::warning('SMS data incomplete', ['person_id' => $data['person_id'] ?? null]);
             return false;
         }
 
-        $sid = $settings['sms_account_sid'];
-        $authToken = $settings['sms_auth_token'];
-        $twilioPhoneNumber = $settings['mobile_number'];
+        if (!$user || empty($user->mobile)) {
+            Log::warning('User mobile number not found', ['user_id' => $data['person_id']]);
+            return false;
+        }
+
         $recipientNumber = $user->mobile;
         $messageBody = strip_tags($data['message']);
 
-        $client = new Client($sid, $authToken);
+        // Create AfroMessage service with admin panel settings
+        $smsService = new AfroMessageService();
+        
+        // Temporarily override config with admin panel settings
+        config([
+            'services.afromessage.token' => $settings['sms_api_token'],
+            'services.afromessage.identifier_id' => $settings['sms_identifier_id'],
+            'services.afromessage.sender' => $settings['sms_sender']
+        ]);
 
         try {
-            $message = $client->messages->create(
-                $recipientNumber,
-                [
-                    'from' => $twilioPhoneNumber,
-                    'body' => $messageBody
-                ]
-            );
+            // Reinitialize service with new config
+            $smsService = new AfroMessageService();
+            $result = $smsService->sendSms($recipientNumber, $messageBody);
 
-            return true;
+            if ($result['success']) {
+                Log::info('SMS sent successfully via AfroMessage', [
+                    'recipient' => $recipientNumber,
+                    'person_id' => $data['person_id']
+                ]);
+                return true;
+            } else {
+                Log::error('AfroMessage SMS failed', [
+                    'recipient' => $recipientNumber,
+                    'error' => $result['message']
+                ]);
+                return false;
+            }
 
         } catch (\Exception $e) {
+            Log::error('AfroMessage SMS exception', [
+                'recipient' => $recipientNumber,
+                'error' => $e->getMessage()
+            ]);
             return false;
         }
     }

@@ -153,16 +153,16 @@
       <div v-if="is_sms_integration == 1" class="bg-body mt-3 px-5 py-4 mb-5">
         <div class="row">
           <div class="col-md-6">
-            <label for="category-sms_account_sid" class="mb-2">{{ $t('setting_integration_page.account_sid') }}</label>
-            <InputField class="col-md-12 mb-0" type="text" :is-required="true" placeholder="" v-model="sms_account_sid" :error-message="errors['sms_account_sid']" :error-messages="errorMessages['sms_account_sid']"></InputField>
+            <label for="category-sms_api_token" class="mb-2">{{ $t('setting_integration_page.api_token') }}</label>
+            <InputField class="col-md-12 mb-0" type="text" :is-required="true" placeholder="AfroMessage API Token" v-model="sms_api_token" :error-message="errors['sms_api_token']" :error-messages="errorMessages['sms_api_token']"></InputField>
           </div>
           <div class="col-md-6">
-            <label for="category-sms_auth_token" class="mb-2">{{ $t('setting_integration_page.auth_token') }}</label>
-            <InputField class="col-md-12 mb-0" type="text" :is-required="true" placeholder="" v-model="sms_auth_token" :error-message="errors['sms_auth_token']" :error-messages="errorMessages['sms_auth_token']"></InputField>
+            <label for="category-sms_identifier_id" class="mb-2">{{ $t('setting_integration_page.identifier_id') }}</label>
+            <InputField class="col-md-12 mb-0" type="text" :is-required="true" placeholder="AfroMessage Identifier ID" v-model="sms_identifier_id" :error-message="errors['sms_identifier_id']" :error-messages="errorMessages['sms_identifier_id']"></InputField>
           </div>
           <div class="col-md-6">
-            <label for="category-mobile_number" class="mb-2">{{ $t('setting_integration_page.mobile_number') }}</label>
-            <InputField class="col-md-12 mb-0" type="text" :is-required="true" placeholder="" v-model="mobile_number" :error-message="errors['mobile_number']" :error-messages="errorMessages['mobile_number']"></InputField>
+            <label for="category-sms_sender" class="mb-2">{{ $t('setting_integration_page.sender_name') }}</label>
+            <InputField class="col-md-12 mb-0" type="text" :is-required="true" placeholder="e.g., HahuCare" v-model="sms_sender" :error-message="errors['sms_sender']" :error-messages="errorMessages['sms_sender']"></InputField>
           </div>
         </div>
       </div>
@@ -243,9 +243,9 @@ const setFormData = (data) => {
       clinicadmin_ios_min_force_update_code: data.clinicadmin_ios_min_force_update_code  || '',
       clinicadmin_ios_latest_version_update_code: data.clinicadmin_ios_latest_version_update_code  || '',
       is_sms_integration: data.is_sms_integration || 0,
-      sms_account_sid: data.sms_account_sid  || '',
-      sms_auth_token: data.sms_auth_token  || '',
-      mobile_number: data.mobile_number  || '',
+      sms_api_token: data.sms_api_token  || '',
+      sms_identifier_id: data.sms_identifier_id  || '',
+      sms_sender: data.sms_sender  || '',
       is_whatsapp_integration: data.is_whatsapp_integration || 0,
       whatsapp_account_sid: data.whatsapp_account_sid  || '',
       whatsapp_auth_token: data.whatsapp_auth_token  || '',
@@ -335,19 +335,19 @@ const validationSchema = yup.object({
     }
     return true
   }),
-  sms_account_sid: yup.string().test('sms_account_sid', "Account sid is Required", function(value) {
+  sms_api_token: yup.string().test('sms_api_token', "API Token is Required", function(value) {
     if(this.parent.is_sms_integration == '1' && !value) {
       return false;
     }
     return true
   }),
-  sms_auth_token: yup.string().test('sms_auth_token', "Auth token is Required", function(value) {
+  sms_identifier_id: yup.string().test('sms_identifier_id', "Identifier ID is Required", function(value) {
     if(this.parent.is_sms_integration == '1' && !value) {
       return false;
     }
     return true
   }),
-  mobile_number: yup.string().test('mobile_number', "Mobile Number is Required", function(value) {
+  sms_sender: yup.string().test('sms_sender', "Sender Name is Required", function(value) {
     if(this.parent.is_sms_integration == '1' && !value) {
       return false;
     }
@@ -396,9 +396,9 @@ const { value: patient_ios_latest_version_update_code } = useField('patient_ios_
 const { value: clinicadmin_ios_min_force_update_code } = useField('clinicadmin_ios_min_force_update_code')
 const { value: clinicadmin_ios_latest_version_update_code } = useField('clinicadmin_ios_latest_version_update_code')
 const { value: is_sms_integration } = useField('is_sms_integration')
-const { value: sms_account_sid } = useField('sms_account_sid')
-const { value: sms_auth_token } = useField('sms_auth_token')
-const { value: mobile_number } = useField('mobile_number')
+const { value: sms_api_token } = useField('sms_api_token')
+const { value: sms_identifier_id } = useField('sms_identifier_id')
+const { value: sms_sender } = useField('sms_sender')
 const { value: is_whatsapp_integration } = useField('is_whatsapp_integration')
 const { value: whatsapp_account_sid } = useField('whatsapp_account_sid')
 const { value: whatsapp_auth_token } = useField('whatsapp_auth_token')
@@ -423,9 +423,9 @@ watch(() => isForceUpdateforIos.value, (value) => {
 }, {deep: true})
 watch(() => is_sms_integration.value, (value) => {
   if(value == '0') {
-    sms_account_sid.value = ''
-    sms_auth_token.value = ''
-    mobile_number.value = ''
+    sms_api_token.value = ''
+    sms_identifier_id.value = ''
+    sms_sender.value = ''
   }
 }, {deep: true})
 watch(() => is_whatsapp_integration.value, (value) => {
@@ -501,9 +501,9 @@ const versions_key = [
   'clinicadmin_ios_latest_version_update_code',
 ]
 const sms_key = [
-  'sms_account_sid',
-  'sms_auth_token',
-  'mobile_number'
+  'sms_api_token',
+  'sms_identifier_id',
+  'sms_sender'
 ]
 const whatsapp_key = [
   'whatsapp_account_sid',

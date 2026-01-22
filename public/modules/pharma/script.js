@@ -36,7 +36,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PharmaEarningFormOffcanvas_vue_vue_type_template_id_5454ef8f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PharmaEarningFormOffcanvas.vue?vue&type=template&id=5454ef8f */ "./Modules/Pharma/Resources/assets/js/components/PharmaEarningFormOffcanvas.vue?vue&type=template&id=5454ef8f");
 /* harmony import */ var _PharmaEarningFormOffcanvas_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PharmaEarningFormOffcanvas.vue?vue&type=script&setup=true&lang=js */ "./Modules/Pharma/Resources/assets/js/components/PharmaEarningFormOffcanvas.vue?vue&type=script&setup=true&lang=js");
 /* harmony import */ var _PharmaEarningFormOffcanvas_vue_vue_type_style_index_0_id_5454ef8f_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PharmaEarningFormOffcanvas.vue?vue&type=style&index=0&id=5454ef8f&lang=css */ "./Modules/Pharma/Resources/assets/js/components/PharmaEarningFormOffcanvas.vue?vue&type=style&index=0&id=5454ef8f&lang=css");
-/* harmony import */ var _home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -44,10 +44,9 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_PharmaEarningFormOffcanvas_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PharmaEarningFormOffcanvas_vue_vue_type_template_id_5454ef8f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"Modules/Pharma/Resources/assets/js/components/PharmaEarningFormOffcanvas.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_PharmaEarningFormOffcanvas_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PharmaEarningFormOffcanvas_vue_vue_type_template_id_5454ef8f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"Modules/Pharma/Resources/assets/js/components/PharmaEarningFormOffcanvas.vue"]])
 /* hot reload */
-if (false) // removed by dead control flow
-{}
+if (false) {}
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
@@ -112,16 +111,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _PharmaViewCommissions_vue_vue_type_template_id_258e87c6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PharmaViewCommissions.vue?vue&type=template&id=258e87c6 */ "./Modules/Pharma/Resources/assets/js/components/PharmaViewCommissions.vue?vue&type=template&id=258e87c6");
 /* harmony import */ var _PharmaViewCommissions_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PharmaViewCommissions.vue?vue&type=script&setup=true&lang=js */ "./Modules/Pharma/Resources/assets/js/components/PharmaViewCommissions.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var _home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_PharmaViewCommissions_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PharmaViewCommissions_vue_vue_type_template_id_258e87c6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"Modules/Pharma/Resources/assets/js/components/PharmaViewCommissions.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_PharmaViewCommissions_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PharmaViewCommissions_vue_vue_type_template_id_258e87c6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"Modules/Pharma/Resources/assets/js/components/PharmaViewCommissions.vue"]])
 /* hot reload */
-if (false) // removed by dead control flow
-{}
+if (false) {}
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
@@ -225,7 +223,7 @@ var LISTING_URL = function LISTING_URL(_ref3) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AST_NODE_PROPS_KEYS: () => (/* binding */ AST_NODE_PROPS_KEYS),
-/* harmony export */   CompileErrorCodes: () => (/* reexport safe */ _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.CompileErrorCodes),
+/* harmony export */   CompileErrorCodes: () => (/* reexport safe */ _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.CompileErrorCodes),
 /* harmony export */   CoreErrorCodes: () => (/* binding */ CoreErrorCodes),
 /* harmony export */   CoreWarnCodes: () => (/* binding */ CoreWarnCodes),
 /* harmony export */   DATETIME_FORMAT_OPTIONS_KEYS: () => (/* binding */ DATETIME_FORMAT_OPTIONS_KEYS),
@@ -240,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   clearNumberFormat: () => (/* binding */ clearNumberFormat),
 /* harmony export */   compile: () => (/* binding */ compile),
 /* harmony export */   compileToFunction: () => (/* binding */ compileToFunction),
-/* harmony export */   createCompileError: () => (/* reexport safe */ _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.createCompileError),
+/* harmony export */   createCompileError: () => (/* reexport safe */ _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.createCompileError),
 /* harmony export */   createCoreContext: () => (/* binding */ createCoreContext),
 /* harmony export */   createCoreError: () => (/* binding */ createCoreError),
 /* harmony export */   createMessageContext: () => (/* binding */ createMessageContext),
@@ -278,10 +276,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   translateDevTools: () => (/* binding */ translateDevTools),
 /* harmony export */   updateFallbackLocale: () => (/* binding */ updateFallbackLocale)
 /* harmony export */ });
-/* harmony import */ var _intlify_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @intlify/shared */ "./node_modules/@intlify/shared/dist/shared.mjs");
-/* harmony import */ var _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @intlify/message-compiler */ "./node_modules/@intlify/core-base/node_modules/@intlify/message-compiler/dist/message-compiler.esm-browser.js");
+/* harmony import */ var _intlify_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @intlify/shared */ "./node_modules/@intlify/shared/dist/shared.mjs");
+/* harmony import */ var _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @intlify/message-compiler */ "./node_modules/@intlify/core-base/node_modules/@intlify/message-compiler/dist/message-compiler.esm-browser.js");
 /*!
-  * core-base v9.14.5
+  * core-base v9.14.4
   * (c) 2025 kazuya kawaguchi
   * Released under the MIT License.
   */
@@ -295,20 +293,20 @@ __webpack_require__.r(__webpack_exports__);
  */
 function initFeatureFlags() {
     if (typeof __INTLIFY_PROD_DEVTOOLS__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__INTLIFY_PROD_DEVTOOLS__ = false;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__INTLIFY_PROD_DEVTOOLS__ = false;
     }
     if (typeof __INTLIFY_JIT_COMPILATION__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__INTLIFY_JIT_COMPILATION__ = false;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__INTLIFY_JIT_COMPILATION__ = false;
     }
     if (typeof __INTLIFY_DROP_MESSAGE_COMPILER__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__INTLIFY_DROP_MESSAGE_COMPILER__ = false;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__INTLIFY_DROP_MESSAGE_COMPILER__ = false;
     }
 }
 
 function isMessageAST(val) {
-    return ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(val) &&
+    return ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(val) &&
         resolveType(val) === 0 &&
-        ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(val, 'b') || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(val, 'body')));
+        ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(val, 'b') || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(val, 'body')));
 }
 const PROPS_BODY = ['b', 'body'];
 function resolveBody(node) {
@@ -358,7 +356,7 @@ function resolveProps(node, props, defaultValue) {
     for (let i = 0; i < props.length; i++) {
         const prop = props[i];
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(node, prop) && node[prop] != null) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(node, prop) && node[prop] != null) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return node[prop];
         }
@@ -597,7 +595,7 @@ const cache = new Map();
  * @VueI18nGeneral
  */
 function resolveWithKeyValue(obj, path) {
-    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(obj) ? obj[path] : null;
+    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(obj) ? obj[path] : null;
 }
 /**
  * message resolver
@@ -614,7 +612,7 @@ function resolveWithKeyValue(obj, path) {
  */
 function resolveValue(obj, path) {
     // check object
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(obj)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(obj)) {
         return null;
     }
     // parse path
@@ -647,7 +645,7 @@ function resolveValue(obj, path) {
         if (val === undefined) {
             return null;
         }
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(last)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(last)) {
             return null;
         }
         last = val;
@@ -659,8 +657,8 @@ function resolveValue(obj, path) {
 const DEFAULT_MODIFIER = (str) => str;
 const DEFAULT_MESSAGE = (ctx) => ''; // eslint-disable-line
 const DEFAULT_MESSAGE_DATA_TYPE = 'text';
-const DEFAULT_NORMALIZE = (values) => values.length === 0 ? '' : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.join)(values);
-const DEFAULT_INTERPOLATE = _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.toDisplayString;
+const DEFAULT_NORMALIZE = (values) => values.length === 0 ? '' : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.join)(values);
+const DEFAULT_INTERPOLATE = _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.toDisplayString;
 function pluralDefault(choice, choicesLength) {
     choice = Math.abs(choice);
     if (choicesLength === 2) {
@@ -675,14 +673,14 @@ function pluralDefault(choice, choicesLength) {
 }
 function getPluralIndex(options) {
     // prettier-ignore
-    const index = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.pluralIndex)
+    const index = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.pluralIndex)
         ? options.pluralIndex
         : -1;
     // prettier-ignore
-    return options.named && ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.named.count) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.named.n))
-        ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.named.count)
+    return options.named && ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.named.count) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.named.n))
+        ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.named.count)
             ? options.named.count
-            : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.named.n)
+            : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.named.n)
                 ? options.named.n
                 : index
         : index;
@@ -698,14 +696,14 @@ function normalizeNamed(pluralIndex, props) {
 function createMessageContext(options = {}) {
     const locale = options.locale;
     const pluralIndex = getPluralIndex(options);
-    const pluralRule = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.pluralRules) &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(locale) &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.pluralRules[locale])
+    const pluralRule = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.pluralRules) &&
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(locale) &&
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.pluralRules[locale])
         ? options.pluralRules[locale]
         : pluralDefault;
-    const orgPluralRule = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.pluralRules) &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(locale) &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.pluralRules[locale])
+    const orgPluralRule = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.pluralRules) &&
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(locale) &&
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.pluralRules[locale])
         ? pluralDefault
         : undefined;
     const plural = (messages) => {
@@ -714,14 +712,14 @@ function createMessageContext(options = {}) {
     const _list = options.list || [];
     const list = (index) => _list[index];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const _named = options.named || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.pluralIndex) && normalizeNamed(pluralIndex, _named);
+    const _named = options.named || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.pluralIndex) && normalizeNamed(pluralIndex, _named);
     const named = (key) => _named[key];
     function message(key) {
         // prettier-ignore
-        const msg = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.messages)
+        const msg = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.messages)
             ? options.messages(key)
-            : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.messages)
+            : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.messages)
                 ? options.messages[key]
                 : false;
         return !msg
@@ -733,14 +731,14 @@ function createMessageContext(options = {}) {
     const _modifier = (name) => options.modifiers
         ? options.modifiers[name]
         : DEFAULT_MODIFIER;
-    const normalize = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.processor) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.processor.normalize)
+    const normalize = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.processor) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.processor.normalize)
         ? options.processor.normalize
         : DEFAULT_NORMALIZE;
-    const interpolate = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.processor) &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.processor.interpolate)
+    const interpolate = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.processor) &&
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.processor.interpolate)
         ? options.processor.interpolate
         : DEFAULT_INTERPOLATE;
-    const type = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.processor) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.processor.type)
+    const type = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.processor) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.processor.type)
         ? options.processor.type
         : DEFAULT_MESSAGE_DATA_TYPE;
     const linked = (key, ...args) => {
@@ -748,26 +746,26 @@ function createMessageContext(options = {}) {
         let type = 'text';
         let modifier = '';
         if (args.length === 1) {
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(arg1)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(arg1)) {
                 modifier = arg1.modifier || modifier;
                 type = arg1.type || type;
             }
-            else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg1)) {
+            else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1)) {
                 modifier = arg1 || modifier;
             }
         }
         else if (args.length === 2) {
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg1)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1)) {
                 modifier = arg1 || modifier;
             }
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg2)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg2)) {
                 type = arg2 || type;
             }
         }
         const ret = message(key)(ctx);
         const msg = 
         // The message in vnode resolved with linked are returned as an array by processor.nomalize
-        type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(ret) && modifier
+        type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(ret) && modifier
             ? ret[0]
             : ret;
         return modifier ? _modifier(modifier)(msg, type) : msg;
@@ -781,7 +779,7 @@ function createMessageContext(options = {}) {
         ["type" /* HelperNameMap.TYPE */]: type,
         ["interpolate" /* HelperNameMap.INTERPOLATE */]: interpolate,
         ["normalize" /* HelperNameMap.NORMALIZE */]: normalize,
-        ["values" /* HelperNameMap.VALUES */]: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)(), _list, _named)
+        ["values" /* HelperNameMap.VALUES */]: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)(), _list, _named)
     };
     return ctx;
 }
@@ -808,8 +806,8 @@ function createDevToolsHook(hook) {
     return (payloads) => devtools && devtools.emit(hook, payloads);
 }
 
-const code$1 = _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.CompileWarnCodes.__EXTEND_POINT__;
-const inc$1 = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.incrementer)(code$1);
+const code$1 = _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.CompileWarnCodes.__EXTEND_POINT__;
+const inc$1 = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.incrementer)(code$1);
 const CoreWarnCodes = {
     NOT_FOUND_KEY: code$1, // 2
     FALLBACK_TO_TRANSLATE: inc$1(), // 3
@@ -831,11 +829,11 @@ const warnMessages = {
     [CoreWarnCodes.EXPERIMENTAL_CUSTOM_MESSAGE_COMPILER]: `This project is using Custom Message Compiler, which is an experimental feature. It may receive breaking changes or be removed in the future.`
 };
 function getWarnMessage(code, ...args) {
-    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.format)(warnMessages[code], ...args);
+    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.format)(warnMessages[code], ...args);
 }
 
-const code = _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.CompileErrorCodes.__EXTEND_POINT__;
-const inc = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.incrementer)(code);
+const code = _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.CompileErrorCodes.__EXTEND_POINT__;
+const inc = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.incrementer)(code);
 const CoreErrorCodes = {
     INVALID_ARGUMENT: code, // 17
     INVALID_DATE_ARGUMENT: inc(), // 18
@@ -847,7 +845,7 @@ const CoreErrorCodes = {
     __EXTEND_POINT__: inc() // 24
 };
 function createCoreError(code) {
-    return (0,_intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.createCompileError)(code, null, ( true) ? { messages: errorMessages } : 0);
+    return (0,_intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.createCompileError)(code, null, ( true) ? { messages: errorMessages } : 0);
 }
 /** @internal */
 const errorMessages = {
@@ -870,17 +868,17 @@ function getLocale(context, options) {
 let _resolveLocale;
 /** @internal */
 function resolveLocale(locale) {
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(locale)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(locale)) {
         return locale;
     }
     else {
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(locale)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(locale)) {
             if (locale.resolvedOnce && _resolveLocale != null) {
                 return _resolveLocale;
             }
             else if (locale.constructor.name === 'Function') {
                 const resolve = locale();
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPromise)(resolve)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPromise)(resolve)) {
                     throw createCoreError(CoreErrorCodes.NOT_SUPPORT_LOCALE_PROMISE_VALUE);
                 }
                 return (_resolveLocale = resolve);
@@ -915,11 +913,11 @@ function fallbackWithSimple(ctx, fallback, start // eslint-disable-line @typescr
     // prettier-ignore
     return [...new Set([
             start,
-            ...((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(fallback)
+            ...((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(fallback)
                 ? fallback
-                : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(fallback)
+                : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(fallback)
                     ? Object.keys(fallback)
-                    : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(fallback)
+                    : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(fallback)
                         ? [fallback]
                         : [start])
         ])];
@@ -941,7 +939,7 @@ function fallbackWithSimple(ctx, fallback, start // eslint-disable-line @typescr
  * @VueI18nGeneral
  */
 function fallbackWithLocaleChain(ctx, fallback, start) {
-    const startLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(start) ? start : DEFAULT_LOCALE;
+    const startLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(start) ? start : DEFAULT_LOCALE;
     const context = ctx;
     if (!context.__localeChainCache) {
         context.__localeChainCache = new Map();
@@ -952,19 +950,19 @@ function fallbackWithLocaleChain(ctx, fallback, start) {
         // first block defined by start
         let block = [start];
         // while any intervening block found
-        while ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(block)) {
+        while ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(block)) {
             block = appendBlockToChain(chain, block, fallback);
         }
         // prettier-ignore
         // last block defined by default
-        const defaults = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(fallback) || !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(fallback)
+        const defaults = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(fallback) || !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(fallback)
             ? fallback
             : fallback['default']
                 ? fallback['default']
                 : null;
         // convert defaults to array
-        block = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(defaults) ? [defaults] : defaults;
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(block)) {
+        block = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(defaults) ? [defaults] : defaults;
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(block)) {
             appendBlockToChain(chain, block, false);
         }
         context.__localeChainCache.set(startLocale, chain);
@@ -973,9 +971,9 @@ function fallbackWithLocaleChain(ctx, fallback, start) {
 }
 function appendBlockToChain(chain, block, blocks) {
     let follow = true;
-    for (let i = 0; i < block.length && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(follow); i++) {
+    for (let i = 0; i < block.length && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(follow); i++) {
         const locale = block[i];
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(locale)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(locale)) {
             follow = appendLocaleToChain(chain, block[i], blocks);
         }
     }
@@ -999,7 +997,7 @@ function appendItemToChain(chain, target, blocks) {
             follow = target[target.length - 1] !== '!';
             const locale = target.replace(/!/g, '');
             chain.push(locale);
-            if (((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(blocks) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(blocks)) &&
+            if (((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(blocks) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(blocks)) &&
                 blocks[locale] // eslint-disable-line @typescript-eslint/no-explicit-any
             ) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1015,7 +1013,7 @@ function appendItemToChain(chain, target, blocks) {
  * Intlify core-base version
  * @internal
  */
-const VERSION = '9.14.5';
+const VERSION = '9.14.4';
 const NOT_REOSLVED = -1;
 const DEFAULT_LOCALE = 'en-US';
 const MISSING_RESOLVE_VALUE = '';
@@ -1024,25 +1022,25 @@ function getDefaultLinkedModifiers() {
     return {
         upper: (val, type) => {
             // prettier-ignore
-            return type === 'text' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val)
+            return type === 'text' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val)
                 ? val.toUpperCase()
-                : type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(val) && '__v_isVNode' in val
+                : type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(val) && '__v_isVNode' in val
                     ? val.children.toUpperCase()
                     : val;
         },
         lower: (val, type) => {
             // prettier-ignore
-            return type === 'text' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val)
+            return type === 'text' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val)
                 ? val.toLowerCase()
-                : type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(val) && '__v_isVNode' in val
+                : type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(val) && '__v_isVNode' in val
                     ? val.children.toLowerCase()
                     : val;
         },
         capitalize: (val, type) => {
             // prettier-ignore
-            return (type === 'text' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val)
+            return (type === 'text' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val)
                 ? capitalize(val)
-                : type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(val) && '__v_isVNode' in val
+                : type === 'vnode' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(val) && '__v_isVNode' in val
                     ? capitalize(val.children)
                     : val);
         }
@@ -1091,75 +1089,75 @@ const getFallbackContext = () => _fallbackContext;
 let _cid = 0;
 function createCoreContext(options = {}) {
     // setup options
-    const onWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.onWarn) ? options.onWarn : _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn;
-    const version = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.version) ? options.version : VERSION;
-    const locale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.locale) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.locale)
+    const onWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.onWarn) ? options.onWarn : _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn;
+    const version = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.version) ? options.version : VERSION;
+    const locale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.locale) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.locale)
         ? options.locale
         : DEFAULT_LOCALE;
-    const _locale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(locale) ? DEFAULT_LOCALE : locale;
-    const fallbackLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(options.fallbackLocale) ||
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.fallbackLocale) ||
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.fallbackLocale) ||
+    const _locale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(locale) ? DEFAULT_LOCALE : locale;
+    const fallbackLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(options.fallbackLocale) ||
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.fallbackLocale) ||
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.fallbackLocale) ||
         options.fallbackLocale === false
         ? options.fallbackLocale
         : _locale;
-    const messages = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.messages)
+    const messages = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.messages)
         ? options.messages
         : createResources(_locale);
-    const datetimeFormats = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.datetimeFormats)
+    const datetimeFormats = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.datetimeFormats)
             ? options.datetimeFormats
             : createResources(_locale)
         ;
-    const numberFormats = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.numberFormats)
+    const numberFormats = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.numberFormats)
             ? options.numberFormats
             : createResources(_locale)
         ;
-    const modifiers = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)(), options.modifiers, getDefaultLinkedModifiers());
-    const pluralRules = options.pluralRules || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-    const missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.missing) ? options.missing : null;
-    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.missingWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.missingWarn)
+    const modifiers = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)(), options.modifiers, getDefaultLinkedModifiers());
+    const pluralRules = options.pluralRules || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+    const missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.missing) ? options.missing : null;
+    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.missingWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.missingWarn)
         ? options.missingWarn
         : true;
-    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.fallbackWarn)
+    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.fallbackWarn)
         ? options.fallbackWarn
         : true;
     const fallbackFormat = !!options.fallbackFormat;
     const unresolving = !!options.unresolving;
-    const postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.postTranslation)
+    const postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.postTranslation)
         ? options.postTranslation
         : null;
-    const processor = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.processor) ? options.processor : null;
-    const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.warnHtmlMessage)
+    const processor = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.processor) ? options.processor : null;
+    const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.warnHtmlMessage)
         ? options.warnHtmlMessage
         : true;
     const escapeParameter = !!options.escapeParameter;
-    const messageCompiler = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.messageCompiler)
+    const messageCompiler = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.messageCompiler)
         ? options.messageCompiler
         : _compiler;
     if ( true &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.messageCompiler)) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warnOnce)(getWarnMessage(CoreWarnCodes.EXPERIMENTAL_CUSTOM_MESSAGE_COMPILER));
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.messageCompiler)) {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warnOnce)(getWarnMessage(CoreWarnCodes.EXPERIMENTAL_CUSTOM_MESSAGE_COMPILER));
     }
-    const messageResolver = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.messageResolver)
+    const messageResolver = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.messageResolver)
         ? options.messageResolver
         : _resolver || resolveWithKeyValue;
-    const localeFallbacker = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.localeFallbacker)
+    const localeFallbacker = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.localeFallbacker)
         ? options.localeFallbacker
         : _fallbacker || fallbackWithSimple;
-    const fallbackContext = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.fallbackContext)
+    const fallbackContext = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.fallbackContext)
         ? options.fallbackContext
         : undefined;
     // setup internal options
     const internalOptions = options;
-    const __datetimeFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(internalOptions.__datetimeFormatters)
+    const __datetimeFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(internalOptions.__datetimeFormatters)
             ? internalOptions.__datetimeFormatters
             : new Map()
         ;
-    const __numberFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(internalOptions.__numberFormatters)
+    const __numberFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(internalOptions.__numberFormatters)
             ? internalOptions.__numberFormatters
             : new Map()
         ;
-    const __meta = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(internalOptions.__meta) ? internalOptions.__meta : {};
+    const __meta = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(internalOptions.__meta) ? internalOptions.__meta : {};
     _cid++;
     const context = {
         version,
@@ -1204,7 +1202,7 @@ function createCoreContext(options = {}) {
     }
     return context;
 }
-const createResources = (locale) => ({ [locale]: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)() });
+const createResources = (locale) => ({ [locale]: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)() });
 /** @internal */
 function isTranslateFallbackWarn(fallback, key) {
     return fallback instanceof RegExp ? fallback.test(key) : fallback;
@@ -1230,7 +1228,7 @@ function handleMissing(context, key, locale, missingWarn, type) {
     }
     if (missing !== null) {
         const ret = missing(context, locale, key, type);
-        return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(ret) ? ret : key;
+        return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(ret) ? ret : key;
     }
     else {
         if (( true) && isTranslateMissingWarn(missingWarn, key)) {
@@ -1311,20 +1309,20 @@ function formatMessagePart(ctx, node) {
         }
         case 4 /* NodeTypes.Named */: {
             const named = node;
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(named, 'k') && named.k) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(named, 'k') && named.k) {
                 return ctx.interpolate(ctx.named(named.k));
             }
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(named, 'key') && named.key) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(named, 'key') && named.key) {
                 return ctx.interpolate(ctx.named(named.key));
             }
             throw createUnhandleNodeError(type);
         }
         case 5 /* NodeTypes.List */: {
             const list = node;
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(list, 'i') && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(list.i)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(list, 'i') && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(list.i)) {
                 return ctx.interpolate(ctx.list(list.i));
             }
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(list, 'index') && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(list.index)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(list, 'index') && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(list.index)) {
                 return ctx.interpolate(ctx.list(list.index));
             }
             throw createUnhandleNodeError(type);
@@ -1348,37 +1346,37 @@ function formatMessagePart(ctx, node) {
 
 const WARN_MESSAGE = `Detected HTML in '{source}' message. Recommend not using HTML messages to avoid XSS.`;
 function checkHtmlMessage(source, warnHtmlMessage) {
-    if (warnHtmlMessage && (0,_intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.detectHtmlTag)(source)) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.format)(WARN_MESSAGE, { source }));
+    if (warnHtmlMessage && (0,_intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.detectHtmlTag)(source)) {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.format)(WARN_MESSAGE, { source }));
     }
 }
 const defaultOnCacheKey = (message) => message;
-let compileCache = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+let compileCache = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
 function onCompileWarn(_warn) {
-    if (_warn.code === _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.CompileWarnCodes.USE_MODULO_SYNTAX) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(`The use of named interpolation with modulo syntax is deprecated. ` +
+    if (_warn.code === _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.CompileWarnCodes.USE_MODULO_SYNTAX) {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(`The use of named interpolation with modulo syntax is deprecated. ` +
             `It will be removed in v10.\n` +
             `reference: https://vue-i18n.intlify.dev/guide/essentials/syntax#rails-i18n-format \n` +
             `(message compiler warning message: ${_warn.message})`);
     }
 }
 function clearCompileCache() {
-    compileCache = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+    compileCache = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
 }
 function baseCompile(message, options = {}) {
     // error detecting on compile
     let detectError = false;
-    const onError = options.onError || _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.defaultOnError;
+    const onError = options.onError || _intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.defaultOnError;
     options.onError = (err) => {
         detectError = true;
         onError(err);
     };
     // compile with mesasge-compiler
-    return { ...(0,_intlify_message_compiler__WEBPACK_IMPORTED_MODULE_1__.baseCompile)(message, options), detectError };
+    return { ...(0,_intlify_message_compiler__WEBPACK_IMPORTED_MODULE_0__.baseCompile)(message, options), detectError };
 }
 /* #__NO_SIDE_EFFECTS__ */
 const compileToFunction = (message, context) => {
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(message)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(message)) {
         throw createCoreError(CoreErrorCodes.NOT_SUPPORT_NON_STRING_MESSAGE);
     }
     // set onWarn
@@ -1387,7 +1385,7 @@ const compileToFunction = (message, context) => {
     }
     {
         // check HTML message
-        const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(context.warnHtmlMessage)
+        const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(context.warnHtmlMessage)
             ? context.warnHtmlMessage
             : true;
         ( true) && checkHtmlMessage(message, warnHtmlMessage);
@@ -1414,9 +1412,9 @@ function compile(message, context) {
         context.onWarn = onCompileWarn;
     }
     if (((__INTLIFY_JIT_COMPILATION__ && !__INTLIFY_DROP_MESSAGE_COMPILER__)) &&
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(message)) {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(message)) {
         // check HTML message
-        const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(context.warnHtmlMessage)
+        const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(context.warnHtmlMessage)
             ? context.warnHtmlMessage
             : true;
         ( true) && checkHtmlMessage(message, warnHtmlMessage);
@@ -1442,7 +1440,7 @@ function compile(message, context) {
     }
     else {
         if (( true) && !isMessageAST(message)) {
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(`the message that is resolve with key '${context.key}' is not supported for jit compilation`);
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(`the message that is resolve with key '${context.key}' is not supported for jit compilation`);
             return (() => message);
         }
         // AST case (passed from bundler)
@@ -1463,24 +1461,24 @@ function compile(message, context) {
 }
 
 const NOOP_MESSAGE_FUNCTION = () => '';
-const isMessageFunction = (val) => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(val);
+const isMessageFunction = (val) => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(val);
 // implementation of `translate` function
 function translate(context, ...args) {
     const { fallbackFormat, postTranslation, unresolving, messageCompiler, fallbackLocale, messages } = context;
     const [key, options] = parseTranslateArgs(...args);
-    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.missingWarn)
+    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.missingWarn)
         ? options.missingWarn
         : context.missingWarn;
-    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackWarn)
+    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackWarn)
         ? options.fallbackWarn
         : context.fallbackWarn;
-    const escapeParameter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.escapeParameter)
+    const escapeParameter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.escapeParameter)
         ? options.escapeParameter
         : context.escapeParameter;
     const resolvedMessage = !!options.resolvedMessage;
     // prettier-ignore
-    const defaultMsgOrKey = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.default) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.default) // default by function option
-        ? !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.default)
+    const defaultMsgOrKey = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.default) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.default) // default by function option
+        ? !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.default)
             ? options.default
             : (!messageCompiler ? () => key : key)
         : fallbackFormat // default by `fallbackFormat` option
@@ -1497,7 +1495,7 @@ function translate(context, ...args) {
         : [
             key,
             locale,
-            messages[locale] || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)()
+            messages[locale] || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)()
         ];
     // NOTE:
     //  Fix to work around `ssrTransfrom` bug in Vite.
@@ -1508,7 +1506,7 @@ function translate(context, ...args) {
     // if you use default message, set it as message format!
     let cacheBaseKey = key;
     if (!resolvedMessage &&
-        !((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(format) ||
+        !((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(format) ||
             isMessageAST(format) ||
             isMessageFunction(format))) {
         if (enableDefaultMsg) {
@@ -1518,15 +1516,15 @@ function translate(context, ...args) {
     }
     // checking message format and target locale
     if (!resolvedMessage &&
-        (!((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(format) ||
+        (!((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(format) ||
             isMessageAST(format) ||
             isMessageFunction(format)) ||
-            !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(targetLocale))) {
+            !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(targetLocale))) {
         return unresolving ? NOT_REOSLVED : key;
     }
     // TODO: refactor
-    if (( true) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(format) && context.messageCompiler == null) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(`The message format compilation is not supported in this build. ` +
+    if (( true) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(format) && context.messageCompiler == null) {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(`The message format compilation is not supported in this build. ` +
             `Because message compiler isn't included. ` +
             `You need to pre-compilation all message format. ` +
             `So translate function return '${key}'.`);
@@ -1550,19 +1548,15 @@ function translate(context, ...args) {
     const msgContext = createMessageContext(ctxOptions);
     const messaged = evaluateMessage(context, msg, msgContext);
     // if use post translation option, proceed it with handler
-    let ret = postTranslation
+    const ret = postTranslation
         ? postTranslation(messaged, key)
         : messaged;
-    // apply HTML sanitization for security
-    if (escapeParameter && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(ret)) {
-        ret = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.sanitizeTranslatedHtml)(ret);
-    }
     // NOTE: experimental !!
     if (true) {
         // prettier-ignore
         const payloads = {
             timestamp: Date.now(),
-            key: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(key)
+            key: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(key)
                 ? key
                 : isMessageFunction(format)
                     ? format.key
@@ -1570,26 +1564,26 @@ function translate(context, ...args) {
             locale: targetLocale || (isMessageFunction(format)
                 ? format.locale
                 : ''),
-            format: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(format)
+            format: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(format)
                 ? format
                 : isMessageFunction(format)
                     ? format.source
                     : '',
             message: ret
         };
-        payloads.meta = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({}, context.__meta, getAdditionalMeta() || {});
+        payloads.meta = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({}, context.__meta, getAdditionalMeta() || {});
         translateDevTools(payloads);
     }
     return ret;
 }
 function escapeParams(options) {
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(options.list)) {
-        options.list = options.list.map(item => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(item) ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(item) : item);
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(options.list)) {
+        options.list = options.list.map(item => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(item) ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.escapeHtml)(item) : item);
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.named)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.named)) {
         Object.keys(options.named).forEach(key => {
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.named[key])) {
-                options.named[key] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(options.named[key]);
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.named[key])) {
+                options.named[key] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.escapeHtml)(options.named[key]);
             }
         });
     }
@@ -1597,7 +1591,7 @@ function escapeParams(options) {
 function resolveMessageFormat(context, key, locale, fallbackLocale, fallbackWarn, missingWarn) {
     const { messages, onWarn, messageResolver: resolveValue, localeFallbacker } = context;
     const locales = localeFallbacker(context, fallbackLocale, locale); // eslint-disable-line @typescript-eslint/no-explicit-any
-    let message = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+    let message = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
     let targetLocale;
     let format = null;
     let from = locale;
@@ -1628,23 +1622,23 @@ function resolveMessageFormat(context, key, locale, fallbackLocale, fallbackWarn
             }
         }
         message =
-            messages[targetLocale] || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+            messages[targetLocale] || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
         // for vue-devtools timeline event
         let start = null;
         let startTag;
         let endTag;
-        if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
+        if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
             start = window.performance.now();
             startTag = 'intlify-message-resolve-start';
             endTag = 'intlify-message-resolve-end';
-            _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark)(startTag);
+            _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark)(startTag);
         }
         if ((format = resolveValue(message, key)) === null) {
             // if null, resolve with object key path
             format = message[key]; // eslint-disable-line @typescript-eslint/no-explicit-any
         }
         // for vue-devtools timeline event
-        if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
+        if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
             const end = window.performance.now();
             const emitter = context.__v_emitter;
             if (emitter && start && format) {
@@ -1656,12 +1650,12 @@ function resolveMessageFormat(context, key, locale, fallbackLocale, fallbackWarn
                     groupId: `${type}:${key}`
                 });
             }
-            if (startTag && endTag && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.measure) {
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark)(endTag);
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.measure)('intlify message resolve', startTag, endTag);
+            if (startTag && endTag && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.measure) {
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark)(endTag);
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.measure)('intlify message resolve', startTag, endTag);
             }
         }
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(format) || isMessageAST(format) || isMessageFunction(format)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(format) || isMessageAST(format) || isMessageFunction(format)) {
             break;
         }
         if (!isImplicitFallback(targetLocale, locales)) {
@@ -1693,15 +1687,15 @@ function compileMessageFormat(context, key, targetLocale, format, cacheBaseKey, 
     let start = null;
     let startTag;
     let endTag;
-    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
+    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
         start = window.performance.now();
         startTag = 'intlify-message-compilation-start';
         endTag = 'intlify-message-compilation-end';
-        _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark)(startTag);
+        _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark)(startTag);
     }
     const msg = messageCompiler(format, getCompileContext(context, targetLocale, cacheBaseKey, format, warnHtmlMessage, onError));
     // for vue-devtools timeline event
-    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
+    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
         const end = window.performance.now();
         const emitter = context.__v_emitter;
         if (emitter && start) {
@@ -1712,9 +1706,9 @@ function compileMessageFormat(context, key, targetLocale, format, cacheBaseKey, 
                 groupId: `${'translate'}:${key}`
             });
         }
-        if (startTag && endTag && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.measure) {
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark)(endTag);
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.measure)('intlify message compilation', startTag, endTag);
+        if (startTag && endTag && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.measure) {
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark)(endTag);
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.measure)('intlify message compilation', startTag, endTag);
         }
     }
     msg.locale = targetLocale;
@@ -1727,15 +1721,15 @@ function evaluateMessage(context, msg, msgCtx) {
     let start = null;
     let startTag;
     let endTag;
-    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
+    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
         start = window.performance.now();
         startTag = 'intlify-message-evaluation-start';
         endTag = 'intlify-message-evaluation-end';
-        _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark)(startTag);
+        _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark)(startTag);
     }
     const messaged = msg(msgCtx);
     // for vue-devtools timeline event
-    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
+    if (( true) && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
         const end = window.performance.now();
         const emitter = context.__v_emitter;
         if (emitter && start) {
@@ -1746,9 +1740,9 @@ function evaluateMessage(context, msg, msgCtx) {
                 groupId: `${'translate'}:${msg.key}`
             });
         }
-        if (startTag && endTag && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.measure) {
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.mark)(endTag);
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.measure)('intlify message evaluation', startTag, endTag);
+        if (startTag && endTag && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.measure) {
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.mark)(endTag);
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.measure)('intlify message evaluation', startTag, endTag);
         }
     }
     return messaged;
@@ -1756,39 +1750,39 @@ function evaluateMessage(context, msg, msgCtx) {
 /** @internal */
 function parseTranslateArgs(...args) {
     const [arg1, arg2, arg3] = args;
-    const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg1) &&
-        !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg1) &&
+    const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1) &&
+        !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg1) &&
         !isMessageFunction(arg1) &&
         !isMessageAST(arg1)) {
         throw createCoreError(CoreErrorCodes.INVALID_ARGUMENT);
     }
     // prettier-ignore
-    const key = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg1)
+    const key = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg1)
         ? String(arg1)
         : isMessageFunction(arg1)
             ? arg1
             : arg1;
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg2)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg2)) {
         options.plural = arg2;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg2)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg2)) {
         options.default = arg2;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg2) && !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject)(arg2)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg2) && !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isEmptyObject)(arg2)) {
         options.named = arg2;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(arg2)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(arg2)) {
         options.list = arg2;
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg3)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg3)) {
         options.plural = arg3;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg3)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg3)) {
         options.default = arg3;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg3)) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)(options, arg3);
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg3)) {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)(options, arg3);
     }
     return [key, options];
 }
@@ -1804,7 +1798,7 @@ function getCompileContext(context, locale, key, source, warnHtmlMessage, onErro
                 const message = `Message compilation error: ${err.message}`;
                 const codeFrame = err.location &&
                     _source &&
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.generateCodeFrame)(_source, err.location.start.offset, err.location.end.offset);
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.generateCodeFrame)(_source, err.location.start.offset, err.location.end.offset);
                 const emitter = context.__v_emitter;
                 if (emitter && _source) {
                     emitter.emit("compile-error" /* VueDevToolsTimelineEvents.COMPILE_ERROR */, {
@@ -1817,14 +1811,13 @@ function getCompileContext(context, locale, key, source, warnHtmlMessage, onErro
                 }
                 console.error(codeFrame ? `${message}\n${codeFrame}` : message);
             }
-            else // removed by dead control flow
-{}
+            else {}
         },
-        onCacheKey: (source) => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.generateFormatCacheKey)(locale, key, source)
+        onCacheKey: (source) => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.generateFormatCacheKey)(locale, key, source)
     };
 }
 function getSourceForCodeFrame(source) {
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(source)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(source)) {
         return source;
     }
     else {
@@ -1842,7 +1835,7 @@ function getMessageContextOptions(context, locale, message, options) {
             const [, , message] = resolveMessageFormat(fallbackContext, key, locale, fallbackLocale, fallbackWarn, missingWarn);
             val = resolveValue(message, key);
         }
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val) || isMessageAST(val)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val) || isMessageAST(val)) {
             let occurred = false;
             const onError = () => {
                 occurred = true;
@@ -1875,7 +1868,7 @@ function getMessageContextOptions(context, locale, message, options) {
     if (options.named) {
         ctxOptions.named = options.named;
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(options.plural)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(options.plural)) {
         ctxOptions.pluralIndex = options.plural;
     }
     return ctxOptions;
@@ -1896,17 +1889,17 @@ function datetime(context, ...args) {
         return MISSING_RESOLVE_VALUE;
     }
     const [key, value, options, overrides] = parseDateTimeArgs(...args);
-    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.missingWarn)
+    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.missingWarn)
         ? options.missingWarn
         : context.missingWarn;
-    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackWarn)
+    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackWarn)
         ? options.fallbackWarn
         : context.fallbackWarn;
     const part = !!options.part;
     const locale = getLocale(context, options);
     const locales = localeFallbacker(context, // eslint-disable-line @typescript-eslint/no-explicit-any
     fallbackLocale, locale);
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(key) || key === '') {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(key) || key === '') {
         return new Intl.DateTimeFormat(locale, overrides).format(value);
     }
     // resolve format
@@ -1942,22 +1935,22 @@ function datetime(context, ...args) {
         datetimeFormat =
             datetimeFormats[targetLocale] || {};
         format = datetimeFormat[key];
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(format))
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(format))
             break;
         handleMissing(context, key, targetLocale, missingWarn, type); // eslint-disable-line @typescript-eslint/no-explicit-any
         from = to;
     }
     // checking format and target locale
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(format) || !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(targetLocale)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(format) || !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(targetLocale)) {
         return unresolving ? NOT_REOSLVED : key;
     }
     let id = `${targetLocale}__${key}`;
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject)(overrides)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isEmptyObject)(overrides)) {
         id = `${id}__${JSON.stringify(overrides)}`;
     }
     let formatter = __datetimeFormatters.get(id);
     if (!formatter) {
-        formatter = new Intl.DateTimeFormat(targetLocale, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({}, format, overrides));
+        formatter = new Intl.DateTimeFormat(targetLocale, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({}, format, overrides));
         __datetimeFormatters.set(id, formatter);
     }
     return !part ? formatter.format(value) : formatter.formatToParts(value);
@@ -1988,10 +1981,10 @@ const DATETIME_FORMAT_OPTIONS_KEYS = [
 /** @internal */
 function parseDateTimeArgs(...args) {
     const [arg1, arg2, arg3, arg4] = args;
-    const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-    let overrides = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+    const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+    let overrides = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
     let value;
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg1)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1)) {
         // Only allow ISO strings - other date formats are often supported,
         // but may cause different results in different browsers.
         const matches = arg1.match(/(\d{4}-\d{2}-\d{2})(T|\s)?(.*)/);
@@ -2014,22 +2007,22 @@ function parseDateTimeArgs(...args) {
             throw createCoreError(CoreErrorCodes.INVALID_ISO_DATE_ARGUMENT);
         }
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isDate)(arg1)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isDate)(arg1)) {
         if (isNaN(arg1.getTime())) {
             throw createCoreError(CoreErrorCodes.INVALID_DATE_ARGUMENT);
         }
         value = arg1;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg1)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg1)) {
         value = arg1;
     }
     else {
         throw createCoreError(CoreErrorCodes.INVALID_ARGUMENT);
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg2)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg2)) {
         options.key = arg2;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg2)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg2)) {
         Object.keys(arg2).forEach(key => {
             if (DATETIME_FORMAT_OPTIONS_KEYS.includes(key)) {
                 overrides[key] = arg2[key];
@@ -2039,13 +2032,13 @@ function parseDateTimeArgs(...args) {
             }
         });
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg3)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg3)) {
         options.locale = arg3;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg3)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg3)) {
         overrides = arg3;
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg4)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg4)) {
         overrides = arg4;
     }
     return [options.key || '', value, options, overrides];
@@ -2071,17 +2064,17 @@ function number(context, ...args) {
         return MISSING_RESOLVE_VALUE;
     }
     const [key, value, options, overrides] = parseNumberArgs(...args);
-    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.missingWarn)
+    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.missingWarn)
         ? options.missingWarn
         : context.missingWarn;
-    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackWarn)
+    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackWarn)
         ? options.fallbackWarn
         : context.fallbackWarn;
     const part = !!options.part;
     const locale = getLocale(context, options);
     const locales = localeFallbacker(context, // eslint-disable-line @typescript-eslint/no-explicit-any
     fallbackLocale, locale);
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(key) || key === '') {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(key) || key === '') {
         return new Intl.NumberFormat(locale, overrides).format(value);
     }
     // resolve format
@@ -2117,22 +2110,22 @@ function number(context, ...args) {
         numberFormat =
             numberFormats[targetLocale] || {};
         format = numberFormat[key];
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(format))
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(format))
             break;
         handleMissing(context, key, targetLocale, missingWarn, type); // eslint-disable-line @typescript-eslint/no-explicit-any
         from = to;
     }
     // checking format and target locale
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(format) || !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(targetLocale)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(format) || !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(targetLocale)) {
         return unresolving ? NOT_REOSLVED : key;
     }
     let id = `${targetLocale}__${key}`;
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject)(overrides)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isEmptyObject)(overrides)) {
         id = `${id}__${JSON.stringify(overrides)}`;
     }
     let formatter = __numberFormatters.get(id);
     if (!formatter) {
-        formatter = new Intl.NumberFormat(targetLocale, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({}, format, overrides));
+        formatter = new Intl.NumberFormat(targetLocale, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({}, format, overrides));
         __numberFormatters.set(id, formatter);
     }
     return !part ? formatter.format(value) : formatter.formatToParts(value);
@@ -2163,16 +2156,16 @@ const NUMBER_FORMAT_OPTIONS_KEYS = [
 /** @internal */
 function parseNumberArgs(...args) {
     const [arg1, arg2, arg3, arg4] = args;
-    const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-    let overrides = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg1)) {
+    const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+    let overrides = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg1)) {
         throw createCoreError(CoreErrorCodes.INVALID_ARGUMENT);
     }
     const value = arg1;
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg2)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg2)) {
         options.key = arg2;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg2)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg2)) {
         Object.keys(arg2).forEach(key => {
             if (NUMBER_FORMAT_OPTIONS_KEYS.includes(key)) {
                 overrides[key] = arg2[key];
@@ -2182,13 +2175,13 @@ function parseNumberArgs(...args) {
             }
         });
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg3)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg3)) {
         options.locale = arg3;
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg3)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg3)) {
         overrides = arg3;
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg4)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg4)) {
         overrides = arg4;
     }
     return [options.key || '', value, options, overrides];
@@ -2239,7 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   warnMessages: () => (/* binding */ warnMessages)
 /* harmony export */ });
 /*!
-  * message-compiler v9.14.5
+  * message-compiler v9.14.4
   * (c) 2025 kazuya kawaguchi
   * Released under the MIT License.
   */
@@ -3906,34 +3899,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   mark: () => (/* binding */ mark),
 /* harmony export */   measure: () => (/* binding */ measure),
 /* harmony export */   objectToString: () => (/* binding */ objectToString),
-/* harmony export */   sanitizeTranslatedHtml: () => (/* binding */ sanitizeTranslatedHtml),
 /* harmony export */   toDisplayString: () => (/* binding */ toDisplayString),
 /* harmony export */   toTypeString: () => (/* binding */ toTypeString),
 /* harmony export */   warn: () => (/* binding */ warn),
 /* harmony export */   warnOnce: () => (/* binding */ warnOnce)
 /* harmony export */ });
 /*!
-  * shared v9.14.5
+  * shared v9.14.4
   * (c) 2025 kazuya kawaguchi
   * Released under the MIT License.
   */
-function warn(msg, err) {
-    if (typeof console !== 'undefined') {
-        console.warn(`[intlify] ` + msg);
-        /* istanbul ignore if */
-        if (err) {
-            console.warn(err.stack);
-        }
-    }
-}
-const hasWarned = {};
-function warnOnce(msg) {
-    if (!hasWarned[msg]) {
-        hasWarned[msg] = true;
-        warn(msg);
-    }
-}
-
 /**
  * Original Utilities
  * written by kazuya kawaguchi
@@ -3996,55 +3971,16 @@ const getGlobalThis = () => {
                     ? self
                     : typeof window !== 'undefined'
                         ? window
-                        : typeof __webpack_require__.g !== 'undefined'
-                            ? __webpack_require__.g
+                        : typeof global !== 'undefined'
+                            ? global
                             : create()));
 };
 function escapeHtml(rawText) {
     return rawText
-        .replace(/&/g, '&amp;') // escape `&` first to avoid double escaping
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;')
-        .replace(/\//g, '&#x2F;') // escape `/` to prevent closing tags or JavaScript URLs
-        .replace(/=/g, '&#x3D;'); // escape `=` to prevent attribute injection
-}
-function escapeAttributeValue(value) {
-    return value
-        .replace(/&(?![a-zA-Z0-9#]{2,6};)/g, '&amp;') // escape unescaped `&`
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-function sanitizeTranslatedHtml(html) {
-    // Escape dangerous characters in attribute values
-    // Process attributes with double quotes
-    html = html.replace(/(\w+)\s*=\s*"([^"]*)"/g, (_, attrName, attrValue) => `${attrName}="${escapeAttributeValue(attrValue)}"`);
-    // Process attributes with single quotes
-    html = html.replace(/(\w+)\s*=\s*'([^']*)'/g, (_, attrName, attrValue) => `${attrName}='${escapeAttributeValue(attrValue)}'`);
-    // Detect and neutralize event handler attributes
-    const eventHandlerPattern = /\s*on\w+\s*=\s*["']?[^"'>]+["']?/gi;
-    if (eventHandlerPattern.test(html)) {
-        if ((true)) {
-            warn('Potentially dangerous event handlers detected in translation. ' +
-                'Consider removing onclick, onerror, etc. from your translation messages.');
-        }
-        // Neutralize event handler attributes by escaping 'on'
-        html = html.replace(/(\s+)(on)(\w+\s*=)/gi, '$1&#111;n$3');
-    }
-    // Disable javascript: URLs in various contexts
-    const javascriptUrlPattern = [
-        // In href, src, action, formaction attributes
-        /(\s+(?:href|src|action|formaction)\s*=\s*["']?)\s*javascript:/gi,
-        // In style attributes within url()
-        /(style\s*=\s*["'][^"']*url\s*\(\s*)javascript:/gi
-    ];
-    javascriptUrlPattern.forEach(pattern => {
-        html = html.replace(pattern, '$1javascript&#58;');
-    });
-    return html;
+        .replace(/'/g, '&apos;');
 }
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 function hasOwn(obj, key) {
@@ -4124,6 +4060,23 @@ function generateCodeFrame(source, start = 0, end = source.length) {
 function incrementer(code) {
     let current = code;
     return () => ++current;
+}
+
+function warn(msg, err) {
+    if (typeof console !== 'undefined') {
+        console.warn(`[intlify] ` + msg);
+        /* istanbul ignore if */
+        if (err) {
+            console.warn(err.stack);
+        }
+    }
+}
+const hasWarned = {};
+function warnOnce(msg) {
+    if (!hasWarned[msg]) {
+        hasWarned[msg] = true;
+        warn(msg);
+    }
 }
 
 /**
@@ -4329,7 +4282,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   isStaticPropertyKey: () => (/* binding */ isStaticPropertyKey),
 /* harmony export */   isTemplateNode: () => (/* binding */ isTemplateNode),
 /* harmony export */   isText: () => (/* binding */ isText$1),
-/* harmony export */   isVPre: () => (/* binding */ isVPre),
 /* harmony export */   isVSlot: () => (/* binding */ isVSlot),
 /* harmony export */   locStub: () => (/* binding */ locStub),
 /* harmony export */   noopDirectiveTransform: () => (/* binding */ noopDirectiveTransform),
@@ -4349,10 +4301,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   transformExpression: () => (/* binding */ transformExpression),
 /* harmony export */   transformModel: () => (/* binding */ transformModel),
 /* harmony export */   transformOn: () => (/* binding */ transformOn),
-/* harmony export */   transformVBindShorthand: () => (/* binding */ transformVBindShorthand),
 /* harmony export */   traverseNode: () => (/* binding */ traverseNode),
 /* harmony export */   unwrapTSNode: () => (/* binding */ unwrapTSNode),
-/* harmony export */   validFirstIdentCharRE: () => (/* binding */ validFirstIdentCharRE),
 /* harmony export */   walkBlockDeclarations: () => (/* binding */ walkBlockDeclarations),
 /* harmony export */   walkFunctionParams: () => (/* binding */ walkFunctionParams),
 /* harmony export */   walkIdentifiers: () => (/* binding */ walkIdentifiers),
@@ -4360,7 +4310,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /**
-* @vue/compiler-core v3.5.24
+* @vue/compiler-core v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
@@ -5384,7 +5334,7 @@ class Tokenizer {
     this.buffer = input;
     while (this.index < this.buffer.length) {
       const c = this.buffer.charCodeAt(this.index);
-      if (c === 10 && this.state !== 33) {
+      if (c === 10) {
         this.newlines.push(this.index);
       }
       switch (this.state) {
@@ -5875,8 +5825,7 @@ function walkFunctionParams(node, onIdent) {
   }
 }
 function walkBlockDeclarations(block, onIdent) {
-  const body = block.type === "SwitchCase" ? block.consequent : block.body;
-  for (const stmt of body) {
+  for (const stmt of block.body) {
     if (stmt.type === "VariableDeclaration") {
       if (stmt.declare) continue;
       for (const decl of stmt.declarations) {
@@ -5889,8 +5838,6 @@ function walkBlockDeclarations(block, onIdent) {
       onIdent(stmt.id);
     } else if (isForStatement(stmt)) {
       walkForStatement(stmt, true, onIdent);
-    } else if (stmt.type === "SwitchStatement") {
-      walkSwitchStatement(stmt, true, onIdent);
     }
   }
 }
@@ -5905,20 +5852,6 @@ function walkForStatement(stmt, isVar, onIdent) {
         onIdent(id);
       }
     }
-  }
-}
-function walkSwitchStatement(stmt, isVar, onIdent) {
-  for (const cs of stmt.cases) {
-    for (const stmt2 of cs.consequent) {
-      if (stmt2.type === "VariableDeclaration" && (stmt2.kind === "var" ? isVar : !isVar)) {
-        for (const decl of stmt2.declarations) {
-          for (const id of extractIdentifiers(decl.id)) {
-            onIdent(id);
-          }
-        }
-      }
-    }
-    walkBlockDeclarations(cs, onIdent);
   }
 }
 function extractIdentifiers(param, nodes = []) {
@@ -5998,7 +5931,7 @@ function isCoreComponent(tag) {
       return BASE_TRANSITION;
   }
 }
-const nonIdentifierRE = /^$|^\d|[^\$\w\xA0-\uFFFF]/;
+const nonIdentifierRE = /^\d|[^\$\w\xA0-\uFFFF]/;
 const isSimpleIdentifier = (name) => !nonIdentifierRE.test(name);
 const validFirstIdentCharRE = /[A-Za-z_$\xA0-\uFFFF]/;
 const validIdentCharRE = /[\.\?\w$\xA0-\uFFFF]/;
@@ -6068,7 +6001,7 @@ const isMemberExpressionBrowser = (exp) => {
 };
 const isMemberExpressionNode = _vue_shared__WEBPACK_IMPORTED_MODULE_0__.NOOP ;
 const isMemberExpression = isMemberExpressionBrowser ;
-const fnExpRE = /^\s*(?:async\s*)?(?:\([^)]*?\)|[\w$_]+)\s*(?::[^=]+)?=>|^\s*(?:async\s+)?function(?:\s+[\w$]+)?\s*\(/;
+const fnExpRE = /^\s*(async\s*)?(\([^)]*?\)|[\w$_]+)\s*(:[^=]+)?=>|^\s*(async\s+)?function(?:\s+[\w$]+)?\s*\(/;
 const isFnExpressionBrowser = (exp) => fnExpRE.test(getExpSource(exp));
 const isFnExpressionNode = _vue_shared__WEBPACK_IMPORTED_MODULE_0__.NOOP ;
 const isFnExpression = isFnExpressionBrowser ;
@@ -6136,9 +6069,6 @@ function hasDynamicKeyVBind(node) {
 }
 function isText$1(node) {
   return node.type === 5 || node.type === 2;
-}
-function isVPre(p) {
-  return p.type === 7 && p.name === "pre";
 }
 function isVSlot(p) {
   return p.type === 7 && p.name === "slot";
@@ -6439,7 +6369,7 @@ const tokenizer = new Tokenizer(stack, {
   ondirarg(start, end) {
     if (start === end) return;
     const arg = getSlice(start, end);
-    if (inVPre && !isVPre(currentProp)) {
+    if (inVPre) {
       currentProp.name += arg;
       setLocEnd(currentProp.nameLoc, end);
     } else {
@@ -6454,7 +6384,7 @@ const tokenizer = new Tokenizer(stack, {
   },
   ondirmodifier(start, end) {
     const mod = getSlice(start, end);
-    if (inVPre && !isVPre(currentProp)) {
+    if (inVPre) {
       currentProp.name += "." + mod;
       setLocEnd(currentProp.nameLoc, end);
     } else if (currentProp.name === "slot") {
@@ -6534,7 +6464,7 @@ const tokenizer = new Tokenizer(stack, {
             "COMPILER_V_BIND_SYNC",
             currentOptions,
             currentProp.loc,
-            currentProp.arg.loc.source
+            currentProp.rawName
           )) {
             currentProp.name = "model";
             currentProp.modifiers.splice(syncIndex, 1);
@@ -6880,7 +6810,7 @@ function isUpperCase(c) {
   return c > 64 && c < 91;
 }
 const windowsNewlineRE = /\r\n/g;
-function condenseWhitespace(nodes) {
+function condenseWhitespace(nodes, tag) {
   const shouldCondense = currentOptions.whitespace !== "preserve";
   let removedWhitespace = false;
   for (let i = 0; i < nodes.length; i++) {
@@ -7044,12 +6974,12 @@ function cacheStatic(root, context) {
     context,
     // Root node is unfortunately non-hoistable due to potential parent
     // fallthrough attributes.
-    !!getSingleElementRoot(root)
+    isSingleElementRoot(root, root.children[0])
   );
 }
-function getSingleElementRoot(root) {
-  const children = root.children.filter((x) => x.type !== 3);
-  return children.length === 1 && children[0].type === 1 && !isSlotOutlet(children[0]) ? children[0] : null;
+function isSingleElementRoot(root, child) {
+  const { children } = root;
+  return children.length === 1 && child.type === 1 && !isSlotOutlet(child);
 }
 function walk(node, parent, context, doNotHoistNode = false, inFor = false) {
   const { children } = node;
@@ -7082,11 +7012,6 @@ function walk(node, parent, context, doNotHoistNode = false, inFor = false) {
     } else if (child.type === 12) {
       const constantType = doNotHoistNode ? 0 : getConstantType(child, context);
       if (constantType >= 2) {
-        if (child.codegenNode.type === 14 && child.codegenNode.arguments.length > 0) {
-          child.codegenNode.arguments.push(
-            -1 + ( true ? ` /* ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[-1]} */` : 0)
-          );
-        }
         toCache.push(child);
         continue;
       }
@@ -7147,7 +7072,9 @@ function walk(node, parent, context, doNotHoistNode = false, inFor = false) {
   }
   function getCacheExpression(value) {
     const exp = context.cache(value);
-    exp.needArraySpread = true;
+    if (inFor && context.hmr) {
+      exp.needArraySpread = true;
+    }
     return exp;
   }
   function getSlotNode(node2, name) {
@@ -7507,15 +7434,15 @@ function createRootCodegen(root, context) {
   const { helper } = context;
   const { children } = root;
   if (children.length === 1) {
-    const singleElementRootChild = getSingleElementRoot(root);
-    if (singleElementRootChild && singleElementRootChild.codegenNode) {
-      const codegenNode = singleElementRootChild.codegenNode;
+    const child = children[0];
+    if (isSingleElementRoot(root, child) && child.codegenNode) {
+      const codegenNode = child.codegenNode;
       if (codegenNode.type === 13) {
         convertToBlock(codegenNode, context);
       }
       root.codegenNode = codegenNode;
     } else {
-      root.codegenNode = children[0];
+      root.codegenNode = child;
     }
   } else if (children.length > 1) {
     let patchFlag = 64;
@@ -8030,8 +7957,7 @@ function genVNodeCall(node, context) {
         const flagNames = Object.keys(_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames).map(Number).filter((n) => n > 0 && patchFlag & n).map((n) => _vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[n]).join(`, `);
         patchFlagString = patchFlag + ` /* ${flagNames} */`;
       }
-    } else // removed by dead control flow
-{}
+    } else {}
   }
   if (directives) {
     push(helper(WITH_DIRECTIVES) + `(`);
@@ -8285,7 +8211,7 @@ function stringifyExpression(exp) {
 }
 
 const transformIf = createStructuralDirectiveTransform(
-  /^(?:if|else|else-if)$/,
+  /^(if|else|else-if)$/,
   (node, dir, context) => {
     return processIf(node, dir, context, (ifNode, branch, isRoot) => {
       const siblings = context.parent.children;
@@ -8354,7 +8280,7 @@ function processIf(node, dir, context, processCodegen) {
         continue;
       }
       if (sibling && sibling.type === 9) {
-        if ((dir.name === "else-if" || dir.name === "else") && sibling.branches[sibling.branches.length - 1].condition === void 0) {
+        if (dir.name === "else-if" && sibling.branches[sibling.branches.length - 1].condition === void 0) {
           context.onError(
             createCompilerError(30, node.loc)
           );
@@ -8503,6 +8429,80 @@ function getParentCondition(node) {
   }
 }
 
+const transformBind = (dir, _node, context) => {
+  const { modifiers, loc } = dir;
+  const arg = dir.arg;
+  let { exp } = dir;
+  if (exp && exp.type === 4 && !exp.content.trim()) {
+    {
+      exp = void 0;
+    }
+  }
+  if (!exp) {
+    if (arg.type !== 4 || !arg.isStatic) {
+      context.onError(
+        createCompilerError(
+          52,
+          arg.loc
+        )
+      );
+      return {
+        props: [
+          createObjectProperty(arg, createSimpleExpression("", true, loc))
+        ]
+      };
+    }
+    transformBindShorthand(dir);
+    exp = dir.exp;
+  }
+  if (arg.type !== 4) {
+    arg.children.unshift(`(`);
+    arg.children.push(`) || ""`);
+  } else if (!arg.isStatic) {
+    arg.content = `${arg.content} || ""`;
+  }
+  if (modifiers.some((mod) => mod.content === "camel")) {
+    if (arg.type === 4) {
+      if (arg.isStatic) {
+        arg.content = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(arg.content);
+      } else {
+        arg.content = `${context.helperString(CAMELIZE)}(${arg.content})`;
+      }
+    } else {
+      arg.children.unshift(`${context.helperString(CAMELIZE)}(`);
+      arg.children.push(`)`);
+    }
+  }
+  if (!context.inSSR) {
+    if (modifiers.some((mod) => mod.content === "prop")) {
+      injectPrefix(arg, ".");
+    }
+    if (modifiers.some((mod) => mod.content === "attr")) {
+      injectPrefix(arg, "^");
+    }
+  }
+  return {
+    props: [createObjectProperty(arg, exp)]
+  };
+};
+const transformBindShorthand = (dir, context) => {
+  const arg = dir.arg;
+  const propName = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(arg.content);
+  dir.exp = createSimpleExpression(propName, false, arg.loc);
+};
+const injectPrefix = (arg, prefix) => {
+  if (arg.type === 4) {
+    if (arg.isStatic) {
+      arg.content = prefix + arg.content;
+    } else {
+      arg.content = `\`${prefix}\${${arg.content}}\``;
+    }
+  } else {
+    arg.children.unshift(`'${prefix}' + (`);
+    arg.children.push(`)`);
+  }
+};
+
 const transformFor = createStructuralDirectiveTransform(
   "for",
   (node, dir, context) => {
@@ -8514,7 +8514,10 @@ const transformFor = createStructuralDirectiveTransform(
       const isTemplate = isTemplateNode(node);
       const memo = findDir(node, "memo");
       const keyProp = findProp(node, `key`, false, true);
-      keyProp && keyProp.type === 7;
+      const isDirKey = keyProp && keyProp.type === 7;
+      if (isDirKey && !keyProp.exp) {
+        transformBindShorthand(keyProp);
+      }
       let keyExp = keyProp && (keyProp.type === 6 ? keyProp.value ? createSimpleExpression(keyProp.value.content, true) : void 0 : keyProp.exp);
       const keyProperty = keyProp && keyExp ? createObjectProperty(`key`, keyExp) : null;
       const isStableFragment = forNode.source.type === 4 && forNode.source.constType > 0;
@@ -8814,7 +8817,7 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
       );
     } else if (vElse = findDir(
       slotElement,
-      /^else(?:-if)?$/,
+      /^else(-if)?$/,
       true
       /* allowEmpty */
     )) {
@@ -8822,11 +8825,11 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
       let prev;
       while (j--) {
         prev = children[j];
-        if (prev.type !== 3 && isNonWhitespaceContent(prev)) {
+        if (prev.type !== 3) {
           break;
         }
       }
-      if (prev && isTemplateNode(prev) && findDir(prev, /^(?:else-)?if$/)) {
+      if (prev && isTemplateNode(prev) && findDir(prev, /^(else-)?if$/)) {
         let conditional = dynamicSlots[dynamicSlots.length - 1];
         while (conditional.alternate.type === 19) {
           conditional = conditional.alternate;
@@ -9256,8 +9259,9 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
         hasDynamicKeys = true;
         if (exp) {
           if (isVBind) {
+            pushRefVForMarker();
+            pushMergeArg();
             {
-              pushMergeArg();
               if (true) {
                 const hasOverridableKeys = mergeArgs.some((arg2) => {
                   if (arg2.type === 15) {
@@ -9287,8 +9291,6 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                 continue;
               }
             }
-            pushRefVForMarker();
-            pushMergeArg();
             mergeArgs.push(exp);
           } else {
             pushMergeArg({
@@ -9686,58 +9688,6 @@ const transformOn = (dir, node, context, augmentor) => {
   return ret;
 };
 
-const transformBind = (dir, _node, context) => {
-  const { modifiers, loc } = dir;
-  const arg = dir.arg;
-  let { exp } = dir;
-  if (exp && exp.type === 4 && !exp.content.trim()) {
-    {
-      exp = void 0;
-    }
-  }
-  if (arg.type !== 4) {
-    arg.children.unshift(`(`);
-    arg.children.push(`) || ""`);
-  } else if (!arg.isStatic) {
-    arg.content = arg.content ? `${arg.content} || ""` : `""`;
-  }
-  if (modifiers.some((mod) => mod.content === "camel")) {
-    if (arg.type === 4) {
-      if (arg.isStatic) {
-        arg.content = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(arg.content);
-      } else {
-        arg.content = `${context.helperString(CAMELIZE)}(${arg.content})`;
-      }
-    } else {
-      arg.children.unshift(`${context.helperString(CAMELIZE)}(`);
-      arg.children.push(`)`);
-    }
-  }
-  if (!context.inSSR) {
-    if (modifiers.some((mod) => mod.content === "prop")) {
-      injectPrefix(arg, ".");
-    }
-    if (modifiers.some((mod) => mod.content === "attr")) {
-      injectPrefix(arg, "^");
-    }
-  }
-  return {
-    props: [createObjectProperty(arg, exp)]
-  };
-};
-const injectPrefix = (arg, prefix) => {
-  if (arg.type === 4) {
-    if (arg.isStatic) {
-      arg.content = prefix + arg.content;
-    } else {
-      arg.content = `\`${prefix}\${${arg.content}}\``;
-    }
-  } else {
-    arg.children.unshift(`'${prefix}' + (`);
-    arg.children.push(`)`);
-  }
-};
-
 const transformText = (node, context) => {
   if (node.type === 0 || node.type === 1 || node.type === 11 || node.type === 10) {
     return () => {
@@ -9849,7 +9799,8 @@ const transformModel = (dir, node, context) => {
     context.onError(createCompilerError(44, exp.loc));
     return createTransformProps();
   }
-  if (!expString.trim() || !isMemberExpression(exp) && true) {
+  const maybeRef = false;
+  if (!expString.trim() || !isMemberExpression(exp) && !maybeRef) {
     context.onError(
       createCompilerError(42, exp.loc)
     );
@@ -10046,7 +9997,7 @@ const seen = /* @__PURE__ */ new WeakSet();
 const transformMemo = (node, context) => {
   if (node.type === 1) {
     const dir = findDir(node, "memo");
-    if (!dir || seen.has(node) || context.inSSR) {
+    if (!dir || seen.has(node)) {
       return;
     }
     seen.add(node);
@@ -10068,36 +10019,9 @@ const transformMemo = (node, context) => {
   }
 };
 
-const transformVBindShorthand = (node, context) => {
-  if (node.type === 1) {
-    for (const prop of node.props) {
-      if (prop.type === 7 && prop.name === "bind" && (!prop.exp || // #13930 :foo in in-DOM templates will be parsed into :foo="" by browser
-      prop.exp.type === 4 && !prop.exp.content.trim()) && prop.arg) {
-        const arg = prop.arg;
-        if (arg.type !== 4 || !arg.isStatic) {
-          context.onError(
-            createCompilerError(
-              52,
-              arg.loc
-            )
-          );
-          prop.exp = createSimpleExpression("", true, arg.loc);
-        } else {
-          const propName = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(arg.content);
-          if (validFirstIdentCharRE.test(propName[0]) || // allow hyphen first char for https://github.com/vuejs/language-tools/pull/3424
-          propName[0] === "-") {
-            prop.exp = createSimpleExpression(propName, false, arg.loc);
-          }
-        }
-      }
-    }
-  }
-};
-
 function getBaseTransformPreset(prefixIdentifiers) {
   return [
     [
-      transformVBindShorthand,
       transformOnce,
       transformIf,
       transformMemo,
@@ -10316,7 +10240,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   isStaticPropertyKey: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.isStaticPropertyKey),
 /* harmony export */   isTemplateNode: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.isTemplateNode),
 /* harmony export */   isText: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.isText),
-/* harmony export */   isVPre: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.isVPre),
 /* harmony export */   isVSlot: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.isVSlot),
 /* harmony export */   locStub: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.locStub),
 /* harmony export */   noopDirectiveTransform: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.noopDirectiveTransform),
@@ -10339,10 +10262,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   transformModel: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.transformModel),
 /* harmony export */   transformOn: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.transformOn),
 /* harmony export */   transformStyle: () => (/* binding */ transformStyle),
-/* harmony export */   transformVBindShorthand: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.transformVBindShorthand),
 /* harmony export */   traverseNode: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.traverseNode),
 /* harmony export */   unwrapTSNode: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.unwrapTSNode),
-/* harmony export */   validFirstIdentCharRE: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.validFirstIdentCharRE),
 /* harmony export */   walkBlockDeclarations: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.walkBlockDeclarations),
 /* harmony export */   walkFunctionParams: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.walkFunctionParams),
 /* harmony export */   walkIdentifiers: () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.walkIdentifiers),
@@ -10351,7 +10272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/compiler-core */ "./node_modules/@vue/compiler-core/dist/compiler-core.esm-bundler.js");
 /* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /**
-* @vue/compiler-dom v3.5.24
+* @vue/compiler-dom v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
@@ -10826,9 +10747,6 @@ const ignoreSideEffectTags = (node, context) => {
 };
 
 function isValidHTMLNesting(parent, child) {
-  if (parent === "template") {
-    return true;
-  }
   if (parent in onlyValidChildren) {
     return onlyValidChildren[parent].has(child);
   }
@@ -11100,14 +11018,14 @@ const isProxyAvailable = typeof Proxy === 'function';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   isPerformanceSupported: () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_3__.isPerformanceSupported),
-/* harmony export */   now: () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_3__.now),
+/* harmony export */   isPerformanceSupported: () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_0__.isPerformanceSupported),
+/* harmony export */   now: () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_0__.now),
 /* harmony export */   setupDevtoolsPlugin: () => (/* binding */ setupDevtoolsPlugin)
 /* harmony export */ });
-/* harmony import */ var _env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./env.js */ "./node_modules/@vue/devtools-api/lib/esm/env.js");
-/* harmony import */ var _const_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./const.js */ "./node_modules/@vue/devtools-api/lib/esm/const.js");
-/* harmony import */ var _proxy_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./proxy.js */ "./node_modules/@vue/devtools-api/lib/esm/proxy.js");
-/* harmony import */ var _time_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./time.js */ "./node_modules/@vue/devtools-api/lib/esm/time.js");
+/* harmony import */ var _env_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./env.js */ "./node_modules/@vue/devtools-api/lib/esm/env.js");
+/* harmony import */ var _const_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./const.js */ "./node_modules/@vue/devtools-api/lib/esm/const.js");
+/* harmony import */ var _proxy_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./proxy.js */ "./node_modules/@vue/devtools-api/lib/esm/proxy.js");
+/* harmony import */ var _time_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./time.js */ "./node_modules/@vue/devtools-api/lib/esm/time.js");
 
 
 
@@ -11116,14 +11034,14 @@ __webpack_require__.r(__webpack_exports__);
 
 function setupDevtoolsPlugin(pluginDescriptor, setupFn) {
     const descriptor = pluginDescriptor;
-    const target = (0,_env_js__WEBPACK_IMPORTED_MODULE_0__.getTarget)();
-    const hook = (0,_env_js__WEBPACK_IMPORTED_MODULE_0__.getDevtoolsGlobalHook)();
-    const enableProxy = _env_js__WEBPACK_IMPORTED_MODULE_0__.isProxyAvailable && descriptor.enableEarlyProxy;
+    const target = (0,_env_js__WEBPACK_IMPORTED_MODULE_1__.getTarget)();
+    const hook = (0,_env_js__WEBPACK_IMPORTED_MODULE_1__.getDevtoolsGlobalHook)();
+    const enableProxy = _env_js__WEBPACK_IMPORTED_MODULE_1__.isProxyAvailable && descriptor.enableEarlyProxy;
     if (hook && (target.__VUE_DEVTOOLS_PLUGIN_API_AVAILABLE__ || !enableProxy)) {
-        hook.emit(_const_js__WEBPACK_IMPORTED_MODULE_1__.HOOK_SETUP, pluginDescriptor, setupFn);
+        hook.emit(_const_js__WEBPACK_IMPORTED_MODULE_2__.HOOK_SETUP, pluginDescriptor, setupFn);
     }
     else {
-        const proxy = enableProxy ? new _proxy_js__WEBPACK_IMPORTED_MODULE_2__.ApiProxy(descriptor, hook) : null;
+        const proxy = enableProxy ? new _proxy_js__WEBPACK_IMPORTED_MODULE_3__.ApiProxy(descriptor, hook) : null;
         const list = target.__VUE_DEVTOOLS_PLUGINS__ = target.__VUE_DEVTOOLS_PLUGINS__ || [];
         list.push({
             pluginDescriptor: descriptor,
@@ -11150,8 +11068,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ApiProxy: () => (/* binding */ ApiProxy)
 /* harmony export */ });
-/* harmony import */ var _const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const.js */ "./node_modules/@vue/devtools-api/lib/esm/const.js");
-/* harmony import */ var _time_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./time.js */ "./node_modules/@vue/devtools-api/lib/esm/time.js");
+/* harmony import */ var _const_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./const.js */ "./node_modules/@vue/devtools-api/lib/esm/const.js");
+/* harmony import */ var _time_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./time.js */ "./node_modules/@vue/devtools-api/lib/esm/time.js");
 
 
 class ApiProxy {
@@ -11192,11 +11110,11 @@ class ApiProxy {
                 currentSettings = value;
             },
             now() {
-                return (0,_time_js__WEBPACK_IMPORTED_MODULE_1__.now)();
+                return (0,_time_js__WEBPACK_IMPORTED_MODULE_0__.now)();
             },
         };
         if (hook) {
-            hook.on(_const_js__WEBPACK_IMPORTED_MODULE_0__.HOOK_PLUGIN_SETTINGS_SET, (pluginId, value) => {
+            hook.on(_const_js__WEBPACK_IMPORTED_MODULE_1__.HOOK_PLUGIN_SETTINGS_SET, (pluginId, value) => {
                 if (pluginId === this.plugin.id) {
                     this.fallbacks.setSettings(value);
                 }
@@ -11364,7 +11282,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /**
-* @vue/reactivity v3.5.24
+* @vue/reactivity v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
@@ -11382,10 +11300,6 @@ class EffectScope {
      * @internal
      */
     this._active = true;
-    /**
-     * @internal track `on` calls, allow `on` call multiple times
-     */
-    this._on = 0;
     /**
      * @internal
      */
@@ -11456,20 +11370,14 @@ class EffectScope {
    * @internal
    */
   on() {
-    if (++this._on === 1) {
-      this.prevScope = activeEffectScope;
-      activeEffectScope = this;
-    }
+    activeEffectScope = this;
   }
   /**
    * This should only be called on non-detached scopes
    * @internal
    */
   off() {
-    if (this._on > 0 && --this._on === 0) {
-      activeEffectScope = this.prevScope;
-      this.prevScope = void 0;
-    }
+    activeEffectScope = this.parent;
   }
   stop(fromParent) {
     if (this._active) {
@@ -11531,9 +11439,7 @@ const EffectFlags = {
   "ALLOW_RECURSE": 32,
   "32": "ALLOW_RECURSE",
   "PAUSED": 64,
-  "64": "PAUSED",
-  "EVALUATED": 128,
-  "128": "EVALUATED"
+  "64": "PAUSED"
 };
 const pausedQueueEffects = /* @__PURE__ */ new WeakSet();
 class ReactiveEffect {
@@ -11569,7 +11475,7 @@ class ReactiveEffect {
   }
   resume() {
     if (this.flags & 64) {
-      this.flags &= -65;
+      this.flags &= ~64;
       if (pausedQueueEffects.has(this)) {
         pausedQueueEffects.delete(this);
         this.trigger();
@@ -11609,7 +11515,7 @@ class ReactiveEffect {
       cleanupDeps(this);
       activeSub = prevEffect;
       shouldTrack = prevShouldTrack;
-      this.flags &= -3;
+      this.flags &= ~2;
     }
   }
   stop() {
@@ -11620,7 +11526,7 @@ class ReactiveEffect {
       this.deps = this.depsTail = void 0;
       cleanupEffect(this);
       this.onStop && this.onStop();
-      this.flags &= -2;
+      this.flags &= ~1;
     }
   }
   trigger() {
@@ -11670,7 +11576,7 @@ function endBatch() {
     while (e) {
       const next = e.next;
       e.next = void 0;
-      e.flags &= -9;
+      e.flags &= ~8;
       e = next;
     }
   }
@@ -11681,7 +11587,7 @@ function endBatch() {
     while (e) {
       const next = e.next;
       e.next = void 0;
-      e.flags &= -9;
+      e.flags &= ~8;
       if (e.flags & 1) {
         try {
           ;
@@ -11737,16 +11643,17 @@ function refreshComputed(computed) {
   if (computed.flags & 4 && !(computed.flags & 16)) {
     return;
   }
-  computed.flags &= -17;
+  computed.flags &= ~16;
   if (computed.globalVersion === globalVersion) {
     return;
   }
   computed.globalVersion = globalVersion;
-  if (!computed.isSSR && computed.flags & 128 && (!computed.deps && !computed._dirty || !isDirty(computed))) {
+  const dep = computed.dep;
+  computed.flags |= 2;
+  if (dep.version > 0 && !computed.isSSR && computed.deps && !isDirty(computed)) {
+    computed.flags &= ~2;
     return;
   }
-  computed.flags |= 2;
-  const dep = computed.dep;
   const prevSub = activeSub;
   const prevShouldTrack = shouldTrack;
   activeSub = computed;
@@ -11755,7 +11662,6 @@ function refreshComputed(computed) {
     prepareDeps(computed);
     const value = computed.fn(computed._value);
     if (dep.version === 0 || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasChanged)(value, computed._value)) {
-      computed.flags |= 128;
       computed._value = value;
       dep.version++;
     }
@@ -11766,7 +11672,7 @@ function refreshComputed(computed) {
     activeSub = prevSub;
     shouldTrack = prevShouldTrack;
     cleanupDeps(computed);
-    computed.flags &= -3;
+    computed.flags &= ~2;
   }
 }
 function removeSub(link, soft = false) {
@@ -11785,7 +11691,7 @@ function removeSub(link, soft = false) {
   if (dep.subs === link) {
     dep.subs = prevSub;
     if (!prevSub && dep.computed) {
-      dep.computed.flags &= -5;
+      dep.computed.flags &= ~4;
       for (let l = dep.computed.deps; l; l = l.nextDep) {
         removeSub(l, true);
       }
@@ -11874,7 +11780,6 @@ class Link {
   }
 }
 class Dep {
-  // TODO isolatedDeclarations "__v_skip"
   constructor(computed) {
     this.computed = computed;
     this.version = 0;
@@ -11895,10 +11800,6 @@ class Dep {
      * Subscriber counter
      */
     this.sc = 0;
-    /**
-     * @internal
-     */
-    this.__v_skip = true;
     if (true) {
       this.subsHead = void 0;
     }
@@ -12029,8 +11930,7 @@ function track(target, type, key) {
         type,
         key
       });
-    } else // removed by dead control flow
-{}
+    } else {}
   }
 }
 function trigger(target, type, key, newValue, oldValue, oldTarget) {
@@ -12050,8 +11950,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
           oldValue,
           oldTarget
         });
-      } else // removed by dead control flow
-{}
+      } else {}
     }
   };
   startBatch();
@@ -12165,7 +12064,7 @@ const arrayInstrumentations = {
   join(separator) {
     return reactiveReadArray(this).join(separator);
   },
-  // keys() iterator only reads `length`, no optimization required
+  // keys() iterator only reads `length`, no optimisation required
   lastIndexOf(...args) {
     return searchProxy(this, "lastIndexOf", args);
   },
@@ -12217,7 +12116,7 @@ function iterator(self, method, wrapValue) {
     iter._next = iter.next;
     iter.next = () => {
       const result = iter._next();
-      if (!result.done) {
+      if (result.value) {
         result.value = wrapValue(result.value);
       }
       return result;
@@ -12344,8 +12243,7 @@ class BaseReactiveHandler {
       return res;
     }
     if (isRef(res)) {
-      const value = targetIsArray && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isIntegerKey)(key) ? res : res.value;
-      return isReadonly2 && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(value) ? readonly(value) : value;
+      return targetIsArray && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isIntegerKey)(key) ? res : res.value;
     }
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(res)) {
       return isReadonly2 ? readonly(res) : reactive(res);
@@ -12367,13 +12265,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
       }
       if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target) && isRef(oldValue) && !isRef(value)) {
         if (isOldValueReadonly) {
-          if (true) {
-            warn(
-              `Set operation on key "${String(key)}" failed: target is readonly.`,
-              target[key]
-            );
-          }
-          return true;
+          return false;
         } else {
           oldValue.value = value;
           return true;
@@ -12518,7 +12410,7 @@ function createInstrumentations(readonly, shallow) {
     get size() {
       const target = this["__v_raw"];
       !readonly && track(toRaw(target), "iterate", ITERATE_KEY);
-      return target.size;
+      return Reflect.get(target, "size", target);
     },
     has(key) {
       const target = this["__v_raw"];
@@ -12745,13 +12637,13 @@ function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandl
   if (target["__v_raw"] && !(isReadonly2 && target["__v_isReactive"])) {
     return target;
   }
-  const targetType = getTargetType(target);
-  if (targetType === 0 /* INVALID */) {
-    return target;
-  }
   const existingProxy = proxyMap.get(target);
   if (existingProxy) {
     return existingProxy;
+  }
+  const targetType = getTargetType(target);
+  if (targetType === 0 /* INVALID */) {
+    return target;
   }
   const proxy = new Proxy(
     target,
@@ -12819,8 +12711,7 @@ class RefImpl {
         type: "get",
         key: "value"
       });
-    } else // removed by dead control flow
-{}
+    } else {}
     return this._value;
   }
   set value(newValue) {
@@ -12838,8 +12729,7 @@ class RefImpl {
           newValue,
           oldValue
         });
-      } else // removed by dead control flow
-{}
+      } else {}
     }
   }
 }
@@ -12852,8 +12742,7 @@ function triggerRef(ref2) {
         key: "value",
         newValue: ref2._value
       });
-    } else // removed by dead control flow
-{}
+    } else {}
   }
 }
 function unref(ref2) {
@@ -13194,11 +13083,11 @@ function watch(source, cb, options = _vue_shared__WEBPACK_IMPORTED_MODULE_0__.EM
             oldValue === INITIAL_WATCHER_VALUE ? void 0 : isMultiSource && oldValue[0] === INITIAL_WATCHER_VALUE ? [] : oldValue,
             boundCleanup
           ];
-          oldValue = newValue;
           call ? call(cb, 3, args) : (
             // @ts-expect-error
             cb(...args)
           );
+          oldValue = newValue;
         } finally {
           activeWatcher = currentWatcher;
         }
@@ -13248,11 +13137,11 @@ function traverse(value, depth = Infinity, seen) {
   if (depth <= 0 || !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(value) || value["__v_skip"]) {
     return value;
   }
-  seen = seen || /* @__PURE__ */ new Map();
-  if ((seen.get(value) || 0) >= depth) {
+  seen = seen || /* @__PURE__ */ new Set();
+  if (seen.has(value)) {
     return value;
   }
-  seen.set(value, depth);
+  seen.add(value);
   depth--;
   if (isRef(value)) {
     traverse(value.value, depth, seen);
@@ -13441,7 +13330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
 /* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /**
-* @vue/runtime-core v3.5.24
+* @vue/runtime-core v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
@@ -13563,8 +13452,7 @@ function formatProp(key, value, raw) {
   }
 }
 function assertNumber(val, type) {
-  if (false) // removed by dead control flow
-{}
+  if (false) {}
   if (val === void 0) {
     return;
   } else if (typeof val !== "number") {
@@ -13712,8 +13600,7 @@ function logError(err, type, contextVNode, throwInDev = true, throwInProd = fals
     } else {
       console.error(err);
     }
-  } else // removed by dead control flow
-{}
+  } else {}
 }
 
 const queue = [];
@@ -13791,11 +13678,11 @@ function flushPreFlushCbs(instance, seen, i = flushIndex + 1) {
       queue.splice(i, 1);
       i--;
       if (cb.flags & 4) {
-        cb.flags &= -2;
+        cb.flags &= ~1;
       }
       cb();
       if (!(cb.flags & 4)) {
-        cb.flags &= -2;
+        cb.flags &= ~1;
       }
     }
   }
@@ -13820,10 +13707,10 @@ function flushPostFlushCbs(seen) {
         continue;
       }
       if (cb.flags & 4) {
-        cb.flags &= -2;
+        cb.flags &= ~1;
       }
       if (!(cb.flags & 8)) cb();
-      cb.flags &= -2;
+      cb.flags &= ~1;
     }
     activePostFlushCbs = null;
     postFlushIndex = 0;
@@ -13859,7 +13746,7 @@ function flushJobs(seen) {
     for (; flushIndex < queue.length; flushIndex++) {
       const job = queue[flushIndex];
       if (job) {
-        job.flags &= -2;
+        job.flags &= ~1;
       }
     }
     flushIndex = -1;
@@ -13935,9 +13822,7 @@ function rerender(id, newRender) {
     }
     instance.renderCache = [];
     isHmrUpdating = true;
-    if (!(instance.job.flags & 8)) {
-      instance.update();
-    }
+    instance.update();
     isHmrUpdating = false;
   });
 }
@@ -13967,12 +13852,10 @@ function reload(id, newComp) {
       dirtyInstances.delete(instance);
     } else if (instance.parent) {
       queueJob(() => {
-        if (!(instance.job.flags & 8)) {
-          isHmrUpdating = true;
-          instance.parent.update();
-          isHmrUpdating = false;
-          dirtyInstances.delete(instance);
-        }
+        isHmrUpdating = true;
+        instance.parent.update();
+        isHmrUpdating = false;
+        dirtyInstances.delete(instance);
       });
     } else if (instance.appContext.reload) {
       instance.appContext.reload();
@@ -14076,6 +13959,7 @@ const devtoolsComponentRemoved = (component) => {
     _devtoolsComponentRemoved(component);
   }
 };
+/*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function createDevtoolsComponentHook(hook) {
   return (component) => {
@@ -14261,6 +14145,9 @@ const TeleportImpl = {
       insert(mainAnchor, container, anchor);
       const mount = (container2, anchor2) => {
         if (shapeFlag & 16) {
+          if (parentComponent && parentComponent.isCE) {
+            parentComponent.ce._teleportTarget = container2;
+          }
           mountChildren(
             children,
             container2,
@@ -14282,9 +14169,6 @@ const TeleportImpl = {
           } else if (namespace !== "mathml" && isTargetMathML(target)) {
             namespace = "mathml";
           }
-          if (parentComponent && parentComponent.isCE) {
-            (parentComponent.ce._teleportTargets || (parentComponent.ce._teleportTargets = /* @__PURE__ */ new Set())).add(target);
-          }
           if (!disabled) {
             mount(target, targetAnchor);
             updateCssVars(n2, false);
@@ -14302,16 +14186,15 @@ const TeleportImpl = {
         updateCssVars(n2, true);
       }
       if (isTeleportDeferred(n2.props)) {
-        n2.el.__isMounted = false;
         queuePostRenderEffect(() => {
           mountToTarget();
-          delete n2.el.__isMounted;
+          n2.el.__isMounted = true;
         }, parentSuspense);
       } else {
         mountToTarget();
       }
     } else {
-      if (isTeleportDeferred(n2.props) && n1.el.__isMounted === false) {
+      if (isTeleportDeferred(n2.props) && !n1.el.__isMounted) {
         queuePostRenderEffect(() => {
           TeleportImpl.process(
             n1,
@@ -14325,6 +14208,7 @@ const TeleportImpl = {
             optimized,
             internals
           );
+          delete n1.el.__isMounted;
         }, parentSuspense);
         return;
       }
@@ -14351,7 +14235,7 @@ const TeleportImpl = {
           namespace,
           slotScopeIds
         );
-        traverseStaticChildren(n1, n2, !!!("development" !== "production"));
+        traverseStaticChildren(n1, n2, true);
       } else if (!optimized) {
         patchChildren(
           n1,
@@ -14473,34 +14357,26 @@ function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }
 function hydrateTeleport(node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized, {
   o: { nextSibling, parentNode, querySelector, insert, createText }
 }, hydrateChildren) {
-  function hydrateDisabledTeleport(node2, vnode2, targetStart, targetAnchor) {
-    vnode2.anchor = hydrateChildren(
-      nextSibling(node2),
-      vnode2,
-      parentNode(node2),
-      parentComponent,
-      parentSuspense,
-      slotScopeIds,
-      optimized
-    );
-    vnode2.targetStart = targetStart;
-    vnode2.targetAnchor = targetAnchor;
-  }
   const target = vnode.target = resolveTarget(
     vnode.props,
     querySelector
   );
-  const disabled = isTeleportDisabled(vnode.props);
   if (target) {
+    const disabled = isTeleportDisabled(vnode.props);
     const targetNode = target._lpa || target.firstChild;
     if (vnode.shapeFlag & 16) {
       if (disabled) {
-        hydrateDisabledTeleport(
-          node,
+        vnode.anchor = hydrateChildren(
+          nextSibling(node),
           vnode,
-          targetNode,
-          targetNode && nextSibling(targetNode)
+          parentNode(node),
+          parentComponent,
+          parentSuspense,
+          slotScopeIds,
+          optimized
         );
+        vnode.targetStart = targetNode;
+        vnode.targetAnchor = targetNode && nextSibling(targetNode);
       } else {
         vnode.anchor = nextSibling(node);
         let targetAnchor = targetNode;
@@ -14531,10 +14407,6 @@ function hydrateTeleport(node, vnode, parentComponent, parentSuspense, slotScope
       }
     }
     updateCssVars(vnode, disabled);
-  } else if (disabled) {
-    if (vnode.shapeFlag & 16) {
-      hydrateDisabledTeleport(node, vnode, node, nextSibling(node));
-    }
   }
   return vnode.anchor && nextSibling(vnode.anchor);
 }
@@ -14646,7 +14518,7 @@ const BaseTransitionImpl = {
         setTransitionHooks(innerChild, enterHooks);
       }
       let oldInnerChild = instance.subTree && getInnerChild$1(instance.subTree);
-      if (oldInnerChild && oldInnerChild.type !== Comment && !isSameVNodeType(oldInnerChild, innerChild) && recursiveGetSubtree(instance).type !== Comment) {
+      if (oldInnerChild && oldInnerChild.type !== Comment && !isSameVNodeType(innerChild, oldInnerChild) && recursiveGetSubtree(instance).type !== Comment) {
         let leavingHooks = resolveTransitionHooks(
           oldInnerChild,
           rawProps,
@@ -14708,8 +14580,7 @@ function findNonCommentChild(children) {
         }
         child = c;
         hasFound = true;
-        if (false) // removed by dead control flow
-{}
+        if (false) {}
       }
     }
   }
@@ -14881,7 +14752,7 @@ function getInnerChild$1(vnode) {
     }
     return vnode;
   }
-  if (vnode.component) {
+  if ( true && vnode.component) {
     return vnode.component.subTree;
   }
   const { shapeFlag, children } = vnode;
@@ -14928,6 +14799,7 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
   return ret;
 }
 
+/*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function defineComponent(options, extraOptions) {
   return (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options) ? (
@@ -14980,7 +14852,6 @@ function useTemplateRef(key) {
   return ret;
 }
 
-const pendingSetRefMap = /* @__PURE__ */ new WeakMap();
 function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(rawRef)) {
     rawRef.forEach(
@@ -15013,7 +14884,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const refs = owner.refs === _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
   const rawSetupState = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toRaw)(setupState);
-  const canSetSetupRef = setupState === _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ ? _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NO : (key) => {
+  const canSetSetupRef = setupState === _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ ? () => false : (key) => {
     if (true) {
       if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(rawSetupState, key) && !(0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isRef)(rawSetupState[key])) {
         warn$1(
@@ -15026,22 +14897,14 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
     }
     return (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(rawSetupState, key);
   };
-  const canSetRef = (ref2) => {
-    return  false || !knownTemplateRefs.has(ref2);
-  };
   if (oldRef != null && oldRef !== ref) {
-    invalidatePendingSetRef(oldRawRef);
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(oldRef)) {
       refs[oldRef] = null;
       if (canSetSetupRef(oldRef)) {
         setupState[oldRef] = null;
       }
     } else if ((0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isRef)(oldRef)) {
-      if (canSetRef(oldRef)) {
-        oldRef.value = null;
-      }
-      const oldRawRefAtom = oldRawRef;
-      if (oldRawRefAtom.k) refs[oldRawRefAtom.k] = null;
+      oldRef.value = null;
     }
   }
   if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(ref)) {
@@ -15052,7 +14915,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
-          const existing = _isString ? canSetSetupRef(ref) ? setupState[ref] : refs[ref] : canSetRef(ref) || !rawRef.k ? ref.value : refs[rawRef.k];
+          const existing = _isString ? canSetSetupRef(ref) ? setupState[ref] : refs[ref] : ref.value;
           if (isUnmount) {
             (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(existing) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.remove)(existing, refValue);
           } else {
@@ -15063,11 +14926,8 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
                   setupState[ref] = refs[ref];
                 }
               } else {
-                const newVal = [refValue];
-                if (canSetRef(ref)) {
-                  ref.value = newVal;
-                }
-                if (rawRef.k) refs[rawRef.k] = newVal;
+                ref.value = [refValue];
+                if (rawRef.k) refs[rawRef.k] = ref.value;
               }
             } else if (!existing.includes(refValue)) {
               existing.push(refValue);
@@ -15079,36 +14939,21 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
             setupState[ref] = value;
           }
         } else if (_isRef) {
-          if (canSetRef(ref)) {
-            ref.value = value;
-          }
+          ref.value = value;
           if (rawRef.k) refs[rawRef.k] = value;
         } else if (true) {
           warn$1("Invalid template ref type:", ref, `(${typeof ref})`);
         }
       };
       if (value) {
-        const job = () => {
-          doSet();
-          pendingSetRefMap.delete(rawRef);
-        };
-        job.id = -1;
-        pendingSetRefMap.set(rawRef, job);
-        queuePostRenderEffect(job, parentSuspense);
+        doSet.id = -1;
+        queuePostRenderEffect(doSet, parentSuspense);
       } else {
-        invalidatePendingSetRef(rawRef);
         doSet();
       }
     } else if (true) {
       warn$1("Invalid template ref type:", ref, `(${typeof ref})`);
     }
-  }
-}
-function invalidatePendingSetRef(rawRef) {
-  const pendingSetRef = pendingSetRefMap.get(rawRef);
-  if (pendingSetRef) {
-    pendingSetRef.flags |= 8;
-    pendingSetRefMap.delete(rawRef);
   }
 }
 
@@ -15352,8 +15197,6 @@ function createHydrationFunctions(rendererInternals) {
         ) && parentComponent && parentComponent.vnode.props && parentComponent.vnode.props.appear;
         const content = el.content.firstChild;
         if (needCallTransitionHooks) {
-          const cls = content.getAttribute("class");
-          if (cls) content.$cls = cls;
           transition.beforeEnter(content);
         }
         replaceNode(content, el, parentComponent);
@@ -15393,16 +15236,14 @@ Server rendered element contains more child nodes than client vdom.`
         if (clientText[0] === "\n" && (el.tagName === "PRE" || el.tagName === "TEXTAREA")) {
           clientText = clientText.slice(1);
         }
-        const { textContent } = el;
-        if (textContent !== clientText && // innerHTML normalize \r\n or \r into a single \n in the DOM
-        textContent !== clientText.replace(/\r\n|\r/g, "\n")) {
+        if (el.textContent !== clientText) {
           if (!isMismatchAllowed(el, 0 /* TEXT */)) {
             ( true) && warn$1(
               `Hydration text content mismatch on`,
               el,
               `
-  - rendered on server: ${textContent}
-  - expected on client: ${clientText}`
+  - rendered on server: ${el.textContent}
+  - expected on client: ${vnode.children}`
             );
             logMismatchError();
           }
@@ -15423,8 +15264,7 @@ Server rendered element contains more child nodes than client vdom.`
               patchProp(el, key, null, props[key], void 0, parentComponent);
             }
           }
-        } else // removed by dead control flow
-{}
+        } else {}
       }
       let vnodeHooks;
       if (vnodeHooks = props && props.onVnodeBeforeMount) {
@@ -15609,12 +15449,7 @@ function propHasMismatch(el, key, clientValue, vnode, instance) {
   let actual;
   let expected;
   if (key === "class") {
-    if (el.$cls) {
-      actual = el.$cls;
-      delete el.$cls;
-    } else {
-      actual = el.getAttribute("class");
-    }
+    actual = el.getAttribute("class");
     expected = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.normalizeClass)(clientValue);
     if (!isSetEqual(toClassSet(actual || ""), toClassSet(expected))) {
       mismatchType = 2 /* CLASS */;
@@ -15718,8 +15553,10 @@ function resolveCssVars(instance, vnode, expectedMap) {
   if (instance.getCssVars && (vnode === root || root && root.type === Fragment && root.children.includes(vnode))) {
     const cssVars = instance.getCssVars();
     for (const key in cssVars) {
-      const value = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.normalizeCssVarValue)(cssVars[key]);
-      expectedMap.set(`--${(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.getEscapedCssVarName)(key, false)}`, value);
+      expectedMap.set(
+        `--${(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.getEscapedCssVarName)(key, false)}`,
+        String(cssVars[key])
+      );
     }
   }
   if (vnode === root && instance.parent) {
@@ -15750,7 +15587,7 @@ function isMismatchAllowed(el, allowedType) {
     if (allowedType === 0 /* TEXT */ && list.includes("children")) {
       return true;
     }
-    return list.includes(MismatchTypeString[allowedType]);
+    return allowedAttr.split(",").includes(MismatchTypeString[allowedType]);
   }
 }
 
@@ -15846,6 +15683,7 @@ function forEachElement(node, cb) {
 }
 
 const isAsyncWrapper = (i) => !!i.type.__asyncLoader;
+/*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function defineAsyncComponent(source) {
   if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(source)) {
@@ -15906,28 +15744,15 @@ function defineAsyncComponent(source) {
     name: "AsyncComponentWrapper",
     __asyncLoader: load,
     __asyncHydrate(el, instance, hydrate) {
-      let patched = false;
-      (instance.bu || (instance.bu = [])).push(() => patched = true);
-      const performHydrate = () => {
-        if (patched) {
-          if (true) {
-            warn$1(
-              `Skipping lazy hydration for component '${getComponentName(resolvedComp) || resolvedComp.__file}': it was updated before lazy hydration performed.`
-            );
-          }
-          return;
-        }
-        hydrate();
-      };
       const doHydrate = hydrateStrategy ? () => {
         const teardown = hydrateStrategy(
-          performHydrate,
+          hydrate,
           (cb) => forEachElement(el, cb)
         );
         if (teardown) {
           (instance.bum || (instance.bum = [])).push(teardown);
         }
-      } : performHydrate;
+      } : hydrate;
       if (resolvedComp) {
         doHydrate();
       } else {
@@ -15998,10 +15823,7 @@ function defineAsyncComponent(source) {
             error: error.value
           });
         } else if (loadingComponent && !delayed.value) {
-          return createInnerComp(
-            loadingComponent,
-            instance
-          );
+          return createVNode(loadingComponent);
         }
       };
     }
@@ -16099,9 +15921,6 @@ const KeepAliveImpl = {
       if (true) {
         devtoolsComponentAdded(instance2);
       }
-      if (true) {
-        instance2.__keepAliveStorageContainer = storageContainer;
-      }
     };
     function unmount(vnode) {
       resetShapeFlag(vnode);
@@ -16189,7 +16008,7 @@ const KeepAliveImpl = {
       );
       const { include, exclude, max } = props;
       if (include && (!name || !matches(include, name)) || exclude && name && matches(exclude, name)) {
-        vnode.shapeFlag &= -257;
+        vnode.shapeFlag &= ~256;
         current = vnode;
         return rawVNode;
       }
@@ -16276,8 +16095,8 @@ function injectToKeepAliveRoot(hook, type, target, keepAliveRoot) {
   }, target);
 }
 function resetShapeFlag(vnode) {
-  vnode.shapeFlag &= -257;
-  vnode.shapeFlag &= -513;
+  vnode.shapeFlag &= ~256;
+  vnode.shapeFlag &= ~512;
 }
 function getInnerChild(vnode) {
   return vnode.shapeFlag & 128 ? vnode.ssContent : vnode;
@@ -16392,16 +16211,14 @@ function renderList(source, renderItem, cache, index) {
   if (sourceIsArray || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(source)) {
     const sourceIsReactiveArray = sourceIsArray && (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isReactive)(source);
     let needsWrap = false;
-    let isReadonlySource = false;
     if (sourceIsReactiveArray) {
       needsWrap = !(0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isShallow)(source);
-      isReadonlySource = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isReadonly)(source);
       source = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.shallowReadArray)(source);
     }
     ret = new Array(source.length);
     for (let i = 0, l = source.length; i < l; i++) {
       ret[i] = renderItem(
-        needsWrap ? isReadonlySource ? (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toReadonly)((0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toReactive)(source[i])) : (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toReactive)(source[i]) : source[i],
+        needsWrap ? (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toReactive)(source[i]) : source[i],
         i,
         void 0,
         cached && cached[i]
@@ -16458,13 +16275,12 @@ function createSlots(slots, dynamicSlots) {
 
 function renderSlot(slots, name, props = {}, fallback, noSlotted) {
   if (currentRenderingInstance.ce || currentRenderingInstance.parent && isAsyncWrapper(currentRenderingInstance.parent) && currentRenderingInstance.parent.ce) {
-    const hasProps = Object.keys(props).length > 0;
     if (name !== "default") props.name = name;
     return openBlock(), createBlock(
       Fragment,
       null,
       [createVNode("slot", props, fallback && fallback())],
-      hasProps ? -2 : 64
+      64
     );
   }
   let slot = slots[name];
@@ -16577,7 +16393,7 @@ const PublicInstanceProxyHandlers = {
       } else if (hasSetupBinding(setupState, key)) {
         accessCache[key] = 1 /* SETUP */;
         return setupState[key];
-      } else if ( true && data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) {
+      } else if (data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) {
         accessCache[key] = 2 /* DATA */;
         return data[key];
       } else if (
@@ -16643,7 +16459,7 @@ const PublicInstanceProxyHandlers = {
     } else if ( true && setupState.__isScriptSetup && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, key)) {
       warn$1(`Cannot mutate <script setup> binding "${key}" from Options API.`);
       return false;
-    } else if ( true && data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) {
+    } else if (data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) {
       data[key] = value;
       return true;
     } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(instance.props, key)) {
@@ -16669,10 +16485,10 @@ const PublicInstanceProxyHandlers = {
     return true;
   },
   has({
-    _: { data, setupState, accessCache, ctx, appContext, propsOptions, type }
+    _: { data, setupState, accessCache, ctx, appContext, propsOptions }
   }, key) {
-    let normalizedProps, cssModules;
-    return !!(accessCache[key] ||  true && data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && key[0] !== "$" && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key) || hasSetupBinding(setupState, key) || (normalizedProps = propsOptions[0]) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(normalizedProps, key) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(ctx, key) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(publicPropertiesMap, key) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(appContext.config.globalProperties, key) || (cssModules = type.__cssModules) && cssModules[key]);
+    let normalizedProps;
+    return !!accessCache[key] || data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key) || hasSetupBinding(setupState, key) || (normalizedProps = propsOptions[0]) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(normalizedProps, key) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(ctx, key) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(publicPropertiesMap, key) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(appContext.config.globalProperties, key);
   },
   defineProperty(target, key, descriptor) {
     if (descriptor.get != null) {
@@ -16810,15 +16626,15 @@ function withDefaults(props, defaults) {
   return null;
 }
 function useSlots() {
-  return getContext("useSlots").slots;
+  return getContext().slots;
 }
 function useAttrs() {
-  return getContext("useAttrs").attrs;
+  return getContext().attrs;
 }
-function getContext(calledFunctionName) {
+function getContext() {
   const i = getCurrentInstance();
   if ( true && !i) {
-    warn$1(`${calledFunctionName}() called without active instance.`);
+    warn$1(`useContext() called without active instance.`);
   }
   return i.setupContext || (i.setupContext = createSetupContext(i));
 }
@@ -16960,8 +16776,7 @@ function applyOptions(instance) {
             enumerable: true,
             writable: true
           });
-        } else // removed by dead control flow
-{}
+        } else {}
         if (true) {
           checkDuplicateProperties("Methods" /* METHODS */, key);
         }
@@ -17070,8 +16885,7 @@ function applyOptions(instance) {
       expose.forEach((key) => {
         Object.defineProperty(exposed, key, {
           get: () => publicThis[key],
-          set: (val) => publicThis[key] = val,
-          enumerable: true
+          set: (val) => publicThis[key] = val
         });
       });
     } else if (!instance.exposed) {
@@ -17380,8 +17194,7 @@ function createAppAPI(render, hydrate) {
               "Mixin has already been applied to target app" + (mixin.name ? `: ${mixin.name}` : "")
             );
           }
-        } else // removed by dead control flow
-{}
+        } else {}
         return app;
       },
       component(name, component) {
@@ -17427,9 +17240,11 @@ function createAppAPI(render, hydrate) {
           }
           if (true) {
             context.reload = () => {
-              const cloned = cloneVNode(vnode);
-              cloned.el = null;
-              render(cloned, rootContainer, namespace);
+              render(
+                cloneVNode(vnode),
+                rootContainer,
+                namespace
+              );
             };
           }
           if (isHydrate && hydrate) {
@@ -17479,15 +17294,9 @@ If you want to remount the same app, move your app creation logic into a factory
       },
       provide(key, value) {
         if ( true && key in context.provides) {
-          if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(context.provides, key)) {
-            warn$1(
-              `App already provides property with key "${String(key)}". It will be overwritten with the new value.`
-            );
-          } else {
-            warn$1(
-              `App already provides property with key "${String(key)}" inherited from its parent element. It will be overwritten with the new value.`
-            );
-          }
+          warn$1(
+            `App already provides property with key "${String(key)}". It will be overwritten with the new value.`
+          );
         }
         context.provides[key] = value;
         return app;
@@ -17522,9 +17331,9 @@ function provide(key, value) {
   }
 }
 function inject(key, defaultValue, treatDefaultAsFactory = false) {
-  const instance = getCurrentInstance();
+  const instance = currentInstance || currentRenderingInstance;
   if (instance || currentApp) {
-    let provides = currentApp ? currentApp._context.provides : instance ? instance.parent == null || instance.ce ? instance.vnode.appContext && instance.vnode.appContext.provides : instance.parent.provides : void 0;
+    const provides = currentApp ? currentApp._context.provides : instance ? instance.parent == null ? instance.vnode.appContext && instance.vnode.appContext.provides : instance.parent.provides : void 0;
     if (provides && key in provides) {
       return provides[key];
     } else if (arguments.length > 1) {
@@ -17537,7 +17346,7 @@ function inject(key, defaultValue, treatDefaultAsFactory = false) {
   }
 }
 function hasInjectionContext() {
-  return !!(getCurrentInstance() || currentApp);
+  return !!(currentInstance || currentRenderingInstance || currentApp);
 }
 
 const internalObjectProto = {};
@@ -17951,14 +17760,14 @@ function isBoolean(...args) {
   return args.some((elem) => elem.toLowerCase() === "boolean");
 }
 
-const isInternalKey = (key) => key === "_" || key === "_ctx" || key === "$stable";
+const isInternalKey = (key) => key[0] === "_" || key === "$stable";
 const normalizeSlotValue = (value) => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
 const normalizeSlot = (key, rawSlot, ctx) => {
   if (rawSlot._n) {
     return rawSlot;
   }
   const normalized = withCtx((...args) => {
-    if ( true && currentInstance && !(ctx === null && currentRenderingInstance) && !(ctx && ctx.root !== currentInstance.root)) {
+    if ( true && currentInstance && (!ctx || ctx.root === currentInstance.root)) {
       warn$1(
         `Slot "${key}" invoked outside of the render function: this will not track dependencies used in the slot. Invoke the slot function inside the render function instead.`
       );
@@ -17997,7 +17806,7 @@ const normalizeVNodeSlots = (instance, children) => {
 };
 const assignSlots = (slots, children, optimized) => {
   for (const key in children) {
-    if (optimized || !isInternalKey(key)) {
+    if (optimized || key !== "_") {
       slots[key] = children[key];
     }
   }
@@ -18065,10 +17874,12 @@ function endMeasure(instance, type) {
   if (instance.appContext.config.performance && isSupported()) {
     const startTag = `vue-${type}-${instance.uid}`;
     const endTag = startTag + `:end`;
-    const measureName = `<${formatComponentName(instance, instance.type)}> ${type}`;
     perf.mark(endTag);
-    perf.measure(measureName, startTag, endTag);
-    perf.clearMeasures(measureName);
+    perf.measure(
+      `<${formatComponentName(instance, instance.type)}> ${type}`,
+      startTag,
+      endTag
+    );
     perf.clearMarks(startTag);
     perf.clearMarks(endTag);
   }
@@ -18091,10 +17902,8 @@ function isSupported() {
 
 function initFeatureFlags() {
   const needWarn = [];
-  if (false) // removed by dead control flow
-{}
-  if (false) // removed by dead control flow
-{}
+  if (false) {}
+  if (false) {}
   if (typeof __VUE_PROD_HYDRATION_MISMATCH_DETAILS__ !== "boolean") {
      true && needWarn.push(`__VUE_PROD_HYDRATION_MISMATCH_DETAILS__`);
     (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
@@ -18237,8 +18046,6 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
     if (ref != null && parentComponent) {
       setRef(ref, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
-    } else if (ref == null && n1 && n1.ref != null) {
-      setRef(n1.ref, null, parentSuspense, n1, true);
     }
   };
   const processText = (n1, n2, container, anchor) => {
@@ -18327,25 +18134,15 @@ function baseCreateRenderer(options, createHydrationFns) {
         optimized
       );
     } else {
-      const customElement = !!(n1.el && n1.el._isVueCE) ? n1.el : null;
-      try {
-        if (customElement) {
-          customElement._beginPatch();
-        }
-        patchElement(
-          n1,
-          n2,
-          parentComponent,
-          parentSuspense,
-          namespace,
-          slotScopeIds,
-          optimized
-        );
-      } finally {
-        if (customElement) {
-          customElement._endPatch();
-        }
-      }
+      patchElement(
+        n1,
+        n2,
+        parentComponent,
+        parentSuspense,
+        namespace,
+        slotScopeIds,
+        optimized
+      );
     }
   };
   const mountElement = (vnode, container, anchor, parentComponent, parentSuspense, namespace, slotScopeIds, optimized) => {
@@ -18554,7 +18351,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         (oldVNode.type === Fragment || // - In the case of different nodes, there is going to be a replacement
         // which also requires the correct parent container
         !isSameVNodeType(oldVNode, newVNode) || // - In the case of a component, it could contain anything.
-        oldVNode.shapeFlag & (6 | 64 | 128)) ? hostParentNode(oldVNode.el) : (
+        oldVNode.shapeFlag & (6 | 64)) ? hostParentNode(oldVNode.el) : (
           // In other cases, the parent container is not actually used so we
           // just pass the block element here to avoid a DOM parentNode call.
           fallbackContainer
@@ -18647,8 +18444,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         );
         if (true) {
           traverseStaticChildren(n1, n2);
-        } else // removed by dead control flow
-{}
+        } else {}
       } else {
         patchChildren(
           n1,
@@ -18715,13 +18511,12 @@ function baseCreateRenderer(options, createHydrationFns) {
         endMeasure(instance, `init`);
       }
     }
-    if ( true && isHmrUpdating) initialVNode.el = null;
     if (instance.asyncDep) {
+      if ( true && isHmrUpdating) initialVNode.el = null;
       parentSuspense && parentSuspense.registerDep(instance, setupRenderEffect, optimized);
       if (!initialVNode.el) {
         const placeholder = instance.subTree = createVNode(Comment);
         processCommentNode(null, placeholder, container, anchor);
-        initialVNode.placeholder = placeholder.el;
       }
     } else {
       setupRenderEffect(
@@ -18808,8 +18603,7 @@ function baseCreateRenderer(options, createHydrationFns) {
             hydrateSubTree();
           }
         } else {
-          if (root.ce && // @ts-expect-error _def is private
-          root.ce._def.shadowRoot !== false) {
+          if (root.ce) {
             root.ce._injectChildStyle(type);
           }
           if (true) {
@@ -19223,11 +19017,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       for (i = toBePatched - 1; i >= 0; i--) {
         const nextIndex = s2 + i;
         const nextChild = c2[nextIndex];
-        const anchorVNode = c2[nextIndex + 1];
-        const anchor = nextIndex + 1 < l2 ? (
-          // #13559, fallback to el placeholder for unresolved async component
-          anchorVNode.el || anchorVNode.placeholder
-        ) : parentAnchor;
+        const anchor = nextIndex + 1 < l2 ? c2[nextIndex + 1].el : parentAnchor;
         if (newIndexToOldIndexMap[i] === 0) {
           patch(
             null,
@@ -19284,20 +19074,8 @@ function baseCreateRenderer(options, createHydrationFns) {
         queuePostRenderEffect(() => transition.enter(el), parentSuspense);
       } else {
         const { leave, delayLeave, afterLeave } = transition;
-        const remove2 = () => {
-          if (vnode.ctx.isUnmounted) {
-            hostRemove(el);
-          } else {
-            hostInsert(el, container, anchor);
-          }
-        };
+        const remove2 = () => hostInsert(el, container, anchor);
         const performLeave = () => {
-          if (el._isLeaving) {
-            el[leaveCbKey](
-              true
-              /* cancelled */
-            );
-          }
           leave(el, () => {
             remove2();
             afterLeave && afterLeave();
@@ -19329,9 +19107,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       optimized = false;
     }
     if (ref != null) {
-      (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.pauseTracking)();
       setRef(ref, null, parentSuspense, vnode, true);
-      (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.resetTracking)();
     }
     if (cacheIndex != null) {
       parentComponent.renderCache[cacheIndex] = void 0;
@@ -19460,6 +19236,12 @@ function baseCreateRenderer(options, createHydrationFns) {
     queuePostRenderEffect(() => {
       instance.isUnmounted = true;
     }, parentSuspense);
+    if (parentSuspense && parentSuspense.pendingBranch && !parentSuspense.isUnmounted && instance.asyncDep && !instance.asyncResolved && instance.suspenseId === parentSuspense.pendingId) {
+      parentSuspense.deps--;
+      if (parentSuspense.deps === 0) {
+        parentSuspense.resolve();
+      }
+    }
     if (true) {
       devtoolsComponentRemoved(instance);
     }
@@ -19538,8 +19320,8 @@ function toggleRecurse({ effect, job }, allowed) {
     effect.flags |= 32;
     job.flags |= 4;
   } else {
-    effect.flags &= -33;
-    job.flags &= -5;
+    effect.flags &= ~32;
+    job.flags &= ~4;
   }
 }
 function needTransition(parentSuspense, transition) {
@@ -19560,15 +19342,11 @@ function traverseStaticChildren(n1, n2, shallow = false) {
         if (!shallow && c2.patchFlag !== -2)
           traverseStaticChildren(c1, c2);
       }
-      if (c2.type === Text && // avoid cached text nodes retaining detached dom nodes
-      c2.patchFlag !== -1) {
+      if (c2.type === Text) {
         c2.el = c1.el;
       }
-      if (c2.type === Comment && !c2.el) {
+      if ( true && c2.type === Comment && !c2.el) {
         c2.el = c1.el;
-      }
-      if (true) {
-        c2.el && (c2.el.__vnode = c2);
       }
     }
   }
@@ -19921,9 +19699,8 @@ function emit(instance, event, ...rawArgs) {
     );
   }
 }
-const mixinEmitsCache = /* @__PURE__ */ new WeakMap();
 function normalizeEmitsOptions(comp, appContext, asMixin = false) {
-  const cache =  true && asMixin ? mixinEmitsCache : appContext.emitsCache;
+  const cache = appContext.emitsCache;
   const cached = cache.get(comp);
   if (cached !== void 0) {
     return cached;
@@ -20371,7 +20148,7 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, namespace, sl
   const { activeBranch, pendingBranch, isInFallback, isHydrating } = suspense;
   if (pendingBranch) {
     suspense.pendingBranch = newBranch;
-    if (isSameVNodeType(pendingBranch, newBranch)) {
+    if (isSameVNodeType(newBranch, pendingBranch)) {
       patch(
         pendingBranch,
         newBranch,
@@ -20442,7 +20219,7 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, namespace, sl
           );
           setActiveBranch(suspense, newFallback);
         }
-      } else if (activeBranch && isSameVNodeType(activeBranch, newBranch)) {
+      } else if (activeBranch && isSameVNodeType(newBranch, activeBranch)) {
         patch(
           activeBranch,
           newBranch,
@@ -20473,7 +20250,7 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, namespace, sl
       }
     }
   } else {
-    if (activeBranch && isSameVNodeType(activeBranch, newBranch)) {
+    if (activeBranch && isSameVNodeType(newBranch, activeBranch)) {
       patch(
         activeBranch,
         newBranch,
@@ -20586,8 +20363,7 @@ function createSuspenseBoundary(vnode, parentSuspense, parentComponent, containe
         pendingId,
         effects,
         parentComponent: parentComponent2,
-        container: container2,
-        isInFallback
+        container: container2
       } = suspense;
       let delayEnter = false;
       if (suspense.isHydrating) {
@@ -20604,9 +20380,6 @@ function createSuspenseBoundary(vnode, parentSuspense, parentComponent, containe
                 0
               );
               queuePostFlushCb(effects);
-              if (isInFallback && vnode2.ssFallback) {
-                vnode2.ssFallback.el = null;
-              }
             }
           };
         }
@@ -20615,9 +20388,6 @@ function createSuspenseBoundary(vnode, parentSuspense, parentComponent, containe
             anchor = next(activeBranch);
           }
           unmount(activeBranch, parentComponent2, suspense, true);
-          if (!delayEnter && isInFallback && vnode2.ssFallback) {
-            vnode2.ssFallback.el = null;
-          }
         }
         if (!delayEnter) {
           move(pendingBranch, container2, anchor, 0);
@@ -20736,7 +20506,6 @@ function createSuspenseBoundary(vnode, parentSuspense, parentComponent, containe
           optimized2
         );
         if (placeholder) {
-          vnode2.placeholder = null;
           remove(placeholder);
         }
         updateHOCHostEl(instance, vnode2.el);
@@ -20924,8 +20693,8 @@ function isSameVNodeType(n1, n2) {
   if ( true && n2.shapeFlag & 6 && n1.component) {
     const dirtyInstances = hmrDirtyComponents.get(n2.type);
     if (dirtyInstances && dirtyInstances.has(n1.component)) {
-      n1.shapeFlag &= -257;
-      n2.shapeFlag &= -513;
+      n1.shapeFlag &= ~256;
+      n2.shapeFlag &= ~512;
       return false;
     }
   }
@@ -21115,7 +20884,6 @@ function cloneVNode(vnode, extraProps, mergeRef = false, cloneTransition = false
     suspense: vnode.suspense,
     ssContent: vnode.ssContent && cloneVNode(vnode.ssContent),
     ssFallback: vnode.ssFallback && cloneVNode(vnode.ssFallback),
-    placeholder: vnode.placeholder,
     el: vnode.el,
     anchor: vnode.anchor,
     ctx: vnode.ctx,
@@ -21325,8 +21093,7 @@ function createComponentInstance(vnode, parent, suspense) {
   };
   if (true) {
     instance.ctx = createDevRenderContext(instance);
-  } else // removed by dead control flow
-{}
+  } else {}
   instance.root = parent ? parent.root : instance;
   instance.emit = emit.bind(null, instance);
   if (vnode.ce) {
@@ -21388,7 +21155,7 @@ function setupComponent(instance, isSSR = false, optimized = false) {
   const { props, children } = instance.vnode;
   const isStateful = isStatefulComponent(instance);
   initProps(instance, props, isStateful, isSSR);
-  initSlots(instance, children, optimized || isSSR);
+  initSlots(instance, children, optimized);
   const setupResult = isStateful ? setupStatefulComponent(instance, isSSR) : void 0;
   isSSR && setInSSRSetupState(false);
   return setupResult;
@@ -21619,8 +21386,7 @@ function createSetupContext(instance) {
       },
       expose
     });
-  } else // removed by dead control flow
-{}
+  } else {}
 }
 function getComponentPublicInstance(instance) {
   if (instance.exposed) {
@@ -21640,7 +21406,7 @@ function getComponentPublicInstance(instance) {
     return instance.proxy;
   }
 }
-const classifyRE = /(?:^|[-_])\w/g;
+const classifyRE = /(?:^|[-_])(\w)/g;
 const classify = (str) => str.replace(classifyRE, (c) => c.toUpperCase()).replace(/[-_]/g, "");
 function getComponentName(Component, includeInferred = true) {
   return (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
@@ -21683,28 +21449,23 @@ const computed = (getterOrOptions, debugOptions) => {
 };
 
 function h(type, propsOrChildren, children) {
-  try {
-    setBlockTracking(-1);
-    const l = arguments.length;
-    if (l === 2) {
-      if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(propsOrChildren) && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(propsOrChildren)) {
-        if (isVNode(propsOrChildren)) {
-          return createVNode(type, null, [propsOrChildren]);
-        }
-        return createVNode(type, propsOrChildren);
-      } else {
-        return createVNode(type, null, propsOrChildren);
+  const l = arguments.length;
+  if (l === 2) {
+    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(propsOrChildren) && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(propsOrChildren)) {
+      if (isVNode(propsOrChildren)) {
+        return createVNode(type, null, [propsOrChildren]);
       }
+      return createVNode(type, propsOrChildren);
     } else {
-      if (l > 3) {
-        children = Array.prototype.slice.call(arguments, 2);
-      } else if (l === 3 && isVNode(children)) {
-        children = [children];
-      }
-      return createVNode(type, propsOrChildren, children);
+      return createVNode(type, null, propsOrChildren);
     }
-  } finally {
-    setBlockTracking(1);
+  } else {
+    if (l > 3) {
+      children = Array.prototype.slice.call(arguments, 2);
+    } else if (l === 3 && isVNode(children)) {
+      children = [children];
+    }
+    return createVNode(type, propsOrChildren, children);
   }
 }
 
@@ -21725,15 +21486,13 @@ function initCustomFormatter() {
       if (obj.__isVue) {
         return ["div", vueStyle, `VueInstance`];
       } else if ((0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isRef)(obj)) {
-        (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.pauseTracking)();
-        const value = obj.value;
-        (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.resetTracking)();
         return [
           "div",
           {},
           ["span", vueStyle, genRefFlag(obj)],
           "<",
-          formatValue(value),
+          // avoid debugger accessing value affecting behavior
+          formatValue("_value" in obj ? obj._value : obj),
           `>`
         ];
       } else if ((0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isReactive)(obj)) {
@@ -21914,7 +21673,7 @@ function isMemoSame(cached, memo) {
   return true;
 }
 
-const version = "3.5.24";
+const version = "3.5.13";
 const warn =  true ? warn$1 : 0;
 const ErrorTypeStrings = ErrorTypeStrings$1 ;
 const devtools =  true ? devtools$1 : 0;
@@ -22120,10 +21879,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   withScopeId: () => (/* reexport safe */ _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.withScopeId)
 /* harmony export */ });
 /* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
+/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
 /**
-* @vue/runtime-dom v3.5.24
+* @vue/runtime-dom v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
@@ -22233,7 +21992,7 @@ const DOMTransitionPropsValidators = {
   leaveActiveClass: String,
   leaveToClass: String
 };
-const TransitionPropsValidators = /* @__PURE__ */ (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)(
+const TransitionPropsValidators = /* @__PURE__ */ (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)(
   {},
   _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.BaseTransitionPropsValidators,
   DOMTransitionPropsValidators
@@ -22247,14 +22006,14 @@ const Transition = /* @__PURE__ */ decorate$1(
   (props, { slots }) => (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.h)(_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.BaseTransition, resolveTransitionProps(props), slots)
 );
 const callHook = (hook, args = []) => {
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(hook)) {
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(hook)) {
     hook.forEach((h2) => h2(...args));
   } else if (hook) {
     hook(...args);
   }
 };
 const hasExplicitCallback = (hook) => {
-  return hook ? (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
+  return hook ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
 };
 function resolveTransitionProps(rawProps) {
   const baseProps = {};
@@ -22320,7 +22079,7 @@ function resolveTransitionProps(rawProps) {
       });
     };
   };
-  return (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)(baseProps, {
+  return (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)(baseProps, {
     onBeforeEnter(el) {
       callHook(onBeforeEnter, [el]);
       addTransitionClass(el, enterFromClass);
@@ -22338,11 +22097,11 @@ function resolveTransitionProps(rawProps) {
       const resolve = () => finishLeave(el, done);
       addTransitionClass(el, leaveFromClass);
       if (!el._enterCancelled) {
-        forceReflow(el);
+        forceReflow();
         addTransitionClass(el, leaveActiveClass);
       } else {
         addTransitionClass(el, leaveActiveClass);
-        forceReflow(el);
+        forceReflow();
       }
       nextFrame(() => {
         if (!el._isLeaving) {
@@ -22373,7 +22132,7 @@ function resolveTransitionProps(rawProps) {
 function normalizeDuration(duration) {
   if (duration == null) {
     return null;
-  } else if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isObject)(duration)) {
+  } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(duration)) {
     return [NumberOf(duration.enter), NumberOf(duration.leave)];
   } else {
     const n = NumberOf(duration);
@@ -22381,7 +22140,7 @@ function normalizeDuration(duration) {
   }
 }
 function NumberOf(val) {
-  const res = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.toNumber)(val);
+  const res = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(val);
   if (true) {
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.assertNumber)(res, "<transition> explicit duration");
   }
@@ -22468,7 +22227,7 @@ function getTransitionInfo(el, expectedType) {
     type = timeout > 0 ? transitionTimeout > animationTimeout ? TRANSITION : ANIMATION : null;
     propCount = type ? type === TRANSITION ? transitionDurations.length : animationDurations.length : 0;
   }
-  const hasTransform = type === TRANSITION && /\b(?:transform|all)(?:,|$)/.test(
+  const hasTransform = type === TRANSITION && /\b(transform|all)(,|$)/.test(
     getStyleProperties(`${TRANSITION}Property`).toString()
   );
   return {
@@ -22488,9 +22247,8 @@ function toMs(s) {
   if (s === "auto") return 0;
   return Number(s.slice(0, -1).replace(",", ".")) * 1e3;
 }
-function forceReflow(el) {
-  const targetDocument = el ? el.ownerDocument : document;
-  return targetDocument.body.offsetHeight;
+function forceReflow() {
+  return document.body.offsetHeight;
 }
 
 function patchClass(el, value, isSVG) {
@@ -22510,8 +22268,6 @@ function patchClass(el, value, isSVG) {
 const vShowOriginalDisplay = Symbol("_vod");
 const vShowHidden = Symbol("_vsh");
 const vShow = {
-  // used for prop mismatch check during hydration
-  name: "show",
   beforeMount(el, { value }, { transition }) {
     el[vShowOriginalDisplay] = el.style.display === "none" ? "" : el.style.display;
     if (transition && value) {
@@ -22545,6 +22301,9 @@ const vShow = {
     setDisplay(el, value);
   }
 };
+if (true) {
+  vShow.name = "show";
+}
 function setDisplay(el, value) {
   el.style.display = value ? el[vShowOriginalDisplay] : "none";
   el[vShowHidden] = !value;
@@ -22585,7 +22344,7 @@ function useCssVars(getter) {
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.queuePostFlushCb)(setVars);
   });
   (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.onMounted)(() => {
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.watch)(setVars, _vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.NOOP, { flush: "post" });
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.watch)(setVars, _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP, { flush: "post" });
     const ob = new MutationObserver(setVars);
     ob.observe(instance.subTree.el.parentNode, { childList: true });
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(() => ob.disconnect());
@@ -22622,22 +22381,21 @@ function setVarsOnNode(el, vars) {
     const style = el.style;
     let cssText = "";
     for (const key in vars) {
-      const value = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.normalizeCssVarValue)(vars[key]);
-      style.setProperty(`--${key}`, value);
-      cssText += `--${key}: ${value};`;
+      style.setProperty(`--${key}`, vars[key]);
+      cssText += `--${key}: ${vars[key]};`;
     }
     style[CSS_VAR_TEXT] = cssText;
   }
 }
 
-const displayRE = /(?:^|;)\s*display\s*:/;
+const displayRE = /(^|;)\s*display\s*:/;
 function patchStyle(el, prev, next) {
   const style = el.style;
-  const isCssString = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isString)(next);
+  const isCssString = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(next);
   let hasControlledDisplay = false;
   if (next && !isCssString) {
     if (prev) {
-      if (!(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isString)(prev)) {
+      if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(prev)) {
         for (const key in prev) {
           if (next[key] == null) {
             setStyle(style, key, "");
@@ -22682,7 +22440,7 @@ function patchStyle(el, prev, next) {
 const semicolonRE = /[^\\];\s*$/;
 const importantRE = /\s*!important$/;
 function setStyle(style, name, val) {
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(val)) {
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(val)) {
     val.forEach((v) => setStyle(style, name, v));
   } else {
     if (val == null) val = "";
@@ -22699,7 +22457,7 @@ function setStyle(style, name, val) {
       const prefixed = autoPrefix(style, name);
       if (importantRE.test(val)) {
         style.setProperty(
-          (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(prefixed),
+          (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(prefixed),
           val.replace(importantRE, ""),
           "important"
         );
@@ -22716,11 +22474,11 @@ function autoPrefix(style, rawName) {
   if (cached) {
     return cached;
   }
-  let name = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.camelize)(rawName);
+  let name = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(rawName);
   if (name !== "filter" && name in style) {
     return prefixCache[rawName] = name;
   }
-  name = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.capitalize)(name);
+  name = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.capitalize)(name);
   for (let i = 0; i < prefixes.length; i++) {
     const prefixed = prefixes[i] + name;
     if (prefixed in style) {
@@ -22731,7 +22489,7 @@ function autoPrefix(style, rawName) {
 }
 
 const xlinkNS = "http://www.w3.org/1999/xlink";
-function patchAttr(el, key, value, isSVG, instance, isBoolean = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSpecialBooleanAttr)(key)) {
+function patchAttr(el, key, value, isSVG, instance, isBoolean = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSpecialBooleanAttr)(key)) {
   if (isSVG && key.startsWith("xlink:")) {
     if (value == null) {
       el.removeAttributeNS(xlinkNS, key.slice(6, key.length));
@@ -22739,12 +22497,12 @@ function patchAttr(el, key, value, isSVG, instance, isBoolean = (0,_vue_runtime_
       el.setAttributeNS(xlinkNS, key, value);
     }
   } else {
-    if (value == null || isBoolean && !(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.includeBooleanAttr)(value)) {
+    if (value == null || isBoolean && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.includeBooleanAttr)(value)) {
       el.removeAttribute(key);
     } else {
       el.setAttribute(
         key,
-        isBoolean ? "" : (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSymbol)(value) ? String(value) : value
+        isBoolean ? "" : (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSymbol)(value) ? String(value) : value
       );
     }
   }
@@ -22779,7 +22537,7 @@ function patchDOMProp(el, key, value, parentComponent, attrName) {
   if (value === "" || value == null) {
     const type = typeof el[key];
     if (type === "boolean") {
-      value = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.includeBooleanAttr)(value);
+      value = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.includeBooleanAttr)(value);
     } else if (value == null && type === "string") {
       value = "";
       needRemove = true;
@@ -22838,7 +22596,7 @@ function parseName(name) {
       options[m[0].toLowerCase()] = true;
     }
   }
-  const event = name[2] === ":" ? name.slice(3) : (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(name.slice(2));
+  const event = name[2] === ":" ? name.slice(3) : (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(name.slice(2));
   return [event, options];
 }
 let cachedNow = 0;
@@ -22863,17 +22621,17 @@ function createInvoker(initialValue, instance) {
   return invoker;
 }
 function sanitizeEventValue(value, propName) {
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isFunction)(value) || (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(value) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
     return value;
   }
   (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(
     `Wrong type passed as event handler to ${propName} - did you forget @ or : in front of your prop?
 Expected function or array of functions, received type ${typeof value}.`
   );
-  return _vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.NOOP;
+  return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP;
 }
 function patchStopImmediatePropagation(e, value) {
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
     const originalStop = e.stopImmediatePropagation;
     e.stopImmediatePropagation = () => {
       originalStop.call(e);
@@ -22895,8 +22653,8 @@ const patchProp = (el, key, prevValue, nextValue, namespace, parentComponent) =>
     patchClass(el, nextValue, isSVG);
   } else if (key === "style") {
     patchStyle(el, prevValue, nextValue);
-  } else if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isOn)(key)) {
-    if (!(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isModelListener)(key)) {
+  } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isOn)(key)) {
+    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isModelListener)(key)) {
       patchEvent(el, key, prevValue, nextValue, parentComponent);
     }
   } else if (key[0] === "." ? (key = key.slice(1), true) : key[0] === "^" ? (key = key.slice(1), false) : shouldSetAsProp(el, key, nextValue, isSVG)) {
@@ -22906,9 +22664,9 @@ const patchProp = (el, key, prevValue, nextValue, namespace, parentComponent) =>
     }
   } else if (
     // #11081 force set props for possible async custom element
-    el._isVueCE && (/[A-Z]/.test(key) || !(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isString)(nextValue))
+    el._isVueCE && (/[A-Z]/.test(key) || !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(nextValue))
   ) {
-    patchDOMProp(el, (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.camelize)(key), nextValue, parentComponent, key);
+    patchDOMProp(el, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(key), nextValue, parentComponent, key);
   } else {
     if (key === "true-value") {
       el._trueValue = nextValue;
@@ -22923,15 +22681,12 @@ function shouldSetAsProp(el, key, value, isSVG) {
     if (key === "innerHTML" || key === "textContent") {
       return true;
     }
-    if (key in el && isNativeOn(key) && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isFunction)(value)) {
+    if (key in el && isNativeOn(key) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(value)) {
       return true;
     }
     return false;
   }
-  if (key === "spellcheck" || key === "draggable" || key === "translate" || key === "autocorrect") {
-    return false;
-  }
-  if (key === "sandbox" && el.tagName === "IFRAME") {
+  if (key === "spellcheck" || key === "draggable" || key === "translate") {
     return false;
   }
   if (key === "form") {
@@ -22949,17 +22704,18 @@ function shouldSetAsProp(el, key, value, isSVG) {
       return false;
     }
   }
-  if (isNativeOn(key) && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isString)(value)) {
+  if (isNativeOn(key) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(value)) {
     return false;
   }
   return key in el;
 }
 
 const REMOVAL = {};
+/*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function defineCustomElement(options, extraOptions, _createApp) {
-  let Comp = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.defineComponent)(options, extraOptions);
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(Comp)) Comp = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)({}, Comp, extraOptions);
+  const Comp = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.defineComponent)(options, extraOptions);
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(Comp)) (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)(Comp, extraOptions);
   class VueCustomElement extends VueElement {
     constructor(initialProps) {
       super(Comp, initialProps, _createApp);
@@ -22968,9 +22724,10 @@ function defineCustomElement(options, extraOptions, _createApp) {
   VueCustomElement.def = Comp;
   return VueCustomElement;
 }
-const defineSSRCustomElement = (/* @__NO_SIDE_EFFECTS__ */ (options, extraOptions) => {
+/*! #__NO_SIDE_EFFECTS__ */
+const defineSSRCustomElement = /* @__NO_SIDE_EFFECTS__ */ (options, extraOptions) => {
   return /* @__PURE__ */ defineCustomElement(options, extraOptions, createSSRApp);
-});
+};
 const BaseClass = typeof HTMLElement !== "undefined" ? HTMLElement : class {
 };
 class VueElement extends BaseClass {
@@ -22994,8 +22751,6 @@ class VueElement extends BaseClass {
     this._nonce = this._def.nonce;
     this._connected = false;
     this._resolved = false;
-    this._patching = false;
-    this._dirty = false;
     this._numberProps = null;
     this._styleChildren = /* @__PURE__ */ new WeakSet();
     this._ob = null;
@@ -23008,20 +22763,19 @@ class VueElement extends BaseClass {
         );
       }
       if (_def.shadowRoot !== false) {
-        this.attachShadow(
-          (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)({}, _def.shadowRootOptions, {
-            mode: "open"
-          })
-        );
+        this.attachShadow({ mode: "open" });
         this._root = this.shadowRoot;
       } else {
         this._root = this;
       }
     }
+    if (!this._def.__asyncLoader) {
+      this._resolveProps(this._def);
+    }
   }
   connectedCallback() {
     if (!this.isConnected) return;
-    if (!this.shadowRoot && !this._resolved) {
+    if (!this.shadowRoot) {
       this._parseSlots();
     }
     this._connected = true;
@@ -23034,7 +22788,8 @@ class VueElement extends BaseClass {
     }
     if (!this._instance) {
       if (this._resolved) {
-        this._mount(this._def);
+        this._setParent();
+        this._update();
       } else {
         if (parent && parent._pendingResolve) {
           this._pendingResolve = parent._pendingResolve.then(() => {
@@ -23050,15 +22805,7 @@ class VueElement extends BaseClass {
   _setParent(parent = this._parent) {
     if (parent) {
       this._instance.parent = parent._instance;
-      this._inheritParentContext(parent);
-    }
-  }
-  _inheritParentContext(parent = this._parent) {
-    if (parent && this._app) {
-      Object.setPrototypeOf(
-        this._app._context.provides,
-        parent._instance.provides
-      );
+      this._instance.provides = parent._instance.provides;
     }
   }
   disconnectedCallback() {
@@ -23072,17 +22819,8 @@ class VueElement extends BaseClass {
         this._app && this._app.unmount();
         if (this._instance) this._instance.ce = void 0;
         this._app = this._instance = null;
-        if (this._teleportTargets) {
-          this._teleportTargets.clear();
-          this._teleportTargets = void 0;
-        }
       }
     });
-  }
-  _processMutations(mutations) {
-    for (const m of mutations) {
-      this._setAttr(m.attributeName);
-    }
   }
   /**
    * resolve inner component definition (handle possible async component)
@@ -23094,26 +22832,32 @@ class VueElement extends BaseClass {
     for (let i = 0; i < this.attributes.length; i++) {
       this._setAttr(this.attributes[i].name);
     }
-    this._ob = new MutationObserver(this._processMutations.bind(this));
+    this._ob = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        this._setAttr(m.attributeName);
+      }
+    });
     this._ob.observe(this, { attributes: true });
     const resolve = (def, isAsync = false) => {
       this._resolved = true;
       this._pendingResolve = void 0;
       const { props, styles } = def;
       let numberProps;
-      if (props && !(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(props)) {
+      if (props && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(props)) {
         for (const key in props) {
           const opt = props[key];
           if (opt === Number || opt && opt.type === Number) {
             if (key in this._props) {
-              this._props[key] = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.toNumber)(this._props[key]);
+              this._props[key] = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(this._props[key]);
             }
-            (numberProps || (numberProps = /* @__PURE__ */ Object.create(null)))[(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.camelize)(key)] = true;
+            (numberProps || (numberProps = /* @__PURE__ */ Object.create(null)))[(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(key)] = true;
           }
         }
       }
       this._numberProps = numberProps;
-      this._resolveProps(def);
+      if (isAsync) {
+        this._resolveProps(def);
+      }
       if (this.shadowRoot) {
         this._applyStyles(styles);
       } else if ( true && styles) {
@@ -23125,10 +22869,9 @@ class VueElement extends BaseClass {
     };
     const asyncDef = this._def.__asyncLoader;
     if (asyncDef) {
-      this._pendingResolve = asyncDef().then((def) => {
-        def.configureApp = this._def.configureApp;
-        resolve(this._def = def, true);
-      });
+      this._pendingResolve = asyncDef().then(
+        (def) => resolve(this._def = def, true)
+      );
     } else {
       resolve(this._def);
     }
@@ -23138,7 +22881,6 @@ class VueElement extends BaseClass {
       def.name = "VueElement";
     }
     this._app = this._createApp(def);
-    this._inheritParentContext();
     if (def.configureApp) {
       def.configureApp(this._app);
     }
@@ -23147,7 +22889,7 @@ class VueElement extends BaseClass {
     const exposed = this._instance && this._instance.exposed;
     if (!exposed) return;
     for (const key in exposed) {
-      if (!(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(this, key)) {
+      if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(this, key)) {
         Object.defineProperty(this, key, {
           // unwrap ref to be consistent with public instance behavior
           get: () => (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.unref)(exposed[key])
@@ -23159,19 +22901,19 @@ class VueElement extends BaseClass {
   }
   _resolveProps(def) {
     const { props } = def;
-    const declaredPropKeys = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(props) ? props : Object.keys(props || {});
+    const declaredPropKeys = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(props) ? props : Object.keys(props || {});
     for (const key of Object.keys(this)) {
       if (key[0] !== "_" && declaredPropKeys.includes(key)) {
         this._setProp(key, this[key]);
       }
     }
-    for (const key of declaredPropKeys.map(_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.camelize)) {
+    for (const key of declaredPropKeys.map(_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)) {
       Object.defineProperty(this, key, {
         get() {
           return this._getProp(key);
         },
         set(val) {
-          this._setProp(key, val, true, !this._patching);
+          this._setProp(key, val, true, true);
         }
       });
     }
@@ -23180,9 +22922,9 @@ class VueElement extends BaseClass {
     if (key.startsWith("data-v-")) return;
     const has = this.hasAttribute(key);
     let value = has ? this.getAttribute(key) : REMOVAL;
-    const camelKey = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.camelize)(key);
+    const camelKey = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(key);
     if (has && this._numberProps && this._numberProps[camelKey]) {
-      value = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.toNumber)(value);
+      value = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(value);
     }
     this._setProp(camelKey, value, false, true);
   }
@@ -23197,7 +22939,6 @@ class VueElement extends BaseClass {
    */
   _setProp(key, val, shouldReflect = true, shouldUpdate = false) {
     if (val !== this._props[key]) {
-      this._dirty = true;
       if (val === REMOVAL) {
         delete this._props[key];
       } else {
@@ -23211,32 +22952,27 @@ class VueElement extends BaseClass {
       }
       if (shouldReflect) {
         const ob = this._ob;
-        if (ob) {
-          this._processMutations(ob.takeRecords());
-          ob.disconnect();
-        }
+        ob && ob.disconnect();
         if (val === true) {
-          this.setAttribute((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key), "");
+          this.setAttribute((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key), "");
         } else if (typeof val === "string" || typeof val === "number") {
-          this.setAttribute((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key), val + "");
+          this.setAttribute((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key), val + "");
         } else if (!val) {
-          this.removeAttribute((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key));
+          this.removeAttribute((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key));
         }
         ob && ob.observe(this, { attributes: true });
       }
     }
   }
   _update() {
-    const vnode = this._createVNode();
-    if (this._app) vnode.appContext = this._app._context;
-    render(vnode, this._root);
+    render(this._createVNode(), this._root);
   }
   _createVNode() {
     const baseProps = {};
     if (!this.shadowRoot) {
       baseProps.onVnodeMounted = baseProps.onVnodeUpdated = this._renderSlots.bind(this);
     }
-    const vnode = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.createVNode)(this._def, (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)(baseProps, this._props));
+    const vnode = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.createVNode)(this._def, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)(baseProps, this._props));
     if (!this._instance) {
       vnode.ce = (instance) => {
         this._instance = instance;
@@ -23257,14 +22993,14 @@ class VueElement extends BaseClass {
           this.dispatchEvent(
             new CustomEvent(
               event,
-              (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(args[0]) ? (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)({ detail: args }, args[0]) : { detail: args }
+              (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(args[0]) ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)({ detail: args }, args[0]) : { detail: args }
             )
           );
         };
         instance.emit = (event, ...args) => {
           dispatch(event, args);
-          if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event) !== event) {
-            dispatch((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event), args);
+          if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event) !== event) {
+            dispatch((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event), args);
           }
         };
         this._setParent();
@@ -23318,7 +23054,7 @@ class VueElement extends BaseClass {
    * Only called when shadowRoot is false
    */
   _renderSlots() {
-    const outlets = this._getSlots();
+    const outlets = (this._teleportTarget || this).querySelectorAll("slot");
     const scopeId = this._instance.type.__scopeId;
     for (let i = 0; i < outlets.length; i++) {
       const o = outlets[i];
@@ -23347,41 +23083,8 @@ class VueElement extends BaseClass {
   /**
    * @internal
    */
-  _getSlots() {
-    const roots = [this];
-    if (this._teleportTargets) {
-      roots.push(...this._teleportTargets);
-    }
-    const slots = /* @__PURE__ */ new Set();
-    for (const root of roots) {
-      const found = root.querySelectorAll("slot");
-      for (let i = 0; i < found.length; i++) {
-        slots.add(found[i]);
-      }
-    }
-    return Array.from(slots);
-  }
-  /**
-   * @internal
-   */
   _injectChildStyle(comp) {
     this._applyStyles(comp.styles, comp);
-  }
-  /**
-   * @internal
-   */
-  _beginPatch() {
-    this._patching = true;
-    this._dirty = false;
-  }
-  /**
-   * @internal
-   */
-  _endPatch() {
-    this._patching = false;
-    if (this._dirty && this._instance) {
-      this._update();
-    }
   }
   /**
    * @internal
@@ -23427,17 +23130,17 @@ function useCssModule(name = "$style") {
     const instance = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
     if (!instance) {
        true && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`useCssModule must be called inside setup()`);
-      return _vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
+      return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
     }
     const modules = instance.type.__cssModules;
     if (!modules) {
        true && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`Current instance does not have CSS modules injected.`);
-      return _vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
+      return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
     }
     const mod = modules[name];
     if (!mod) {
        true && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`Current instance does not have CSS module named "${name}".`);
-      return _vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
+      return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
     }
     return mod;
   }
@@ -23453,7 +23156,7 @@ const decorate = (t) => {
 };
 const TransitionGroupImpl = /* @__PURE__ */ decorate({
   name: "TransitionGroup",
-  props: /* @__PURE__ */ (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)({}, TransitionPropsValidators, {
+  props: /* @__PURE__ */ (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)({}, TransitionPropsValidators, {
     tag: String,
     moveClass: String
   }),
@@ -23472,13 +23175,12 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
         instance.vnode.el,
         moveClass
       )) {
-        prevChildren = [];
         return;
       }
       prevChildren.forEach(callPendingCbs);
       prevChildren.forEach(recordPosition);
       const movedChildren = prevChildren.filter(applyTranslation);
-      forceReflow(instance.vnode.el);
+      forceReflow();
       movedChildren.forEach((c) => {
         const el = c.el;
         const style = el.style;
@@ -23488,7 +23190,7 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
           if (e && e.target !== el) {
             return;
           }
-          if (!e || e.propertyName.endsWith("transform")) {
+          if (!e || /transform$/.test(e.propertyName)) {
             el.removeEventListener("transitionend", cb);
             el[moveCbKey] = null;
             removeTransitionClass(el, moveClass);
@@ -23496,7 +23198,6 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
         };
         el.addEventListener("transitionend", cb);
       });
-      prevChildren = [];
     });
     return () => {
       const rawProps = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.toRaw)(props);
@@ -23517,10 +23218,10 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
                 instance
               )
             );
-            positionMap.set(child, {
-              left: child.el.offsetLeft,
-              top: child.el.offsetTop
-            });
+            positionMap.set(
+              child,
+              child.el.getBoundingClientRect()
+            );
           }
         }
       }
@@ -23551,10 +23252,7 @@ function callPendingCbs(c) {
   }
 }
 function recordPosition(c) {
-  newPositionMap.set(c, {
-    left: c.el.offsetLeft,
-    top: c.el.offsetTop
-  });
+  newPositionMap.set(c, c.el.getBoundingClientRect());
 }
 function applyTranslation(c) {
   const oldPos = positionMap.get(c);
@@ -23587,7 +23285,7 @@ function hasCSSTransform(el, root, moveClass) {
 
 const getModelAssigner = (vnode) => {
   const fn = vnode.props["onUpdate:modelValue"] || false;
-  return (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(fn) ? (value) => (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.invokeArrayFns)(fn, value) : fn;
+  return (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(fn) ? (value) => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.invokeArrayFns)(fn, value) : fn;
 };
 function onCompositionStart(e) {
   e.target.composing = true;
@@ -23600,22 +23298,24 @@ function onCompositionEnd(e) {
   }
 }
 const assignKey = Symbol("_assign");
-function castValue(value, trim, number) {
-  if (trim) value = value.trim();
-  if (number) value = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(value);
-  return value;
-}
 const vModelText = {
   created(el, { modifiers: { lazy, trim, number } }, vnode) {
     el[assignKey] = getModelAssigner(vnode);
     const castToNumber = number || vnode.props && vnode.props.type === "number";
     addEventListener(el, lazy ? "change" : "input", (e) => {
       if (e.target.composing) return;
-      el[assignKey](castValue(el.value, trim, castToNumber));
+      let domValue = el.value;
+      if (trim) {
+        domValue = domValue.trim();
+      }
+      if (castToNumber) {
+        domValue = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(domValue);
+      }
+      el[assignKey](domValue);
     });
-    if (trim || castToNumber) {
+    if (trim) {
       addEventListener(el, "change", () => {
-        el.value = castValue(el.value, trim, castToNumber);
+        el.value = el.value.trim();
       });
     }
     if (!lazy) {
@@ -23631,7 +23331,7 @@ const vModelText = {
   beforeUpdate(el, { value, oldValue, modifiers: { lazy, trim, number } }, vnode) {
     el[assignKey] = getModelAssigner(vnode);
     if (el.composing) return;
-    const elValue = (number || el.type === "number") && !/^0\d/.test(el.value) ? (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(el.value) : el.value;
+    const elValue = (number || el.type === "number") && !/^0\d/.test(el.value) ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(el.value) : el.value;
     const newValue = value == null ? "" : value;
     if (elValue === newValue) {
       return;
@@ -23657,8 +23357,8 @@ const vModelCheckbox = {
       const elementValue = getValue(el);
       const checked = el.checked;
       const assign = el[assignKey];
-      if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(modelValue)) {
-        const index = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(modelValue, elementValue);
+      if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(modelValue)) {
+        const index = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(modelValue, elementValue);
         const found = index !== -1;
         if (checked && !found) {
           assign(modelValue.concat(elementValue));
@@ -23667,7 +23367,7 @@ const vModelCheckbox = {
           filtered.splice(index, 1);
           assign(filtered);
         }
-      } else if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSet)(modelValue)) {
+      } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSet)(modelValue)) {
         const cloned = new Set(modelValue);
         if (checked) {
           cloned.add(elementValue);
@@ -23690,13 +23390,13 @@ const vModelCheckbox = {
 function setChecked(el, { value, oldValue }, vnode) {
   el._modelValue = value;
   let checked;
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
-    checked = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(value, vnode.props.value) > -1;
-  } else if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSet)(value)) {
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
+    checked = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(value, vnode.props.value) > -1;
+  } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSet)(value)) {
     checked = value.has(vnode.props.value);
   } else {
     if (value === oldValue) return;
-    checked = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(value, getCheckboxValue(el, true));
+    checked = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(value, getCheckboxValue(el, true));
   }
   if (el.checked !== checked) {
     el.checked = checked;
@@ -23704,7 +23404,7 @@ function setChecked(el, { value, oldValue }, vnode) {
 }
 const vModelRadio = {
   created(el, { value }, vnode) {
-    el.checked = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(value, vnode.props.value);
+    el.checked = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(value, vnode.props.value);
     el[assignKey] = getModelAssigner(vnode);
     addEventListener(el, "change", () => {
       el[assignKey](getValue(el));
@@ -23713,7 +23413,7 @@ const vModelRadio = {
   beforeUpdate(el, { value, oldValue }, vnode) {
     el[assignKey] = getModelAssigner(vnode);
     if (value !== oldValue) {
-      el.checked = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(value, vnode.props.value);
+      el.checked = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(value, vnode.props.value);
     }
   }
 };
@@ -23721,10 +23421,10 @@ const vModelSelect = {
   // <select multiple> value need to be deep traversed
   deep: true,
   created(el, { value, modifiers: { number } }, vnode) {
-    const isSetModel = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSet)(value);
+    const isSetModel = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSet)(value);
     addEventListener(el, "change", () => {
       const selectedVal = Array.prototype.filter.call(el.options, (o) => o.selected).map(
-        (o) => number ? (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(getValue(o)) : getValue(o)
+        (o) => number ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(getValue(o)) : getValue(o)
       );
       el[assignKey](
         el.multiple ? isSetModel ? new Set(selectedVal) : selectedVal : selectedVal[0]
@@ -23752,8 +23452,8 @@ const vModelSelect = {
 };
 function setSelected(el, value) {
   const isMultiple = el.multiple;
-  const isArrayValue = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(value);
-  if (isMultiple && !isArrayValue && !(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSet)(value)) {
+  const isArrayValue = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(value);
+  if (isMultiple && !isArrayValue && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSet)(value)) {
      true && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(
       `<select multiple v-model> expects an Array or Set value for its binding, but got ${Object.prototype.toString.call(value).slice(8, -1)}.`
     );
@@ -23768,12 +23468,12 @@ function setSelected(el, value) {
         if (optionType === "string" || optionType === "number") {
           option.selected = value.some((v) => String(v) === String(optionValue));
         } else {
-          option.selected = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(value, optionValue) > -1;
+          option.selected = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(value, optionValue) > -1;
         }
       } else {
         option.selected = value.has(optionValue);
       }
-    } else if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(getValue(option), value)) {
+    } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(getValue(option), value)) {
       if (el.selectedIndex !== i) el.selectedIndex = i;
       return;
     }
@@ -23831,16 +23531,16 @@ function callModelHook(el, binding, vnode, prevVNode, hook) {
 function initVModelForSSR() {
   vModelText.getSSRProps = ({ value }) => ({ value });
   vModelRadio.getSSRProps = ({ value }, vnode) => {
-    if (vnode.props && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(vnode.props.value, value)) {
+    if (vnode.props && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseEqual)(vnode.props.value, value)) {
       return { checked: true };
     }
   };
   vModelCheckbox.getSSRProps = ({ value }, vnode) => {
-    if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
-      if (vnode.props && (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(value, vnode.props.value) > -1) {
+    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
+      if (vnode.props && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseIndexOf)(value, vnode.props.value) > -1) {
         return { checked: true };
       }
-    } else if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSet)(value)) {
+    } else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSet)(value)) {
       if (vnode.props && value.has(vnode.props.value)) {
         return { checked: true };
       }
@@ -23880,13 +23580,13 @@ const modifierGuards = {
 const withModifiers = (fn, modifiers) => {
   const cache = fn._withMods || (fn._withMods = {});
   const cacheKey = modifiers.join(".");
-  return cache[cacheKey] || (cache[cacheKey] = ((event, ...args) => {
+  return cache[cacheKey] || (cache[cacheKey] = (event, ...args) => {
     for (let i = 0; i < modifiers.length; i++) {
       const guard = modifierGuards[modifiers[i]];
       if (guard && guard(event, modifiers)) return;
     }
     return fn(event, ...args);
-  }));
+  });
 };
 const keyNames = {
   esc: "escape",
@@ -23900,20 +23600,20 @@ const keyNames = {
 const withKeys = (fn, modifiers) => {
   const cache = fn._withKeys || (fn._withKeys = {});
   const cacheKey = modifiers.join(".");
-  return cache[cacheKey] || (cache[cacheKey] = ((event) => {
+  return cache[cacheKey] || (cache[cacheKey] = (event) => {
     if (!("key" in event)) {
       return;
     }
-    const eventKey = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event.key);
+    const eventKey = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event.key);
     if (modifiers.some(
       (k) => k === eventKey || keyNames[k] === eventKey
     )) {
       return fn(event);
     }
-  }));
+  });
 };
 
-const rendererOptions = /* @__PURE__ */ (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.extend)({ patchProp }, nodeOps);
+const rendererOptions = /* @__PURE__ */ (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)({ patchProp }, nodeOps);
 let renderer;
 let enabledHydration = false;
 function ensureRenderer() {
@@ -23924,13 +23624,13 @@ function ensureHydrationRenderer() {
   enabledHydration = true;
   return renderer;
 }
-const render = ((...args) => {
+const render = (...args) => {
   ensureRenderer().render(...args);
-});
-const hydrate = ((...args) => {
+};
+const hydrate = (...args) => {
   ensureHydrationRenderer().hydrate(...args);
-});
-const createApp = ((...args) => {
+};
+const createApp = (...args) => {
   const app = ensureRenderer().createApp(...args);
   if (true) {
     injectNativeTagCheck(app);
@@ -23941,7 +23641,7 @@ const createApp = ((...args) => {
     const container = normalizeContainer(containerOrSelector);
     if (!container) return;
     const component = app._component;
-    if (!(0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isFunction)(component) && !component.render && !component.template) {
+    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(component) && !component.render && !component.template) {
       component.template = container.innerHTML;
     }
     if (container.nodeType === 1) {
@@ -23955,8 +23655,8 @@ const createApp = ((...args) => {
     return proxy;
   };
   return app;
-});
-const createSSRApp = ((...args) => {
+};
+const createSSRApp = (...args) => {
   const app = ensureHydrationRenderer().createApp(...args);
   if (true) {
     injectNativeTagCheck(app);
@@ -23970,7 +23670,7 @@ const createSSRApp = ((...args) => {
     }
   };
   return app;
-});
+};
 function resolveRootNamespace(container) {
   if (container instanceof SVGElement) {
     return "svg";
@@ -23981,7 +23681,7 @@ function resolveRootNamespace(container) {
 }
 function injectNativeTagCheck(app) {
   Object.defineProperty(app.config, "isNativeTag", {
-    value: (tag) => (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isHTMLTag)(tag) || (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isSVGTag)(tag) || (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isMathMLTag)(tag),
+    value: (tag) => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isHTMLTag)(tag) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isSVGTag)(tag) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isMathMLTag)(tag),
     writable: false
   });
 }
@@ -24015,7 +23715,7 @@ function injectCompilerOptionsCheck(app) {
   }
 }
 function normalizeContainer(container) {
-  if ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_1__.isString)(container)) {
+  if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(container)) {
     const res = document.querySelector(container);
     if ( true && !res) {
       (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(
@@ -24113,7 +23813,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   looseToNumber: () => (/* binding */ looseToNumber),
 /* harmony export */   makeMap: () => (/* binding */ makeMap),
 /* harmony export */   normalizeClass: () => (/* binding */ normalizeClass),
-/* harmony export */   normalizeCssVarValue: () => (/* binding */ normalizeCssVarValue),
 /* harmony export */   normalizeProps: () => (/* binding */ normalizeProps),
 /* harmony export */   normalizeStyle: () => (/* binding */ normalizeStyle),
 /* harmony export */   objectToString: () => (/* binding */ objectToString),
@@ -24129,10 +23828,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   toTypeString: () => (/* binding */ toTypeString)
 /* harmony export */ });
 /**
-* @vue/shared v3.5.24
+* @vue/shared v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
+/*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function makeMap(str) {
   const map = /* @__PURE__ */ Object.create(null);
@@ -24185,15 +23885,15 @@ const isBuiltInDirective = /* @__PURE__ */ makeMap(
 );
 const cacheStringFunction = (fn) => {
   const cache = /* @__PURE__ */ Object.create(null);
-  return ((str) => {
+  return (str) => {
     const hit = cache[str];
     return hit || (cache[str] = fn(str));
-  });
+  };
 };
-const camelizeRE = /-\w/g;
+const camelizeRE = /-(\w)/g;
 const camelize = cacheStringFunction(
   (str) => {
-    return str.replace(camelizeRE, (c) => c.slice(1).toUpperCase());
+    return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
   }
 );
 const hyphenateRE = /\B([A-Z])/g;
@@ -24289,7 +23989,7 @@ const PatchFlagNames = {
   [512]: `NEED_PATCH`,
   [1024]: `DYNAMIC_SLOTS`,
   [2048]: `DEV_ROOT_FRAGMENT`,
-  [-1]: `CACHED`,
+  [-1]: `HOISTED`,
   [-2]: `BAIL`
 };
 
@@ -24644,24 +24344,6 @@ const stringifySymbol = (v, i = "") => {
     isSymbol(v) ? `Symbol(${(_a = v.description) != null ? _a : i})` : v
   );
 };
-
-function normalizeCssVarValue(value) {
-  if (value == null) {
-    return "initial";
-  }
-  if (typeof value === "string") {
-    return value === "" ? " " : value;
-  }
-  if (typeof value !== "number" || !Number.isFinite(value)) {
-    if (true) {
-      console.warn(
-        "[Vue warn] Invalid value used for CSS binding. Expected a string or a finite number but received:",
-        value
-      );
-    }
-  }
-  return String(value);
-}
 
 
 
@@ -27550,12 +27232,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _constant_earning__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constant/earning */ "./Modules/Pharma/Resources/assets/js/constant/earning.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.mjs");
-/* harmony import */ var _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/helpers/hooks/useCrudOpration */ "./resources/js/helpers/hooks/useCrudOpration.js");
-/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! yup */ "./node_modules/yup/index.esm.js");
-/* harmony import */ var _helpers_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/helpers/utilities */ "./resources/js/helpers/utilities.js");
-/* harmony import */ var _vue_components_form_elements_FormHeader_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/vue/components/form-elements/FormHeader.vue */ "./resources/js/vue/components/form-elements/FormHeader.vue");
-/* harmony import */ var _vue_components_form_elements_FormFooter_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/vue/components/form-elements/FormFooter.vue */ "./resources/js/vue/components/form-elements/FormFooter.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.mjs");
+/* harmony import */ var _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/helpers/hooks/useCrudOpration */ "./resources/js/helpers/hooks/useCrudOpration.js");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! yup */ "./node_modules/yup/index.esm.js");
+/* harmony import */ var _helpers_utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/helpers/utilities */ "./resources/js/helpers/utilities.js");
+/* harmony import */ var _vue_components_form_elements_FormHeader_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/vue/components/form-elements/FormHeader.vue */ "./resources/js/vue/components/form-elements/FormHeader.vue");
+/* harmony import */ var _vue_components_form_elements_FormFooter_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/vue/components/form-elements/FormFooter.vue */ "./resources/js/vue/components/form-elements/FormFooter.vue");
 
 
 
@@ -27595,28 +27277,25 @@ var type = 'earning_payment_method';
       options: []
     });
     var formatCurrencyVue = window.currencyFormat;
-    var _useRequest = (0,_helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__.useRequest)(),
+    var _useRequest = (0,_helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__.useRequest)(),
       getRequest = _useRequest.getRequest,
       storeRequest = _useRequest.storeRequest,
       updateRequest = _useRequest.updateRequest,
       listingRequest = _useRequest.listingRequest;
-
-    // const payment_method_data = ref([])
-
     listingRequest({
       url: _constant_earning__WEBPACK_IMPORTED_MODULE_1__.LISTING_URL,
       data: {
         type: type
       }
     }).then(function (res) {
-      payment_method_data.value.options = (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_5__.buildMultiSelectObject)(res.results, {
+      payment_method_data.value.options = (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_4__.buildMultiSelectObject)(res.results, {
         value: 'id',
         label: 'text'
       });
     });
 
     // Edit Form Or Create Form
-    var currentId = (0,_helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__.useModuleId)(function () {
+    var currentId = (0,_helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__.useModuleId)(function () {
       IsLoading.value = true;
       if (currentId.value > 0) {
         listingRequest({
@@ -27677,28 +27356,28 @@ var type = 'earning_payment_method';
     };
 
     // Validations
-    var validationSchema = yup__WEBPACK_IMPORTED_MODULE_4__.object({
-      payment_method: yup__WEBPACK_IMPORTED_MODULE_4__.string().required("Payment method is required field"),
-      amount: yup__WEBPACK_IMPORTED_MODULE_4__.string().required(),
-      description: yup__WEBPACK_IMPORTED_MODULE_4__.string().required("Description is required field")
+    var validationSchema = yup__WEBPACK_IMPORTED_MODULE_3__.object({
+      payment_method: yup__WEBPACK_IMPORTED_MODULE_3__.string().required("Payment method is required field"),
+      amount: yup__WEBPACK_IMPORTED_MODULE_3__.string().required(),
+      description: yup__WEBPACK_IMPORTED_MODULE_3__.string().required("Description is required field")
     });
-    var _useForm = (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useForm)({
+    var _useForm = (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useForm)({
         validationSchema: validationSchema
       }),
       handleSubmit = _useForm.handleSubmit,
       errors = _useForm.errors,
       resetForm = _useForm.resetForm;
     var fieldMappings = {
-      id: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('id'),
-      full_name: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('full_name'),
-      email: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('email'),
-      mobile: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('mobile'),
-      profile_image: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('profile_image'),
-      description: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('description'),
-      commission_earn: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('commission_earn'),
-      tip_earn: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('tip_earn'),
-      amount: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('amount'),
-      payment_method: (0,vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField)('payment_method')
+      id: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('id'),
+      full_name: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('full_name'),
+      email: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('email'),
+      mobile: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('mobile'),
+      profile_image: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('profile_image'),
+      description: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('description'),
+      commission_earn: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('commission_earn'),
+      tip_earn: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('tip_earn'),
+      amount: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('amount'),
+      payment_method: (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField)('payment_method')
     };
 
     // Access the values using destructuring
@@ -27735,7 +27414,7 @@ var type = 'earning_payment_method';
         });
       }
     });
-    (0,_helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__.useOnOffcanvasHide)('form-offcanvas', function () {
+    (0,_helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__.useOnOffcanvasHide)('form-offcanvas', function () {
       return setFormData(defaultData());
     });
     var __returned__ = {
@@ -27785,28 +27464,28 @@ var type = 'earning_payment_method';
         return _constant_earning__WEBPACK_IMPORTED_MODULE_1__.LISTING_URL;
       },
       get useField() {
-        return vee_validate__WEBPACK_IMPORTED_MODULE_2__.useField;
+        return vee_validate__WEBPACK_IMPORTED_MODULE_7__.useField;
       },
       get useForm() {
-        return vee_validate__WEBPACK_IMPORTED_MODULE_2__.useForm;
+        return vee_validate__WEBPACK_IMPORTED_MODULE_7__.useForm;
       },
       get useModuleId() {
-        return _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__.useModuleId;
+        return _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__.useModuleId;
       },
       get useRequest() {
-        return _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__.useRequest;
+        return _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__.useRequest;
       },
       get useOnOffcanvasHide() {
-        return _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_3__.useOnOffcanvasHide;
+        return _helpers_hooks_useCrudOpration__WEBPACK_IMPORTED_MODULE_2__.useOnOffcanvasHide;
       },
       get yup() {
-        return yup__WEBPACK_IMPORTED_MODULE_4__;
+        return yup__WEBPACK_IMPORTED_MODULE_3__;
       },
       get buildMultiSelectObject() {
-        return _helpers_utilities__WEBPACK_IMPORTED_MODULE_5__.buildMultiSelectObject;
+        return _helpers_utilities__WEBPACK_IMPORTED_MODULE_4__.buildMultiSelectObject;
       },
-      FormHeader: _vue_components_form_elements_FormHeader_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-      FormFooter: _vue_components_form_elements_FormFooter_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+      FormHeader: _vue_components_form_elements_FormHeader_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+      FormFooter: _vue_components_form_elements_FormFooter_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -28108,7 +27787,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "img-fluid avatar avatar-60 rounded-pill"
   }, null, 8 /* PROPS */, _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.full_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.email), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.mobile), 1 /* TEXT */)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('earning.lbl_select_method')) + " ", 1 /* TEXT */), _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "text-danger"
-  }, "*", -1 /* CACHED */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Multiselect, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+  }, "*", -1 /* HOISTED */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Multiselect, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
     modelValue: $setup.payment_method,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.payment_method = $event;
@@ -28119,7 +27798,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSelect: _ctx.branchSelect
   }), null, 16 /* FULL_PROPS */, ["modelValue", "value", "onSelect"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.errors.payment_method), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('earning.lbl_description')) + " ", 1 /* TEXT */), _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "text-danger"
-  }, "*", -1 /* CACHED */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  }, "*", -1 /* HOISTED */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     type: "textarea",
     "class": "form-control",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -28130,7 +27809,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       key: err
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(err), 1 /* TEXT */);
-  }), 128 /* KEYED_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.errors.description), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"d-flex justify-content-between align-items-center\">\n              <span>{{$t('earning.commission_earn')}}</span>\n              <strong>{{ commission_earn }}</strong>\n            </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('earning.total_pay')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.amount), 1 /* TEXT */)])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('messages.Proccessing')), 1 /* TEXT */)), !$setup.IsLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('messages.cancel')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }), 128 /* KEYED_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.errors.description), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('earning.total_pay')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.amount), 1 /* TEXT */)])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('messages.Proccessing')), 1 /* TEXT */)), !$setup.IsLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('messages.cancel')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-secondary",
     id: "save-button",
     disabled: $setup.isDisable > 0
@@ -28196,7 +27875,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn-close",
     "data-bs-dismiss": "offcanvas",
     "aria-label": "Close"
-  }, null, -1 /* CACHED */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.commissions, function (item, index) {
+  }, null, -1 /* HOISTED */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.commissions, function (item, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: item,
       "class": "list-group-item d-flex justify-content-between align-items-center"
@@ -28242,7 +27921,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "spinner-border spinner-border-sm",
     role: "status",
     "aria-hidden": "true"
-  }, null, -1 /* CACHED */)), _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Loading... ", -1 /* CACHED */))], 64 /* STABLE_FRAGMENT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  }, null, -1 /* HOISTED */)), _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Loading... "))], 64 /* STABLE_FRAGMENT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('messages.save')), 1 /* TEXT */)], 64 /* STABLE_FRAGMENT */))], 8 /* PROPS */, _hoisted_4)])]);
 }
@@ -28283,7 +27962,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn-close-offcanvas"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "ph ph-x-circle"
-  })], -1 /* CACHED */))]);
+  })], -1 /* HOISTED */))]);
 }
 
 /***/ }),
@@ -29605,7 +29284,7 @@ function _r(e, t = {}) {
 function $r(e) {
   return JSON.parse(JSON.stringify(e));
 }
-const Gt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof __webpack_require__.g < "u" ? __webpack_require__.g : typeof self < "u" ? self : {}, Wt = "__vueuse_ssr_handlers__", Cr = /* @__PURE__ */ kr();
+const Gt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, Wt = "__vueuse_ssr_handlers__", Cr = /* @__PURE__ */ kr();
 function kr() {
   return Wt in Gt || (Gt[Wt] = Gt[Wt] || {}), Gt[Wt];
 }
@@ -37854,7 +37533,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.form__input {\n  font-family: 'Roboto', sans-serif;\n  color: #333;\n  font-size: 1.2rem;\n\tmargin: 0 auto;\n  padding: 1.5rem 2rem;\n  border-radius: 0.2rem;\n  background-color: rgb(255, 255, 255);\n  border: none;\n  width: 90%;\n  display: block;\n  border-bottom: 0.3rem solid transparent;\n  transition: all 0.3s;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.form__input {\r\n  font-family: 'Roboto', sans-serif;\r\n  color: #333;\r\n  font-size: 1.2rem;\r\n\tmargin: 0 auto;\r\n  padding: 1.5rem 2rem;\r\n  border-radius: 0.2rem;\r\n  background-color: rgb(255, 255, 255);\r\n  border: none;\r\n  width: 90%;\r\n  display: block;\r\n  border-bottom: 0.3rem solid transparent;\r\n  transition: all 0.3s;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -55143,8 +54822,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   }
   // Check for `exports` after `define` in case a build optimizer adds it.
-  else // removed by dead control flow
-{}
+  else {}
 }.call(this));
 
 
@@ -77132,8 +76810,8 @@ const _global = /*#__PURE__*/ (() => typeof window === 'object' && window.window
     ? window
     : typeof self === 'object' && self.self === self
         ? self
-        : typeof __webpack_require__.g === 'object' && __webpack_require__.g.global === __webpack_require__.g
-            ? __webpack_require__.g
+        : typeof global === 'object' && global.global === global
+            ? global
             : typeof globalThis === 'object'
                 ? globalThis
                 : { HTMLElement: null })();
@@ -78144,8 +77822,7 @@ function patchObject(newState, oldState) {
  */
 function acceptHMRUpdate(initialUseStore, hot) {
     // strip as much as possible from iife.prod
-    if (false) // removed by dead control flow
-{}
+    if (false) {}
     return (newModule) => {
         const pinia = hot.data.pinia || initialUseStore._pinia;
         if (!pinia) {
@@ -79787,8 +79464,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /**
-  * vee-validate v4.15.1
-  * (c) 2025 Abdelrahman Awad
+  * vee-validate v4.15.0
+  * (c) 2024 Abdelrahman Awad
   * @license MIT
   */
 
@@ -80098,16 +79775,14 @@ function isEqual(a, b) {
             return a.valueOf() === b.valueOf();
         if (a.toString !== Object.prototype.toString)
             return a.toString() === b.toString();
-        // Remove undefined values before object comparison
-        a = normalizeObject(a);
-        b = normalizeObject(b);
         keys = Object.keys(a);
-        length = keys.length;
-        if (length !== Object.keys(b).length)
+        length = keys.length - countUndefinedValues(a, keys);
+        if (length !== Object.keys(b).length - countUndefinedValues(b, Object.keys(b)))
             return false;
-        for (i = length; i-- !== 0;)
+        for (i = length; i-- !== 0;) {
             if (!Object.prototype.hasOwnProperty.call(b, keys[i]))
                 return false;
+        }
         for (i = length; i-- !== 0;) {
             // eslint-disable-next-line no-var
             var key = keys[i];
@@ -80119,13 +79794,15 @@ function isEqual(a, b) {
     // true if both NaN, false otherwise
     return a !== a && b !== b;
 }
-/**
- * Returns a new object where keys with an `undefined` value are removed.
- *
- * @param a object to normalize
- */
-function normalizeObject(a) {
-    return Object.fromEntries(Object.entries(a).filter(([, value]) => value !== undefined));
+function countUndefinedValues(a, keys) {
+    let result = 0;
+    for (let i = keys.length; i-- !== 0;) {
+        // eslint-disable-next-line no-var
+        var key = keys[i];
+        if (a[key] === undefined)
+            result++;
+    }
+    return result;
 }
 function isFile(a) {
     if (!isClient) {
@@ -83978,13 +83655,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   useI18n: () => (/* binding */ useI18n),
 /* harmony export */   vTDirective: () => (/* binding */ vTDirective)
 /* harmony export */ });
-/* harmony import */ var _intlify_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @intlify/shared */ "./node_modules/@intlify/shared/dist/shared.mjs");
-/* harmony import */ var _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @intlify/core-base */ "./node_modules/@intlify/core-base/dist/core-base.mjs");
-/* harmony import */ var _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @intlify/core-base */ "./node_modules/@intlify/core-base/node_modules/@intlify/message-compiler/dist/message-compiler.esm-browser.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _intlify_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @intlify/shared */ "./node_modules/@intlify/shared/dist/shared.mjs");
+/* harmony import */ var _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @intlify/core-base */ "./node_modules/@intlify/core-base/dist/core-base.mjs");
+/* harmony import */ var _intlify_core_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @intlify/core-base */ "./node_modules/@intlify/core-base/node_modules/@intlify/message-compiler/dist/message-compiler.esm-browser.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _vue_devtools_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vue/devtools-api */ "./node_modules/@vue/devtools-api/lib/esm/index.js");
 /*!
-  * vue-i18n v9.14.5
+  * vue-i18n v9.14.4
   * (c) 2025 kazuya kawaguchi
   * Released under the MIT License.
   */
@@ -84001,31 +83678,31 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @VueI18nGeneral
  */
-const VERSION = '9.14.5';
+const VERSION = '9.14.4';
 /**
  * This is only called in esm-bundler builds.
  * istanbul-ignore-next
  */
 function initFeatureFlags() {
     if (typeof __VUE_I18N_FULL_INSTALL__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__VUE_I18N_FULL_INSTALL__ = true;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__VUE_I18N_FULL_INSTALL__ = true;
     }
     if (typeof __VUE_I18N_LEGACY_API__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__VUE_I18N_LEGACY_API__ = true;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__VUE_I18N_LEGACY_API__ = true;
     }
     if (typeof __INTLIFY_JIT_COMPILATION__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__INTLIFY_JIT_COMPILATION__ = false;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__INTLIFY_JIT_COMPILATION__ = false;
     }
     if (typeof __INTLIFY_DROP_MESSAGE_COMPILER__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__INTLIFY_DROP_MESSAGE_COMPILER__ = false;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__INTLIFY_DROP_MESSAGE_COMPILER__ = false;
     }
     if (typeof __INTLIFY_PROD_DEVTOOLS__ !== 'boolean') {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)().__INTLIFY_PROD_DEVTOOLS__ = false;
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)().__INTLIFY_PROD_DEVTOOLS__ = false;
     }
 }
 
-const code$1 = _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.CoreWarnCodes.__EXTEND_POINT__;
-const inc$1 = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.incrementer)(code$1);
+const code$1 = _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.CoreWarnCodes.__EXTEND_POINT__;
+const inc$1 = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.incrementer)(code$1);
 const I18nWarnCodes = {
     FALLBACK_TO_ROOT: code$1, // 9
     NOT_SUPPORTED_PRESERVE: inc$1(), // 10
@@ -84051,11 +83728,11 @@ const warnMessages = {
     [I18nWarnCodes.NOTICE_DROP_TRANSLATE_EXIST_COMPATIBLE_FLAG]: `'translateExistCompatible' option will be dropped in the next major version.`
 };
 function getWarnMessage(code, ...args) {
-    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.format)(warnMessages[code], ...args);
+    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.format)(warnMessages[code], ...args);
 }
 
-const code = _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.CoreErrorCodes.__EXTEND_POINT__;
-const inc = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.incrementer)(code);
+const code = _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.CoreErrorCodes.__EXTEND_POINT__;
+const inc = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.incrementer)(code);
 const I18nErrorCodes = {
     // composer module errors
     UNEXPECTED_RETURN_TYPE: code, // 24
@@ -84085,7 +83762,7 @@ const I18nErrorCodes = {
     __EXTEND_POINT__: inc() // 38
 };
 function createI18nError(code, ...args) {
-    return (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.createCompileError)(code, null, ( true) ? { messages: errorMessages, args } : 0);
+    return (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_3__.createCompileError)(code, null, ( true) ? { messages: errorMessages, args } : 0);
 }
 const errorMessages = {
     [I18nErrorCodes.UNEXPECTED_RETURN_TYPE]: 'Unexpected return type in composer',
@@ -84105,16 +83782,16 @@ const errorMessages = {
 };
 
 const TranslateVNodeSymbol = 
-/* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__translateVNode');
-const DatetimePartsSymbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__datetimeParts');
-const NumberPartsSymbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__numberParts');
-const EnableEmitter = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__enableEmitter');
-const DisableEmitter = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__disableEmitter');
-const SetPluralRulesSymbol = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__setPluralRules');
-(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__intlifyMeta');
+/* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__translateVNode');
+const DatetimePartsSymbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__datetimeParts');
+const NumberPartsSymbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__numberParts');
+const EnableEmitter = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__enableEmitter');
+const DisableEmitter = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__disableEmitter');
+const SetPluralRulesSymbol = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__setPluralRules');
+(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__intlifyMeta');
 const InejctWithOptionSymbol = 
-/* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__injectWithOption');
-const DisposeSymbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('__dispose');
+/* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__injectWithOption');
+const DisposeSymbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('__dispose');
 const __VUE_I18N_BRIDGE__ =  '__VUE_I18N_BRIDGE__';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -84123,21 +83800,21 @@ const __VUE_I18N_BRIDGE__ =  '__VUE_I18N_BRIDGE__';
  */
 function handleFlatJson(obj) {
     // check obj
-    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(obj)) {
+    if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(obj)) {
         return obj;
     }
-    if ((0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isMessageAST)(obj)) {
+    if ((0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isMessageAST)(obj)) {
         return obj;
     }
     for (const key in obj) {
         // check key
-        if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(obj, key)) {
+        if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(obj, key)) {
             continue;
         }
         // handle for normal json
         if (!key.includes('.')) {
             // recursive process value if value is also a object
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(obj[key])) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(obj[key])) {
                 handleFlatJson(obj[key]);
             }
         }
@@ -84153,11 +83830,11 @@ function handleFlatJson(obj) {
                     throw new Error(`unsafe key: ${subKeys[i]}`);
                 }
                 if (!(subKeys[i] in currentObj)) {
-                    currentObj[subKeys[i]] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+                    currentObj[subKeys[i]] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
                 }
-                if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(currentObj[subKeys[i]])) {
+                if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(currentObj[subKeys[i]])) {
                     ( true) &&
-                        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.IGNORE_OBJ_FLATTEN, {
+                        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.IGNORE_OBJ_FLATTEN, {
                             key: subKeys[i]
                         }));
                     hasStringValue = true;
@@ -84167,7 +83844,7 @@ function handleFlatJson(obj) {
             }
             // update last object value, delete old property
             if (!hasStringValue) {
-                if (!(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isMessageAST)(currentObj)) {
+                if (!(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isMessageAST)(currentObj)) {
                     currentObj[subKeys[lastIndex]] = obj[key];
                     delete obj[key];
                 }
@@ -84176,15 +83853,15 @@ function handleFlatJson(obj) {
                      * NOTE:
                      * if the last object is a message AST and subKeys[lastIndex] has message AST prop key, ignore to copy and key deletion
                      */
-                    if (!_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.AST_NODE_PROPS_KEYS.includes(subKeys[lastIndex])) {
+                    if (!_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.AST_NODE_PROPS_KEYS.includes(subKeys[lastIndex])) {
                         delete obj[key];
                     }
                 }
             }
             // recursive process value if value is also a object
-            if (!(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isMessageAST)(currentObj)) {
+            if (!(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isMessageAST)(currentObj)) {
                 const target = currentObj[subKeys[lastIndex]];
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(target)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(target)) {
                     handleFlatJson(target);
                 }
             }
@@ -84195,33 +83872,33 @@ function handleFlatJson(obj) {
 function getLocaleMessages(locale, options) {
     const { messages, __i18n, messageResolver, flatJson } = options;
     // prettier-ignore
-    const ret = ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(messages)
+    const ret = ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(messages)
         ? messages
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(__i18n)
-            ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)()
-            : { [locale]: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)() });
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(__i18n)
+            ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)()
+            : { [locale]: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)() });
     // merge locale messages of i18n custom block
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(__i18n)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(__i18n)) {
         __i18n.forEach(custom => {
             if ('locale' in custom && 'resource' in custom) {
                 const { locale, resource } = custom;
                 if (locale) {
-                    ret[locale] = ret[locale] || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.deepCopy)(resource, ret[locale]);
+                    ret[locale] = ret[locale] || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.deepCopy)(resource, ret[locale]);
                 }
                 else {
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.deepCopy)(resource, ret);
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.deepCopy)(resource, ret);
                 }
             }
             else {
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(custom) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.deepCopy)(JSON.parse(custom), ret);
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(custom) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.deepCopy)(JSON.parse(custom), ret);
             }
         });
     }
     // handle messages for flat json
     if (messageResolver == null && flatJson) {
         for (const key in ret) {
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(ret, key)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(ret, key)) {
                 handleFlatJson(ret[key]);
             }
         }
@@ -84234,9 +83911,9 @@ function getComponentOptions(instance) {
 }
 function adjustI18nResources(gl, options, componentOptions // eslint-disable-line @typescript-eslint/no-explicit-any
 ) {
-    let messages = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.messages)
+    let messages = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.messages)
         ? options.messages
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
     if ('__i18nGlobal' in componentOptions) {
         messages = getLocaleMessages(gl.locale.value, {
             messages,
@@ -84252,7 +83929,7 @@ function adjustI18nResources(gl, options, componentOptions // eslint-disable-lin
     }
     {
         // merge datetime formats
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.datetimeFormats)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.datetimeFormats)) {
             const locales = Object.keys(options.datetimeFormats);
             if (locales.length) {
                 locales.forEach(locale => {
@@ -84261,7 +83938,7 @@ function adjustI18nResources(gl, options, componentOptions // eslint-disable-lin
             }
         }
         // merge number formats
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(options.numberFormats)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(options.numberFormats)) {
             const locales = Object.keys(options.numberFormats);
             if (locales.length) {
                 locales.forEach(locale => {
@@ -84272,7 +83949,7 @@ function adjustI18nResources(gl, options, componentOptions // eslint-disable-lin
     }
 }
 function createTextNode(key) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_3__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_3__.Text, null, key, 0)
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Text, null, key, 0)
         ;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
@@ -84285,13 +83962,13 @@ const NOOP_RETURN_FALSE = () => false;
 let composerID = 0;
 function defineCoreMissingHandler(missing) {
     return ((ctx, locale, key, type) => {
-        return missing(locale, key, (0,vue__WEBPACK_IMPORTED_MODULE_3__.getCurrentInstance)() || undefined, type);
+        return missing(locale, key, (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)() || undefined, type);
     });
 }
 // for Intlify DevTools
 /* #__NO_SIDE_EFFECTS__ */
 const getMetaInfo = () => {
-    const instance = (0,vue__WEBPACK_IMPORTED_MODULE_3__.getCurrentInstance)();
+    const instance = (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
     let meta = null; // eslint-disable-line @typescript-eslint/no-explicit-any
     return instance && (meta = getComponentOptions(instance)[DEVTOOLS_META])
         ? { [DEVTOOLS_META]: meta } // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -84307,41 +83984,41 @@ function createComposer(options = {}, VueI18nLegacy) {
     const { __root, __injectWithOption } = options;
     const _isGlobal = __root === undefined;
     const flatJson = options.flatJson;
-    const _ref = _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser ? vue__WEBPACK_IMPORTED_MODULE_3__.ref : vue__WEBPACK_IMPORTED_MODULE_3__.shallowRef;
+    const _ref = _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser ? vue__WEBPACK_IMPORTED_MODULE_0__.ref : vue__WEBPACK_IMPORTED_MODULE_0__.shallowRef;
     const translateExistCompatible = !!options.translateExistCompatible;
     if ((true)) {
         if (translateExistCompatible && !false) {
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warnOnce)(getWarnMessage(I18nWarnCodes.NOTICE_DROP_TRANSLATE_EXIST_COMPATIBLE_FLAG));
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warnOnce)(getWarnMessage(I18nWarnCodes.NOTICE_DROP_TRANSLATE_EXIST_COMPATIBLE_FLAG));
         }
     }
-    let _inheritLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.inheritLocale)
+    let _inheritLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.inheritLocale)
         ? options.inheritLocale
         : true;
     const _locale = _ref(
     // prettier-ignore
     __root && _inheritLocale
         ? __root.locale.value
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.locale)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.locale)
             ? options.locale
-            : _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_LOCALE);
+            : _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_LOCALE);
     const _fallbackLocale = _ref(
     // prettier-ignore
     __root && _inheritLocale
         ? __root.fallbackLocale.value
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.fallbackLocale) ||
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(options.fallbackLocale) ||
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.fallbackLocale) ||
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.fallbackLocale) ||
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(options.fallbackLocale) ||
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.fallbackLocale) ||
             options.fallbackLocale === false
             ? options.fallbackLocale
             : _locale.value);
     const _messages = _ref(getLocaleMessages(_locale.value, options));
     // prettier-ignore
-    const _datetimeFormats = _ref((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.datetimeFormats)
+    const _datetimeFormats = _ref((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.datetimeFormats)
             ? options.datetimeFormats
             : { [_locale.value]: {} })
         ;
     // prettier-ignore
-    const _numberFormats = _ref((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.numberFormats)
+    const _numberFormats = _ref((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.numberFormats)
             ? options.numberFormats
             : { [_locale.value]: {} })
         ;
@@ -84349,36 +84026,36 @@ function createComposer(options = {}, VueI18nLegacy) {
     // prettier-ignore
     let _missingWarn = __root
         ? __root.missingWarn
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.missingWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.missingWarn)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.missingWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.missingWarn)
             ? options.missingWarn
             : true;
     // prettier-ignore
     let _fallbackWarn = __root
         ? __root.fallbackWarn
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.fallbackWarn)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.fallbackWarn)
             ? options.fallbackWarn
             : true;
     // prettier-ignore
     let _fallbackRoot = __root
         ? __root.fallbackRoot
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackRoot)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackRoot)
             ? options.fallbackRoot
             : true;
     // configure fall back to root
     let _fallbackFormat = !!options.fallbackFormat;
     // runtime missing
-    let _missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.missing) ? options.missing : null;
-    let _runtimeMissing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.missing)
+    let _missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.missing) ? options.missing : null;
+    let _runtimeMissing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.missing)
         ? defineCoreMissingHandler(options.missing)
         : null;
     // postTranslation handler
-    let _postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.postTranslation)
+    let _postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.postTranslation)
         ? options.postTranslation
         : null;
     // prettier-ignore
     let _warnHtmlMessage = __root
         ? __root.warnHtmlMessage
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.warnHtmlMessage)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.warnHtmlMessage)
             ? options.warnHtmlMessage
             : true;
     let _escapeParameter = !!options.escapeParameter;
@@ -84386,7 +84063,7 @@ function createComposer(options = {}, VueI18nLegacy) {
     // prettier-ignore
     const _modifiers = __root
         ? __root.modifiers
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.modifiers)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.modifiers)
             ? options.modifiers
             : {};
     // pluralRules
@@ -84395,7 +84072,7 @@ function createComposer(options = {}, VueI18nLegacy) {
     // eslint-disable-next-line prefer-const
     let _context;
     const getCoreContext = () => {
-        _isGlobal && (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.setFallbackContext)(null);
+        _isGlobal && (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.setFallbackContext)(null);
         const ctxOptions = {
             version: VERSION,
             locale: _locale.value,
@@ -84418,24 +84095,24 @@ function createComposer(options = {}, VueI18nLegacy) {
         {
             ctxOptions.datetimeFormats = _datetimeFormats.value;
             ctxOptions.numberFormats = _numberFormats.value;
-            ctxOptions.__datetimeFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(_context)
+            ctxOptions.__datetimeFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(_context)
                 ? _context.__datetimeFormatters
                 : undefined;
-            ctxOptions.__numberFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(_context)
+            ctxOptions.__numberFormatters = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(_context)
                 ? _context.__numberFormatters
                 : undefined;
         }
         if ((true)) {
-            ctxOptions.__v_emitter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(_context)
+            ctxOptions.__v_emitter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(_context)
                 ? _context.__v_emitter
                 : undefined;
         }
-        const ctx = (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.createCoreContext)(ctxOptions);
-        _isGlobal && (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.setFallbackContext)(ctx);
+        const ctx = (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.createCoreContext)(ctxOptions);
+        _isGlobal && (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.setFallbackContext)(ctx);
         return ctx;
     };
     _context = getCoreContext();
-    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
+    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
     // track reactivity
     function trackReactivityValues() {
         return [
@@ -84448,7 +84125,7 @@ function createComposer(options = {}, VueI18nLegacy) {
             ;
     }
     // locale
-    const locale = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)({
+    const locale = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)({
         get: () => _locale.value,
         set: val => {
             _locale.value = val;
@@ -84456,23 +84133,23 @@ function createComposer(options = {}, VueI18nLegacy) {
         }
     });
     // fallbackLocale
-    const fallbackLocale = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)({
+    const fallbackLocale = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)({
         get: () => _fallbackLocale.value,
         set: val => {
             _fallbackLocale.value = val;
             _context.fallbackLocale = _fallbackLocale.value;
-            (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.updateFallbackLocale)(_context, _locale.value, val);
+            (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.updateFallbackLocale)(_context, _locale.value, val);
         }
     });
     // messages
-    const messages = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(() => _messages.value);
+    const messages = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => _messages.value);
     // datetimeFormats
-    const datetimeFormats = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(() => _datetimeFormats.value);
+    const datetimeFormats = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => _datetimeFormats.value);
     // numberFormats
-    const numberFormats = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(() => _numberFormats.value);
+    const numberFormats = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => _numberFormats.value);
     // getPostTranslationHandler
     function getPostTranslationHandler() {
-        return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(_postTranslation) ? _postTranslation : null;
+        return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(_postTranslation) ? _postTranslation : null;
     }
     // setPostTranslationHandler
     function setPostTranslationHandler(handler) {
@@ -84501,37 +84178,37 @@ function createComposer(options = {}, VueI18nLegacy) {
         let ret;
         try {
             if (true) {
-                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.setAdditionalMeta)(getMetaInfo());
+                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.setAdditionalMeta)(getMetaInfo());
             }
             if (!_isGlobal) {
                 _context.fallbackContext = __root
-                    ? (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.getFallbackContext)()
+                    ? (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.getFallbackContext)()
                     : undefined;
             }
             ret = fn(_context);
         }
         finally {
             if (true) {
-                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.setAdditionalMeta)(null);
+                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.setAdditionalMeta)(null);
             }
             if (!_isGlobal) {
                 _context.fallbackContext = undefined;
             }
         }
         if ((warnType !== 'translate exists' && // for not `te` (e.g `t`)
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(ret) &&
-            ret === _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.NOT_REOSLVED) ||
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(ret) &&
+            ret === _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.NOT_REOSLVED) ||
             (warnType === 'translate exists' && !ret) // for `te`
         ) {
             const [key, arg2] = argumentParser();
             if (( true) &&
                 __root &&
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(key) &&
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(key) &&
                 isResolvedTranslateMessage(warnType, arg2)) {
                 if (_fallbackRoot &&
-                    ((0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isTranslateFallbackWarn)(_fallbackWarn, key) ||
-                        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isTranslateMissingWarn)(_missingWarn, key))) {
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.FALLBACK_TO_ROOT, {
+                    ((0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isTranslateFallbackWarn)(_fallbackWarn, key) ||
+                        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isTranslateMissingWarn)(_missingWarn, key))) {
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.FALLBACK_TO_ROOT, {
                         key,
                         type: warnType
                     }));
@@ -84563,27 +84240,27 @@ function createComposer(options = {}, VueI18nLegacy) {
     };
     // t
     function t(...args) {
-        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.translate, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.parseTranslateArgs)(...args), 'translate', root => Reflect.apply(root.t, root, [...args]), key => key, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val));
+        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.translate, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.parseTranslateArgs)(...args), 'translate', root => Reflect.apply(root.t, root, [...args]), key => key, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val));
     }
     // rt
     function rt(...args) {
         const [arg1, arg2, arg3] = args;
-        if (arg3 && !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(arg3)) {
+        if (arg3 && !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(arg3)) {
             throw createI18nError(I18nErrorCodes.INVALID_ARGUMENT);
         }
-        return t(...[arg1, arg2, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({ resolvedMessage: true }, arg3 || {})]);
+        return t(...[arg1, arg2, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({ resolvedMessage: true }, arg3 || {})]);
     }
     // d
     function d(...args) {
-        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.datetime, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.parseDateTimeArgs)(...args), 'datetime format', root => Reflect.apply(root.d, root, [...args]), () => _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.MISSING_RESOLVE_VALUE, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val));
+        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.datetime, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.parseDateTimeArgs)(...args), 'datetime format', root => Reflect.apply(root.d, root, [...args]), () => _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.MISSING_RESOLVE_VALUE, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val));
     }
     // n
     function n(...args) {
-        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.number, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.parseNumberArgs)(...args), 'number format', root => Reflect.apply(root.n, root, [...args]), () => _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.MISSING_RESOLVE_VALUE, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val));
+        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.number, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.parseNumberArgs)(...args), 'number format', root => Reflect.apply(root.n, root, [...args]), () => _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.MISSING_RESOLVE_VALUE, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val));
     }
     // for custom processor
     function normalize(values) {
-        return values.map(val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(val)
+        return values.map(val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(val)
             ? createTextNode(String(val))
             : val);
     }
@@ -84600,27 +84277,27 @@ function createComposer(options = {}, VueI18nLegacy) {
             const _context = context;
             try {
                 _context.processor = processor;
-                ret = Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.translate, null, [_context, ...args]);
+                ret = Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.translate, null, [_context, ...args]);
             }
             finally {
                 _context.processor = null;
             }
             return ret;
-        }, () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.parseTranslateArgs)(...args), 'translate', 
+        }, () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.parseTranslateArgs)(...args), 'translate', 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        root => root[TranslateVNodeSymbol](...args), key => [createTextNode(key)], val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(val));
+        root => root[TranslateVNodeSymbol](...args), key => [createTextNode(key)], val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(val));
     }
     // numberParts, using for `i18n-n` component
     function numberParts(...args) {
-        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.number, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.parseNumberArgs)(...args), 'number format', 
+        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.number, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.parseNumberArgs)(...args), 'number format', 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        root => root[NumberPartsSymbol](...args), NOOP_RETURN_ARRAY, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(val));
+        root => root[NumberPartsSymbol](...args), NOOP_RETURN_ARRAY, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(val));
     }
     // datetimeParts, using for `i18n-d` component
     function datetimeParts(...args) {
-        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.datetime, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.parseDateTimeArgs)(...args), 'datetime format', 
+        return wrapWithDeps(context => Reflect.apply(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.datetime, null, [context, ...args]), () => (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.parseDateTimeArgs)(...args), 'datetime format', 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        root => root[DatetimePartsSymbol](...args), NOOP_RETURN_ARRAY, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(val));
+        root => root[DatetimePartsSymbol](...args), NOOP_RETURN_ARRAY, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(val) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(val));
     }
     function setPluralRules(rules) {
         _pluralRules = rules;
@@ -84632,21 +84309,21 @@ function createComposer(options = {}, VueI18nLegacy) {
             if (!key) {
                 return false;
             }
-            const targetLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(locale) ? locale : _locale.value;
+            const targetLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(locale) ? locale : _locale.value;
             const message = getLocaleMessage(targetLocale);
             const resolved = _context.messageResolver(message, key);
             return !translateExistCompatible
-                ? (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isMessageAST)(resolved) ||
-                    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isMessageFunction)(resolved) ||
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(resolved)
+                ? (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isMessageAST)(resolved) ||
+                    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isMessageFunction)(resolved) ||
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(resolved)
                 : resolved != null;
         }, () => [key], 'translate exists', root => {
             return Reflect.apply(root.te, root, [key, locale]);
-        }, NOOP_RETURN_FALSE, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(val));
+        }, NOOP_RETURN_FALSE, val => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(val));
     }
     function resolveMessages(key) {
         let messages = null;
-        const locales = (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.fallbackWithLocaleChain)(_context, _fallbackLocale.value, _locale.value);
+        const locales = (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.fallbackWithLocaleChain)(_context, _fallbackLocale.value, _locale.value);
         for (let i = 0; i < locales.length; i++) {
             const targetLocaleMessages = _messages.value[locales[i]] || {};
             const messageValue = _context.messageResolver(targetLocaleMessages, key);
@@ -84676,7 +84353,7 @@ function createComposer(options = {}, VueI18nLegacy) {
         if (flatJson) {
             const _message = { [locale]: message };
             for (const key in _message) {
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(_message, key)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(_message, key)) {
                     handleFlatJson(_message[key]);
                 }
             }
@@ -84691,13 +84368,13 @@ function createComposer(options = {}, VueI18nLegacy) {
         const _message = { [locale]: message };
         if (flatJson) {
             for (const key in _message) {
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(_message, key)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(_message, key)) {
                     handleFlatJson(_message[key]);
                 }
             }
         }
         message = _message[locale];
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.deepCopy)(message, _messages.value[locale]);
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.deepCopy)(message, _messages.value[locale]);
         _context.messages = _messages.value;
     }
     // getDateTimeFormat
@@ -84708,13 +84385,13 @@ function createComposer(options = {}, VueI18nLegacy) {
     function setDateTimeFormat(locale, format) {
         _datetimeFormats.value[locale] = format;
         _context.datetimeFormats = _datetimeFormats.value;
-        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.clearDateTimeFormat)(_context, locale, format);
+        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.clearDateTimeFormat)(_context, locale, format);
     }
     // mergeDateTimeFormat
     function mergeDateTimeFormat(locale, format) {
-        _datetimeFormats.value[locale] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)(_datetimeFormats.value[locale] || {}, format);
+        _datetimeFormats.value[locale] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)(_datetimeFormats.value[locale] || {}, format);
         _context.datetimeFormats = _datetimeFormats.value;
-        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.clearDateTimeFormat)(_context, locale, format);
+        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.clearDateTimeFormat)(_context, locale, format);
     }
     // getNumberFormat
     function getNumberFormat(locale) {
@@ -84724,30 +84401,30 @@ function createComposer(options = {}, VueI18nLegacy) {
     function setNumberFormat(locale, format) {
         _numberFormats.value[locale] = format;
         _context.numberFormats = _numberFormats.value;
-        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.clearNumberFormat)(_context, locale, format);
+        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.clearNumberFormat)(_context, locale, format);
     }
     // mergeNumberFormat
     function mergeNumberFormat(locale, format) {
-        _numberFormats.value[locale] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)(_numberFormats.value[locale] || {}, format);
+        _numberFormats.value[locale] = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)(_numberFormats.value[locale] || {}, format);
         _context.numberFormats = _numberFormats.value;
-        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.clearNumberFormat)(_context, locale, format);
+        (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.clearNumberFormat)(_context, locale, format);
     }
     // for debug
     composerID++;
     // watch root locale & fallbackLocale
-    if (__root && _intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser) {
-        (0,vue__WEBPACK_IMPORTED_MODULE_3__.watch)(__root.locale, (val) => {
+    if (__root && _intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser) {
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(__root.locale, (val) => {
             if (_inheritLocale) {
                 _locale.value = val;
                 _context.locale = val;
-                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
+                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
             }
         });
-        (0,vue__WEBPACK_IMPORTED_MODULE_3__.watch)(__root.fallbackLocale, (val) => {
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(__root.fallbackLocale, (val) => {
             if (_inheritLocale) {
                 _fallbackLocale.value = val;
                 _context.fallbackLocale = val;
-                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
+                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
             }
         });
     }
@@ -84764,7 +84441,7 @@ function createComposer(options = {}, VueI18nLegacy) {
             if (val && __root) {
                 _locale.value = __root.locale.value;
                 _fallbackLocale.value = __root.fallbackLocale.value;
-                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
+                (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.updateFallbackLocale)(_context, _locale.value, _fallbackLocale.value);
             }
         },
         get availableLocales() {
@@ -84870,49 +84547,49 @@ function createComposer(options = {}, VueI18nLegacy) {
  * @internal
  */
 function convertComposerOptions(options) {
-    const locale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.locale) ? options.locale : _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_LOCALE;
-    const fallbackLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.fallbackLocale) ||
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(options.fallbackLocale) ||
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.fallbackLocale) ||
+    const locale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.locale) ? options.locale : _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_LOCALE;
+    const fallbackLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.fallbackLocale) ||
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(options.fallbackLocale) ||
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.fallbackLocale) ||
         options.fallbackLocale === false
         ? options.fallbackLocale
         : locale;
-    const missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.missing) ? options.missing : undefined;
-    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.silentTranslationWarn) ||
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.silentTranslationWarn)
+    const missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.missing) ? options.missing : undefined;
+    const missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.silentTranslationWarn) ||
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.silentTranslationWarn)
         ? !options.silentTranslationWarn
         : true;
-    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.silentFallbackWarn) ||
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.silentFallbackWarn)
+    const fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.silentFallbackWarn) ||
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.silentFallbackWarn)
         ? !options.silentFallbackWarn
         : true;
-    const fallbackRoot = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackRoot)
+    const fallbackRoot = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackRoot)
         ? options.fallbackRoot
         : true;
     const fallbackFormat = !!options.formatFallbackMessages;
-    const modifiers = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.modifiers) ? options.modifiers : {};
+    const modifiers = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.modifiers) ? options.modifiers : {};
     const pluralizationRules = options.pluralizationRules;
-    const postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.postTranslation)
+    const postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.postTranslation)
         ? options.postTranslation
         : undefined;
-    const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.warnHtmlInMessage)
+    const warnHtmlMessage = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.warnHtmlInMessage)
         ? options.warnHtmlInMessage !== 'off'
         : true;
     const escapeParameter = !!options.escapeParameterHtml;
-    const inheritLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.sync) ? options.sync : true;
+    const inheritLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.sync) ? options.sync : true;
     if (( true) && options.formatter) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_FORMATTER));
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_FORMATTER));
     }
     if (( true) && options.preserveDirectiveContent) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE));
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE));
     }
     let messages = options.messages;
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.sharedMessages)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.sharedMessages)) {
         const sharedMessages = options.sharedMessages;
         const locales = Object.keys(sharedMessages);
         messages = locales.reduce((messages, locale) => {
             const message = messages[locale] || (messages[locale] = {});
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)(message, sharedMessages[locale]);
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)(message, sharedMessages[locale]);
             return messages;
         }, (messages || {}));
     }
@@ -84993,7 +84670,7 @@ function createVueI18n(options = {}, VueI18nLegacy) {
             },
             // formatter
             get formatter() {
-                ( true) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_FORMATTER));
+                ( true) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_FORMATTER));
                 // dummy
                 return {
                     interpolate() {
@@ -85002,7 +84679,7 @@ function createVueI18n(options = {}, VueI18nLegacy) {
                 };
             },
             set formatter(val) {
-                ( true) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_FORMATTER));
+                ( true) && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_FORMATTER));
             },
             // missing
             get missing() {
@@ -85013,21 +84690,21 @@ function createVueI18n(options = {}, VueI18nLegacy) {
             },
             // silentTranslationWarn
             get silentTranslationWarn() {
-                return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(composer.missingWarn)
+                return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(composer.missingWarn)
                     ? !composer.missingWarn
                     : composer.missingWarn;
             },
             set silentTranslationWarn(val) {
-                composer.missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(val) ? !val : val;
+                composer.missingWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(val) ? !val : val;
             },
             // silentFallbackWarn
             get silentFallbackWarn() {
-                return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(composer.fallbackWarn)
+                return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(composer.fallbackWarn)
                     ? !composer.fallbackWarn
                     : composer.fallbackWarn;
             },
             set silentFallbackWarn(val) {
-                composer.fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(val) ? !val : val;
+                composer.fallbackWarn = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(val) ? !val : val;
             },
             // modifiers
             get modifiers() {
@@ -85071,12 +84748,12 @@ function createVueI18n(options = {}, VueI18nLegacy) {
             // preserveDirectiveContent
             get preserveDirectiveContent() {
                 ( true) &&
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE));
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE));
                 return true;
             },
             set preserveDirectiveContent(val) {
                 ( true) &&
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE));
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE));
             },
             // pluralizationRules
             get pluralizationRules() {
@@ -85090,23 +84767,23 @@ function createVueI18n(options = {}, VueI18nLegacy) {
                 const options = {};
                 let list = null;
                 let named = null;
-                if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg1)) {
+                if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1)) {
                     throw createI18nError(I18nErrorCodes.INVALID_ARGUMENT);
                 }
                 const key = arg1;
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg2)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg2)) {
                     options.locale = arg2;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(arg2)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(arg2)) {
                     list = arg2;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg2)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg2)) {
                     named = arg2;
                 }
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(arg3)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(arg3)) {
                     list = arg3;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg3)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg3)) {
                     named = arg3;
                 }
                 // return composer.t(key, (list || named || {}) as any, options)
@@ -85125,29 +84802,29 @@ function createVueI18n(options = {}, VueI18nLegacy) {
                 const options = { plural: 1 };
                 let list = null;
                 let named = null;
-                if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg1)) {
+                if (!(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1)) {
                     throw createI18nError(I18nErrorCodes.INVALID_ARGUMENT);
                 }
                 const key = arg1;
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg2)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg2)) {
                     options.locale = arg2;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(arg2)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(arg2)) {
                     options.plural = arg2;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(arg2)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(arg2)) {
                     list = arg2;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg2)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg2)) {
                     named = arg2;
                 }
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(arg3)) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(arg3)) {
                     options.locale = arg3;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(arg3)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(arg3)) {
                     list = arg3;
                 }
-                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(arg3)) {
+                else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(arg3)) {
                     named = arg3;
                 }
                 // return composer.t(key, (list || named || {}) as any, options)
@@ -85213,7 +84890,7 @@ function createVueI18n(options = {}, VueI18nLegacy) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             getChoiceIndex(choice, choicesLength) {
                 ( true) &&
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_GET_CHOICE_INDEX));
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_GET_CHOICE_INDEX));
                 return -1;
             }
         };
@@ -85264,7 +84941,7 @@ keys) {
             return [
                 ...slot,
                 // prettier-ignore
-                ...(current.type === vue__WEBPACK_IMPORTED_MODULE_3__.Fragment ? current.children : [current]
+                ...(current.type === vue__WEBPACK_IMPORTED_MODULE_0__.Fragment ? current.children : [current]
                     )
             ];
         }, []);
@@ -85277,18 +84954,18 @@ keys) {
                 arg[key] = slot();
             }
             return arg;
-        }, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)());
+        }, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)());
     }
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getFragmentableTag(tag) {
-    return vue__WEBPACK_IMPORTED_MODULE_3__.Fragment ;
+    return vue__WEBPACK_IMPORTED_MODULE_0__.Fragment ;
 }
 
-const TranslationImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.defineComponent)({
+const TranslationImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
     /* eslint-disable */
     name: 'i18n-t',
-    props: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({
+    props: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({
         keypath: {
             type: String,
             required: true
@@ -85296,7 +84973,7 @@ const TranslationImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.define
         plural: {
             type: [Number, String],
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            validator: (val) => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(val) || !isNaN(val)
+            validator: (val) => (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(val) || !isNaN(val)
         }
     }, baseFormatProps),
     /* eslint-enable */
@@ -85311,21 +84988,21 @@ const TranslationImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.define
             });
         return () => {
             const keys = Object.keys(slots).filter(key => key !== '_');
-            const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+            const options = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
             if (props.locale) {
                 options.locale = props.locale;
             }
             if (props.plural !== undefined) {
-                options.plural = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props.plural) ? +props.plural : props.plural;
+                options.plural = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(props.plural) ? +props.plural : props.plural;
             }
             const arg = getInterpolateArg(context, keys);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const children = i18n[TranslateVNodeSymbol](props.keypath, arg, options);
-            const assignedAttrs = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)(), attrs);
-            const tag = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props.tag) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(props.tag)
+            const assignedAttrs = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)(), attrs);
+            const tag = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(props.tag) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(props.tag)
                 ? props.tag
                 : getFragmentableTag();
-            return (0,vue__WEBPACK_IMPORTED_MODULE_3__.h)(tag, assignedAttrs, children);
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(tag, assignedAttrs, children);
         };
     }
 });
@@ -85386,35 +85063,35 @@ const Translation = TranslationImpl;
 const I18nT = Translation;
 
 function isVNode(target) {
-    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target) && !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(target[0]);
+    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(target) && !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(target[0]);
 }
 function renderFormatter(props, context, slotKeys, partFormatter) {
     const { slots, attrs } = context;
     return () => {
         const options = { part: true };
-        let overrides = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)();
+        let overrides = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)();
         if (props.locale) {
             options.locale = props.locale;
         }
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props.format)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(props.format)) {
             options.key = props.format;
         }
-        else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(props.format)) {
+        else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(props.format)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props.format.key)) {
+            if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(props.format.key)) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 options.key = props.format.key;
             }
             // Filter out number format options only
             overrides = Object.keys(props.format).reduce((options, prop) => {
                 return slotKeys.includes(prop)
-                    ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)(), options, { [prop]: props.format[prop] }) // eslint-disable-line @typescript-eslint/no-explicit-any
+                    ? (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)(), options, { [prop]: props.format[prop] }) // eslint-disable-line @typescript-eslint/no-explicit-any
                     : options;
-            }, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)());
+            }, (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)());
         }
         const parts = partFormatter(...[props.value, options, overrides]);
         let children = [options.key];
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(parts)) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(parts)) {
             children = parts.map((part, index) => {
                 const slot = slots[part.type];
                 const node = slot
@@ -85426,21 +85103,21 @@ function renderFormatter(props, context, slotKeys, partFormatter) {
                 return node;
             });
         }
-        else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(parts)) {
+        else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(parts)) {
             children = [parts];
         }
-        const assignedAttrs = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.create)(), attrs);
-        const tag = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props.tag) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(props.tag)
+        const assignedAttrs = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.create)(), attrs);
+        const tag = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(props.tag) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(props.tag)
             ? props.tag
             : getFragmentableTag();
-        return (0,vue__WEBPACK_IMPORTED_MODULE_3__.h)(tag, assignedAttrs, children);
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(tag, assignedAttrs, children);
     };
 }
 
-const NumberFormatImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.defineComponent)({
+const NumberFormatImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
     /* eslint-disable */
     name: 'i18n-n',
-    props: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({
+    props: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({
         value: {
             type: Number,
             required: true
@@ -85457,7 +85134,7 @@ const NumberFormatImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.defin
                 useScope: props.scope,
                 __useComponent: true
             });
-        return renderFormatter(props, context, _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.NUMBER_FORMAT_OPTIONS_KEYS, (...args) => 
+        return renderFormatter(props, context, _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.NUMBER_FORMAT_OPTIONS_KEYS, (...args) => 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         i18n[NumberPartsSymbol](...args));
     }
@@ -85486,10 +85163,10 @@ const NumberFormatImpl = /*#__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.defin
 const NumberFormat = NumberFormatImpl;
 const I18nN = NumberFormat;
 
-const DatetimeFormatImpl = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.defineComponent)({
+const DatetimeFormatImpl = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
     /* eslint-disable */
     name: 'i18n-d',
-    props: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({
+    props: (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({
         value: {
             type: [Number, Date],
             required: true
@@ -85506,7 +85183,7 @@ const DatetimeFormatImpl = /* #__PURE__*/ (0,vue__WEBPACK_IMPORTED_MODULE_3__.de
                 useScope: props.scope,
                 __useComponent: true
             });
-        return renderFormatter(props, context, _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.DATETIME_FORMAT_OPTIONS_KEYS, (...args) => 
+        return renderFormatter(props, context, _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.DATETIME_FORMAT_OPTIONS_KEYS, (...args) => 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         i18n[DatetimePartsSymbol](...args));
     }
@@ -85552,7 +85229,7 @@ function vTDirective(i18n) {
         }
         const composer = getComposer$2(i18n, instance.$);
         if (( true) && modifiers.preserve) {
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE));
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_SUPPORTED_PRESERVE));
         }
         const parsedValue = parseValue(value);
         return [
@@ -85562,9 +85239,9 @@ function vTDirective(i18n) {
     };
     const register = (el, binding) => {
         const [textContent, composer] = _process(binding);
-        if (_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser && i18n.global === composer) {
+        if (_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser && i18n.global === composer) {
             // global scope only
-            el.__i18nWatcher = (0,vue__WEBPACK_IMPORTED_MODULE_3__.watch)(composer.locale, () => {
+            el.__i18nWatcher = (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(composer.locale, () => {
                 binding.instance && binding.instance.$forceUpdate();
             });
         }
@@ -85572,7 +85249,7 @@ function vTDirective(i18n) {
         el.textContent = textContent;
     };
     const unregister = (el) => {
-        if (_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.inBrowser && el.__i18nWatcher) {
+        if (_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.inBrowser && el.__i18nWatcher) {
             el.__i18nWatcher();
             el.__i18nWatcher = undefined;
             delete el.__i18nWatcher;
@@ -85603,10 +85280,10 @@ function vTDirective(i18n) {
     };
 }
 function parseValue(value) {
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(value)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(value)) {
         return { path: value };
     }
-    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(value)) {
+    else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(value)) {
         if (!('path' in value)) {
             throw createI18nError(I18nErrorCodes.REQUIRED_VALUE, 'path');
         }
@@ -85620,28 +85297,28 @@ function makeParams(value) {
     const { path, locale, args, choice, plural } = value;
     const options = {};
     const named = args || {};
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(locale)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(locale)) {
         options.locale = locale;
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(choice)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(choice)) {
         options.plural = choice;
     }
-    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isNumber)(plural)) {
+    if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isNumber)(plural)) {
         options.plural = plural;
     }
     return [path, named, options];
 }
 
 function apply(app, i18n, ...options) {
-    const pluginOptions = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options[0])
+    const pluginOptions = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options[0])
         ? options[0]
         : {};
     const useI18nComponentName = !!pluginOptions.useI18nComponentName;
-    const globalInstall = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(pluginOptions.globalInstall)
+    const globalInstall = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(pluginOptions.globalInstall)
         ? pluginOptions.globalInstall
         : true;
     if (( true) && globalInstall && useI18nComponentName) {
-        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.COMPONENT_NAME_LEGACY_COMPATIBLE, {
+        (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.COMPONENT_NAME_LEGACY_COMPATIBLE, {
             name: Translation.name
         }));
     }
@@ -85830,13 +85507,13 @@ function getLocaleMessageValue(messages) {
     const value = {};
     Object.keys(messages).forEach((key) => {
         const v = messages[key];
-        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(v) && 'source' in v) {
+        if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(v) && 'source' in v) {
             value[key] = getMessageFunctionDetails(v);
         }
-        else if ((0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.isMessageAST)(v) && v.loc && v.loc.source) {
+        else if ((0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.isMessageAST)(v) && v.loc && v.loc.source) {
             value[key] = v.loc.source;
         }
-        else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(v)) {
+        else if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(v)) {
             value[key] = getLocaleMessageValue(v);
         }
         else {
@@ -86024,16 +85701,16 @@ function editScope(payload, i18n) {
     const composer = getComposer$1(payload.nodeId, i18n);
     if (composer) {
         const [field] = payload.path;
-        if (field === 'locale' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(payload.state.value)) {
+        if (field === 'locale' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(payload.state.value)) {
             composer.locale.value = payload.state.value;
         }
         else if (field === 'fallbackLocale' &&
-            ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(payload.state.value) ||
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(payload.state.value) ||
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(payload.state.value))) {
+            ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(payload.state.value) ||
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(payload.state.value) ||
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(payload.state.value))) {
             composer.fallbackLocale.value = payload.state.value;
         }
-        else if (field === 'inheritLocale' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(payload.state.value)) {
+        else if (field === 'inheritLocale' && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(payload.state.value)) {
             composer.inheritLocale = payload.state.value;
         }
     }
@@ -86046,7 +85723,7 @@ function editScope(payload, i18n) {
 function defineMixin(vuei18n, composer, i18n) {
     return {
         beforeCreate() {
-            const instance = (0,vue__WEBPACK_IMPORTED_MODULE_3__.getCurrentInstance)();
+            const instance = (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
             /* istanbul ignore if */
             if (!instance) {
                 throw createI18nError(I18nErrorCodes.UNEXPECTED_ERROR);
@@ -86119,13 +85796,13 @@ function defineMixin(vuei18n, composer, i18n) {
                 const _vueI18n = this.$i18n;
                 this.$el.__VUE_I18N__ = _vueI18n.__composer;
                 const emitter = (this.__v_emitter =
-                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.createEmitter)());
+                    (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.createEmitter)());
                 _vueI18n.__enableEmitter && _vueI18n.__enableEmitter(emitter);
                 emitter.on('*', addTimelineEvent);
             }
         },
         unmounted() {
-            const instance = (0,vue__WEBPACK_IMPORTED_MODULE_3__.getCurrentInstance)();
+            const instance = (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
             /* istanbul ignore if */
             if (!instance) {
                 throw createI18nError(I18nErrorCodes.UNEXPECTED_ERROR);
@@ -86199,15 +85876,15 @@ function mergeToGlobal(g, options) {
  * @VueI18nGeneral
  */
 const I18nInjectionKey = 
-/* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)('global-vue-i18n');
+/* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)('global-vue-i18n');
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 function createI18n(options = {}, VueI18nLegacy) {
     // prettier-ignore
-    const __legacyMode = __VUE_I18N_LEGACY_API__ && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.legacy)
+    const __legacyMode = __VUE_I18N_LEGACY_API__ && (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.legacy)
             ? options.legacy
             : __VUE_I18N_LEGACY_API__;
     // prettier-ignore
-    const __globalInjection = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.globalInjection)
+    const __globalInjection = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.globalInjection)
         ? options.globalInjection
         : true;
     // prettier-ignore
@@ -86216,10 +85893,10 @@ function createI18n(options = {}, VueI18nLegacy) {
             : true;
     const __instances = new Map();
     const [globalScope, __global] = createGlobal(options, __legacyMode);
-    const symbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.makeSymbol)(( true) ? 'vue-i18n' : 0);
+    const symbol = /* #__PURE__*/ (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.makeSymbol)(( true) ? 'vue-i18n' : 0);
     if ((true)) {
         if (__legacyMode && __allowComposition && !false) {
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOTICE_DROP_ALLOW_COMPOSITION));
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOTICE_DROP_ALLOW_COMPOSITION));
         }
     }
     function __getInstance(component) {
@@ -86252,7 +85929,7 @@ function createI18n(options = {}, VueI18nLegacy) {
                 app.__VUE_I18N_SYMBOL__ = symbol;
                 app.provide(app.__VUE_I18N_SYMBOL__, i18n);
                 // set composer & vuei18n extend hook options from plugin options
-                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options[0])) {
+                if ((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options[0])) {
                     const opts = options[0];
                     i18n.__composerExtend =
                         opts.__composerExtend;
@@ -86285,7 +85962,7 @@ function createI18n(options = {}, VueI18nLegacy) {
                     if (!ret) {
                         throw createI18nError(I18nErrorCodes.CANNOT_SETUP_VUE_DEVTOOLS_PLUGIN);
                     }
-                    const emitter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.createEmitter)();
+                    const emitter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.createEmitter)();
                     if (__legacyMode) {
                         const _vueI18n = __global;
                         _vueI18n.__enableEmitter && _vueI18n.__enableEmitter(emitter);
@@ -86319,7 +85996,7 @@ function createI18n(options = {}, VueI18nLegacy) {
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function useI18n(options = {}) {
-    const instance = (0,vue__WEBPACK_IMPORTED_MODULE_3__.getCurrentInstance)();
+    const instance = (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
     if (instance == null) {
         throw createI18nError(I18nErrorCodes.MUST_BE_CALL_SETUP_TOP);
     }
@@ -86350,7 +86027,7 @@ function useI18n(options = {}) {
         let composer = getComposer(i18n, instance, options.__useComponent);
         if (composer == null) {
             if ((true)) {
-                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.warn)(getWarnMessage(I18nWarnCodes.NOT_FOUND_PARENT_SCOPE));
+                (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.warn)(getWarnMessage(I18nWarnCodes.NOT_FOUND_PARENT_SCOPE));
             }
             composer = gl;
         }
@@ -86359,7 +86036,7 @@ function useI18n(options = {}) {
     const i18nInternal = i18n;
     let composer = i18nInternal.__getInstance(instance);
     if (composer == null) {
-        const composerOptions = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.assign)({}, options);
+        const composerOptions = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.assign)({}, options);
         if ('__i18n' in componentOptions) {
             composerOptions.__i18n = componentOptions.__i18n;
         }
@@ -86403,7 +86080,7 @@ const castToVueI18n = (i18n
 };
 function createGlobal(options, legacyMode, VueI18nLegacy // eslint-disable-line @typescript-eslint/no-explicit-any
 ) {
-    const scope = (0,vue__WEBPACK_IMPORTED_MODULE_3__.effectScope)();
+    const scope = (0,vue__WEBPACK_IMPORTED_MODULE_0__.effectScope)();
     {
         const obj = __VUE_I18N_LEGACY_API__ && legacyMode
             ? scope.run(() => createVueI18n(options))
@@ -86416,7 +86093,7 @@ function createGlobal(options, legacyMode, VueI18nLegacy // eslint-disable-line 
 }
 function getI18nInstance(instance) {
     {
-        const i18n = (0,vue__WEBPACK_IMPORTED_MODULE_3__.inject)(!instance.isCE
+        const i18n = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(!instance.isCE
             ? instance.appContext.app.__VUE_I18N_SYMBOL__
             : I18nInjectionKey);
         /* istanbul ignore if */
@@ -86431,7 +86108,7 @@ function getI18nInstance(instance) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getScope(options, componentOptions) {
     // prettier-ignore
-    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject)(options)
+    return (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isEmptyObject)(options)
         ? ('__i18n' in componentOptions)
             ? 'local'
             : 'global'
@@ -86494,19 +86171,19 @@ function getParentComponentInstance(target, useComponent = false) {
 function setupLifeCycle(i18n, target, composer) {
     let emitter = null;
     {
-        (0,vue__WEBPACK_IMPORTED_MODULE_3__.onMounted)(() => {
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(() => {
             // inject composer instance to DOM for intlify-devtools
             if ( true &&
                 target.vnode.el) {
                 target.vnode.el.__VUE_I18N__ = composer;
-                emitter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.createEmitter)();
+                emitter = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.createEmitter)();
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const _composer = composer;
                 _composer[EnableEmitter] && _composer[EnableEmitter](emitter);
                 emitter.on('*', addTimelineEvent);
             }
         }, target);
-        (0,vue__WEBPACK_IMPORTED_MODULE_3__.onUnmounted)(() => {
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(() => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const _composer = composer;
             // remove composer instance from DOM for intlify-devtools
@@ -86530,78 +86207,78 @@ function setupLifeCycle(i18n, target, composer) {
 function useI18nForLegacy(instance, scope, root, options = {} // eslint-disable-line @typescript-eslint/no-explicit-any
 ) {
     const isLocalScope = scope === 'local';
-    const _composer = (0,vue__WEBPACK_IMPORTED_MODULE_3__.shallowRef)(null);
+    const _composer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.shallowRef)(null);
     if (isLocalScope &&
         instance.proxy &&
         !(instance.proxy.$options.i18n || instance.proxy.$options.__i18n)) {
         throw createI18nError(I18nErrorCodes.MUST_DEFINE_I18N_OPTION_IN_ALLOW_COMPOSITION);
     }
-    const _inheritLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.inheritLocale)
+    const _inheritLocale = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.inheritLocale)
         ? options.inheritLocale
-        : !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.locale);
-    const _locale = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(
+        : !(0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.locale);
+    const _locale = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(
     // prettier-ignore
     !isLocalScope || _inheritLocale
         ? root.locale.value
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.locale)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.locale)
             ? options.locale
-            : _intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_LOCALE);
-    const _fallbackLocale = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(
+            : _intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_LOCALE);
+    const _fallbackLocale = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(
     // prettier-ignore
     !isLocalScope || _inheritLocale
         ? root.fallbackLocale.value
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(options.fallbackLocale) ||
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(options.fallbackLocale) ||
-            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.fallbackLocale) ||
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(options.fallbackLocale) ||
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(options.fallbackLocale) ||
+            (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.fallbackLocale) ||
             options.fallbackLocale === false
             ? options.fallbackLocale
             : _locale.value);
-    const _messages = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(getLocaleMessages(_locale.value, options));
+    const _messages = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(getLocaleMessages(_locale.value, options));
     // prettier-ignore
-    const _datetimeFormats = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.datetimeFormats)
+    const _datetimeFormats = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.datetimeFormats)
         ? options.datetimeFormats
         : { [_locale.value]: {} });
     // prettier-ignore
-    const _numberFormats = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.numberFormats)
+    const _numberFormats = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)((0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.numberFormats)
         ? options.numberFormats
         : { [_locale.value]: {} });
     // prettier-ignore
     const _missingWarn = isLocalScope
         ? root.missingWarn
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.missingWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.missingWarn)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.missingWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.missingWarn)
             ? options.missingWarn
             : true;
     // prettier-ignore
     const _fallbackWarn = isLocalScope
         ? root.fallbackWarn
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isRegExp)(options.fallbackWarn)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackWarn) || (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(options.fallbackWarn)
             ? options.fallbackWarn
             : true;
     // prettier-ignore
     const _fallbackRoot = isLocalScope
         ? root.fallbackRoot
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.fallbackRoot)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.fallbackRoot)
             ? options.fallbackRoot
             : true;
     // configure fall back to root
     const _fallbackFormat = !!options.fallbackFormat;
     // runtime missing
-    const _missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.missing) ? options.missing : null;
+    const _missing = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.missing) ? options.missing : null;
     // postTranslation handler
-    const _postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options.postTranslation)
+    const _postTranslation = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(options.postTranslation)
         ? options.postTranslation
         : null;
     // prettier-ignore
     const _warnHtmlMessage = isLocalScope
         ? root.warnHtmlMessage
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isBoolean)(options.warnHtmlMessage)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isBoolean)(options.warnHtmlMessage)
             ? options.warnHtmlMessage
             : true;
     const _escapeParameter = !!options.escapeParameter;
     // prettier-ignore
     const _modifiers = isLocalScope
         ? root.modifiers
-        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(options.modifiers)
+        : (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(options.modifiers)
             ? options.modifiers
             : {};
     // pluralRules
@@ -86617,7 +86294,7 @@ function useI18nForLegacy(instance, scope, root, options = {} // eslint-disable-
         ];
     }
     // locale
-    const locale = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)({
+    const locale = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)({
         get: () => {
             return _composer.value ? _composer.value.locale.value : _locale.value;
         },
@@ -86629,7 +86306,7 @@ function useI18nForLegacy(instance, scope, root, options = {} // eslint-disable-
         }
     });
     // fallbackLocale
-    const fallbackLocale = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)({
+    const fallbackLocale = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)({
         get: () => {
             return _composer.value
                 ? _composer.value.fallbackLocale.value
@@ -86643,7 +86320,7 @@ function useI18nForLegacy(instance, scope, root, options = {} // eslint-disable-
         }
     });
     // messages
-    const messages = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(() => {
+    const messages = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => {
         if (_composer.value) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return _composer.value.messages.value;
@@ -86653,8 +86330,8 @@ function useI18nForLegacy(instance, scope, root, options = {} // eslint-disable-
             return _messages.value;
         }
     });
-    const datetimeFormats = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(() => _datetimeFormats.value);
-    const numberFormats = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(() => _numberFormats.value);
+    const datetimeFormats = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => _datetimeFormats.value);
+    const numberFormats = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => _numberFormats.value);
     function getPostTranslationHandler() {
         return _composer.value
             ? _composer.value.getPostTranslationHandler()
@@ -86867,7 +86544,7 @@ function useI18nForLegacy(instance, scope, root, options = {} // eslint-disable-
         composer.missingWarn = _missingWarn;
         composer.warnHtmlMessage = _warnHtmlMessage;
     }
-    (0,vue__WEBPACK_IMPORTED_MODULE_3__.onBeforeMount)(() => {
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(() => {
         if (instance.proxy == null || instance.proxy.$i18n == null) {
             throw createI18nError(I18nErrorCodes.NOT_AVAILABLE_COMPOSITION_IN_LEGACY);
         }
@@ -86901,7 +86578,7 @@ function injectGlobalFields(app, composer) {
         if (!desc) {
             throw createI18nError(I18nErrorCodes.UNEXPECTED_ERROR);
         }
-        const wrap = (0,vue__WEBPACK_IMPORTED_MODULE_3__.isRef)(desc.value) // check computed props
+        const wrap = (0,vue__WEBPACK_IMPORTED_MODULE_0__.isRef)(desc.value) // check computed props
             ? {
                 get() {
                     return desc.value.value;
@@ -86942,20 +86619,20 @@ function injectGlobalFields(app, composer) {
 }
 // register message compiler at vue-i18n
 if (__INTLIFY_JIT_COMPILATION__) {
-    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.registerMessageCompiler)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.compile);
+    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.registerMessageCompiler)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.compile);
 }
 else {
-    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.registerMessageCompiler)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.compileToFunction);
+    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.registerMessageCompiler)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.compileToFunction);
 }
 // register message resolver at vue-i18n
-(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.registerMessageResolver)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.resolveValue);
+(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.registerMessageResolver)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.resolveValue);
 // register fallback locale at vue-i18n
-(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.registerLocaleFallbacker)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.fallbackWithLocaleChain);
+(0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.registerLocaleFallbacker)(_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.fallbackWithLocaleChain);
 // NOTE: experimental !!
 if (true) {
-    const target = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_0__.getGlobalThis)();
+    const target = (0,_intlify_shared__WEBPACK_IMPORTED_MODULE_1__.getGlobalThis)();
     target.__INTLIFY__ = true;
-    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_1__.setDevToolsHook)(target.__INTLIFY_DEVTOOLS_GLOBAL_HOOK__);
+    (0,_intlify_core_base__WEBPACK_IMPORTED_MODULE_2__.setDevToolsHook)(target.__INTLIFY_DEVTOOLS_GLOBAL_HOOK__);
 }
 if ((true)) ;
 
@@ -87360,20 +87037,19 @@ function createValidation(config) {
       abortEarly = schema.spec.abortEarly,
       disableStackTrace = schema.spec.disableStackTrace
     } = options;
-    const resolveOptions = {
-      value,
-      parent,
-      context
-    };
+    function resolve(item) {
+      return Reference.isRef(item) ? item.getValue(value, parent, context) : item;
+    }
     function createError(overrides = {}) {
-      const nextParams = resolveParams(Object.assign({
+      const nextParams = Object.assign({
         value,
         originalValue,
         label: schema.spec.label,
         path: overrides.path || path,
         spec: schema.spec,
         disableStackTrace: overrides.disableStackTrace || disableStackTrace
-      }, params, overrides.params), resolveOptions);
+      }, params, overrides.params);
+      for (const key of Object.keys(nextParams)) nextParams[key] = resolve(nextParams[key]);
       const error = new ValidationError(ValidationError.formatError(overrides.message || message, nextParams), value, nextParams.path, overrides.type || name, nextParams.disableStackTrace);
       error.params = nextParams;
       return error;
@@ -87385,9 +87061,7 @@ function createValidation(config) {
       type: name,
       from: options.from,
       createError,
-      resolve(item) {
-        return resolveMaybeRef(item, resolveOptions);
-      },
+      resolve,
       options,
       originalValue,
       schema
@@ -87420,18 +87094,6 @@ function createValidation(config) {
   }
   validate.OPTIONS = config;
   return validate;
-}
-
-// Warning: mutates the input
-function resolveParams(params, options) {
-  if (!params) return params;
-  for (const key of Object.keys(params)) {
-    params[key] = resolveMaybeRef(params[key], options);
-  }
-  return params;
-}
-function resolveMaybeRef(item, options) {
-  return Reference.isRef(item) ? item.getValue(options.value, options.parent, options.context) : item;
 }
 
 function getIn(schema, path, value, context = value) {
@@ -87548,87 +87210,6 @@ function clone(src, seen = new Map()) {
     throw Error(`Unable to clone ${src}`);
   }
   return copy;
-}
-
-/**
- * Copied from @standard-schema/spec to avoid having a dependency on it.
- * https://github.com/standard-schema/standard-schema/blob/main/packages/spec/src/index.ts
- */
-
-function createStandardPath(path) {
-  if (!(path != null && path.length)) {
-    return undefined;
-  }
-
-  // Array to store the final path segments
-  const segments = [];
-  // Buffer for building the current segment
-  let currentSegment = '';
-  // Track if we're inside square brackets (array/property access)
-  let inBrackets = false;
-  // Track if we're inside quotes (for property names with special chars)
-  let inQuotes = false;
-  for (let i = 0; i < path.length; i++) {
-    const char = path[i];
-    if (char === '[' && !inQuotes) {
-      // When entering brackets, push any accumulated segment after splitting on dots
-      if (currentSegment) {
-        segments.push(...currentSegment.split('.').filter(Boolean));
-        currentSegment = '';
-      }
-      inBrackets = true;
-      continue;
-    }
-    if (char === ']' && !inQuotes) {
-      if (currentSegment) {
-        // Handle numeric indices (e.g. arr[0])
-        if (/^\d+$/.test(currentSegment)) {
-          segments.push(currentSegment);
-        } else {
-          // Handle quoted property names (e.g. obj["foo.bar"])
-          segments.push(currentSegment.replace(/^"|"$/g, ''));
-        }
-        currentSegment = '';
-      }
-      inBrackets = false;
-      continue;
-    }
-    if (char === '"') {
-      // Toggle quote state for handling quoted property names
-      inQuotes = !inQuotes;
-      continue;
-    }
-    if (char === '.' && !inBrackets && !inQuotes) {
-      // On dots outside brackets/quotes, push current segment
-      if (currentSegment) {
-        segments.push(currentSegment);
-        currentSegment = '';
-      }
-      continue;
-    }
-    currentSegment += char;
-  }
-
-  // Push any remaining segment after splitting on dots
-  if (currentSegment) {
-    segments.push(...currentSegment.split('.').filter(Boolean));
-  }
-  return segments;
-}
-function createStandardIssues(error, parentPath) {
-  const path = parentPath ? `${parentPath}.${error.path}` : error.path;
-  return error.errors.map(err => ({
-    message: err,
-    path: createStandardPath(path)
-  }));
-}
-function issuesFromValidationError(error, parentPath) {
-  var _error$inner;
-  if (!((_error$inner = error.inner) != null && _error$inner.length) && error.errors.length) {
-    return createStandardIssues(error, parentPath);
-  }
-  const path = parentPath ? `${parentPath}.${error.path}` : error.path;
-  return error.inner.flatMap(err => issuesFromValidationError(err, path));
 }
 
 // If `CustomSchemaMeta` isn't extended with any keys, we'll fall back to a
@@ -87780,12 +87361,9 @@ class Schema {
    */
 
   cast(value, options = {}) {
-    let resolvedSchema = this.resolve(Object.assign({}, options, {
+    let resolvedSchema = this.resolve(Object.assign({
       value
-      // parent: options.parent,
-      // context: options.context,
-    }));
-
+    }, options));
     let allowOptionality = options.assert === 'ignore-optionality';
     let result = resolvedSchema._cast(value, options);
     if (options.assert !== false && !resolvedSchema.isType(result)) {
@@ -87799,7 +87377,7 @@ class Schema {
     return result;
   }
   _cast(rawValue, options) {
-    let value = rawValue === undefined ? rawValue : this.transforms.reduce((prevValue, fn) => fn.call(this, prevValue, rawValue, this, options), rawValue);
+    let value = rawValue === undefined ? rawValue : this.transforms.reduce((prevValue, fn) => fn.call(this, prevValue, rawValue, this), rawValue);
     if (value === undefined) {
       value = this.getDefault(options);
     }
@@ -88201,40 +87779,12 @@ class Schema {
       type: next.type,
       oneOf: next._whitelist.describe(),
       notOneOf: next._blacklist.describe(),
-      tests: next.tests.filter((n, idx, list) => list.findIndex(c => c.OPTIONS.name === n.OPTIONS.name) === idx).map(fn => {
-        const params = fn.OPTIONS.params && options ? resolveParams(Object.assign({}, fn.OPTIONS.params), options) : fn.OPTIONS.params;
-        return {
-          name: fn.OPTIONS.name,
-          params
-        };
-      })
+      tests: next.tests.map(fn => ({
+        name: fn.OPTIONS.name,
+        params: fn.OPTIONS.params
+      })).filter((n, idx, list) => list.findIndex(c => c.name === n.name) === idx)
     };
     return description;
-  }
-  get ['~standard']() {
-    const schema = this;
-    const standard = {
-      version: 1,
-      vendor: 'yup',
-      async validate(value) {
-        try {
-          const result = await schema.validate(value, {
-            abortEarly: false
-          });
-          return {
-            value: result
-          };
-        } catch (err) {
-          if (err instanceof ValidationError) {
-            return {
-              issues: issuesFromValidationError(err)
-            };
-          }
-          throw err;
-        }
-      }
-    };
-    return standard;
   }
 }
 // @ts-expect-error
@@ -88283,8 +87833,8 @@ class BooleanSchema extends Schema {
       }
     });
     this.withMutation(() => {
-      this.transform((value, _raw) => {
-        if (this.spec.coerce && !this.isType(value)) {
+      this.transform((value, _raw, ctx) => {
+        if (ctx.spec.coerce && !ctx.isType(value)) {
           if (/^(true|1)$/i.test(String(value))) return true;
           if (/^(false|0)$/i.test(String(value))) return false;
         }
@@ -88428,8 +87978,8 @@ class StringSchema extends Schema {
       }
     });
     this.withMutation(() => {
-      this.transform((value, _raw) => {
-        if (!this.spec.coerce || this.isType(value)) return value;
+      this.transform((value, _raw, ctx) => {
+        if (!ctx.spec.coerce || ctx.isType(value)) return value;
 
         // don't ever convert arrays
         if (Array.isArray(value)) return value;
@@ -88641,8 +88191,8 @@ class NumberSchema extends Schema {
       }
     });
     this.withMutation(() => {
-      this.transform((value, _raw) => {
-        if (!this.spec.coerce) return value;
+      this.transform((value, _raw, ctx) => {
+        if (!ctx.spec.coerce) return value;
         let parsed = value;
         if (typeof parsed === 'string') {
           parsed = parsed.replace(/\s/g, '');
@@ -88653,7 +88203,7 @@ class NumberSchema extends Schema {
 
         // null -> NaN isn't useful; treat all nulls as null and let it fail on
         // nullability check vs TypeErrors
-        if (this.isType(parsed) || parsed === null) return parsed;
+        if (ctx.isType(parsed) || parsed === null) return parsed;
         return parseFloat(parsed);
       });
     });
@@ -88762,10 +88312,10 @@ class DateSchema extends Schema {
       }
     });
     this.withMutation(() => {
-      this.transform((value, _raw) => {
+      this.transform((value, _raw, ctx) => {
         // null -> InvalidDate isn't useful; treat all nulls as null and let it fail on
         // nullability check vs TypeErrors
-        if (!this.spec.coerce || this.isType(value) || value === null) return value;
+        if (!ctx.spec.coerce || ctx.isType(value) || value === null) return value;
         value = parseIsoDate(value);
 
         // 0 is a valid timestamp equivalent to 1970-01-01T00:00:00Z(unix epoch) or before.
@@ -88854,7 +88404,7 @@ function sortByKeyOrder(keys) {
   };
 }
 
-const parseJson = (value, _, schema) => {
+const parseJson = (value, _, ctx) => {
   if (typeof value !== 'string') {
     return value;
   }
@@ -88864,7 +88414,7 @@ const parseJson = (value, _, schema) => {
   } catch (err) {
     /* */
   }
-  return schema.isType(parsed) ? parsed : value;
+  return ctx.isType(parsed) ? parsed : value;
 };
 
 // @ts-ignore
@@ -88944,9 +88494,9 @@ class ObjectSchema extends Schema {
     for (const prop of props) {
       let field = fields[prop];
       let exists = (prop in value);
-      let inputValue = value[prop];
       if (field) {
         let fieldValue;
+        let inputValue = value[prop];
 
         // safe to mutate since this is fired in sequence
         innerOptions.path = (options.path ? `${options.path}.` : '') + prop;
@@ -88961,14 +88511,16 @@ class ObjectSchema extends Schema {
           isChanged = isChanged || prop in value;
           continue;
         }
-        fieldValue = !options.__validating || !strict ? field.cast(inputValue, innerOptions) : inputValue;
+        fieldValue = !options.__validating || !strict ?
+        // TODO: use _cast, this is double resolving
+        field.cast(value[prop], innerOptions) : value[prop];
         if (fieldValue !== undefined) {
           intermediateValue[prop] = fieldValue;
         }
       } else if (exists && !strip) {
-        intermediateValue[prop] = inputValue;
+        intermediateValue[prop] = value[prop];
       }
-      if (exists !== prop in intermediateValue || intermediateValue[prop] !== inputValue) {
+      if (exists !== prop in intermediateValue || intermediateValue[prop] !== value[prop]) {
         isChanged = true;
       }
     }
@@ -89242,11 +88794,7 @@ class ArraySchema extends Schema {
     let isChanged = false;
     const castArray = value.map((v, idx) => {
       const castElement = this.innerType.cast(v, Object.assign({}, _opts, {
-        path: `${_opts.path || ''}[${idx}]`,
-        parent: value,
-        originalValue: v,
-        value: v,
-        index: idx
+        path: `${_opts.path || ''}[${idx}]`
       }));
       if (castElement !== v) {
         isChanged = true;
@@ -89431,11 +88979,7 @@ class TupleSchema extends Schema {
     let isChanged = false;
     const castArray = types.map((type, idx) => {
       const castElement = type.cast(value[idx], Object.assign({}, options, {
-        path: `${options.path || ''}[${idx}]`,
-        parent: value,
-        originalValue: value[idx],
-        value: value[idx],
-        index: idx
+        path: `${options.path || ''}[${idx}]`
       }));
       if (castElement !== value[idx]) isChanged = true;
       return castElement;
@@ -89588,31 +89132,6 @@ class Lazy {
     next.spec.meta = Object.assign(next.spec.meta || {}, args[0]);
     return next;
   }
-  get ['~standard']() {
-    const schema = this;
-    const standard = {
-      version: 1,
-      vendor: 'yup',
-      async validate(value) {
-        try {
-          const result = await schema.validate(value, {
-            abortEarly: false
-          });
-          return {
-            value: result
-          };
-        } catch (err) {
-          if (ValidationError.isError(err)) {
-            return {
-              issues: issuesFromValidationError(err)
-            };
-          }
-          throw err;
-        }
-      }
-    };
-    return standard;
-  }
 }
 
 function setLocale(custom) {
@@ -89656,8 +89175,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _helpers_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/helpers/utilities */ "./resources/js/helpers/utilities.js");
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 
@@ -89715,13 +89234,16 @@ var formatValue = function formatValue(value) {
 };
 var useRequest = function useRequest() {
   var getRequest = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(_ref) {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref) {
       var url, id;
-      return _regenerator().w(function (_context) {
-        while (1) switch (_context.n) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
           case 0:
             url = _ref.url, id = _ref.id;
-            return _context.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(id)));
+            return _context.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(id)));
+          case 2:
+          case "end":
+            return _context.stop();
         }
       }, _callee);
     }));
@@ -89735,13 +89257,16 @@ var useRequest = function useRequest() {
   //   path: url,
   // };
   var listingRequest = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(_ref3) {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(_ref3) {
       var url, _ref3$data, data;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.n) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
           case 0:
             url = _ref3.url, _ref3$data = _ref3.data, data = _ref3$data === void 0 ? {} : _ref3$data;
-            return _context2.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(data)));
+            return _context2.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(data)));
+          case 2:
+          case "end":
+            return _context2.stop();
         }
       }, _callee2);
     }));
@@ -89755,25 +89280,28 @@ var useRequest = function useRequest() {
   //   path: url,
   // };
   var storeRequest = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(_ref5) {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(_ref5) {
       var url, body, type, formData;
-      return _regenerator().w(function (_context3) {
-        while (1) switch (_context3.n) {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
           case 0:
             url = _ref5.url, body = _ref5.body, type = _ref5.type;
             if (!(type == 'file')) {
-              _context3.n = 1;
+              _context3.next = 5;
               break;
             }
             formData = new FormData();
             Object.keys(body).map(function (fieldName) {
               formData.append(fieldName, formatValue(body[fieldName]));
             });
-            return _context3.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequestWithFormData)(url(), {
+            return _context3.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequestWithFormData)(url(), {
               Accept: 'application/json'
             }, formData));
-          case 1:
-            return _context3.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(), {}, body));
+          case 5:
+            return _context3.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(), {}, body));
+          case 6:
+          case "end":
+            return _context3.stop();
         }
       }, _callee3);
     }));
@@ -89787,14 +89315,14 @@ var useRequest = function useRequest() {
   //   path: url,
   // };
   var updateRequest = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(_ref7) {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(_ref7) {
       var url, id, body, type, formData;
-      return _regenerator().w(function (_context4) {
-        while (1) switch (_context4.n) {
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
           case 0:
             url = _ref7.url, id = _ref7.id, body = _ref7.body, type = _ref7.type;
             if (!(type !== undefined && type == 'file')) {
-              _context4.n = 1;
+              _context4.next = 8;
               break;
             }
             formData = new FormData();
@@ -89802,13 +89330,14 @@ var useRequest = function useRequest() {
               formData.append(fieldName, formatValue(body[fieldName]));
             });
             formData.append('_method', 'PUT');
-            return _context4.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequestWithFormData)(url(id), {
+            return _context4.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequestWithFormData)(url(id), {
               Accept: 'application/json'
             }, formData));
-          case 1:
-            return _context4.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(id), {}, body));
-          case 2:
-            return _context4.a(2);
+          case 8:
+            return _context4.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(id), {}, body));
+          case 9:
+          case "end":
+            return _context4.stop();
         }
       }, _callee4);
     }));
@@ -89822,18 +89351,21 @@ var useRequest = function useRequest() {
   //   path: url,
   // };
   var deleteRequest = /*#__PURE__*/function () {
-    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(_ref9) {
+    var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(_ref9) {
       var url, id;
-      return _regenerator().w(function (_context5) {
-        while (1) switch (_context5.n) {
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
           case 0:
             url = _ref9.url, id = _ref9.id;
-            return _context5.a(2, (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(id)));
+            return _context5.abrupt("return", (0,_helpers_utilities__WEBPACK_IMPORTED_MODULE_1__.createRequest)(url(id)));
+          case 2:
+          case "end":
+            return _context5.stop();
         }
       }, _callee5);
     }));
     return function deleteRequest(_x5) {
-      return _ref0.apply(this, arguments);
+      return _ref10.apply(this, arguments);
     };
   }();
   return {
@@ -89890,12 +89422,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   InitApp: () => (/* binding */ InitApp)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.mjs");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.mjs");
-/* harmony import */ var _vueform_multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vueform/multiselect */ "./node_modules/@vueform/multiselect/dist/multiselect.js");
-/* harmony import */ var bootstrap_vue_next__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap-vue-next */ "./node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.mjs");
-/* harmony import */ var _vueform_multiselect_themes_default_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @vueform/multiselect/themes/default.css */ "./node_modules/@vueform/multiselect/themes/default.css");
-/* harmony import */ var bootstrap_vue_next_dist_bootstrap_vue_next_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! bootstrap-vue-next/dist/bootstrap-vue-next.css */ "./node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.css");
+/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.mjs");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.mjs");
+/* harmony import */ var _vueform_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vueform/multiselect */ "./node_modules/@vueform/multiselect/dist/multiselect.js");
+/* harmony import */ var bootstrap_vue_next__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-vue-next */ "./node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.mjs");
+/* harmony import */ var _vueform_multiselect_themes_default_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vueform/multiselect/themes/default.css */ "./node_modules/@vueform/multiselect/themes/default.css");
+/* harmony import */ var bootstrap_vue_next_dist_bootstrap_vue_next_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap-vue-next/dist/bootstrap-vue-next.css */ "./node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.css");
 
 
 
@@ -89904,7 +89436,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var InitApp = function InitApp(component) {
-  var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.createPinia)();
+  var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_5__.createPinia)();
   var app;
   if (component != undefined) {
     app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(component);
@@ -89915,7 +89447,7 @@ var InitApp = function InitApp(component) {
    *
    * !Usage : $t('{key_name}')
    */
-  var i18n = (0,vue_i18n__WEBPACK_IMPORTED_MODULE_1__.createI18n)({
+  var i18n = (0,vue_i18n__WEBPACK_IMPORTED_MODULE_6__.createI18n)({
     legacy: false,
     locale: "en",
     globalInjection: true,
@@ -89926,9 +89458,9 @@ var InitApp = function InitApp(component) {
   window.i18n = i18n;
   app.use(pinia);
   app.use(i18n);
-  app.use(bootstrap_vue_next__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  app.use(bootstrap_vue_next__WEBPACK_IMPORTED_MODULE_2__["default"]);
   app.config.globalProperties.msg = "hello";
-  app.component("Multiselect", _vueform_multiselect__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  app.component("Multiselect", _vueform_multiselect__WEBPACK_IMPORTED_MODULE_1__["default"]);
   return app;
 };
 
@@ -89959,8 +89491,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -89983,53 +89514,55 @@ var JSON_REQUEST_HEADER = function JSON_REQUEST_HEADER() {
   }, XSRF_REQUEST_HEADER());
 };
 var createRequest = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(URL, header) {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(URL, header) {
     var bodyData,
       options,
       headerMerged,
       response,
-      _args = arguments,
-      _t;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.n) {
+      _args = arguments;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
         case 0:
           bodyData = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
           options = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
           headerMerged = (0,lodash__WEBPACK_IMPORTED_MODULE_0__.mergeWith)(JSON_REQUEST_HEADER(), header);
-          _t = URL.method;
-          _context.n = _t === 'GET' ? 1 : _t === 'POST' ? 3 : _t === 'PUT' ? 3 : _t === "PATCH" ? 3 : _t === 'DELETE' ? 5 : 7;
+          _context.t0 = URL.method;
+          _context.next = _context.t0 === 'GET' ? 6 : _context.t0 === 'POST' ? 10 : _context.t0 === 'PUT' ? 10 : _context.t0 === "PATCH" ? 10 : _context.t0 === 'DELETE' ? 14 : 18;
           break;
-        case 1:
-          _context.n = 2;
+        case 6:
+          _context.next = 8;
           return fetch(URL.path, {
             headers: headerMerged
           });
-        case 2:
-          response = _context.v;
-          return _context.a(2, response.json());
-        case 3:
-          _context.n = 4;
+        case 8:
+          response = _context.sent;
+          return _context.abrupt("return", response.json());
+        case 10:
+          _context.next = 12;
           return fetch(URL.path, _objectSpread({
             method: URL.method,
             body: JSON.stringify(bodyData),
             headers: headerMerged
           }, options));
-        case 4:
-          response = _context.v;
-          return _context.a(2, response.json());
-        case 5:
-          _context.n = 6;
+        case 12:
+          response = _context.sent;
+          return _context.abrupt("return", response.json());
+        case 14:
+          _context.next = 16;
           return fetch(URL.path, {
             method: 'DELETE',
             headers: headerMerged
           });
-        case 6:
-          response = _context.v;
-          return _context.a(2, response.json());
-        case 7:
-          return _context.a(3, 8);
-        case 8:
-          return _context.a(2, false);
+        case 16:
+          response = _context.sent;
+          return _context.abrupt("return", response.json());
+        case 18:
+          return _context.abrupt("break", 19);
+        case 19:
+          return _context.abrupt("return", false);
+        case 20:
+        case "end":
+          return _context.stop();
       }
     }, _callee);
   }));
@@ -90038,32 +89571,32 @@ var createRequest = /*#__PURE__*/function () {
   };
 }();
 var createRequestWithFormData = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(URL, header, bodyData) {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(URL, header, bodyData) {
     var options,
       headerMerged,
       response,
-      _args2 = arguments,
-      _t2;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.n) {
+      _args2 = arguments;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
         case 0:
           options = _args2.length > 3 && _args2[3] !== undefined ? _args2[3] : {};
           headerMerged = (0,lodash__WEBPACK_IMPORTED_MODULE_0__.mergeWith)(XSRF_REQUEST_HEADER(), header);
-          _t2 = URL.method;
-          _context2.n = _t2 === "POST" ? 1 : _t2 === "PUT" ? 1 : _t2 === "PATCH" ? 1 : 3;
+          _context2.t0 = URL.method;
+          _context2.next = _context2.t0 === "POST" ? 5 : _context2.t0 === "PUT" ? 5 : _context2.t0 === "PATCH" ? 5 : 10;
           break;
-        case 1:
-          _context2.n = 2;
+        case 5:
+          _context2.next = 7;
           return fetch(URL.path, _objectSpread({
             method: URL.method,
             headers: headerMerged,
             body: bodyData
           }, options));
-        case 2:
-          response = _context2.v;
-          return _context2.a(2, response.json());
-        case 3:
-          return _context2.a(2);
+        case 7:
+          response = _context2.sent;
+          return _context2.abrupt("return", response.json());
+        case 10:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -90095,13 +89628,13 @@ var endTime = function endTime(value, addTime) {
   return moment__WEBPACK_IMPORTED_MODULE_1__(value).add(addTime, 'minutes').format('YYYY-MM-DDTHH:mm');
 };
 var confirmSwal = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(_ref4) {
+  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(_ref4) {
     var title;
-    return _regenerator().w(function (_context3) {
-      while (1) switch (_context3.n) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
           title = _ref4.title;
-          _context3.n = 1;
+          _context3.next = 3;
           return Swal.fire({
             title: title,
             icon: 'warning',
@@ -90118,8 +89651,11 @@ var confirmSwal = /*#__PURE__*/function () {
           }).then(function (result) {
             return result;
           });
-        case 1:
-          return _context3.a(2, _context3.v);
+        case 3:
+          return _context3.abrupt("return", _context3.sent);
+        case 4:
+        case "end":
+          return _context3.stop();
       }
     }, _callee3);
   }));
@@ -90128,13 +89664,13 @@ var confirmSwal = /*#__PURE__*/function () {
   };
 }();
 var confirmcancleSwal = /*#__PURE__*/function () {
-  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(_ref6) {
+  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(_ref6) {
     var title;
-    return _regenerator().w(function (_context4) {
-      while (1) switch (_context4.n) {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
           title = _ref6.title;
-          _context4.n = 1;
+          _context4.next = 3;
           return Swal.fire({
             title: title,
             icon: 'question',
@@ -90151,8 +89687,11 @@ var confirmcancleSwal = /*#__PURE__*/function () {
           }).then(function (result) {
             return result;
           });
-        case 1:
-          return _context4.a(2, _context4.v);
+        case 3:
+          return _context4.abrupt("return", _context4.sent);
+        case 4:
+        case "end":
+          return _context4.stop();
       }
     }, _callee4);
   }));
@@ -90176,16 +89715,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FormFooter_vue_vue_type_template_id_6b69b4f0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormFooter.vue?vue&type=template&id=6b69b4f0 */ "./resources/js/vue/components/form-elements/FormFooter.vue?vue&type=template&id=6b69b4f0");
 /* harmony import */ var _FormFooter_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormFooter.vue?vue&type=script&setup=true&lang=js */ "./resources/js/vue/components/form-elements/FormFooter.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var _home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormFooter_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormFooter_vue_vue_type_template_id_6b69b4f0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/vue/components/form-elements/FormFooter.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormFooter_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormFooter_vue_vue_type_template_id_6b69b4f0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/vue/components/form-elements/FormFooter.vue"]])
 /* hot reload */
-if (false) // removed by dead control flow
-{}
+if (false) {}
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
@@ -90237,16 +89775,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FormHeader_vue_vue_type_template_id_e6c7ce3c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormHeader.vue?vue&type=template&id=e6c7ce3c */ "./resources/js/vue/components/form-elements/FormHeader.vue?vue&type=template&id=e6c7ce3c");
 /* harmony import */ var _FormHeader_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormHeader.vue?vue&type=script&setup=true&lang=js */ "./resources/js/vue/components/form-elements/FormHeader.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var _home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_mishruti_health_wellness_dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormHeader_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormHeader_vue_vue_type_template_id_e6c7ce3c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/vue/components/form-elements/FormHeader.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_HPENVY_17_Desktop_New_folder_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormHeader_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormHeader_vue_vue_type_template_id_e6c7ce3c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/vue/components/form-elements/FormHeader.vue"]])
 /* hot reload */
-if (false) // removed by dead control flow
-{}
+if (false) {}
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
@@ -90442,6 +89979,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 				script = document.createElement('script');
 /******/ 		
 /******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
 /******/ 				if (__webpack_require__.nc) {
 /******/ 					script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 				}

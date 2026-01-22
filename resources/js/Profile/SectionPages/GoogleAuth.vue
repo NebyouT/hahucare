@@ -51,22 +51,29 @@ export default {
     },
     async login() {
       try {
-        const response = await axios.post('/auth/google')
+        const response = await axios.post('/app/auth/google')
         const authUrl = response.data
         
-        window.location.href = authUrl
+        if (authUrl && typeof authUrl === 'string') {
+          window.location.href = authUrl
+        } else {
+          console.error('Invalid auth URL received:', authUrl)
+        }
       } catch (error) {
         console.error('Error initiating Google OAuth:', error)
+        window.errorSnackbar('Failed to initiate Google authentication')
       }
     },
     async logout() {
       try {
-        await axios.post('token-revoke')
+        await axios.post('/app/token-revoke')
         localStorage.removeItem('isLoggedIn')
         localStorage.removeItem('tokenExpiry')
         this.isLoggedIn = false
+        window.successSnackbar('Google account disconnected successfully')
       } catch (error) {
         console.error('Logout failed:', error)
+        window.errorSnackbar('Failed to disconnect Google account')
       }
     }
   }
