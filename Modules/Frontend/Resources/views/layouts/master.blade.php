@@ -74,4 +74,7 @@
         window.defaultCurrencySymbol = @json(Currency::defaultSymbol())
     </script>
     @stack('after-scripts')
+    
+    <!-- Video Meeting Script -->
+    <script src="{{ asset('js/video-meeting.js') }}"></script>
 </body>

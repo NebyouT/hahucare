@@ -39,15 +39,23 @@
 
     @if (optional($data->clinicservice)->is_video_consultancy == 1 && $appointmentDate->isToday())
         @if ($googleMeetEnabled && $data->meet_link != null)
-            <a href="{{ route('backend.google_connect', ['id' => $data->id]) }}" data-type="ajax"
-                class='btn text-info p-0 fs-5' data-bs-toggle="tooltip" title="{{ __('clinic.google_meet') }}"><i
-                    class="fa-solid fa-video"></i></a>
+            <button type="button" 
+                onclick="openVideoMeeting('{{ $data->meet_link }}', 'Google Meet - Appointment #{{ $data->id }}')"
+                class='btn text-info p-0 fs-5' 
+                data-bs-toggle="tooltip" 
+                title="{{ __('clinic.google_meet') }}">
+                <i class="fa-solid fa-video"></i>
+            </button>
         @endif
 
         @if ($zoomEnabled && $data->start_video_link != null)
-            <a href="{{ route('backend.zoom_connect', ['id' => $data->id]) }}" data-type="ajax"
-                class='btn text-info p-0 fs-5' data-bs-toggle="tooltip" title="{{ __('clinic.zoom_meet') }}"><i
-                    class="fa-solid fa-video"></i></a>
+            <button type="button" 
+                onclick="openVideoMeeting('{{ $data->start_video_link }}', 'Zoom Meeting - Appointment #{{ $data->id }}')"
+                class='btn text-info p-0 fs-5' 
+                data-bs-toggle="tooltip" 
+                title="{{ __('clinic.zoom_meet') }}">
+                <i class="fa-solid fa-video"></i>
+            </button>
         @endif
     @endif
     <!-- @if (setting('view_patient_soap') == 1)

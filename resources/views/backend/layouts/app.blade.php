@@ -324,6 +324,9 @@
     @endif
 
     @stack('after-scripts')
+    
+    <!-- Video Meeting Script -->
+    <script src="{{ asset('js/video-meeting.js') }}"></script>
     <!-- / Scripts -->
     <script>
         $('.notification_list').on('click', function() {
