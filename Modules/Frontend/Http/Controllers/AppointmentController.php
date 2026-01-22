@@ -46,6 +46,11 @@ use Modules\Appointment\Models\EncounterPrescriptionBillingDetail;
 use Modules\Clinic\Models\Receptionist;
 use Modules\Commission\Models\Commission;
 use Modules\Commission\Models\CommissionEarning;
+use Google\Client as GoogleClient;
+use Google\Service\Calendar;
+use Modules\Clinic\Models\ClinicServiceMapping;
+use Illuminate\Support\Facades\Mail;
+use Modules\Appointment\Mail\AppointmentConfirmation;
 class AppointmentController extends Controller
 {
     use AppointmentTrait;
@@ -3119,5 +3124,178 @@ class AppointmentController extends Controller
             abort(404, 'Invalid or expired payment session.');
         }
         return view('razorpay.payment', $data);
+    }
+
+    public function generateMeetLink(Request $request, $startDateTime, $duration, $data)
+    {
+        try {
+            $employee = User::find($data->doctor_id);
+            
+            if (!$employee) {
+                \Log::error('Doctor not found for Google Meet link generation', ['doctor_id' => $data->doctor_id]);
+                return null;
+            }
+
+            // Get Google Meet settings
+            $googleMeetSettings = Setting::whereIn('name', ['google_meet_method', 'google_clientid', 'google_secret_key'])
+                ->pluck('val', 'name');
+            $settings = $googleMeetSettings->toArray();
+
+            if (empty($settings['google_clientid']) || empty($settings['google_secret_key'])) {
+                \Log::error('Google Meet credentials not configured in settings');
+                return null;
+            }
+
+            // Get doctor's Google access token
+            $googleAccessToken = json_decode($employee->google_access_token, true);
+            $accessToken = $googleAccessToken['access_token'] ?? null;
+            $refreshToken = $googleAccessToken['refresh_token'] ?? null;
+
+            if (!$accessToken) {
+                \Log::error('Doctor does not have Google access token', ['doctor_id' => $employee->id]);
+                return null;
+            }
+
+            // Initialize Google Client
+            $client = new GoogleClient([
+                'client_id' => $settings['google_clientid'],
+                'client_secret' => $settings['google_secret_key'],
+                'redirect_uri' => 'postmessage',
+                'access_type' => 'offline',
+                'prompt' => 'consent',
+                'scopes' => ['https://www.googleapis.com/auth/calendar.events'],
+            ]);
+
+            $client->setAccessToken($accessToken);
+
+            // Refresh token if expired
+            if ($client->isAccessTokenExpired()) {
+                if ($refreshToken) {
+                    $client->fetchAccessTokenWithRefreshToken($refreshToken);
+                    $newAccessToken = $client->getAccessToken();
+                    $employee->update(['google_access_token' => json_encode($newAccessToken)]);
+                } else {
+                    \Log::error('Google access token expired and no refresh token available', ['doctor_id' => $employee->id]);
+                    return null;
+                }
+            }
+
+            // Initialize Calendar service
+            $service = new Calendar($client);
+            
+            // Get appointment details
+            $user = User::find($data->user_id);
+            $clinic = Clinics::find($data->clinic_id);
+            $clinicService = ClinicsService::find($data->service_id);
+
+            if (!$user || !$clinic || !$clinicService) {
+                \Log::error('Missing appointment data for Google Meet', [
+                    'user_id' => $data->user_id,
+                    'clinic_id' => $data->clinic_id,
+                    'service_id' => $data->service_id
+                ]);
+                return null;
+            }
+
+            // Prepare event details
+            $emailData = [
+                'service_name' => $clinicService->name,
+                'user_name' => "{$user->first_name} {$user->last_name}",
+                'clinic_name' => $clinic->name,
+                'doctor_name' => "{$employee->first_name} {$employee->last_name}",
+                'appointment_date' => $data->appointment_date,
+                'appointment_time' => $data->appointment_time,
+            ];
+
+            // Get event templates from settings
+            $contentSettings = Setting::whereIn('name', ['google_meet_content', 'google_meet_event_title'])->pluck('val', 'name');
+            $content = $contentSettings['google_meet_content'] ?? 'Appointment with {{doctor_name}} at {{clinic_name}}';
+            $googleEvent = $contentSettings['google_meet_event_title'] ?? 'Medical Appointment - {{service_name}}';
+
+            // Replace placeholders
+            $placeholders = [
+                '{{appointment_date}}' => $emailData['appointment_date'],
+                '{{appointment_time}}' => $emailData['appointment_time'],
+                '{{patient_name}}' => $emailData['user_name'],
+                '{{clinic_name}}' => $emailData['clinic_name'],
+                '{{doctor_name}}' => $emailData['doctor_name'],
+                '{{service_name}}' => $emailData['service_name'],
+            ];
+
+            foreach ($placeholders as $placeholder => $value) {
+                $content = str_replace($placeholder, $value, $content);
+                $googleEvent = str_replace($placeholder, $value, $googleEvent);
+            }
+
+            // Calculate start and end times with timezone
+            $timezone = setting('default_time_zone') ?? 'UTC';
+            $startDateTime = Carbon::parse($data->appointment_date . ' ' . $data->appointment_time, $timezone);
+            $endDateTime = $startDateTime->copy()->addMinutes($duration ?? 60);
+
+            // Create Google Calendar event with conference data
+            $event = new \Google\Service\Calendar\Event([
+                'summary' => $googleEvent,
+                'description' => $content,
+                'start' => [
+                    'dateTime' => $startDateTime->format('Y-m-d\TH:i:sP'),
+                    'timeZone' => $timezone,
+                ],
+                'end' => [
+                    'dateTime' => $endDateTime->format('Y-m-d\TH:i:sP'),
+                    'timeZone' => $timezone,
+                ],
+                'attendees' => [
+                    ['email' => $user->email],
+                    ['email' => $employee->email],
+                ],
+                'conferenceData' => [
+                    'createRequest' => [
+                        'requestId' => uniqid('meet_', true),
+                        'conferenceSolutionKey' => [
+                            'type' => 'hangoutsMeet',
+                        ],
+                    ],
+                ],
+            ]);
+
+            // Insert event into Google Calendar
+            $calendarId = 'primary';
+            $createdEvent = $service->events->insert($calendarId, $event, ['conferenceDataVersion' => 1]);
+
+            // Extract meeting link
+            $hangoutLink = $createdEvent->getHangoutLink();
+
+            if (!empty($hangoutLink)) {
+                // Update appointment with Google Meet link
+                $data->update([
+                    'meet_link' => $hangoutLink,
+                    'start_video_link' => $hangoutLink, // Doctor link
+                    'join_video_link' => $hangoutLink,  // Patient link
+                ]);
+
+                \Log::info('Google Meet link generated successfully', [
+                    'appointment_id' => $data->id,
+                    'meet_link' => $hangoutLink
+                ]);
+
+                return [
+                    'status' => true,
+                    'meet_link' => $hangoutLink,
+                    'start_url' => $hangoutLink,
+                    'join_url' => $hangoutLink,
+                ];
+            } else {
+                \Log::error('Google Meet link not generated in event response');
+                return null;
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Error generating Google Meet link', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'appointment_id' => $data->id ?? null
+            ]);
+            return null;
+        }
     }
 }
