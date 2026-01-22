@@ -57,7 +57,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'name' => 'is_zoom',
-                'val' => 1,
+                'val' => 0,
                 'type' =>'integaration',
             ],
             [
@@ -74,6 +74,31 @@ class SettingSeeder extends Seeder
                 'name' => 'client_secret',
                 'val' => '150kB12FZyJ5W4AHoDi1EpwG9mCrxJX9',
                 'type' =>'is_zoom',
+            ],
+            [
+                'name' => 'google_meet_method',
+                'val' => 1,
+                'type' =>'integaration',
+            ],
+            [
+                'name' => 'google_clientid',
+                'val' => '864058558222-f0gorc2j0k4j0b1kmtosjkkm56jgokbr.apps.googleusercontent.com',
+                'type' =>'google_meet_method',
+            ],
+            [
+                'name' => 'google_secret_key',
+                'val' => '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',
+                'type' =>'google_meet_method',
+            ],
+            [
+                'name' => 'google_meet_event_title',
+                'val' => 'Medical Appointment - {{service_name}}',
+                'type' =>'google_meet_method',
+            ],
+            [
+                'name' => 'google_meet_content',
+                'val' => 'You have an appointment with {{doctor_name}} at {{clinic_name}} on {{appointment_date}} at {{appointment_time}} for {{service_name}}.',
+                'type' =>'google_meet_method',
             ],
 
             [
