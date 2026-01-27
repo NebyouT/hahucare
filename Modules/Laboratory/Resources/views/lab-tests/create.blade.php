@@ -3,27 +3,16 @@
 @section('title') {{ __('Create Lab Test') }} @endsection
 
 @section('content')
-<x-backend.section-header>
-    <div>
-        <x-backend.breadcrumbs>
-            <x-backend.breadcrumb-item route='{{ route("backend.lab-tests.index") }}' icon='ph ph-test-tube'>
-                {{ __('Lab Tests') }}
-            </x-backend.breadcrumb-item>
-            <x-backend.breadcrumb-item type="active">{{ __('Create') }}</x-backend.breadcrumb-item>
-        </x-backend.breadcrumbs>
-    </div>
-    <x-slot name="toolbar">
-        <a href="{{ route('backend.lab-tests.index') }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="{{ __('Back') }}">
-            <i class="ph ph-arrow-left"></i> {{ __('Back') }}
-        </a>
-    </x-slot>
-</x-backend.section-header>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
+<div class="container-fluid px-4">
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">{{ __('Create Lab Test') }}</h5>
+            <a href="{{ route('backend.lab-tests.index') }}" class="btn btn-secondary btn-sm">
+                <i class="ph ph-arrow-left"></i> {{ __('Back') }}
+            </a>
+        </div>
+        <div class="card-body">
                     <form method="POST" action="{{ route('backend.lab-tests.store') }}" enctype="multipart/form-data">
                         @csrf
                         
@@ -177,8 +166,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>

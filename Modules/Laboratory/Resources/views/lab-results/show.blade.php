@@ -3,32 +3,23 @@
 @section('title') {{ __('Lab Result Details') }} @endsection
 
 @section('content')
-<x-backend.section-header>
-    <div>
-        <x-backend.breadcrumbs>
-            <x-backend.breadcrumb-item route='{{ route("backend.lab-results.index") }}' icon='ph ph-file-text'>
-                {{ __('Lab Results') }}
-            </x-backend.breadcrumb-item>
-            <x-backend.breadcrumb-item type="active">{{ __('Details') }}</x-backend.breadcrumb-item>
-        </x-backend.breadcrumbs>
-    </div>
-    <x-slot name="toolbar">
-        <a href="{{ route('backend.lab-results.index') }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="{{ __('Back') }}">
-            <i class="ph ph-arrow-left"></i> {{ __('Back') }}
-        </a>
-        @can('edit_lab_results')
-            <a href="{{ route('backend.lab-results.edit', $labResult->id) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="{{ __('Edit') }}">
-                <i class="ph ph-pencil"></i> {{ __('Edit') }}
-            </a>
-        @endcan
-    </x-slot>
-</x-backend.section-header>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
+<div class="container-fluid px-4">
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">{{ __('Lab Result Details') }}</h5>
+            <div>
+                <a href="{{ route('backend.lab-results.index') }}" class="btn btn-secondary btn-sm">
+                    <i class="ph ph-arrow-left"></i> {{ __('Back') }}
+                </a>
+                @can('edit_lab_results')
+                    <a href="{{ route('backend.lab-results.edit', $labResult->id) }}" class="btn btn-primary btn-sm">
+                        <i class="ph ph-pencil"></i> {{ __('Edit') }}
+                    </a>
+                @endcan
+            </div>
+        </div>
+        <div class="card-body">
                     <h5 class="card-title mb-4">{{ __('Lab Result Information') }}</h5>
                     
                     <div class="row mb-3">
@@ -115,8 +106,6 @@
                             <p>{{ $labResult->updated_at?->format('Y-m-d H:i:s') ?? 'N/A' }}</p>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

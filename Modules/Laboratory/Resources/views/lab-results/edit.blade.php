@@ -3,27 +3,16 @@
 @section('title') {{ __('Edit Lab Result') }} @endsection
 
 @section('content')
-<x-backend.section-header>
-    <div>
-        <x-backend.breadcrumbs>
-            <x-backend.breadcrumb-item route='{{ route("backend.lab-results.index") }}' icon='ph ph-file-text'>
-                {{ __('Lab Results') }}
-            </x-backend.breadcrumb-item>
-            <x-backend.breadcrumb-item type="active">{{ __('Edit') }}</x-backend.breadcrumb-item>
-        </x-backend.breadcrumbs>
-    </div>
-    <x-slot name="toolbar">
-        <a href="{{ route('backend.lab-results.index') }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="{{ __('Back') }}">
-            <i class="ph ph-arrow-left"></i> {{ __('Back') }}
-        </a>
-    </x-slot>
-</x-backend.section-header>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
+<div class="container-fluid px-4">
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">{{ __('Edit Lab Result') }}</h5>
+            <a href="{{ route('backend.lab-results.index') }}" class="btn btn-secondary btn-sm">
+                <i class="ph ph-arrow-left"></i> {{ __('Back') }}
+            </a>
+        </div>
+        <div class="card-body">
                     <form method="POST" action="{{ route('backend.lab-results.update', $labResult->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -151,8 +140,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>
