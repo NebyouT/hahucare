@@ -713,6 +713,53 @@ class GenerateMenus
                     // }
                 }
 
+            // Laboratory Module
+            if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
+
+                $laboratory = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-flask',
+                    'title' => 'Laboratory',
+                    'nickname' => 'laboratory',
+                    'order' => 0,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-test-tube',
+                    'title' => 'Lab Tests',
+                    'route' => 'backend.lab-tests.index',
+                    'active' => ['app/lab-tests'],
+                    'permission' => ['view_lab_tests'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-file-text',
+                    'title' => 'Lab Results',
+                    'route' => 'backend.lab-results.index',
+                    'active' => ['app/lab-results'],
+                    'permission' => ['view_lab_results'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-list-bullets',
+                    'title' => 'Lab Categories',
+                    'route' => 'backend.lab-categories.index',
+                    'active' => ['app/lab-categories'],
+                    'permission' => ['view_lab_categories'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-gear',
+                    'title' => 'Lab Equipment',
+                    'route' => 'backend.lab-equipment.index',
+                    'active' => ['app/lab-equipment'],
+                    'permission' => ['view_lab_equipment'],
+                    'order' => 0,
+                ]);
+            }
 
 
             $permissionsToCheck = ['view_tax', 'view_earning', 'view_billing_record'];

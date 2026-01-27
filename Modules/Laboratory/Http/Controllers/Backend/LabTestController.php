@@ -172,7 +172,7 @@ class LabTestController extends Controller
         return response()->json(['message' => 'Invalid action'], 400);
     }
 
-    public function export()
+    public function export(Request $request)
     {
         // Export functionality can be implemented later
         return response()->json(['message' => 'Export functionality coming soon']);
