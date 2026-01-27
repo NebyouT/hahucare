@@ -44,5 +44,6 @@
     "Pharma": true,
     "Plugins": true,
     "Bed": true,
+    "Laboratory": true,
     "kivicare-pro": false
 }
