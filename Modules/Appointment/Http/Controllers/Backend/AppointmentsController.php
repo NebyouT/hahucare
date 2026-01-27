@@ -364,23 +364,63 @@ class AppointmentsController extends Controller
 
         // Telemedicine link creation
         if ($service && $service->is_video_consultancy == 1) {
+            \Log::info('Telemedicine: Service has video consultancy enabled', [
+                'appointment_id' => $appointment->id,
+                'service_id' => $service->id,
+                'service_name' => $service->name
+            ]);
+            
             $googleMeetSetting = Setting::where('name', 'google_meet_method')->first();
             $zoomSetting = Setting::where('name', 'is_zoom')->first();
             
+            \Log::info('Telemedicine: Settings check', [
+                'google_meet_enabled' => $googleMeetSetting ? $googleMeetSetting->val : 'not found',
+                'zoom_enabled' => $zoomSetting ? $zoomSetting->val : 'not found'
+            ]);
+            
             // Check Google Meet first (priority)
             if ($googleMeetSetting && $googleMeetSetting->val == 1) {
-                $this->generateMeetLink($request, $appointment->start_date_time, $appointment->duration, $appointment);
+                \Log::info('Telemedicine: Attempting to generate Google Meet link', [
+                    'appointment_id' => $appointment->id,
+                    'doctor_id' => $appointment->doctor_id
+                ]);
+                
+                $meetLinkResult = $this->generateMeetLink($request, $appointment->start_date_time, $appointment->duration, $appointment);
+                
+                if ($meetLinkResult && isset($meetLinkResult['meet_link'])) {
+                    \Log::info('Telemedicine: Google Meet link generated successfully', [
+                        'appointment_id' => $appointment->id,
+                        'meet_link' => $meetLinkResult['meet_link']
+                    ]);
+                } else {
+                    \Log::error('Telemedicine: Google Meet link generation failed', [
+                        'appointment_id' => $appointment->id,
+                        'result' => $meetLinkResult
+                    ]);
+                }
             } 
             // Fallback to Zoom if Google Meet is disabled
             else if ($zoomSetting && $zoomSetting->val == 1) {
+                \Log::info('Telemedicine: Attempting to generate Zoom link', ['appointment_id' => $appointment->id]);
+                
                 $zoom_url = getzoomVideoUrl($appointment);
                 if (!empty($zoom_url['start_url']) && !empty($zoom_url['join_url'])) {
                     $appointment->update([
                         'start_video_link' => $zoom_url['start_url'],
                         'join_video_link' => $zoom_url['join_url'],
                     ]);
+                    
+                    \Log::info('Telemedicine: Zoom link generated successfully', [
+                        'appointment_id' => $appointment->id
+                    ]);
                 }
             }
+        } else {
+            \Log::info('Telemedicine: Service does not have video consultancy enabled', [
+                'appointment_id' => $appointment->id,
+                'service_id' => $service ? $service->id : 'null',
+                'is_video_consultancy' => $service ? $service->is_video_consultancy : 'null'
+            ]);
         }
 
         // Upload medical files

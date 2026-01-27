@@ -794,7 +794,7 @@ return [
                 'data' => 'is_sms_integration', // data type, string, int, boolean
                 'name' => 'sms_api_token', // unique name for field
                 'label' => 'integration', // you know what label it is
-                'rules' => 'required|max:191', // validation rule of laravel
+                'rules' => 'required|max:500', // validation rule of laravel
                 'class' => '', // any class for input
                 'value' => '', // default value if you want
                 'help' => 'Enter your AfroMessage API Token.', // Help text for the input field.

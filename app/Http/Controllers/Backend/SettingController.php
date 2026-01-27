@@ -223,7 +223,7 @@ class SettingController extends Controller
     {
         $setting = Setting::where('type', 'google_meet_method')->where('name', 'google_clientid')->first();
         
-        $redirectUri = env('GOOGLE_REDIRECT_URI');
+        $redirectUri = env('GOOGLE_REDIRECT');
         $clientId = env('GOOGLE_CLIENT_ID');
         $clientSecret = env('GOOGLE_CLIENT_SECRET');
         
@@ -233,17 +233,35 @@ class SettingController extends Controller
             'has_secret' => !empty($clientSecret)
         ]);
         
-        $client = new Client([
-            'client_id' => $clientId,
-            'redirect_uri' => $redirectUri,
-            'scopes' => ['https://www.googleapis.com/auth/calendar.events', 'https://www.googleapis.com/auth/userinfo.email'],
-            'client_secret' => $clientSecret,
-        ]);
-        $authUrl = $client->createAuthUrl();
+        if (empty($clientId) || empty($clientSecret) || empty($redirectUri)) {
+            \Log::error('Google OAuth credentials are not configured');
+            return response()->json([
+                'error' => 'Google OAuth is not configured',
+                'message' => 'Please configure GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT in your environment variables.'
+            ], 500);
+        }
         
-        \Log::info('Google OAuth Auth URL:', ['url' => $authUrl]);
-        
-        return response()->json($authUrl);
+        try {
+            $client = new Client([
+                'client_id' => $clientId,
+                'redirect_uri' => $redirectUri,
+                'scopes' => ['https://www.googleapis.com/auth/calendar.events', 'https://www.googleapis.com/auth/userinfo.email'],
+                'client_secret' => $clientSecret,
+                'access_type' => 'offline',
+                'prompt' => 'consent',
+            ]);
+            $authUrl = $client->createAuthUrl();
+            
+            \Log::info('Google OAuth Auth URL:', ['url' => $authUrl]);
+            
+            return response()->json($authUrl);
+        } catch (\Exception $e) {
+            \Log::error('Google OAuth Error: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Failed to initialize Google OAuth',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function handleGoogleCallback(Request $request)
@@ -253,7 +271,9 @@ class SettingController extends Controller
 
         $client->setClientId(env('GOOGLE_CLIENT_ID'));
         $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-        $client->setRedirectUri(env('GOOGLE_REDIRECT_URI'));
+        $client->setRedirectUri(env('GOOGLE_REDIRECT'));
+        $client->setAccessType('offline');
+        $client->setPrompt('consent');
         $client->addScope('https://www.googleapis.com/auth/calendar.events');
         $client->addScope('https://www.googleapis.com/auth/userinfo.email');
 

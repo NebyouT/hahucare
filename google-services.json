@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "864058558222",
+    "project_id": "hahucare-9fe67",
+    "storage_bucket": "hahucare-9fe67.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864058558222:android:d4830ccfd0111764e9f95f",
+        "android_client_info": {
+          "package_name": "com.hahucare.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864058558222-eecgu6i4mrtcvuvlgrochjjulpgebgou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hahucare.app",
+            "certificate_hash": "877ace0d247c9855419087ce82bfe7c66bcfc9b8"
+          }
+        },
+        {
+          "client_id": "864058558222-r2nrjd03hhvh1799e19p0c5dl4kf6q5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7oWErDEbb9fnoI8ftMIlV9U10tVMcOXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864058558222-272i0ut7kc4nl5peim49on08h7aoko23.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "864058558222-pe0l3jmcos4mh9urbphac2uaijfgjgac.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hahucare.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

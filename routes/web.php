@@ -287,7 +287,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
     });
 
     Route::post('/auth/google', [SettingController::class, 'googleId']);
-    Route::get('callback', [SettingController::class, 'handleGoogleCallback']);
+    Route::get('/auth/google/callback', [SettingController::class, 'handleGoogleCallback']);
     Route::post('/store-access-token', [SettingController::class, 'storeToken']);
     Route::get('google-key', [SettingController::class, 'googleKey']);
     Route::get('download-json', [SettingController::class, 'downloadJson']);

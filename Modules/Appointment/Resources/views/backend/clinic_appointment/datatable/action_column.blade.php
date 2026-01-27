@@ -37,7 +37,7 @@
     @endif
 
 
-    @if (optional($data->clinicservice)->is_video_consultancy == 1 && $appointmentDate->isToday())
+    @if (optional($data->clinicservice)->is_video_consultancy == 1)
         @if ($googleMeetEnabled && $data->meet_link != null)
             <button type="button" 
                 onclick="openVideoMeeting('{{ $data->meet_link }}', 'Google Meet - Appointment #{{ $data->id }}')"

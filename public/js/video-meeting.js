@@ -14,36 +14,54 @@ function openVideoMeeting(meetingUrl, title = 'Video Meeting') {
         return;
     }
 
-    // Calculate center position
-    const width = 1200;
-    const height = 800;
-    const left = (screen.width / 2) - (width / 2);
-    const top = (screen.height / 2) - (height / 2);
-
-    // Window features
-    const features = `
-        width=${width},
-        height=${height},
-        left=${left},
-        top=${top},
-        toolbar=no,
-        menubar=no,
-        location=no,
-        status=no,
-        scrollbars=yes,
-        resizable=yes
-    `.replace(/\s+/g, '');
-
-    // Open popup window
-    const popup = window.open(meetingUrl, title, features);
-
-    if (!popup) {
-        // Popup blocked - fallback to new tab
-        alert('Popup blocked! Opening in new tab instead.');
-        window.open(meetingUrl, '_blank');
-    } else {
-        popup.focus();
+    // Check if modal already exists
+    let modal = document.getElementById('videoMeetingModal');
+    
+    if (!modal) {
+        // Create modal
+        const modalHTML = `
+            <div class="modal fade" id="videoMeetingModal" tabindex="-1" aria-labelledby="videoMeetingModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title" id="videoMeetingModalLabel">${title}</h5>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-sm btn-light" onclick="openInNewWindow()">
+                                    <i class="fa-solid fa-external-link-alt"></i> Open in New Window
+                                </button>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div class="modal-body p-0" style="height: calc(100vh - 120px);">
+                            <iframe id="videoMeetingIframe" src="" frameborder="0" width="100%" height="100%" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        modal = document.getElementById('videoMeetingModal');
     }
+
+    // Update iframe src and modal title
+    const iframe = document.getElementById('videoMeetingIframe');
+    const modalTitle = document.getElementById('videoMeetingModalLabel');
+    
+    iframe.src = meetingUrl;
+    modalTitle.textContent = title;
+
+    // Store URL for "Open in New Window" button
+    window.currentMeetingUrl = meetingUrl;
+
+    // Show modal
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
+
+    // Clear iframe when modal closes
+    modal.addEventListener('hidden.bs.modal', function () {
+        iframe.src = '';
+    });
 }
 
 /**

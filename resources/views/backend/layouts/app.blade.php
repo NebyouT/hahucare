@@ -131,36 +131,38 @@
         window.auth_permissions = @json($permissions)
     </script>
     @if (setting('is_one_signal_notification') == 1)
-        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
-            window.OneSignal = window.OneSignal || [];
-            OneSignal.push(function() {
-                OneSignal.init({
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(async function(OneSignal) {
+                await OneSignal.init({
                     appId: "{{ setting('onesignal_app_id') }}",
-                    safari_web_id: "web.onesignal.auto.3cbb98e8-d926-4cfe-89ae-1bc86ff7cf70",
+                    safari_web_id: "web.onesignal.auto.613528e9-2930-4b07-a098-5a9518822d98",
                     notifyButton: {
                         enable: true,
                     },
-                    subdomainName: "apps-iqonic",
                 });
-                window.OneSignal.getUserId(function(userId) {
-                    if (userId !== '{{ auth()->user()->web_player_id ?? '' }}' &&
-                        '{{ auth()->user()->web_player_id ?? 'undefined' }}' !== 'undefined') {
+
+                // Save user's OneSignal ID to database
+                OneSignal.User.PushSubscription.addEventListener('change', async function(event) {
+                    const userId = await OneSignal.User.PushSubscription.id;
+                    if (userId && userId !== '{{ auth()->user()->web_player_id ?? '' }}') {
                         fetch("{{ route('backend.update-player-id') }}", {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify({
-                                    player_id: userId
-                                })
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                player_id: userId
                             })
-                            .then((res) => res.json())
-                            .then((data) => console.log(data))
+                        })
+                        .then((res) => res.json())
+                        .then((data) => console.log('OneSignal ID saved:', data))
+                        .catch((err) => console.error('Error saving OneSignal ID:', err));
                     }
-                })
+                });
             });
         </script>
     @endif

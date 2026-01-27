@@ -47,3 +47,6 @@ Thumbs.db
 
 # Ignore public storage uploads (if you store images there)
 public/storage/*
+
+# Firebase Admin SDK service account (contains private keys)
+storage/app/data/*.json
