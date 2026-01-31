@@ -1,0 +1,11 @@
+{
+    "name": "PatientReferral",
+    "alias": "patientreferral",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PatientReferral\\Providers\\PatientReferralServiceProvider"
+    ],
+    "files": []
+}

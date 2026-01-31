@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/patientreferral",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PatientReferral\\": "",
+            "Modules\\PatientReferral\\App\\": "app/",
+            "Modules\\PatientReferral\\Database\\Factories\\": "database/factories/",
+            "Modules\\PatientReferral\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\PatientReferral\\Tests\\": "tests/"
+        }
+    }
+}

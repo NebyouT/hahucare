@@ -197,7 +197,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Modules\Frontend\Providers\ModuleServiceProvider::class,
         // Modules\Pharma\Providers\PharmaServiceProvider::class, // Commented out - Pharma module not found
-
+Modules\PatientReferral\Providers\PatientReferralServiceProvider::class,
         /*
          * Package Service Providers...
          */

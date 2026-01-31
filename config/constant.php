@@ -76,6 +76,14 @@ return [
             'type' => '',
             'is_custom_permission' => 0,
         ],
+
+
+      
+[
+    'module_name' => 'Patient Referral',
+    'type' => '',
+    'is_custom_permission' => 0,
+],
         [
             'module_name' => 'Clinics Service',
             'type' => '',

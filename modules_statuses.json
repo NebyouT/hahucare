@@ -45,5 +45,6 @@
     "Plugins": true,
     "Bed": true,
     "Laboratory": true,
-    "kivicare-pro": false
+    "kivicare-pro": false,
+    "PatientReferral": true
 }
