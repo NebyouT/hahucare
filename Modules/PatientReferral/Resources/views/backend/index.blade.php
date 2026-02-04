@@ -24,6 +24,7 @@
                                 <th>Patient</th>
                                 <th>Referred By</th>
                                 <th>Referred To</th>
+                                <th>Reason</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -33,18 +34,50 @@
                             @foreach($referrals as $referral)
                             <tr>
                                 <td>{{ $referral->id }}</td>
-                                <td>{{ $referral->patient_id }}</td>
-                                <td>{{ $referral->referred_by }}</td>
-                                <td>{{ $referral->referred_to }}</td>
-                                <td>{{ $referral->status }}</td>
+                                <td>{{ $referral->patient ? $referral->patient->first_name . ' ' . $referral->patient->last_name : 'N/A' }}</td>
+                                <td>{{ $referral->referredByDoctor ? $referral->referredByDoctor->first_name . ' ' . $referral->referredByDoctor->last_name : 'N/A' }}</td>
+                                <td>{{ $referral->referredToDoctor ? $referral->referredToDoctor->first_name . ' ' . $referral->referredToDoctor->last_name : 'N/A' }}</td>
+                                <td>{{ Str::limit($referral->reason, 30) }}</td>
+                                <td>
+                                    @switch($referral->status)
+                                        @case('pending')
+                                            <span class="badge badge-warning">{{ ucfirst($referral->status) }}</span>
+                                            @break
+                                        @case('accepted')
+                                            <span class="badge badge-success">{{ ucfirst($referral->status) }}</span>
+                                            @break
+                                        @case('rejected')
+                                            <span class="badge badge-danger">{{ ucfirst($referral->status) }}</span>
+                                            @break
+                                        @default
+                                            <span class="badge badge-secondary">{{ ucfirst($referral->status) }}</span>
+                                    @endswitch
+                                </td>
                                 <td>{{ $referral->referral_date->format('Y-m-d') }}</td>
                                 <td>
-                                    <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-sm btn-info">Edit</a>
-                                    <form action="{{ route('backend.patientreferral.destroy', $referral) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
+                                    <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary">View</a>
+                                    
+                                    @if((auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id && $referral->status === 'pending') || 
+                                   (in_array(auth()->user()->user_type, ['admin', 'demo_admin']) && $referral->status === 'pending'))
+                                        <form action="{{ route('backend.patientreferral.accept', $referral) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to accept this referral and create an appointment?')">
+                                                <i class="fas fa-check"></i> Accept
+                                            </button>
+                                        </form>
+                                    @endif
+                                    
+                                    @if(auth()->user()->user_type !== 'doctor' || $referral->referred_to !== auth()->user()->id)
+                                        <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-sm btn-info">Edit</a>
+                                    @endif
+                                    
+                                    @if(auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id)
+                                        <form action="{{ route('backend.patientreferral.destroy', $referral) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this referral?')">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

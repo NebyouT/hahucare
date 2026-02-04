@@ -218,6 +218,15 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
         Route::get('vendor-payout-report', [ReportsController::class, 'vendor_payout_report'])->name('reports.vendor-payout-report');
         Route::get('vendor-payout-report-index-data', [ReportsController::class, 'vendor_payout_report_index_data'])->name('reports.vendor-payout-report.index_data');
     });
+/*
+
+
+*/
+
+
+
+
+
 
     /*
     *

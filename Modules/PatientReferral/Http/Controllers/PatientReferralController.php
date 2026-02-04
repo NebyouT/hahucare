@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\PatientReferral\Models\PatientReferral;
+use Modules\Appointment\Models\Appointment;
 use Illuminate\Support\Facades\Auth; // <-- ADD THIS IMPORT
 
 class PatientReferralController extends Controller
@@ -280,13 +281,78 @@ class PatientReferralController extends Controller
         return redirect()->route('backend.patientreferral.index')
             ->with('success', 'Referral deleted successfully');
     }
+
+    /**
+     * Accept a referral and create an appointment.
+     */
+    public function acceptReferral($id): RedirectResponse
+    {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $user = Auth::user();
+        $referral = PatientReferral::findOrFail($id);
+        
+        // Check permissions: only the referred_to doctor can accept the referral, unless user is admin/demo_admin
+        if ($user->user_type === 'doctor' && $referral->referred_to !== $user->id) {
+            abort(403, 'You are not authorized to accept this referral.');
+        }
+        
+        // Check if referral is already accepted
+        if ($referral->status === 'accepted') {
+            return redirect()->route('backend.patientreferral.index')
+                ->with('info', 'This referral has already been accepted.');
+        }
+        
+        // Update referral status to accepted
+        $referral->status = 'accepted';
+        $referral->save();
+        
+        // Redirect to appointment booking page for this referral
+        return redirect()->route('backend.patientreferral.book', $referral->id)
+            ->with('success', 'Referral accepted. Please complete the appointment booking.');
+    }
+
+    /**
+     * Show appointment booking form for referral.
+     */
+    public function bookAppointment($id)
+    {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $user = Auth::user();
+        $referral = PatientReferral::findOrFail($id);
+        
+        // Check permissions: only the referred_to doctor can book, unless user is admin/demo_admin
+        if ($user->user_type === 'doctor' && $referral->referred_to !== $user->id) {
+            abort(403, 'You are not authorized to book this referral.');
+        }
+        
+        // Check if referral is already accepted
+        if ($referral->status !== 'accepted') {
+            return redirect()->route('backend.patientreferral.show', $referral)
+                ->with('error', 'This referral must be accepted before booking an appointment.');
+        }
+        
+        // Get data needed for appointment booking
+        $clinics = \Modules\Clinic\Models\Clinics::where('status', 1)->get();
+        $services = \Modules\Clinic\Models\ClinicsService::where('status', 1)->get();
+        
+        return view('patientreferral::backend.book_appointment', compact('referral', 'clinics', 'services'));
+    }
+
 // Modules/PatientReferral/Http/Controllers/PatientReferralController.php
 
 public function __construct()
 {
     $this->middleware('permission:view_patient_referral')->only(['index', 'show']);
     $this->middleware('permission:add_patient_referral')->only(['create', 'store']);
-    $this->middleware('permission:edit_patient_referral')->only(['edit', 'update']);
+    $this->middleware('permission:edit_patient_referral')->only(['edit', 'update', 'acceptReferral', 'bookAppointment']);
     $this->middleware('permission:delete_patient_referral')->only(['destroy']);
 }
 
