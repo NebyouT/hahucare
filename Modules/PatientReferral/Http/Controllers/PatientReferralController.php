@@ -320,30 +320,62 @@ class PatientReferralController extends Controller
      */
     public function bookAppointment($id)
     {
-        // Check if user is authenticated
-        if (!Auth::check()) {
-            abort(401, 'Please login to access this page.');
+        try {
+            // Check if user is authenticated
+            if (!Auth::check()) {
+                abort(401, 'Please login to access this page.');
+            }
+            
+            $user = Auth::user();
+            $referral = PatientReferral::findOrFail($id);
+            
+            // Check permissions: only the referred_to doctor can book, unless user is admin/demo_admin
+            if ($user->user_type === 'doctor' && $referral->referred_to !== $user->id) {
+                abort(403, 'You are not authorized to book this referral.');
+            }
+            
+            // Check if referral is already accepted
+            if ($referral->status !== 'accepted') {
+                return redirect()->route('backend.patientreferral.show', $referral)
+                    ->with('error', 'This referral must be accepted before booking an appointment.');
+            }
+            
+            // Get data needed for appointment booking
+            $clinics = \Modules\Clinic\Models\Clinics::where('status', 1)->get();
+            $services = \Modules\Clinic\Models\ClinicsService::where('status', 1)->get();
+            
+            // Get the doctor's clinic information
+            $doctorClinicMapping = \Modules\Clinic\Models\DoctorClinicMapping::where('doctor_id', $referral->referred_to)
+                ->with('clinics')
+                ->first();
+                
+            $doctorClinic = null;
+            if ($doctorClinicMapping && $doctorClinicMapping->clinics) {
+                $doctorClinic = $doctorClinicMapping->clinics;
+            }
+            
+            // Debug: Log the data
+            \Log::info('Referral booking data', [
+                'referral_id' => $referral->id,
+                'doctor_id' => $referral->referred_to,
+                'clinic_id' => $doctorClinic ? $doctorClinic->id : null,
+                'clinics_count' => $clinics->count(),
+                'services_count' => $services->count()
+            ]);
+            
+            return view('patientreferral::backend.book_appointment', compact('referral', 'clinics', 'services', 'doctorClinic'));
+            
+        } catch (\Exception $e) {
+            \Log::error('Referral booking error: ' . $e->getMessage(), [
+                'id' => $id,
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            // Return a simple error view for debugging
+            return response()->view('errors.500', [
+                'message' => 'Error loading booking page: ' . $e->getMessage()
+            ], 500);
         }
-        
-        $user = Auth::user();
-        $referral = PatientReferral::findOrFail($id);
-        
-        // Check permissions: only the referred_to doctor can book, unless user is admin/demo_admin
-        if ($user->user_type === 'doctor' && $referral->referred_to !== $user->id) {
-            abort(403, 'You are not authorized to book this referral.');
-        }
-        
-        // Check if referral is already accepted
-        if ($referral->status !== 'accepted') {
-            return redirect()->route('backend.patientreferral.show', $referral)
-                ->with('error', 'This referral must be accepted before booking an appointment.');
-        }
-        
-        // Get data needed for appointment booking
-        $clinics = \Modules\Clinic\Models\Clinics::where('status', 1)->get();
-        $services = \Modules\Clinic\Models\ClinicsService::where('status', 1)->get();
-        
-        return view('patientreferral::backend.book_appointment', compact('referral', 'clinics', 'services'));
     }
 
 // Modules/PatientReferral/Http/Controllers/PatientReferralController.php
