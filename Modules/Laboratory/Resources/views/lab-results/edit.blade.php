@@ -129,6 +129,42 @@
                             </div>
                         </div>
 
+                        <hr>
+
+                        <h5>{{ __('Attachments') }}</h5>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">{{ __('Upload Files') }}</label>
+                                <input type="file" name="attachments[]" class="form-control" multiple accept=".pdf,.jpg,.jpeg,.png">
+                                <small class="text-muted">{{ __('Allowed files: PDF, JPG, JPEG, PNG (Max 5MB each)') }}</small>
+                            </div>
+                        </div>
+
+                        @if($labResult->attachments && $labResult->attachments->count() > 0)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>{{ __('Current Attachments') }}</h6>
+                                    <div class="list-group">
+                                        @foreach($labResult->attachments as $attachment)
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-file"></i>
+                                                    <a href="{{ $attachment->file_url }}" target="_blank">{{ $attachment->file_name }}</a>
+                                                    <small class="text-muted">({{ $attachment->formatted_file_size }})</small>
+                                                    @if($attachment->description)
+                                                        <br><small class="text-muted">{{ $attachment->description }}</small>
+                                                    @endif
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-danger remove-attachment" data-id="{{ $attachment->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="row mt-4">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">
@@ -144,3 +180,31 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    // Remove attachment
+    $(document).on('click', '.remove-attachment', function() {
+        var id = $(this).data('id');
+        
+        if (confirm('Are you sure you want to remove this attachment?')) {
+            $.ajax({
+                url: '/app/lab-results/remove-attachment/' + id,
+                method: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    toastr.success(response.message);
+                    location.reload();
+                },
+                error: function(xhr) {
+                    toastr.error(xhr.responseJSON.message || 'Failed to remove attachment');
+                }
+            });
+        }
+    });
+});
+</script>
+@endpush

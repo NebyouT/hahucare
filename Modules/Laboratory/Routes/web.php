@@ -38,6 +38,7 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
         Route::get('print/{id}', [LabResultController::class, 'print'])->name('print');
         Route::get('download/{id}', [LabResultController::class, 'download'])->name('download');
         Route::post('upload-attachment/{id}', [LabResultController::class, 'uploadAttachment'])->name('upload_attachment');
+        Route::delete('remove-attachment/{id}', [LabResultController::class, 'removeAttachment'])->name('remove_attachment');
     });
     Route::resource('lab-results', LabResultController::class);
 

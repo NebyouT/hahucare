@@ -15,6 +15,7 @@ class LabTest extends Model
         'test_name',
         'description',
         'category_id',
+        'lab_id',
         'price',
         'discount_price',
         'discount_type',
@@ -47,6 +48,11 @@ class LabTest extends Model
     public function results()
     {
         return $this->hasMany(LabResult::class, 'lab_test_id');
+    }
+
+    public function lab()
+    {
+        return $this->belongsTo(Lab::class, 'lab_id');
     }
 
     public function scopeActive($query)

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
+use Modules\Laboratory\Models\LabTest;
+use Modules\Laboratory\Models\LabResultAttachment;
 
 class LabResult extends Model
 {
@@ -55,6 +57,11 @@ class LabResult extends Model
     public function technician()
     {
         return $this->belongsTo(User::class, 'technician_id');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(LabResultAttachment::class, 'lab_result_id');
     }
 
     public function scopePending($query)
