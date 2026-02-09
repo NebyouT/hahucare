@@ -60,24 +60,10 @@ class LaboratoryPermissionSeeder extends Seeder
         }
 
         // Assign permissions to roles
-        $admin = Role::findByName('admin');
-        $demo_admin = Role::findByName('demo_admin');
-        $doctor = Role::findByName('doctor');
-        $lab_technician = Role::findByName('lab_technician');
-        $receptionist = Role::findByName('receptionist');
-
-        // Give all permissions to admin and demo_admin
-        if ($admin) {
-            $admin->givePermissionTo($permissions);
-        }
-        
-        if ($demo_admin) {
-            $demo_admin->givePermissionTo($permissions);
-        }
-
-        // Give specific permissions to doctor
-        if ($doctor) {
-            $doctor->givePermissionTo([
+        $roles = [
+            'admin' => $permissions,
+            'demo_admin' => $permissions,
+            'doctor' => [
                 'view_lab_tests',
                 'view_lab_categories',
                 'view_lab_results',
@@ -87,12 +73,8 @@ class LaboratoryPermissionSeeder extends Seeder
                 'create_lab_orders',
                 'edit_lab_orders',
                 'order_lab_tests',
-            ]);
-        }
-
-        // Give specific permissions to lab technician
-        if ($lab_technician) {
-            $lab_technician->givePermissionTo([
+            ],
+            'lab_technician' => [
                 'view_lab_tests',
                 'view_lab_categories',
                 'view_lab_results',
@@ -102,19 +84,26 @@ class LaboratoryPermissionSeeder extends Seeder
                 'view_labs',
                 'view_lab_orders',
                 'edit_lab_orders',
-            ]);
-        }
-
-        // Give specific permissions to receptionist
-        if ($receptionist) {
-            $receptionist->givePermissionTo([
+            ],
+            'receptionist' => [
                 'view_lab_tests',
                 'view_lab_categories',
                 'view_lab_results',
                 'view_labs',
                 'view_lab_orders',
                 'create_lab_orders',
-            ]);
+            ],
+        ];
+
+        foreach ($roles as $roleName => $rolePermissions) {
+            $role = Role::where('name', $roleName)->first();
+            if ($role) {
+                foreach ($rolePermissions as $permission) {
+                    if (!$role->hasPermissionTo($permission)) {
+                        $role->givePermissionTo($permission);
+                    }
+                }
+            }
         }
     }
 }
