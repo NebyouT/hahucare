@@ -8,6 +8,7 @@ use Modules\Laboratory\Models\LabResult;
 use Modules\Laboratory\Models\LabTest;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class LabResultController extends Controller
 {
@@ -46,7 +47,7 @@ class LabResultController extends Controller
                 return $row->labTest ? $row->labTest->test_name : '-';
             })
             ->addColumn('patient_name', function($row) {
-                return $row->patient ? $row->patient->name : '-';
+                return $row->patient ? $row->patient->full_name : '-';
             })
             ->addColumn('status_badge', function($row) {
                 $badges = [
@@ -78,13 +79,13 @@ class LabResultController extends Controller
         $labTests = LabTest::where('is_active', true)->orderBy('test_name')->get();
         $patients = User::whereHas('roles', function($q) {
             $q->where('name', 'patient');
-        })->orderBy('name')->get();
+        })->orderBy('first_name')->orderBy('last_name')->get();
         $doctors = User::whereHas('roles', function($q) {
             $q->where('name', 'doctor');
-        })->orderBy('name')->get();
+        })->orderBy('first_name')->orderBy('last_name')->get();
         $technicians = User::whereHas('roles', function($q) {
             $q->where('name', 'lab_technician');
-        })->orderBy('name')->get();
+        })->orderBy('first_name')->orderBy('last_name')->get();
         
         return view('laboratory::lab-results.create', compact('labTests', 'patients', 'doctors', 'technicians'));
     }
@@ -126,13 +127,13 @@ class LabResultController extends Controller
         $labTests = LabTest::where('is_active', true)->orderBy('test_name')->get();
         $patients = User::whereHas('roles', function($q) {
             $q->where('name', 'patient');
-        })->orderBy('name')->get();
+        })->orderBy('first_name')->orderBy('last_name')->get();
         $doctors = User::whereHas('roles', function($q) {
             $q->where('name', 'doctor');
-        })->orderBy('name')->get();
+        })->orderBy('first_name')->orderBy('last_name')->get();
         $technicians = User::whereHas('roles', function($q) {
             $q->where('name', 'lab_technician');
-        })->orderBy('name')->get();
+        })->orderBy('first_name')->orderBy('last_name')->get();
         
         return view('laboratory::lab-results.edit', compact('labResult', 'labTests', 'patients', 'doctors', 'technicians'));
     }
@@ -210,12 +211,45 @@ class LabResultController extends Controller
     {
         $request->validate([
             'attachment' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $labResult = LabResult::findOrFail($id);
         
-        // File upload logic here
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('lab_result_attachments', $fileName, 'public');
+            
+            $attachment = new \Modules\Laboratory\Models\LabResultAttachment();
+            $attachment->lab_result_id = $labResult->id;
+            $attachment->file_name = $file->getClientOriginalName();
+            $attachment->file_path = $filePath;
+            $attachment->file_type = $file->getMimeType();
+            $attachment->file_size = $file->getSize();
+            $attachment->description = $request->description ?? null;
+            $attachment->save();
+            
+            return response()->json([
+                'message' => 'Attachment uploaded successfully',
+                'attachment' => $attachment
+            ]);
+        }
         
-        return response()->json(['message' => 'Attachment uploaded successfully']);
+        return response()->json(['message' => 'No file uploaded'], 400);
+    }
+
+    public function removeAttachment($attachment_id)
+    {
+        $attachment = \Modules\Laboratory\Models\LabResultAttachment::findOrFail($attachment_id);
+        
+        // Delete file from storage
+        if (Storage::disk('public')->exists($attachment->file_path)) {
+            Storage::disk('public')->delete($attachment->file_path);
+        }
+        
+        $attachment->delete();
+        
+        return response()->json(['message' => 'Attachment removed successfully']);
     }
 }

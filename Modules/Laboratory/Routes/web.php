@@ -5,6 +5,9 @@ use Modules\Laboratory\Http\Controllers\Backend\LabTestController;
 use Modules\Laboratory\Http\Controllers\Backend\LabResultController;
 use Modules\Laboratory\Http\Controllers\Backend\LabCategoryController;
 use Modules\Laboratory\Http\Controllers\Backend\LabEquipmentController;
+use Modules\Laboratory\Http\Controllers\Backend\LabController;
+use Modules\Laboratory\Http\Controllers\Backend\LabOrderController;
+use Modules\Laboratory\Http\Controllers\LabTestOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +56,34 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
         Route::post('update-status/{id}', [LabEquipmentController::class, 'update_status'])->name('update_status');
     });
     Route::resource('lab-equipment', LabEquipmentController::class);
+
+    // Labs
+    Route::group(['prefix' => 'labs', 'as' => 'labs.'], function () {
+        Route::get('index_data', [LabController::class, 'index_data'])->name('index_data');
+        Route::post('bulk-action', [LabController::class, 'bulk_action'])->name('bulk_action');
+        Route::post('update-status/{id}', [LabController::class, 'update_status'])->name('update_status');
+        Route::get('get-by-clinic/{clinic_id}', [LabController::class, 'getLabsByClinic'])->name('get_by_clinic');
+    });
+    Route::resource('labs', LabController::class);
+
+    // Lab Orders
+    Route::group(['prefix' => 'lab-orders', 'as' => 'lab-orders.'], function () {
+        Route::get('index_data', [LabOrderController::class, 'index_data'])->name('index_data');
+        Route::get('get-tests/{lab_id}', [LabOrderController::class, 'getLabTests'])->name('get_tests');
+    });
+    Route::resource('lab-orders', LabOrderController::class);
+});
+
+// Lab Test Ordering from Encounters
+Route::group(['prefix' => 'lab-orders', 'middleware' => ['auth']], function () {
+    Route::get('create-from-encounter/{encounter_id}', [LabTestOrderController::class, 'create'])->name('lab_orders.create_from_encounter');
+    Route::post('store-from-encounter/{encounter_id}', [LabTestOrderController::class, 'store'])->name('lab_orders.store_from_encounter');
+    Route::get('get-by-encounter/{encounter_id}', [LabTestOrderController::class, 'getOrdersByEncounter'])->name('lab_orders.get_by_encounter');
+    Route::get('show/{order_id}', [LabTestOrderController::class, 'show'])->name('lab_orders.show');
+});
+
+// API Routes for Lab Test Ordering
+Route::group(['prefix' => 'api/lab-orders', 'middleware' => ['auth']], function () {
+    Route::get('get-labs-by-clinic/{clinic_id}', [LabTestOrderController::class, 'getLabsByClinic']);
+    Route::get('get-tests-by-category-and-lab/{category_id}/{lab_id}', [LabTestOrderController::class, 'getTestsByCategoryAndLab']);
 });
