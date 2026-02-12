@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Clinic\Models\Clinics;
+use App\Models\User;
 
 class Lab extends Model
 {
@@ -16,6 +17,7 @@ class Lab extends Model
         'slug',
         'description',
         'clinic_id',
+        'user_id',
         'lab_code',
         'phone_number',
         'email',
@@ -53,6 +55,11 @@ class Lab extends Model
     public function labTests()
     {
         return $this->hasMany(LabTest::class, 'lab_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeActive($query)

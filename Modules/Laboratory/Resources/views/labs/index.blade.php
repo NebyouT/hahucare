@@ -16,7 +16,66 @@
                     @endcan
                 </div>
                 <div class="card-body">
+         
+                   
+                    
+                    <!-- Simple table without DataTables for now -->
                     <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="labs-simple-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Lab Code</th>
+                                    <th>Name</th>
+                                    <th>Clinic</th>
+                                    <th>Lab User</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($allLabs))
+                                    @foreach($allLabs as $lab)
+                                        <tr>
+                                            <td>{{ $lab->id }}</td>
+                                            <td>{{ $lab->lab_code }}</td>
+                                            <td>{{ $lab->name }}</td>
+                                            <td>{{ $lab->clinic ? $lab->clinic->name : 'N/A' }}</td>
+                                            <td>{{ $lab->user ? $lab->user->first_name . ' ' . $lab->user->last_name : 'N/A' }}</td>
+                                            <td>{{ $lab->phone_number ?? 'N/A' }}</td>
+                                            <td>{{ $lab->email }}</td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input status-toggle" type="checkbox" 
+                                                           data-id="{{ $lab->id }}" {{ $lab->is_active ? 'checked' : '' }}>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ route('backend.labs.edit', $lab->id) }}" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger delete-btn" 
+                                                            data-url="{{ route('backend.labs.destroy', $lab->id) }}">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="9" class="text-center">No labs found</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- DataTables table (hidden for now) -->
+                    <div class="table-responsive" style="display: none;">
                         <table id="labs-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -24,6 +83,7 @@
                                     <th>Lab Code</th>
                                     <th>Name</th>
                                     <th>Clinic</th>
+                                    <th>Lab User</th>
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Status</th>
@@ -42,29 +102,8 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    var table = $('#labs-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{{ route("backend.labs.index_data") }}',
-        columns: [
-            { data: 'id', orderable: false, searchable: false, render: function(data) {
-                return '<input type="checkbox" class="row-checkbox" value="' + data + '">';
-            }},
-            { data: 'lab_code', name: 'lab_code' },
-            { data: 'name', name: 'name' },
-            { data: 'clinic_name', name: 'clinic.name' },
-            { data: 'phone_number', name: 'phone_number' },
-            { data: 'email', name: 'email' },
-            { data: 'status', name: 'is_active', orderable: false },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
-        ]
-    });
-
-    // Select all checkboxes
-    $('#select-all').on('click', function() {
-        $('.row-checkbox').prop('checked', this.checked);
-    });
-
+    console.log('Document ready, labs page loaded');
+    
     // Status toggle
     $(document).on('change', '.status-toggle', function() {
         var id = $(this).data('id');
@@ -99,7 +138,7 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     toastr.success(response.message);
-                    table.ajax.reload();
+                    location.reload();
                 },
                 error: function(xhr) {
                     toastr.error(xhr.responseJSON.message || 'Failed to delete lab');

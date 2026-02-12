@@ -14,7 +14,15 @@
                     <form action="{{ route('backend.labs.store') }}" method="POST">
                         @csrf
                         
-                        <div class="row">
+                        <!-- Basic Information -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">
+                                    <i class="ph ph-building-office me-2"></i>
+                                    Basic Information
+                                </h5>
+                            </div>
+                            
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="name" class="form-label">Lab Name <span class="text-danger">*</span></label>
@@ -26,19 +34,6 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="lab_code" class="form-label">Lab Code <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control @error('lab_code') is-invalid @enderror" 
-                                           id="lab_code" name="lab_code" value="{{ old('lab_code') }}" required>
-                                    @error('lab_code')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="clinic_id" class="form-label">Clinic <span class="text-danger">*</span></label>
@@ -59,6 +54,71 @@
                             
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
+                                    <label for="email" class="form-label">Lab Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                                           id="email" name="email" value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" 
+                                              id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Authentication Section -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">
+                                    <i class="ph ph-lock me-2"></i>
+                                    Lab User Authentication
+                                </h5>
+                                <p class="text-muted mb-3">A user account will be created for the lab with the following credentials.</p>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                                           id="password" name="password" required>
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="password_confirmation" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" 
+                                           id="password_confirmation" name="password_confirmation" required>
+                                    @error('password_confirmation')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">
+                                    <i class="ph ph-phone me-2"></i>
+                                    Contact Information
+                                </h5>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
                                     <label for="phone_number" class="form-label">Phone Number</label>
                                     <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" 
                                            id="phone_number" name="phone_number" value="{{ old('phone_number') }}">
@@ -67,125 +127,61 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
+                            
+                            <div class="col-12">
                                 <div class="form-group mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                           id="email" name="email" value="{{ old('email') }}">
-                                    @error('email')
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea class="form-control @error('address') is-invalid @enderror" 
+                                              id="address" name="address" rows="2">{{ old('address') }}</textarea>
+                                    @error('address')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Settings -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">
+                                    <i class="ph ph-gear me-2"></i>
+                                    Status Settings
+                                </h5>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="time_slot_duration" class="form-label">Time Slot Duration (minutes)</label>
-                                    <input type="number" class="form-control @error('time_slot_duration') is-invalid @enderror" 
-                                           id="time_slot_duration" name="time_slot_duration" value="{{ old('time_slot_duration', 30) }}" min="15">
-                                    @error('time_slot_duration')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" 
-                                      id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                            @error('description')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control @error('address') is-invalid @enderror" 
-                                      id="address" name="address" rows="2">{{ old('address') }}</textarea>
-                            @error('address')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group mb-3">
-                                    <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control @error('city') is-invalid @enderror" 
-                                           id="city" name="city" value="{{ old('city') }}">
-                                    @error('city')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <div class="form-group mb-3">
-                                    <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control @error('state') is-invalid @enderror" 
-                                           id="state" name="state" value="{{ old('state') }}">
-                                    @error('state')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <div class="form-group mb-3">
-                                    <label for="country" class="form-label">Country</label>
-                                    <input type="text" class="form-control @error('country') is-invalid @enderror" 
-                                           id="country" name="country" value="{{ old('country') }}">
-                                    @error('country')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <div class="form-group mb-3">
-                                    <label for="postal_code" class="form-label">Postal Code</label>
-                                    <input type="text" class="form-control @error('postal_code') is-invalid @enderror" 
-                                           id="postal_code" name="postal_code" value="{{ old('postal_code') }}">
-                                    @error('postal_code')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" id="is_active" 
-                                           name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }}>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" checked>
                                     <label class="form-check-label" for="is_active">
-                                        Active
+                                        Active Lab
                                     </label>
+                                    <div class="form-text">Enable this lab for operations</div>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" id="is_featured" 
-                                           name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1">
                                     <label class="form-check-label" for="is_featured">
-                                        Featured
+                                        Featured Lab
                                     </label>
+                                    <div class="form-text">Show this lab in featured listings</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('backend.labs.index') }}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Save Lab
-                            </button>
+                        <!-- Submit Buttons -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('backend.labs.index') }}" class="btn btn-secondary">
+                                        <i class="ph ph-arrow-left me-2"></i>Back to Labs
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="ph ph-plus me-2"></i>Create Lab
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -194,3 +190,54 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Password strength indicator
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('password_confirmation');
+    
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        let strength = 0;
+        
+        if (password.length >= 8) strength++;
+        if (password.match(/[a-z]/)) strength++;
+        if (password.match(/[A-Z]/)) strength++;
+        if (password.match(/[0-9]/)) strength++;
+        if (password.match(/[^a-zA-Z0-9]/)) strength++;
+        
+        let strengthText = '';
+        let strengthClass = '';
+        
+        if (strength <= 2) {
+            strengthText = 'Weak';
+            strengthClass = 'text-danger';
+        } else if (strength <= 3) {
+            strengthText = 'Medium';
+            strengthClass = 'text-warning';
+        } else {
+            strengthText = 'Strong';
+            strengthClass = 'text-success';
+        }
+        
+        // Update password strength indicator (you can add this element to the form)
+        const strengthIndicator = document.getElementById('password-strength');
+        if (strengthIndicator) {
+            strengthIndicator.textContent = strengthText;
+            strengthIndicator.className = strengthClass;
+        }
+    });
+    
+    // Confirm password validation
+    confirmPasswordInput.addEventListener('input', function() {
+        if (this.value !== passwordInput.value) {
+            this.setCustomValidity('Passwords do not match');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+});
+</script>
+@endpush

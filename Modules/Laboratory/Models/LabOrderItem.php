@@ -11,20 +11,27 @@ class LabOrderItem extends Model
 
     protected $fillable = [
         'lab_order_id',
-        'lab_test_id',
-        'test_name',
-        'test_description',
+        'lab_service_id',
+        'service_name',
+        'service_description',
         'price',
         'discount_amount',
         'final_price',
         'status',
         'lab_result_id',
+        'urgent_flag',
+        'clinical_notes',
+        'sample_type',
+        'fasting_required',
+        'special_instructions',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'discount_amount' => 'decimal:2',
         'final_price' => 'decimal:2',
+        'urgent_flag' => 'boolean',
+        'fasting_required' => 'boolean',
     ];
 
     public function labOrder()
@@ -32,9 +39,9 @@ class LabOrderItem extends Model
         return $this->belongsTo(LabOrder::class, 'lab_order_id');
     }
 
-    public function labTest()
+    public function labService()
     {
-        return $this->belongsTo(LabTest::class, 'lab_test_id');
+        return $this->belongsTo(LabService::class, 'lab_service_id');
     }
 
     public function labResult()
@@ -55,5 +62,10 @@ class LabOrderItem extends Model
     public function scopeCompleted($query)
     {
         return $query->where('status', 'completed');
+    }
+
+    public function scopeUrgent($query)
+    {
+        return $query->where('urgent_flag', true);
     }
 }

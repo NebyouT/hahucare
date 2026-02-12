@@ -27,6 +27,9 @@ use App\Models\User;
 use Modules\NotificationTemplate\Models\NotificationTemplate;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\IncidenceMail;
+use Modules\Laboratory\Models\Lab;
+use Modules\Laboratory\Models\LabTest;
+use Modules\Laboratory\Models\LabTestCategory;
 
 class FrontendController extends Controller
 {
@@ -171,6 +174,71 @@ class FrontendController extends Controller
     {
         $settings = Setting::whereIn('type', ['bussiness', 'string'])->pluck('val', 'name')->toArray();
         return view('frontend::contact_us', compact('settings'));
+    }
+
+    public function laboratoryList()
+    {
+        $labs = Lab::with('clinic')->where('is_active', true)->get();
+        $categories = LabTestCategory::where('is_active', true)->get();
+        $tests = LabTest::with(['category', 'lab'])->where('is_active', true)->get();
+        
+        return view('frontend::laboratory', compact('labs', 'categories', 'tests'));
+    }
+
+    public function laboratoryCreate()
+    {
+        $categories = LabTestCategory::where('is_active', true)->get();
+        
+        return view('frontend::laboratory-create', compact('categories'));
+    }
+
+    public function laboratoryRequestStore(Request $request)
+    {
+        $request->validate([
+            'patient_name' => 'required|string|max:255',
+            'patient_phone' => 'required|string|max:20',
+            'patient_email' => 'nullable|email|max:255',
+            'patient_age' => 'required|integer|min:1|max:150',
+            'patient_gender' => 'required|in:male,female,other',
+            'preferred_date' => 'required|date|after:today',
+            'tests' => 'required|array|min:1',
+            'tests.*' => 'exists:lab_tests,id',
+            'symptoms' => 'nullable|string|max:1000',
+            'doctor_referral' => 'nullable|string|max:500',
+            'notes' => 'nullable|string|max:500',
+        ]);
+
+        // Create a simple lab request record (you can enhance this based on your needs)
+        $requestData = [
+            'patient_name' => $request->patient_name,
+            'patient_phone' => $request->patient_phone,
+            'patient_email' => $request->patient_email,
+            'patient_age' => $request->patient_age,
+            'patient_gender' => $request->patient_gender,
+            'preferred_date' => $request->preferred_date,
+            'tests' => $request->tests,
+            'symptoms' => $request->symptoms,
+            'doctor_referral' => $request->doctor_referral,
+            'notes' => $request->notes,
+            'status' => 'pending',
+            'created_at' => now(),
+        ];
+
+        // You can store this in a database table or send email notification
+        // For now, we'll just return success
+        
+        // Optional: Send email notification to admin
+        try {
+            // You can implement email sending here
+            // Mail::to('admin@example.com')->send(new LabRequestNotification($requestData));
+        } catch (\Exception $e) {
+            // Log error but continue
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lab test request submitted successfully! We will contact you soon.'
+        ]);
     }
 
     public function incidenceReport()

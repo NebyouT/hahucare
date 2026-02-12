@@ -19,6 +19,10 @@ class LabOrder extends Model
         'patient_id',
         'doctor_id',
         'encounter_id',
+        'order_type', // outpatient, inpatient, emergency
+        'priority', // routine, urgent, stat
+        'clinical_indication', // reason for the test
+        'diagnosis_suspected', // suspected diagnosis
         'notes',
         'total_amount',
         'discount_amount',
@@ -27,9 +31,12 @@ class LabOrder extends Model
         'order_date',
         'confirmed_date',
         'completed_date',
-        'collection_type',
+        'collection_type', // venipuncture, urine, swab, etc.
         'sample_collection_date',
         'collection_notes',
+        'referred_by', // referring doctor if different
+        'department', // hospital department
+        'ward_room', // for inpatients
         'created_by',
         'updated_by',
         'deleted_by',

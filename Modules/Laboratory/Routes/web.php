@@ -7,6 +7,7 @@ use Modules\Laboratory\Http\Controllers\Backend\LabCategoryController;
 use Modules\Laboratory\Http\Controllers\Backend\LabEquipmentController;
 use Modules\Laboratory\Http\Controllers\Backend\LabController;
 use Modules\Laboratory\Http\Controllers\Backend\LabOrderController;
+use Modules\Laboratory\Http\Controllers\Backend\LabServiceController;
 use Modules\Laboratory\Http\Controllers\LabTestOrderController;
 
 /*
@@ -67,10 +68,24 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
     });
     Route::resource('labs', LabController::class);
 
+    // Lab Services
+    Route::group(['prefix' => 'lab-services', 'as' => 'lab-services.'], function () {
+        Route::get('index_data', [LabServiceController::class, 'index_data'])->name('index_data');
+        Route::post('bulk-action', [LabServiceController::class, 'bulk_action'])->name('bulk_action');
+        Route::post('update-status/{id}', [LabServiceController::class, 'update_status'])->name('update_status');
+        Route::get('get-by-category/{category_id}', [LabServiceController::class, 'getServicesByCategory'])->name('get_by_category');
+        Route::get('get-by-lab/{lab_id}', [LabServiceController::class, 'getServicesByLab'])->name('get_by_lab');
+    });
+    Route::resource('lab-services', LabServiceController::class);
+
     // Lab Orders
     Route::group(['prefix' => 'lab-orders', 'as' => 'lab-orders.'], function () {
         Route::get('index_data', [LabOrderController::class, 'index_data'])->name('index_data');
         Route::get('get-tests/{lab_id}', [LabOrderController::class, 'getLabTests'])->name('get_tests');
+        Route::get('get-labs-by-clinic/{clinic_id}', [LabOrderController::class, 'getLabsByClinic'])->name('get_labs_by_clinic');
+        Route::get('get-services-by-lab/{lab_id}', [LabOrderController::class, 'getServicesByLab'])->name('get_services_by_lab');
+        Route::get('get-doctors-by-clinic/{clinic_id}', [LabOrderController::class, 'getDoctorsByClinic'])->name('get_doctors_by_clinic');
+        Route::get('get-patients-by-doctor/{doctor_id}', [LabOrderController::class, 'getPatientsByDoctor'])->name('get_patients_by_doctor');
     });
     Route::resource('lab-orders', LabOrderController::class);
 });
@@ -87,4 +102,9 @@ Route::group(['prefix' => 'lab-orders', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => 'api/lab-orders', 'middleware' => ['auth']], function () {
     Route::get('get-labs-by-clinic/{clinic_id}', [LabTestOrderController::class, 'getLabsByClinic']);
     Route::get('get-tests-by-category-and-lab/{category_id}/{lab_id}', [LabTestOrderController::class, 'getTestsByCategoryAndLab']);
+});
+
+// API Routes for Frontend
+Route::group(['prefix' => 'api', 'middleware' => ['web']], function () {
+    Route::get('/lab-tests/by-category/{category_id}', [LabTestController::class, 'getTestsByCategory']);
 });

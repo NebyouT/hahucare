@@ -1,0 +1,333 @@
+@extends('backend.layouts.app')
+
+@section('title', 'Create Lab Order')
+
+@section('content')
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Create Lab Order</h4>
+                </div>
+                <div class="card-body">
+                    <form id="lab-order-form" method="POST" action="{{ route('backend.lab-orders.store') }}">
+                        @csrf
+                        
+                        <!-- Step 1: Clinic Selection -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="mb-3"><i class="fas fa-hospital"></i> Step 1: Select Clinic</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="clinic_id" class="form-label">Clinic <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="clinic_id" name="clinic_id" required>
+                                        <option value="">Select Clinic</option>
+                                        @foreach($clinics as $clinic)
+                                            <option value="{{ $clinic->id }}">{{ $clinic->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Lab Selection -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="mb-3"><i class="fas fa-flask"></i> Step 2: Select Lab in this Clinic</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="lab_id" class="form-label">Lab <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="lab_id" name="lab_id" required disabled>
+                                        <option value="">Select Lab</option>
+                                    </select>
+                                    <small class="text-muted">Please select a clinic first</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Service Selection -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="mb-3"><i class="fas fa-vial"></i> Step 3: Select Services in this Lab</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Services <span class="text-danger">*</span></label>
+                                    <div id="services-container">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i> Please select a lab first to see available services
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Doctor Selection -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="mb-3"><i class="fas fa-user-md"></i> Step 4: Select Doctor in this Clinic</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="doctor_id" class="form-label">Doctor <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="doctor_id" name="doctor_id" required disabled>
+                                        <option value="">Select Doctor</option>
+                                    </select>
+                                    <small class="text-muted">Please select a clinic first</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Patient Selection -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="mb-3"><i class="fas fa-user-patient"></i> Step 5: Select Patient</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="patient_id" class="form-label">Patient <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="patient_id" name="patient_id" required disabled>
+                                        <option value="">Select Patient</option>
+                                    </select>
+                                    <small class="text-muted">Please select a doctor first</small>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="doctor_id" class="form-label">Doctor <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="doctor_id" name="doctor_id" required>
+                                        <option value="">Select Doctor</option>
+                                        @foreach($doctors as $doctor)
+                                            <option value="{{ $doctor->id }}">{{ $doctor->full_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="collection_type" class="form-label">Collection Type <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="collection_type" name="collection_type" required>
+                                        <option value="clinic">At Clinic</option>
+                                        <option value="home">Home Collection</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="encounter_id" class="form-label">Encounter ID</label>
+                                    <input type="number" class="form-control" id="encounter_id" name="encounter_id">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="notes" class="form-label">Notes</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="collection_notes" class="form-label">Collection Notes</label>
+                            <textarea class="form-control" id="collection_notes" name="collection_notes" rows="2"></textarea>
+                        </div>
+
+                        <hr>
+
+                        <h5>Lab Tests</h5>
+                        <div id="tests-container">
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <select class="form-select" id="test-select" disabled>
+                                        <option value="">Select Lab First</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control" id="test-price" placeholder="Price" readonly>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary" id="add-test-btn" disabled>
+                                        <i class="fas fa-plus"></i> Add Test
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="selected-tests" class="mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Total Amount: $<span id="total-amount">0.00</span></h6>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Final Amount: $<span id="final-amount">0.00</span></h6>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('backend.lab-orders.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </a>
+                            <button type="submit" class="btn btn-primary" id="submit-btn" disabled>
+                                <i class="fas fa-save"></i> Create Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    let selectedTests = [];
+
+    // Load labs when clinic is selected
+    $('#clinic_id').on('change', function() {
+        const clinicId = $(this).val();
+        if (clinicId) {
+            $.get('/app/labs/get-by-clinic/' + clinicId, function(data) {
+                $('#lab_id').html('<option value="">Select Lab</option>');
+                data.forEach(function(lab) {
+                    $('#lab_id').append('<option value="' + lab.id + '">' + lab.name + '</option>');
+                });
+                $('#lab_id').prop('disabled', false);
+            });
+        } else {
+            $('#lab_id').prop('disabled', true).html('<option value="">Select Lab</option>');
+        }
+    });
+
+    // Load tests when lab is selected
+    $('#lab_id').on('change', function() {
+        const labId = $(this).val();
+        if (labId) {
+            $.get('/app/lab-orders/get-tests/' + labId, function(data) {
+                $('#test-select').html('<option value="">Select Test</option>');
+                data.forEach(function(test) {
+                    $('#test-select').append('<option value="' + test.id + '" data-price="' + test.price + '">' + test.test_name + ' - $' + test.price + '</option>');
+                });
+                $('#test-select').prop('disabled', false);
+                $('#add-test-btn').prop('disabled', false);
+            });
+        } else {
+            $('#test-select').prop('disabled', true).html('<option value="">Select Lab First</option>');
+            $('#add-test-btn').prop('disabled', true);
+        }
+    });
+
+    // Update price when test is selected
+    $('#test-select').on('change', function() {
+        const selectedOption = $(this).find(':selected');
+        const price = selectedOption.data('price');
+        $('#test-price').val(price || 0);
+    });
+
+    // Add test to order
+    $('#add-test-btn').on('click', function() {
+        const testSelect = $('#test-select');
+        const testId = testSelect.val();
+        const testName = testSelect.find(':selected').text();
+        const price = parseFloat($('#test-price').val());
+
+        if (testId && !selectedTests.find(t => t.lab_test_id === testId)) {
+            selectedTests.push({
+                lab_test_id: testId,
+                price: price
+            });
+
+            updateTestsDisplay();
+            updateTotals();
+            testSelect.val('').trigger('change');
+            $('#test-price').val('');
+        }
+    });
+
+    function updateTestsDisplay() {
+        const container = $('#selected-tests');
+        container.empty();
+
+        selectedTests.forEach(function(test, index) {
+            const testName = $('#test-select option[value="' + test.lab_test_id + '"]').text().split(' - $')[0];
+            container.append(`
+                <div class="row mb-2" data-test-index="${index}">
+                    <div class="col-md-6">
+                        <input type="hidden" name="tests[${index}][lab_test_id]" value="${test.lab_test_id}">
+                        <input type="text" class="form-control" value="${testName}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="tests[${index}][price]" value="${test.price}" step="0.01" readonly>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn-sm remove-test">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `);
+        });
+    }
+
+    function updateTotals() {
+        const total = selectedTests.reduce((sum, test) => sum + test.price, 0);
+        $('#total-amount').text(total.toFixed(2));
+        $('#final-amount').text(total.toFixed(2));
+        $('#submit-btn').prop('disabled', selectedTests.length === 0);
+    }
+
+    // Remove test
+    $(document).on('click', '.remove-test', function() {
+        const index = $(this).closest('.row').data('test-index');
+        selectedTests.splice(index, 1);
+        updateTestsDisplay();
+        updateTotals();
+    });
+
+    // Submit form
+    $('#lab-order-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        // Add tests data
+        selectedTests.forEach((test, index) => {
+            formData.append(`tests[${index}][lab_test_id]`, test.lab_test_id);
+            formData.append(`tests[${index}][price]`, test.price);
+        });
+
+        $.ajax({
+            url: '{{ route("backend.lab-orders.store") }}',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                toastr.success('Lab order created successfully');
+                window.location.href = '{{ route("backend.lab-orders.index") }}';
+            },
+            error: function(xhr) {
+                const errors = xhr.responseJSON.errors;
+                let errorMessages = [];
+                for (let field in errors) {
+                    errorMessages.push(errors[field][0]);
+                }
+                toastr.error(errorMessages.join('<br>'));
+            }
+        });
+    });
+});
+</script>
+@endpush

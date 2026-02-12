@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Modules\Laboratory\Models\LabOrder;
 use Modules\Laboratory\Models\LabOrderItem;
 use Modules\Laboratory\Models\Lab;
-use Modules\Laboratory\Models\LabTest;
+use Modules\Laboratory\Models\LabService;
 use Modules\Clinic\Models\Clinics;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
@@ -92,16 +92,13 @@ class LabOrderController extends Controller
 
     public function create()
     {
-        $clinics = Clinics::where('is_active', true)->orderBy('name')->get();
-        $labs = Lab::where('is_active', true)->orderBy('name')->get();
-        $patients = User::whereHas('roles', function($q) {
-            $q->where('name', 'patient');
-        })->orderBy('first_name')->orderBy('last_name')->get();
-        $doctors = User::whereHas('roles', function($q) {
-            $q->where('name', 'doctor');
-        })->orderBy('first_name')->orderBy('last_name')->get();
+        $clinics = Clinics::where('status', 1)->orderBy('name')->get();
+        $labs = []; // Will be loaded via AJAX based on clinic
+        $services = []; // Will be loaded via AJAX based on lab
+        $doctors = []; // Will be loaded via AJAX based on clinic
+        $patients = []; // Will be loaded via AJAX based on doctor
         
-        return view('laboratory::lab-orders.create', compact('clinics', 'labs', 'patients', 'doctors'));
+        return view('laboratory::lab-orders.create', compact('clinics', 'labs', 'services', 'doctors', 'patients'));
     }
 
     public function store(Request $request)
@@ -112,12 +109,23 @@ class LabOrderController extends Controller
             'patient_id' => 'required|exists:users,id',
             'doctor_id' => 'required|exists:users,id',
             'encounter_id' => 'nullable|integer',
+            'order_type' => 'required|in:outpatient,inpatient,emergency',
+            'priority' => 'required|in:routine,urgent,stat',
+            'clinical_indication' => 'nullable|string',
+            'diagnosis_suspected' => 'nullable|string',
             'notes' => 'nullable|string',
-            'collection_type' => 'required|in:clinic,home',
+            'collection_type' => 'required|in:venipuncture,urine,swab,other',
             'collection_notes' => 'nullable|string',
-            'tests' => 'required|array|min:1',
-            'tests.*.lab_test_id' => 'required|exists:lab_tests,id',
-            'tests.*.price' => 'required|numeric|min:0',
+            'referred_by' => 'nullable|exists:users,id',
+            'department' => 'nullable|string',
+            'ward_room' => 'nullable|string',
+            'services' => 'required|array|min:1',
+            'services.*.lab_service_id' => 'required|exists:lab_services,id',
+            'services.*.urgent_flag' => 'boolean',
+            'services.*.clinical_notes' => 'nullable|string',
+            'services.*.sample_type' => 'nullable|string',
+            'services.*.fasting_required' => 'boolean',
+            'services.*.special_instructions' => 'nullable|string',
         ]);
 
         DB::beginTransaction();
@@ -129,9 +137,16 @@ class LabOrderController extends Controller
             $labOrder->patient_id = $validated['patient_id'];
             $labOrder->doctor_id = $validated['doctor_id'];
             $labOrder->encounter_id = $validated['encounter_id'] ?? null;
+            $labOrder->order_type = $validated['order_type'];
+            $labOrder->priority = $validated['priority'];
+            $labOrder->clinical_indication = $validated['clinical_indication'] ?? null;
+            $labOrder->diagnosis_suspected = $validated['diagnosis_suspected'] ?? null;
             $labOrder->notes = $validated['notes'] ?? null;
             $labOrder->collection_type = $validated['collection_type'];
             $labOrder->collection_notes = $validated['collection_notes'] ?? null;
+            $labOrder->referred_by = $validated['referred_by'] ?? null;
+            $labOrder->department = $validated['department'] ?? null;
+            $labOrder->ward_room = $validated['ward_room'] ?? null;
             $labOrder->order_date = now();
             $labOrder->status = 'pending';
             $labOrder->created_by = auth()->id();
@@ -141,21 +156,26 @@ class LabOrderController extends Controller
             
             $labOrder->save();
             
-            foreach ($validated['tests'] as $test) {
-                $labTest = LabTest::find($test['lab_test_id']);
+            foreach ($validated['services'] as $service) {
+                $labService = LabService::find($service['lab_service_id']);
                 
                 $orderItem = new LabOrderItem();
                 $orderItem->lab_order_id = $labOrder->id;
-                $orderItem->lab_test_id = $test['lab_test_id'];
-                $orderItem->test_name = $labTest->test_name;
-                $orderItem->test_description = $labTest->description;
-                $orderItem->price = $test['price'];
+                $orderItem->lab_service_id = $service['lab_service_id'];
+                $orderItem->service_name = $labService->name;
+                $orderItem->service_description = $labService->description;
+                $orderItem->price = $labService->price;
                 $orderItem->discount_amount = 0;
-                $orderItem->final_price = $test['price'];
+                $orderItem->final_price = $labService->price;
+                $orderItem->urgent_flag = $service['urgent_flag'] ?? false;
+                $orderItem->clinical_notes = $service['clinical_notes'] ?? null;
+                $orderItem->sample_type = $service['sample_type'] ?? null;
+                $orderItem->fasting_required = $service['fasting_required'] ?? false;
+                $orderItem->special_instructions = $service['special_instructions'] ?? null;
                 $orderItem->status = 'pending';
                 $orderItem->save();
                 
-                $totalAmount += $test['price'];
+                $totalAmount += $labService->price;
             }
             
             $labOrder->total_amount = $totalAmount;
@@ -242,6 +262,51 @@ class LabOrderController extends Controller
         $labOrder->delete();
 
         return response()->json(['message' => 'Lab order deleted successfully']);
+    }
+
+    public function getServicesByLab($lab_id)
+    {
+        $services = LabService::where('lab_id', $lab_id)
+            ->where('is_active', true)
+            ->with(['category'])
+            ->get(['id', 'name', 'price', 'description', 'category_id']);
+            
+        return response()->json($services);
+    }
+
+    public function getLabsByClinic($clinic_id)
+    {
+        $labs = Lab::where('clinic_id', $clinic_id)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get(['id', 'name']);
+            
+        return response()->json($labs);
+    }
+
+    public function getDoctorsByClinic($clinic_id)
+    {
+        $doctors = User::whereHas('roles', function($q) {
+                $q->where('name', 'doctor');
+            })
+            ->where('clinic_id', $clinic_id)
+            ->orderBy('first_name')
+            ->orderBy('last_name')
+            ->get(['id', 'first_name', 'last_name']);
+            
+        return response()->json($doctors);
+    }
+
+    public function getPatientsByDoctor($doctor_id)
+    {
+        $patients = User::whereHas('roles', function($q) {
+                $q->where('name', 'patient');
+            })
+            ->orderBy('first_name')
+            ->orderBy('last_name')
+            ->get(['id', 'first_name', 'last_name']);
+            
+        return response()->json($patients);
     }
 
     public function getLabTests($lab_id)

@@ -177,4 +177,29 @@ class LabTestController extends Controller
         // Export functionality can be implemented later
         return response()->json(['message' => 'Export functionality coming soon']);
     }
+
+    public function getTestsByCategory($category_id)
+    {
+        $tests = LabTest::with('category', 'lab')
+            ->where('is_active', true)
+            ->when($category_id, function($query, $category_id) {
+                return $query->where('category_id', $category_id);
+            })
+            ->get();
+
+        return response()->json([
+            'tests' => $tests->map(function($test) {
+                return [
+                    'id' => $test->id,
+                    'test_name' => $test->test_name,
+                    'description' => $test->description,
+                    'price' => $test->price,
+                    'final_price' => $test->final_price,
+                    'duration_minutes' => $test->duration_minutes,
+                    'category' => $test->category ? $test->category->name : null,
+                    'lab' => $test->lab ? $test->lab->name : null,
+                ];
+            })
+        ]);
+    }
 }

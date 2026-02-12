@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Lab Test Categories')
+@section('title', 'Lab Services')
 
 @section('content')
 <div class="container-fluid">
@@ -8,53 +8,56 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">Lab Test Categories</h4>
-                    @can('create_lab_categories')
-                    <a href="{{ route('backend.lab-categories.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Add New Category
+                    <h4 class="mb-0">Lab Services Management</h4>
+                    <!-- Temporarily remove permission check for debugging -->
+                    <a href="{{ route('backend.lab-services.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Service
                     </a>
-                    @endcan
+                    <!-- @can('create_lab_services')
+                    <a href="{{ route('backend.lab-services.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Service
+                    </a>
+                    @endcan -->
                 </div>
                 <div class="card-body">
-                    
                     <!-- Simple table without DataTables for now -->
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered" id="categories-simple-table">
+                        <table class="table table-striped table-bordered" id="services-simple-table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Slug</th>
+                                    <th>Service Name</th>
                                     <th>Description</th>
-                                    <th>Tests Count</th>
-                                    <th>Sort Order</th>
+                                    <th>Category</th>
+                                    <th>Lab</th>
+                                    <th>Price</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(isset($allCategories))
-                                    @foreach($allCategories as $category)
+                                @if(isset($allServices))
+                                    @foreach($allServices as $service)
                                         <tr>
-                                            <td>{{ $category->id }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
-                                            <td>{{ $category->description ?? 'N/A' }}</td>
-                                            <td>{{ $category->lab_tests_count }}</td>
-                                            <td>{{ $category->sort_order ?? 'N/A' }}</td>
+                                            <td>{{ $service->id }}</td>
+                                            <td>{{ $service->name }}</td>
+                                            <td>{{ $service->description ? Str::limit($service->description, 50) : 'N/A' }}</td>
+                                            <td>{{ $service->category ? $service->category->name : 'N/A' }}</td>
+                                            <td>{{ $service->lab ? $service->lab->name : 'N/A' }}</td>
+                                            <td>${{ number_format($service->price, 2) }}</td>
                                             <td>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input status-toggle" type="checkbox" 
-                                                           data-id="{{ $category->id }}" {{ $category->is_active ? 'checked' : '' }}>
+                                                           data-id="{{ $service->id }}" {{ $service->is_active ? 'checked' : '' }}>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ route('backend.lab-categories.edit', $category->id) }}" class="btn btn-sm btn-primary">
+                                                    <a href="{{ route('backend.lab-services.edit', $service->id) }}" class="btn btn-sm btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-sm btn-danger delete-btn" 
-                                                            data-url="{{ route('backend.lab-categories.destroy', $category->id) }}">
+                                                            data-url="{{ route('backend.lab-services.destroy', $service->id) }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -63,25 +66,10 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="8" class="text-center">No categories found</td>
+                                        <td colspan="8" class="text-center">No services found</td>
                                     </tr>
                                 @endif
                             </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- DataTables table (hidden for now) -->
-                    <div class="table-responsive" style="display: none;">
-                        <table id="lab-categories-table" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Tests Count</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
                         </table>
                     </div>
                 </div>
@@ -94,7 +82,7 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    console.log('Document ready, lab categories page loaded');
+    console.log('Document ready, lab services page loaded');
     
     // Status toggle
     $(document).on('change', '.status-toggle', function() {
@@ -102,7 +90,7 @@ $(document).ready(function() {
         var status = $(this).is(':checked') ? 1 : 0;
         
         $.ajax({
-            url: '{{ url("app/lab-categories/update-status") }}/' + id,
+            url: '{{ url("app/lab-services/update-status") }}/' + id,
             method: 'POST',
             data: {
                 _token: '{{ csrf_token() }}',
@@ -121,7 +109,7 @@ $(document).ready(function() {
     $(document).on('click', '.delete-btn', function() {
         var url = $(this).data('url');
         
-        if (confirm('Are you sure you want to delete this category?')) {
+        if (confirm('Are you sure you want to delete this service?')) {
             $.ajax({
                 url: url,
                 method: 'DELETE',
@@ -133,7 +121,7 @@ $(document).ready(function() {
                     location.reload();
                 },
                 error: function(xhr) {
-                    toastr.error(xhr.responseJSON.message || 'Failed to delete category');
+                    toastr.error(xhr.responseJSON.message || 'Failed to delete service');
                 }
             });
         }

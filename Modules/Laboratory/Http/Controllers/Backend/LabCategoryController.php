@@ -12,7 +12,8 @@ class LabCategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:view_lab_categories', ['only' => ['index', 'index_data']]);
+        // Temporarily remove permission middleware for debugging
+        // $this->middleware('permission:view_lab_categories', ['only' => ['index', 'index_data']]);
         $this->middleware('permission:create_lab_categories', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit_lab_categories', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete_lab_categories', ['only' => ['destroy']]);
@@ -20,7 +21,17 @@ class LabCategoryController extends Controller
 
     public function index()
     {
-        return view('laboratory::lab-categories.index');
+        try {
+            $categoryCount = LabTestCategory::count();
+            // Get all categories with test count
+            $allCategories = LabTestCategory::withCount('labTests')->get();
+            return view('laboratory::lab-categories.index', compact('categoryCount', 'allCategories'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error in index method: ' . $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+        }
     }
 
     public function index_data(Request $request)

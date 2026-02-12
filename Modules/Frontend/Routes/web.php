@@ -52,6 +52,9 @@ Route::middleware(['check.header.menu'])->group(function () {
     Route::get('/services', [ServiceController::class, 'servicesList'])->name('services');
     Route::get('/clinics', [ClinicController::class, 'clinicsList'])->name('clinics');
     Route::get('/doctors', [DoctorController::class, 'doctorsList'])->name('doctors');
+    Route::get('/laboratory', [FrontendController::class, 'laboratoryList'])->name('laboratory');
+    Route::get('/laboratory/create', [FrontendController::class, 'laboratoryCreate'])->name('laboratory.create');
+    Route::post('/laboratory/request/store', [FrontendController::class, 'laboratoryRequestStore'])->name('laboratory.request.store');
 
     ### incidence report route front end
     Route::get('/incidence', [FrontendController::class, 'incidenceReport'])->name('incidence.index');
