@@ -788,7 +788,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Labs',
         'route' => 'backend.labs.index',
         'active' => ['app/labs'],
-        'permission' => ['view_labs'],
+        // 'permission' => ['view_labs'], // Temporarily disabled for debugging
         'order' => 0,
     ]);
 
@@ -808,7 +808,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Tests',
         'route' => 'backend.lab-tests.index',
         'active' => ['app/lab-tests'],
-        'permission' => ['view_lab_tests'],
+        // 'permission' => ['view_lab_tests'], // Temporarily disabled for debugging
         'order' => 0,
     ]);
 
@@ -817,7 +817,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Categories',
         'route' => 'backend.lab-categories.index',
         'active' => ['app/lab-categories'],
-        'permission' => ['view_lab_categories'],
+        // 'permission' => ['view_lab_categories'], // Temporarily disabled for debugging
         'order' => 0,
     ]);
 
@@ -826,7 +826,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Results',
         'route' => 'backend.lab-results.index',
         'active' => ['app/lab-results'],
-        'permission' => ['view_lab_results'],
+        // 'permission' => ['view_lab_results'], // Temporarily disabled for debugging
         'order' => 0,
     ]);
 
@@ -844,7 +844,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Equipment',
         'route' => 'backend.lab-equipment.index',
         'active' => ['app/lab-equipment'],
-        'permission' => ['view_lab_equipment'],
+        // 'permission' => ['view_lab_equipment'], // Temporarily disabled for debugging
         'order' => 0,
     ]);
 }
