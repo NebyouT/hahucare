@@ -835,7 +835,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Orders',
         'route' => 'backend.lab-orders.index',
         'active' => ['app/lab-orders'],
-        'permission' => ['view_lab_orders'],
+        // 'permission' => ['view_lab_orders'], // Temporarily disabled for debugging
         'order' => 0,
     ]);
 
