@@ -16,11 +16,10 @@ class LabController extends Controller
 {
     public function __construct()
     {
-        // Temporarily disabled permissions for debugging
-        // $this->middleware('permission:view_labs', ['only' => ['index', 'index_data']]);
-        // $this->middleware('permission:create_labs', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:edit_labs', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:delete_labs', ['only' => ['destroy']]);
+        $this->middleware('permission:view_labs', ['only' => ['index', 'index_data']]);
+        $this->middleware('permission:create_labs', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_labs', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_labs', ['only' => ['destroy']]);
     }
 
     public function index()

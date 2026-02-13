@@ -42,6 +42,12 @@ class LaboratoryPermissionSeeder extends Seeder
             'edit_labs',
             'delete_labs',
             
+            // Lab Services
+            'view_lab_services',
+            'create_lab_services',
+            'edit_lab_services',
+            'delete_lab_services',
+            
             // Lab Orders
             'view_lab_orders',
             'create_lab_orders',
@@ -69,6 +75,7 @@ class LaboratoryPermissionSeeder extends Seeder
                 'view_lab_results',
                 'view_lab_equipment',
                 'view_labs',
+                'view_lab_services',
                 'view_lab_orders',
                 'create_lab_orders',
                 'edit_lab_orders',
@@ -82,6 +89,7 @@ class LaboratoryPermissionSeeder extends Seeder
                 'edit_lab_results',
                 'view_lab_equipment',
                 'view_labs',
+                'view_lab_services',
                 'view_lab_orders',
                 'edit_lab_orders',
             ],
@@ -90,6 +98,7 @@ class LaboratoryPermissionSeeder extends Seeder
                 'view_lab_categories',
                 'view_lab_results',
                 'view_labs',
+                'view_lab_services',
                 'view_lab_orders',
                 'create_lab_orders',
             ],

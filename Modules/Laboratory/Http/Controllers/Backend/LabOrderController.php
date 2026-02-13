@@ -17,11 +17,10 @@ class LabOrderController extends Controller
 {
     public function __construct()
     {
-        // Temporarily disabled permissions for debugging
-        // $this->middleware('permission:view_lab_orders', ['only' => ['index', 'index_data', 'show']]);
-        // $this->middleware('permission:create_lab_orders', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:edit_lab_orders', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:delete_lab_orders', ['only' => ['destroy']]);
+        $this->middleware('permission:view_lab_orders', ['only' => ['index', 'index_data', 'show']]);
+        $this->middleware('permission:create_lab_orders', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_lab_orders', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_lab_orders', ['only' => ['destroy']]);
     }
 
     public function index()

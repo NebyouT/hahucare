@@ -788,7 +788,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Labs',
         'route' => 'backend.labs.index',
         'active' => ['app/labs'],
-        // 'permission' => ['view_labs'], // Temporarily disabled for debugging
+        'permission' => ['view_labs'],
         'order' => 0,
     ]);
 
@@ -797,7 +797,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Services',
         'route' => 'backend.lab-services.index',
         'active' => ['app/lab-services'],
-        // 'permission' => ['view_lab_services'], // Temporarily disabled for debugging
+        'permission' => ['view_lab_services'],
         'order' => 0,
     ]);
 
@@ -808,7 +808,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Tests',
         'route' => 'backend.lab-tests.index',
         'active' => ['app/lab-tests'],
-        // 'permission' => ['view_lab_tests'], // Temporarily disabled for debugging
+        'permission' => ['view_lab_tests'],
         'order' => 0,
     ]);
 
@@ -817,7 +817,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Categories',
         'route' => 'backend.lab-categories.index',
         'active' => ['app/lab-categories'],
-        // 'permission' => ['view_lab_categories'], // Temporarily disabled for debugging
+        'permission' => ['view_lab_categories'],
         'order' => 0,
     ]);
 
@@ -826,7 +826,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Results',
         'route' => 'backend.lab-results.index',
         'active' => ['app/lab-results'],
-        // 'permission' => ['view_lab_results'], // Temporarily disabled for debugging
+        'permission' => ['view_lab_results'],
         'order' => 0,
     ]);
 
@@ -835,7 +835,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Orders',
         'route' => 'backend.lab-orders.index',
         'active' => ['app/lab-orders'],
-        // 'permission' => ['view_lab_orders'], // Temporarily disabled for debugging
+        'permission' => ['view_lab_orders'],
         'order' => 0,
     ]);
 
@@ -844,7 +844,7 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'title' => 'Lab Equipment',
         'route' => 'backend.lab-equipment.index',
         'active' => ['app/lab-equipment'],
-        // 'permission' => ['view_lab_equipment'], // Temporarily disabled for debugging
+        'permission' => ['view_lab_equipment'],
         'order' => 0,
     ]);
 }

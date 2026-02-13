@@ -12,11 +12,11 @@ class LabTestController extends Controller
 {
     public function __construct()
     {
-        // Temporarily disabled permissions for debugging
-        // $this->middleware('permission:view_lab_tests', ['only' => ['index', 'index_data']]);
-        // $this->middleware('permission:create_lab_tests', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:edit_lab_tests', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:delete_lab_tests', ['only' => ['destroy']]);
+        // Restore permissions for proper role-based access
+        $this->middleware('permission:view_lab_tests', ['only' => ['index', 'index_data']]);
+        $this->middleware('permission:create_lab_tests', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_lab_tests', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_lab_tests', ['only' => ['destroy']]);
     }
 
     public function index()

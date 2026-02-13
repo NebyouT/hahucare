@@ -339,6 +339,11 @@ return [
             'type' => '',
             'is_custom_permission' => 0,
         ],
+        [
+            'module_name' => 'Laboratory',
+            'type' => '',
+            'is_custom_permission' => 0,
+        ],
     ],
     'TIMEZONE' => array(
         '(UTC-11:00) Midway Island' => 'Pacific/Midway',
