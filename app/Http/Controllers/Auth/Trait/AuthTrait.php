@@ -57,6 +57,11 @@ trait AuthTrait
                        return ['status' => 406, 'message' => 'Unauthorized role & The provided credentials do not match our records'];
                 }
 
+                // Allow lab_technician role to login
+                if($user->hasRole('lab_technician')){
+                    // Lab technicians can login, no additional checks needed
+                }
+
                 event(new UserLoginSuccess($request, auth()->user()));
 
                 return ['status' => 200, 'message' => 'Login successful!'];

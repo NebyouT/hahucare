@@ -107,6 +107,7 @@ class LabController extends Controller
             'last_name' => 'Lab', // Default last name for lab users
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'user_type' => 'lab_technician', // Set user_type for login compatibility
             'status' => $validated['is_active'] ?? 1,
             'email_verified_at' => now(),
             'created_by' => auth()->id(),
