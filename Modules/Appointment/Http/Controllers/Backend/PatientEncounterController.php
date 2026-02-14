@@ -42,6 +42,9 @@ use Modules\Clinic\Models\DoctorServiceMapping;
 use Modules\Bed\Models\BedMaster;
 use Modules\Bed\Models\BedType;
 use Modules\Bed\Models\BedAllocation;
+use Modules\Laboratory\Models\LabOrder;
+use Modules\Laboratory\Models\Lab;
+use Modules\Clinic\Models\Clinics;
 
 
 class PatientEncounterController extends Controller

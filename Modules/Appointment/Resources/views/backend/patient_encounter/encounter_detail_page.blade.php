@@ -254,6 +254,28 @@
                                     </div>
                                 </div>
 
+                                <!-- Lab Orders Section -->
+                                <div class="mb-4">
+                                    <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
+                                        <h5 class="card-title">{{ __('laboratory.lab_orders') }}</h5>
+                                        @if ($data['status'] == 1)
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#addLabOrder">
+                                                <div class="d-inline-flex align-items-center gap-1">
+                                                    <i class="ph ph-plus"></i>
+                                                    {{ __('laboratory.add_lab_order') }}
+                                                </div>
+                                            </button>
+                                        @endif
+                                    </div>
+
+                                    <div class="card-body bg-body" style="padding: 1px">
+                                        <div id="lab_order_table">
+                                            @include('laboratory::backend.patient_encounter.component.lab_order_table', ['data' => $data])
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="mb-4">
                                     <div class="card-header px-0 mb-3 d-flex justify-content-between flex-wrap gap-3">
@@ -368,6 +390,10 @@
                         ]
                     )
                 @endif
+
+                @include('laboratory::backend.patient_encounter.component.lab_order_modal', [
+                    'data' => $data,
+                ])
 
                 @include('appointment::backend.patient_encounter.component.medical_report', [
                     'data' => $data,
