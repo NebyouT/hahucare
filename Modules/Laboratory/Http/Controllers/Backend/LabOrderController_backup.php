@@ -2,19 +2,27 @@
 
 namespace Modules\Laboratory\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Modules\Laboratory\Models\LabOrder;
 use Modules\Laboratory\Models\LabOrderItem;
-use Modules\Laboratory\Models\LabService;
 use Modules\Laboratory\Models\Lab;
+use Modules\Laboratory\Models\LabService;
 use Modules\Clinic\Models\Clinics;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class LabOrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view_lab_orders', ['only' => ['index', 'index_data', 'show']]);
+        $this->middleware('permission:create_lab_orders', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_lab_orders', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_lab_orders', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         return view('laboratory::lab-orders.index');
@@ -22,48 +30,63 @@ class LabOrderController extends Controller
 
     public function index_data(Request $request)
     {
-        $labOrders = LabOrder::with(['clinic', 'lab', 'patient', 'doctor'])
-            ->orderBy('created_at', 'desc');
+        $query = LabOrder::with(['clinic', 'lab', 'patient', 'doctor']);
 
-        return DataTables::of($labOrders)
-            ->addColumn('order_number', function ($labOrder) {
-                return '<strong>#' . $labOrder->order_number . '</strong>';
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function($q) use ($search) {
+                $q->where('order_number', 'like', "%{$search}%")
+                  ->orWhereHas('patient', function($subQ) use ($search) {
+                      $subQ->where('first_name', 'like', "%{$search}%")
+                           ->orWhere('last_name', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        if ($request->has('status') && $request->status) {
+            $query->where('status', $request->status);
+        }
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('patient_name', function($row) {
+                return $row->patient ? $row->patient->full_name : '-';
             })
-            ->addColumn('patient_name', function ($labOrder) {
-                return $labOrder->patient->full_name ?? 'N/A';
+            ->addColumn('doctor_name', function($row) {
+                return $row->doctor ? $row->doctor->full_name : '-';
             })
-            ->addColumn('doctor_name', function ($labOrder) {
-                return 'Dr. ' . ($labOrder->doctor->full_name ?? 'N/A');
+            ->addColumn('clinic_name', function($row) {
+                return $row->clinic ? $row->clinic->name : '-';
             })
-            ->addColumn('lab_name', function ($labOrder) {
-                return $labOrder->lab->name ?? 'N/A';
+            ->addColumn('lab_name', function($row) {
+                return $row->lab ? $row->lab->name : '-';
             })
-            ->addColumn('status', function ($labOrder) {
-                $badgeClass = $labOrder->status == 'completed' ? 'success' : 
-                              ($labOrder->status == 'processing' ? 'warning' : 'secondary');
-                return '<span class="badge bg-' . $badgeClass . '">' . ucfirst($labOrder->status) . '</span>';
+            ->addColumn('status_badge', function($row) {
+                $badges = [
+                    'pending' => 'warning',
+                    'confirmed' => 'info',
+                    'in_progress' => 'primary',
+                    'completed' => 'success',
+                    'cancelled' => 'danger',
+                ];
+                $class = $badges[$row->status] ?? 'secondary';
+                return '<span class="badge bg-'.$class.'">'.ucfirst(str_replace('_', ' ', $row->status)).'</span>';
             })
-            ->addColumn('priority', function ($labOrder) {
-                $badgeClass = $labOrder->priority == 'urgent' ? 'danger' : 
-                              ($labOrder->priority == 'stat' ? 'danger' : 'primary');
-                return '<span class="badge bg-' . $badgeClass . '">' . ucfirst($labOrder->priority) . '</span>';
+            ->addColumn('amount', function($row) {
+                return number_format($row->final_amount, 2);
             })
-            ->addColumn('order_date', function ($labOrder) {
-                return $labOrder->order_date->format('M d, Y H:i');
+            ->addColumn('action', function($row) {
+                $showUrl = route('backend.lab-orders.show', $row->id);
+                $editUrl = route('backend.lab-orders.edit', $row->id);
+                $deleteUrl = route('backend.lab-orders.destroy', $row->id);
+                
+                return '<div class="btn-group">
+                    <a href="'.$showUrl.'" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                    <a href="'.$editUrl.'" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-url="'.$deleteUrl.'"><i class="fas fa-trash"></i></button>
+                </div>';
             })
-            ->addColumn('total_amount', function ($labOrder) {
-                return '$' . number_format($labOrder->final_amount, 2);
-            })
-            ->addColumn('action', function ($labOrder) {
-                $buttons = '';
-                $buttons .= '<a href="' . route('backend.lab-orders.show', $labOrder->id) . '" class="btn btn-sm btn-primary me-1">View</a>';
-                if ($labOrder->status != 'completed') {
-                    $buttons .= '<a href="' . route('backend.lab-orders.edit', $labOrder->id) . '" class="btn btn-sm btn-warning me-1">Edit</a>';
-                }
-                $buttons .= '<button type="button" class="btn btn-sm btn-danger" onclick="deleteLabOrder(' . $labOrder->id . ')">Delete</button>';
-                return $buttons;
-            })
-            ->rawColumns(['order_number', 'status', 'priority', 'action'])
+            ->rawColumns(['status_badge', 'action'])
             ->make(true);
     }
 
@@ -228,7 +251,7 @@ class LabOrderController extends Controller
 
     public function show($id)
     {
-        $labOrder = LabOrder::with(['clinic', 'lab', 'patient', 'doctor', 'labOrderItems.labService'])->findOrFail($id);
+        $labOrder = LabOrder::with(['clinic', 'lab', 'patient', 'doctor', 'labOrderItems.labTest'])->findOrFail($id);
         return view('laboratory::lab-orders.show', compact('labOrder'));
     }
 
@@ -249,24 +272,30 @@ class LabOrderController extends Controller
 
     public function update(Request $request, $id)
     {
+        $labOrder = LabOrder::findOrFail($id);
+
         $validated = $request->validate([
             'clinic_id' => 'required|exists:clinics,id',
             'lab_id' => 'required|exists:labs,id',
             'patient_id' => 'required|exists:users,id',
             'doctor_id' => 'required|exists:users,id',
-            'order_type' => 'required|in:outpatient,inpatient,emergency',
-            'priority' => 'required|in:routine,urgent,stat',
-            'clinical_indication' => 'nullable|string',
-            'diagnosis_suspected' => 'nullable|string',
+            'encounter_id' => 'nullable|integer',
             'notes' => 'nullable|string',
-            'collection_type' => 'required|in:venipuncture,urine,swab,other',
+            'collection_type' => 'required|in:clinic,home',
             'collection_notes' => 'nullable|string',
-            'referred_by' => 'nullable|exists:users,id',
-            'department' => 'nullable|string',
-            'ward_room' => 'nullable|string',
+            'status' => 'required|in:pending,confirmed,in_progress,completed,cancelled',
         ]);
 
-        $labOrder = LabOrder::findOrFail($id);
+        $validated['updated_by'] = auth()->id();
+        
+        if ($validated['status'] === 'confirmed' && $labOrder->status !== 'confirmed') {
+            $validated['confirmed_date'] = now();
+        }
+        
+        if ($validated['status'] === 'completed' && $labOrder->status !== 'completed') {
+            $validated['completed_date'] = now();
+        }
+        
         $labOrder->update($validated);
 
         return redirect()->route('backend.lab-orders.index')
@@ -276,13 +305,19 @@ class LabOrderController extends Controller
     public function destroy($id)
     {
         $labOrder = LabOrder::findOrFail($id);
+        
+        if ($labOrder->status === 'in_progress' || $labOrder->status === 'completed') {
+            return response()->json(['message' => 'Cannot delete order that is in progress or completed'], 400);
+        }
+        
+        $labOrder->deleted_by = auth()->id();
+        $labOrder->save();
         $labOrder->delete();
 
-        return redirect()->route('backend.lab-orders.index')
-            ->with('success', 'Lab order deleted successfully');
+        return response()->json(['message' => 'Lab order deleted successfully']);
     }
 
-    public function getLabTests($lab_id)
+    public function getServicesByLab($lab_id)
     {
         $services = LabService::where('lab_id', $lab_id)
             ->where('is_active', true)
@@ -325,16 +360,6 @@ class LabOrderController extends Controller
         return response()->json($services);
     }
 
-    public function getServicesByLab($lab_id)
-    {
-        $services = LabService::where('lab_id', $lab_id)
-            ->where('is_active', true)
-            ->orderBy('name')
-            ->get(['id', 'name', 'price', 'description', 'category_id']);
-            
-        return response()->json($services);
-    }
-
     public function getDoctorsByClinic($clinic_id)
     {
         $doctors = User::whereHas('roles', function($q) {
@@ -358,5 +383,15 @@ class LabOrderController extends Controller
             ->get(['id', 'first_name', 'last_name']);
             
         return response()->json($patients);
+    }
+
+    public function getLabTests($lab_id)
+    {
+        $labTests = LabTest::where('lab_id', $lab_id)
+                           ->where('is_active', true)
+                           ->orderBy('test_name')
+                           ->get(['id', 'test_name', 'price', 'category_id']);
+
+        return response()->json($labTests);
     }
 }
