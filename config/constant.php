@@ -342,7 +342,8 @@ return [
         [
             'module_name' => 'Laboratory',
             'type' => '',
-            'is_custom_permission' => 0,
+            'is_custom_permission' => 1,
+            'more_permission' => ['labs', 'lab_services', 'lab_tests', 'lab_categories', 'lab_results', 'lab_equipment', 'lab_orders'],
         ],
     ],
     'TIMEZONE' => array(
