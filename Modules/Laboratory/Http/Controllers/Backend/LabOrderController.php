@@ -70,12 +70,8 @@ class LabOrderController extends Controller
     public function create()
     {
         $clinics = Clinics::where('status', 1)->orderBy('name')->get();
-        $labs = []; // Will be loaded via AJAX based on clinic
-        $services = []; // Will be loaded via AJAX based on lab
-        $doctors = []; // Will be loaded via AJAX based on clinic
-        $patients = []; // Will be loaded via AJAX based on doctor
         
-        return view('laboratory::lab-orders.create', compact('clinics', 'labs', 'services', 'doctors', 'patients'));
+        return view('laboratory::lab-orders.create_simplified', compact('clinics'));
     }
 
     public function store(Request $request)
@@ -115,7 +111,7 @@ class LabOrderController extends Controller
             }
             $validated['services'] = $servicesArray;
         } else {
-            // Full validation for regular lab orders
+            // Simplified validation for regular lab orders
             $validated = $request->validate([
                 'clinic_id' => 'required|exists:clinics,id',
                 'lab_id' => 'required|exists:labs,id',
@@ -124,22 +120,26 @@ class LabOrderController extends Controller
                 'encounter_id' => 'nullable|integer',
                 'order_type' => 'required|in:outpatient,inpatient,emergency',
                 'priority' => 'required|in:routine,urgent,stat',
-                'clinical_indication' => 'nullable|string',
-                'diagnosis_suspected' => 'nullable|string',
                 'notes' => 'nullable|string',
-                'collection_type' => 'required|in:venipuncture,urine,swab,other',
-                'collection_notes' => 'nullable|string',
-                'referred_by' => 'nullable|exists:users,id',
-                'department' => 'nullable|string',
-                'ward_room' => 'nullable|string',
                 'services' => 'required|array|min:1',
-                'services.*.lab_service_id' => 'required|exists:lab_services,id',
-                'services.*.urgent_flag' => 'boolean',
-                'services.*.clinical_notes' => 'nullable|string',
-                'services.*.sample_type' => 'nullable|string',
-                'services.*.fasting_required' => 'boolean',
-                'services.*.special_instructions' => 'nullable|string',
+                'services.*' => 'required|exists:lab_services,id',
             ]);
+            
+            // Set default values for optional fields
+            $validated['clinical_indication'] = null;
+            $validated['diagnosis_suspected'] = null;
+            $validated['collection_type'] = 'venipuncture';
+            $validated['collection_notes'] = null;
+            $validated['referred_by'] = $validated['doctor_id'];
+            $validated['department'] = null;
+            $validated['ward_room'] = null;
+            
+            // Convert services array to expected format
+            $servicesArray = [];
+            foreach ($validated['services'] as $serviceId) {
+                $servicesArray[] = ['lab_service_id' => $serviceId];
+            }
+            $validated['services'] = $servicesArray;
         }
 
         DB::beginTransaction();
@@ -181,11 +181,11 @@ class LabOrderController extends Controller
                 $orderItem->price = $labService->price;
                 $orderItem->discount_amount = 0;
                 $orderItem->final_price = $labService->price;
-                $orderItem->urgent_flag = $service['urgent_flag'] ?? false;
-                $orderItem->clinical_notes = $service['clinical_notes'] ?? null;
-                $orderItem->sample_type = $service['sample_type'] ?? null;
-                $orderItem->fasting_required = $service['fasting_required'] ?? false;
-                $orderItem->special_instructions = $service['special_instructions'] ?? null;
+                $orderItem->urgent_flag = false;
+                $orderItem->clinical_notes = null;
+                $orderItem->sample_type = null;
+                $orderItem->fasting_required = false;
+                $orderItem->special_instructions = null;
                 $orderItem->status = 'pending';
                 $orderItem->save();
                 
@@ -373,6 +373,32 @@ class LabOrderController extends Controller
         $patients = User::whereHas('roles', function($q) {
                 $q->where('name', 'patient');
             })
+            ->orderBy('first_name')
+            ->orderBy('last_name')
+            ->get(['id', 'first_name', 'last_name']);
+            
+        return response()->json($patients);
+    }
+
+    public function getAllDoctors()
+    {
+        $doctors = User::whereHas('roles', function($q) {
+                $q->where('name', 'doctor');
+            })
+            ->where('status', 1)
+            ->orderBy('first_name')
+            ->orderBy('last_name')
+            ->get(['id', 'first_name', 'last_name']);
+            
+        return response()->json($doctors);
+    }
+
+    public function getAllPatients()
+    {
+        $patients = User::whereHas('roles', function($q) {
+                $q->where('name', 'patient');
+            })
+            ->where('status', 1)
             ->orderBy('first_name')
             ->orderBy('last_name')
             ->get(['id', 'first_name', 'last_name']);

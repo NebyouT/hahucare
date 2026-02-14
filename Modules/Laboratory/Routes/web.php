@@ -88,6 +88,8 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
         Route::get('get-services-by-category/{category_id}', [LabOrderController::class, 'getServicesByCategory'])->name('get_services_by_category');
         Route::get('get-doctors-by-clinic/{clinic_id}', [LabOrderController::class, 'getDoctorsByClinic'])->name('get_doctors_by_clinic');
         Route::get('get-patients-by-doctor/{doctor_id}', [LabOrderController::class, 'getPatientsByDoctor'])->name('get_patients_by_doctor');
+        Route::get('get-all-doctors', [LabOrderController::class, 'getAllDoctors'])->name('get_all_doctors');
+        Route::get('get-all-patients', [LabOrderController::class, 'getAllPatients'])->name('get_all_patients');
     });
     Route::resource('lab-orders', LabOrderController::class);
 });
