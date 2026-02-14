@@ -15,12 +15,11 @@
                 </div>
                 <form method="post" id="lab-order-form" class="requires-validation">
                     @csrf
-                    <input type="hidden" name="encounter_id" value="{{ $data['id'] }}">
-                    <input type="hidden" name="user_id" value="{{ $data['user_id'] }}">
-                    <input type="hidden" name="clinic_id" value="{{ $data['clinic_id'] }}">
-                    <input type="hidden" name="doctor_id" value="{{ $data['doctor_id'] }}">
-                    <input type="hidden" name="patient_id" value="{{ $data['user_id'] }}">
                     <input type="hidden" name="type" value="encounter_lab_order">
+                    <input type="hidden" name="clinic_id" value="{{ $data->clinic_id ?? '' }}">
+                    <input type="hidden" name="patient_id" value="{{ $data->user_id ?? '' }}">
+                    <input type="hidden" name="doctor_id" value="{{ $data->doctor_id ?? '' }}">
+                    <input type="hidden" name="encounter_id" value="{{ $data->id ?? '' }}">
                     <input type="hidden" name="order_type" value="outpatient">
                     <input type="hidden" name="priority" value="routine">
                     <input type="hidden" name="collection_type" value="venipuncture">
@@ -29,19 +28,19 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <div class="alert alert-info">
-                                <h6><i class="ph ph-info"></i> {{ __('laboratory.encounter_information') }}</h6>
+                                <h6><i class="ph ph-info"></i> Encounter Information</h6>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <strong>{{ __('appointment.clinic') }}:</strong> {{ optional($data->clinic)->name ?? 'N/A' }}
+                                        <strong>Clinic:</strong> {{ optional($data->clinic)->name ?? 'N/A' }}
                                     </div>
                                     <div class="col-md-3">
-                                        <strong>{{ __('appointment.doctor') }}:</strong> Dr. {{ optional($data->doctor)->full_name ?? 'N/A' }}
+                                        <strong>Doctor:</strong> {{ optional($data->doctor)->full_name ?? 'N/A' }}
                                     </div>
                                     <div class="col-md-3">
-                                        <strong>{{ __('appointment.patient') }}:</strong> {{ optional($data->user)->full_name ?? 'N/A' }}
+                                        <strong>Patient:</strong> {{ optional($data->user)->full_name ?? 'N/A' }}
                                     </div>
                                     <div class="col-md-3">
-                                        <strong>{{ __('appointment.encounter_id') }}:</strong> #{{ $data['id'] }}
+                                        <strong>Encounter ID:</strong> #{{ $data->id ?? 'N/A' }}
                                     </div>
                                 </div>
                             </div>
@@ -51,9 +50,9 @@
                     <!-- Lab Selection -->
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <label for="lab_id" class="form-label">{{ __('laboratory.select_lab') }} <span class="text-danger">*</span></label>
+                            <label for="lab_id" class="form-label">Select Lab <span class="text-danger">*</span></label>
                             <select class="form-select" id="lab_id" name="lab_id" required>
-                                <option value="">{{ __('laboratory.choose_lab') }}</option>
+                                <option value="">Choose Lab</option>
                             </select>
                         </div>
                     </div>
@@ -61,9 +60,9 @@
                     <!-- Category Selection -->
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <label for="category_id" class="form-label">{{ __('laboratory.select_category') }} <span class="text-danger">*</span></label>
+                            <label for="category_id" class="form-label">Select Category <span class="text-danger">*</span></label>
                             <select class="form-select" id="category_id" name="category_id" required disabled>
-                                <option value="">{{ __('laboratory.choose_category') }}</option>
+                                <option value="">Choose Category</option>
                             </select>
                         </div>
                     </div>
@@ -71,10 +70,10 @@
                     <!-- Lab Services Selection -->
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <label class="form-label">{{ __('laboratory.select_services') }} <span class="text-danger">*</span></label>
+                            <label class="form-label">Select Services <span class="text-danger">*</span></label>
                             <div id="services-container">
                                 <div class="alert alert-info">
-                                    <i class="fas fa-info-circle"></i> {{ __('laboratory.select_lab_and_category_first') }}
+                                    <i class="fas fa-info-circle"></i> Please select lab and category first to see services
                                 </div>
                             </div>
                         </div>
@@ -83,20 +82,20 @@
                     <!-- Referral and Notes -->
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <label for="referral_notes" class="form-label">{{ __('laboratory.referral_notes') }}</label>
+                            <label for="referral_notes" class="form-label">Referral & Clinical Notes</label>
                             <textarea class="form-control" id="referral_notes" name="referral_notes" rows="4"
-                                placeholder="{{ __('laboratory.add_referral_or_clinical_notes') }}"></textarea>
-                            <small class="text-muted">{{ __('laboratory.referral_notes_help') }}</small>
+                                placeholder="Add referral information or clinical notes..."></textarea>
+                            <small class="text-muted">Include any relevant clinical information, symptoms, or specific requirements for the laboratory</small>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="ph ph-x"></i> {{ __('messages.cancel') }}
+                    <i class="ph ph-x"></i> Cancel
                 </button>
                 <button type="button" class="btn btn-primary" onclick="saveLabOrder()">
-                    <i class="ph ph-check"></i> {{ __('laboratory.create_lab_order') }}
+                    <i class="ph ph-check"></i> Create Lab Order
                 </button>
             </div>
         </div>
@@ -126,8 +125,10 @@
         });
 
         function loadLabsForClinic(clinicId) {
+            console.log('Loading labs for clinic:', clinicId); // Debug log
             $.get(`/app/lab-orders/get-labs-by-clinic/${clinicId}`, function(data) {
-                $('#lab_id').empty().append('<option value="">{{ __('laboratory.choose_lab') }}</option>');
+                console.log('Labs received:', data); // Debug log
+                $('#lab_id').empty().append('<option value="">Choose Lab</option>');
                 data.forEach(function(lab) {
                     $('#lab_id').append(`<option value="${lab.id}">${lab.name}</option>`);
                 });
@@ -138,21 +139,21 @@
 
         function loadCategoriesForLab(labId) {
             if (!labId) {
-                $('#category_id').empty().append('<option value="">{{ __('laboratory.choose_category') }}</option>').prop('disabled', true);
+                $('#category_id').empty().append('<option value="">Choose Category</option>').prop('disabled', true);
                 return;
             }
 
             console.log('Loading categories for lab:', labId); // Debug log
-            $('#category_id').empty().append('<option value="">{{ __('laboratory.loading_categories') }}...</option>').prop('disabled', false);
+            $('#category_id').empty().append('<option value="">Loading categories...</option>').prop('disabled', false);
 
             $.get(`/app/lab-orders/get-categories-by-lab/${labId}`, function(data) {
                 console.log('Categories received:', data); // Debug log
                 
-                $('#category_id').empty().append('<option value="">{{ __('laboratory.choose_category') }}</option>');
+                $('#category_id').empty().append('<option value="">Choose Category</option>');
                 
                 if (data.error) {
                     console.error('Server error:', data.error);
-                    $('#category_id').empty().append('<option value="">{{ __('laboratory.error_loading_categories') }}</option>').prop('disabled', true);
+                    $('#category_id').empty().append('<option value="">Error loading categories</option>').prop('disabled', true);
                     return;
                 }
                 
@@ -165,32 +166,32 @@
                 }
             }).fail(function(xhr) {
                 console.error('Error loading categories:', xhr.responseText);
-                $('#category_id').empty().append('<option value="">{{ __('laboratory.error_loading_categories') }}</option>').prop('disabled', true);
+                $('#category_id').empty().append('<option value="">Error loading categories</option>').prop('disabled', true);
             });
         }
 
         function loadLabServices(categoryId) {
             if (!categoryId) {
-                $('#services-container').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> {{ __('laboratory.select_lab_and_category_first') }}</div>');
+                $('#services-container').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> Please select lab and category first to see services</div>');
                 selectedLabServices = [];
                 return;
             }
 
             console.log('Loading services for category:', categoryId); // Debug log
-            $('#services-container').html('<div class="text-center"><div class="spinner-border text-primary"></div> {{ __('messages.loading') }}...</div>');
+            $('#services-container').html('<div class="text-center"><div class="spinner-border text-primary"></div> Loading...</div>');
 
             $.get(`/app/lab-orders/get-services-by-category/${categoryId}`, function(data) {
                 console.log('Services received:', data); // Debug log
                 displayLabServices(data);
             }).fail(function(xhr) {
                 console.error('Error loading services:', xhr.responseText);
-                $('#services-container').html('<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> {{ __('laboratory.error_loading_services') }}</div>');
+                $('#services-container').html('<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Error loading services</div>');
             });
         }
 
         function displayLabServices(services) {
             if (services.length === 0) {
-                $('#services-container').html('<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> {{ __('laboratory.no_services_available') }}</div>');
+                $('#services-container').html('<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> No services available</div>');
                 return;
             }
 
@@ -231,8 +232,8 @@
         }
 
         function resetServices() {
-            $('#category_id').empty().append('<option value="">{{ __('laboratory.choose_category') }}</option>').prop('disabled', true);
-            $('#services-container').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> {{ __('laboratory.select_lab_and_category_first') }}</div>');
+            $('#category_id').empty().append('<option value="">Choose Category</option>').prop('disabled', true);
+            $('#services-container').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> Please select lab and category first to see services</div>');
             selectedLabServices = [];
         }
 
@@ -240,7 +241,7 @@
             if (selectedLabServices.length === 0) {
                 Swal.fire({
                     title: 'Error',
-                    text: '{{ __('laboratory.please_select_at_least_one_service') }}',
+                    text: 'Please select at least one service',
                     icon: 'error'
                 });
                 return;

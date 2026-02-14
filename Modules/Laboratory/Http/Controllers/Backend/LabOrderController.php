@@ -305,6 +305,9 @@ class LabOrderController extends Controller
     public function getCategoriesByLab($lab_id)
     {
         try {
+            // Debug: Log the lab_id
+            \Log::info("Getting categories for lab_id: " . $lab_id);
+            
             // Get all services for this lab with their categories
             $services = LabService::where('lab_id', $lab_id)
                 ->where('is_active', true)
@@ -312,7 +315,10 @@ class LabOrderController extends Controller
                 ->with('category')
                 ->get();
             
+            \Log::info("Found " . $services->count() . " services for lab " . $lab_id);
+            
             if ($services->isEmpty()) {
+                \Log::info("No services found for lab " . $lab_id);
                 return response()->json([]);
             }
             
@@ -327,11 +333,13 @@ class LabOrderController extends Controller
                 ->unique('id')
                 ->values();
             
+            \Log::info("Found " . $categories->count() . " unique categories");
+            
             return response()->json($categories);
             
         } catch (\Exception $e) {
             \Log::error('Error loading categories for lab ' . $lab_id . ': ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to load categories'], 500);
+            return response()->json(['error' => 'Failed to load categories: ' . $e->getMessage()], 500);
         }
     }
 
