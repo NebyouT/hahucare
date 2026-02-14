@@ -304,15 +304,35 @@ class LabOrderController extends Controller
 
     public function getCategoriesByLab($lab_id)
     {
-        $categories = LabService::where('lab_id', $lab_id)
-            ->where('is_active', true)
-            ->with('category')
-            ->get()
-            ->pluck('category')
-            ->unique('id')
-            ->values();
+        try {
+            // Get all services for this lab with their categories
+            $services = LabService::where('lab_id', $lab_id)
+                ->where('is_active', true)
+                ->whereNotNull('category_id')
+                ->with('category')
+                ->get();
             
-        return response()->json($categories);
+            if ($services->isEmpty()) {
+                return response()->json([]);
+            }
+            
+            // Extract unique categories from services
+            $categories = $services
+                ->map(function ($service) {
+                    return $service->category;
+                })
+                ->filter(function ($category) {
+                    return $category !== null;
+                })
+                ->unique('id')
+                ->values();
+            
+            return response()->json($categories);
+            
+        } catch (\Exception $e) {
+            \Log::error('Error loading categories for lab ' . $lab_id . ': ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to load categories'], 500);
+        }
     }
 
     public function getServicesByCategory($category_id)

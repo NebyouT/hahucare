@@ -142,13 +142,27 @@
                 return;
             }
 
+            console.log('Loading categories for lab:', labId); // Debug log
             $('#category_id').empty().append('<option value="">{{ __('laboratory.loading_categories') }}...</option>').prop('disabled', false);
 
             $.get(`/app/lab-orders/get-categories-by-lab/${labId}`, function(data) {
+                console.log('Categories received:', data); // Debug log
+                
                 $('#category_id').empty().append('<option value="">{{ __('laboratory.choose_category') }}</option>');
-                data.forEach(function(category) {
-                    $('#category_id').append(`<option value="${category.id}">${category.name}</option>`);
-                });
+                
+                if (data.error) {
+                    console.error('Server error:', data.error);
+                    $('#category_id').empty().append('<option value="">{{ __('laboratory.error_loading_categories') }}</option>').prop('disabled', true);
+                    return;
+                }
+                
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(category) {
+                        $('#category_id').append(`<option value="${category.id}">${category.name}</option>`);
+                    });
+                } else {
+                    $('#category_id').empty().append('<option value="">No categories available</option>').prop('disabled', true);
+                }
             }).fail(function(xhr) {
                 console.error('Error loading categories:', xhr.responseText);
                 $('#category_id').empty().append('<option value="">{{ __('laboratory.error_loading_categories') }}</option>').prop('disabled', true);
@@ -162,9 +176,11 @@
                 return;
             }
 
+            console.log('Loading services for category:', categoryId); // Debug log
             $('#services-container').html('<div class="text-center"><div class="spinner-border text-primary"></div> {{ __('messages.loading') }}...</div>');
 
             $.get(`/app/lab-orders/get-services-by-category/${categoryId}`, function(data) {
+                console.log('Services received:', data); // Debug log
                 displayLabServices(data);
             }).fail(function(xhr) {
                 console.error('Error loading services:', xhr.responseText);
