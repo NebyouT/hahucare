@@ -1,23 +1,8 @@
 @php
-    $patientsData = [];
-    // Support both $customer, $customers and $patients variable names
-    $customerList = $customer ?? ($customers ?? ($patients ?? []));
-    foreach ($customerList as $patient) {
-        $patientsData[$patient->id] = [
-            'name' => trim($patient->first_name . ' ' . $patient->last_name),
-            'email' => $patient->email ?? '',
-            'mobile' => $patient->mobile ?? '',
-            'created_at' => $patient->created_at ? \Carbon\Carbon::parse($patient->created_at)->format('F Y') : '',
-            'avatar' => $patient->profile_image ?? default_user_avatar(),
-        ];
-    }
-    $authUserId = auth()->id();
     $currencySymbol = \App\Models\Currency::defaultSymbol();
-    
-    // Pre-filled referral data
     $referralPatient = $referral->patient;
-    $referralDoctor = $referral->referredToDoctor;
-    $referralClinic = $doctorClinic;
+    $referralDoctor  = $referral->referredToDoctor;
+    $referralClinic  = $doctorClinic;
 @endphp
 
 @extends('backend.layouts.app')
@@ -281,12 +266,12 @@
                             </div>
 
                             {{-- Form Actions --}}
-                            <div class="d-grid d-sm-flex justify-content-sm-end gap-3 p-3">
-                                <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-white d-block">
-                                    <i class="fas fa-times"></i> {{ __('messages.close') }}
-                                </a>
-                                <button class="btn btn-secondary" name="submit" id="appointment-submit">
-                                    <i class="fas fa-calendar-plus"></i> {{ __('messages.save') }}
+                            <div class="d-flex justify-content-end align-items-center mt-3 gap-2">
+                                <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-white">{{ __('appointment.lbl_close') }}</a>
+                                <button class="btn btn-secondary" type="submit" id="save-appointment-btn">
+                                    <span class="save-btn-text">{{ __('appointment.lbl_save') }}</span>
+                                    <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true" id="save-btn-spinner"></span>
+                                    <span class="loading-text d-none">{{ __('appointment.lbl_loading') }}...</span>
                                 </button>
                             </div>
                         </div>
@@ -297,58 +282,23 @@
     </div>
 </div>
 
-<!-- Loading Modal -->
-<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <h5 class="mt-3">Booking Appointment...</h5>
-                <p>Please wait while we process your request.</p>
-            </div>
-        </div>
-    </div>
-</div>
+{{-- hidden inputs so disabled selects still submit their values --}}
+<input type="hidden" name="clinic_id" value="{{ $referralClinic->id }}">
+<input type="hidden" name="doctor_id" value="{{ $referralDoctor->id }}">
+<input type="hidden" name="patient_id" value="{{ $referralPatient->id }}";
 
-<!-- Success Toast Template -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-success text-white">
-            <strong class="me-auto"><i class="fas fa-check-circle"></i> Success</strong>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Appointment booked successfully!
-        </div>
-    </div>
-</div>
-
-<!-- Error Toast Template -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-danger text-white">
-            <strong class="me-auto"><i class="fas fa-exclamation-circle"></i> Error</strong>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body" id="errorToastBody">
-            An error occurred.
-        </div>
-    </div>
-</div>
-
-@push('scripts')
+@push('after-scripts')
+<link rel="stylesheet" href="{{ mix('modules/appointment/style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Global variables
-    const baseMeta = document.querySelector('meta[name="baseUrl"]');
-    const baseUrl = baseMeta?.getAttribute('content') || window.location.origin;
-    
-    // Form elements
-    const form = document.getElementById('clinic-appointment-form');
-    const patientSelect = document.getElementById('patient-select');
-    const clinicSelect = document.getElementById('clinic-select');
+$(function () {
+    var csrfToken = '{{ csrf_token() }}';
+    var currencySymbol = '{{ $currencySymbol }}';
+    var referralId    = {{ $referral->id }};
+    var clinicId      = {{ $referralClinic->id }};
+    var doctorId      = {{ $referralDoctor->id }};
+    var patientId     = {{ $referralPatient->id }};
+    var redirectUrl   = '{{ route("backend.patientreferral.show", $referral) }}';
     const doctorSelect = document.getElementById('doctor-select');
     const serviceSelect = document.getElementById('service-select');
     const appointmentDate = document.getElementById('appointment-date');

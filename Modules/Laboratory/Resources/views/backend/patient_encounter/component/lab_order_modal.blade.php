@@ -1,101 +1,67 @@
-<div class="modal fade" id="addLabOrder" tabindex="-1" role="dialog" aria-labelledby="labOrderModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+{{-- Lab Order Modal — Doctor creates order from encounter --}}
+<div class="modal fade" id="addLabOrder" tabindex="-1" aria-labelledby="labOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="labOrderModalLabel">{{ __('laboratory.add_lab_order') }}</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header bg-primary text-white py-2">
+                <h5 class="modal-title mb-0" id="labOrderModalLabel">
+                    <i class="ph ph-flask me-1"></i> New Lab Order
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <!-- Loader for lab order modal -->
-                <div id="lab-order-loader" class="text-center py-5" style="display:none;">
-                    <span class="spinner-border text-primary"></span>
+
+            <div class="modal-body p-4">
+                {{-- Context strip --}}
+                <div class="d-flex flex-wrap gap-3 mb-4 p-3 bg-light rounded">
+                    <div><span class="text-muted small">Patient</span><br><strong>{{ optional($data->user)->full_name ?? '—' }}</strong></div>
+                    <div class="vr"></div>
+                    <div><span class="text-muted small">Doctor</span><br><strong>Dr. {{ optional($data->doctor)->full_name ?? '—' }}</strong></div>
+                    <div class="vr"></div>
+                    <div><span class="text-muted small">Clinic</span><br><strong>{{ optional($data->clinic)->name ?? '—' }}</strong></div>
+                    <div class="vr"></div>
+                    <div><span class="text-muted small">Encounter</span><br><strong>#{{ $data->id ?? '—' }}</strong></div>
                 </div>
-                <form method="post" id="lab-order-form" class="requires-validation">
+
+                <form id="lab-order-form">
                     @csrf
-                    <input type="hidden" name="type" value="encounter_lab_order">
-                    <input type="hidden" name="clinic_id" value="{{ $data->clinic_id ?? '' }}">
-                    <input type="hidden" name="patient_id" value="{{ $data->user_id ?? '' }}">
-                    <input type="hidden" name="doctor_id" value="{{ $data->doctor_id ?? '' }}">
-                    <input type="hidden" name="encounter_id" value="{{ $data->id ?? '' }}">
-                    <input type="hidden" name="order_type" value="outpatient">
-                    <input type="hidden" name="priority" value="routine">
+                    <input type="hidden" name="type"           value="encounter_lab_order">
+                    <input type="hidden" name="clinic_id"      value="{{ $data->clinic_id ?? '' }}">
+                    <input type="hidden" name="patient_id"     value="{{ $data->user_id ?? '' }}">
+                    <input type="hidden" name="doctor_id"      value="{{ $data->doctor_id ?? '' }}">
+                    <input type="hidden" name="encounter_id"   value="{{ $data->id ?? '' }}">
+                    <input type="hidden" name="order_type"     value="outpatient">
+                    <input type="hidden" name="priority"       value="routine">
                     <input type="hidden" name="collection_type" value="venipuncture">
-                    
-                    <!-- Pre-filled Information -->
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <div class="alert alert-info">
-                                <h6><i class="ph ph-info"></i> Encounter Information</h6>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <strong>Clinic:</strong> {{ optional($data->clinic)->name ?? 'N/A' }}
-                                    </div>
-                                    <div class="col-md-3">
-                                        <strong>Doctor:</strong> {{ optional($data->doctor)->full_name ?? 'N/A' }}
-                                    </div>
-                                    <div class="col-md-3">
-                                        <strong>Patient:</strong> {{ optional($data->user)->full_name ?? 'N/A' }}
-                                    </div>
-                                    <div class="col-md-3">
-                                        <strong>Encounter ID:</strong> #{{ $data->id ?? 'N/A' }}
-                                    </div>
-                                </div>
-                            </div>
+
+                    {{-- Step 1: Lab --}}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">1. Select Lab <span class="text-danger">*</span></label>
+                        <select class="form-select" id="lo_lab_id" name="lab_id" required>
+                            <option value="">— Choose a lab —</option>
+                        </select>
+                    </div>
+
+                    {{-- Step 2: Services (loads after lab chosen) --}}
+                    <div class="mb-3" id="lo_services_wrap" style="display:none;">
+                        <label class="form-label fw-semibold">2. Select Services <span class="text-danger">*</span></label>
+                        <div id="lo_services_container">
+                            <div class="text-center py-3"><span class="spinner-border spinner-border-sm text-primary"></span> Loading…</div>
                         </div>
                     </div>
 
-                    <!-- Lab Selection -->
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <label for="lab_id" class="form-label">Select Lab <span class="text-danger">*</span></label>
-                            <select class="form-select" id="lab_id" name="lab_id" required>
-                                <option value="">Choose Lab</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Category Selection -->
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <label for="category_id" class="form-label">Select Category <span class="text-danger">*</span></label>
-                            <select class="form-select" id="category_id" name="category_id" required disabled>
-                                <option value="">Choose Category</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Lab Services Selection -->
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <label class="form-label">Select Services <span class="text-danger">*</span></label>
-                            <div id="services-container">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle"></i> Please select lab and category first to see services
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Referral and Notes -->
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <label for="referral_notes" class="form-label">Referral & Clinical Notes</label>
-                            <textarea class="form-control" id="referral_notes" name="referral_notes" rows="4"
-                                placeholder="Add referral information or clinical notes..."></textarea>
-                            <small class="text-muted">Include any relevant clinical information, symptoms, or specific requirements for the laboratory</small>
-                        </div>
+                    {{-- Step 3: Clinical Note --}}
+                    <div class="mb-1" id="lo_note_wrap" style="display:none;">
+                        <label class="form-label fw-semibold">3. Clinical Note <span class="text-muted fw-normal">(optional)</span></label>
+                        <textarea class="form-control" id="lo_referral_notes" name="referral_notes" rows="3"
+                            placeholder="Symptoms, special instructions, or clinical indication…"></textarea>
                     </div>
                 </form>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="ph ph-x"></i> Cancel
-                </button>
-                <button type="button" class="btn btn-primary" onclick="saveLabOrder()">
-                    <i class="ph ph-check"></i> Create Lab Order
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="lo_submit_btn" disabled onclick="saveLabOrder()">
+                    <span id="lo_submit_spinner" class="spinner-border spinner-border-sm me-1" style="display:none;"></span>
+                    <i class="ph ph-paper-plane-tilt me-1"></i> Send to Lab
                 </button>
             </div>
         </div>
@@ -103,210 +69,141 @@
 </div>
 
 @push('after-scripts')
-    <script>
-        let selectedLabServices = [];
+<script>
+(function () {
+    let loSelectedServices = [];
 
-        $(document).ready(function() {
-            // Load labs for the current clinic
-            loadLabsForClinic({{ $data['clinic_id'] }});
+    // Load labs when modal opens
+    $('#addLabOrder').on('show.bs.modal', function () {
+        loSelectedServices = [];
+        $('#lo_services_wrap').hide();
+        $('#lo_note_wrap').hide();
+        $('#lo_submit_btn').prop('disabled', true);
+        $('#lo_lab_id').val('').trigger('change');
 
-            // Lab selection triggers category loading
-            $('#lab_id').on('change', function() {
-                const labId = $(this).val();
-                loadCategoriesForLab(labId);
-                resetServices();
+        const clinicId = {{ $data['clinic_id'] ?? 0 }};
+        $.get(`/app/lab-orders/get-labs-by-clinic/${clinicId}`)
+            .done(function (labs) {
+                $('#lo_lab_id').empty().append('<option value="">— Choose a lab —</option>');
+                if (labs.length) {
+                    labs.forEach(function(l) {
+                        const label = l.same_clinic
+                            ? l.name
+                            : l.name + (l.clinic_name ? ' (' + l.clinic_name + ')' : '');
+                        $('#lo_lab_id').append(`<option value="${l.id}">${label}</option>`);
+                    });
+                } else {
+                    $('#lo_lab_id').append('<option value="" disabled>No labs found</option>');
+                }
+            })
+            .fail(function() {
+                $('#lo_lab_id').append('<option value="" disabled>Error loading labs</option>');
             });
+    });
 
-            // Category selection triggers services loading
-            $('#category_id').on('change', function() {
-                const categoryId = $(this).val();
-                loadLabServices(categoryId);
-            });
-        });
+    // Lab change → load services
+    $('#lo_lab_id').on('change', function () {
+        const labId = $(this).val();
+        loSelectedServices = [];
+        $('#lo_submit_btn').prop('disabled', true);
 
-        function loadLabsForClinic(clinicId) {
-            console.log('Loading labs for clinic:', clinicId); // Debug log
-            $.get(`/app/lab-orders/get-labs-by-clinic/${clinicId}`, function(data) {
-                console.log('Labs received:', data); // Debug log
-                $('#lab_id').empty().append('<option value="">Choose Lab</option>');
-                data.forEach(function(lab) {
-                    $('#lab_id').append(`<option value="${lab.id}">${lab.name}</option>`);
-                });
-            }).fail(function(xhr) {
-                console.error('Error loading labs:', xhr.responseText);
-            });
+        if (!labId) {
+            $('#lo_services_wrap').hide();
+            $('#lo_note_wrap').hide();
+            return;
         }
 
-        function loadCategoriesForLab(labId) {
-            if (!labId) {
-                $('#category_id').empty().append('<option value="">Choose Category</option>').prop('disabled', true);
-                return;
-            }
+        $('#lo_services_wrap').show();
+        $('#lo_note_wrap').show();
+        $('#lo_services_container').html('<div class="text-center py-3"><span class="spinner-border spinner-border-sm text-primary"></span> Loading services…</div>');
 
-            console.log('Loading categories for lab:', labId); // Debug log
-            $('#category_id').empty().append('<option value="">Loading categories...</option>').prop('disabled', false);
-
-            $.get(`/app/lab-orders/get-categories-by-lab/${labId}`, function(data) {
-                console.log('Categories received:', data); // Debug log
-                
-                $('#category_id').empty().append('<option value="">Choose Category</option>');
-                
-                if (data.error) {
-                    console.error('Server error:', data.error);
-                    $('#category_id').empty().append('<option value="">Error loading categories</option>').prop('disabled', true);
+        $.get(`/app/lab-orders/get-services-by-lab/${labId}`)
+            .done(function (services) {
+                if (!services.length) {
+                    $('#lo_services_container').html('<p class="text-muted small">No services found for this lab.</p>');
                     return;
                 }
-                
-                if (Array.isArray(data) && data.length > 0) {
-                    data.forEach(function(category) {
-                        $('#category_id').append(`<option value="${category.id}">${category.name}</option>`);
-                    });
-                } else {
-                    $('#category_id').empty().append('<option value="">No categories available</option>').prop('disabled', true);
-                }
-            }).fail(function(xhr) {
-                console.error('Error loading categories:', xhr.responseText);
-                $('#category_id').empty().append('<option value="">Error loading categories</option>').prop('disabled', true);
-            });
-        }
-
-        function loadLabServices(categoryId) {
-            if (!categoryId) {
-                $('#services-container').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> Please select lab and category first to see services</div>');
-                selectedLabServices = [];
-                return;
-            }
-
-            console.log('Loading services for category:', categoryId); // Debug log
-            $('#services-container').html('<div class="text-center"><div class="spinner-border text-primary"></div> Loading...</div>');
-
-            $.get(`/app/lab-orders/get-services-by-category/${categoryId}`, function(data) {
-                console.log('Services received:', data); // Debug log
-                displayLabServices(data);
-            }).fail(function(xhr) {
-                console.error('Error loading services:', xhr.responseText);
-                $('#services-container').html('<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Error loading services</div>');
-            });
-        }
-
-        function displayLabServices(services) {
-            if (services.length === 0) {
-                $('#services-container').html('<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> No services available</div>');
-                return;
-            }
-
-            let html = '<div class="row">';
-            services.forEach(function(service) {
-                html += `
-                    <div class="col-md-6 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-check">
-                                    <input class="form-check-input service-checkbox" type="checkbox" 
-                                        id="service_${service.id}" value="${service.id}">
-                                    <label class="form-check-label" for="service_${service.id}">
-                                        <strong>${service.name}</strong>
-                                        ${service.price ? '<span class="badge bg-primary ms-2">$' + service.price + '</span>' : ''}
-                                    </label>
-                                </div>
-                                ${service.description ? `<p class="text-muted small mb-2">${service.description}</p>` : ''}
+                let html = '<div class="row g-2">';
+                services.forEach(function (s) {
+                    html += `
+                    <div class="col-sm-6">
+                        <label class="d-flex align-items-start gap-2 p-2 border rounded cursor-pointer lo-service-card" for="lo_svc_${s.id}">
+                            <input class="form-check-input mt-1 lo-service-cb flex-shrink-0" type="checkbox"
+                                id="lo_svc_${s.id}" value="${s.id}">
+                            <div>
+                                <div class="fw-semibold">${s.name}</div>
+                                ${s.description ? `<div class="text-muted small">${s.description}</div>` : ''}
+                                ${s.price ? `<span class="badge bg-primary-subtle text-primary mt-1">${s.price}</span>` : ''}
                             </div>
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            $('#services-container').html(html);
-
-            // Handle service checkbox changes
-            $('.service-checkbox').on('change', function() {
-                const serviceId = $(this).val();
-                const isChecked = $(this).is(':checked');
-                
-                if (isChecked) {
-                    selectedLabServices.push(serviceId);
-                } else {
-                    selectedLabServices = selectedLabServices.filter(id => id !== serviceId);
-                }
-            });
-        }
-
-        function resetServices() {
-            $('#category_id').empty().append('<option value="">Choose Category</option>').prop('disabled', true);
-            $('#services-container').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> Please select lab and category first to see services</div>');
-            selectedLabServices = [];
-        }
-
-        function saveLabOrder() {
-            if (selectedLabServices.length === 0) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Please select at least one service',
-                    icon: 'error'
+                        </label>
+                    </div>`;
                 });
-                return;
-            }
+                html += '</div>';
+                $('#lo_services_container').html(html);
 
-            // Add selected services to form data
-            const formData = $('#lab-order-form').serialize();
-            const servicesData = selectedLabServices.map(id => `services[]=${id}`).join('&');
-            const fullFormData = formData + '&' + servicesData;
-            
-            $.ajax({
-                url: "/app/lab-orders/store",
-                type: 'POST',
-                data: fullFormData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                beforeSend: function() {
-                    $('#lab-order-loader').show();
-                },
-                success: function(response) {
-                    $('#lab-order-loader').hide();
-                    
-                    Swal.fire({
-                        title: 'Success',
-                        text: '{{ __('laboratory.lab_order_created_successfully') }}',
-                        icon: 'success',
-                        showClass: {
-                            popup: 'animate__animated animate__zoomIn'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__zoomOut'
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Close modal
-                            $('#addLabOrder').modal('hide');
-                            
-                            // Reload page to show new lab order
-                            location.reload();
-                        }
-                    });
-                },
-                error: function(xhr) {
-                    $('#lab-order-loader').hide();
-                    
-                    let errorMessage = '{{ __('laboratory.error_creating_lab_order') }}';
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMessage = xhr.responseJSON.message;
+                // Checkbox handler
+                $(document).off('change', '.lo-service-cb').on('change', '.lo-service-cb', function () {
+                    const id = $(this).val();
+                    if ($(this).is(':checked')) {
+                        loSelectedServices.push(id);
+                        $(this).closest('.lo-service-card').addClass('border-primary bg-primary-subtle');
+                    } else {
+                        loSelectedServices = loSelectedServices.filter(x => x !== id);
+                        $(this).closest('.lo-service-card').removeClass('border-primary bg-primary-subtle');
                     }
-                    
-                    Swal.fire({
-                        title: 'Error',
-                        text: errorMessage,
-                        icon: 'error'
-                    });
-                }
+                    $('#lo_submit_btn').prop('disabled', loSelectedServices.length === 0);
+                });
+            })
+            .fail(function () {
+                $('#lo_services_container').html('<p class="text-danger small">Failed to load services.</p>');
             });
-        }
+    });
 
-        // Reset form when modal is hidden
-        $('#addLabOrder').on('hidden.bs.modal', function () {
-            $('#lab-order-form')[0].reset();
-            selectedLabServices = [];
-            resetServices();
+    window.saveLabOrder = function () {
+        if (!loSelectedServices.length) return;
+
+        const btn = $('#lo_submit_btn');
+        btn.prop('disabled', true);
+        $('#lo_submit_spinner').show();
+
+        const formData = $('#lab-order-form').serialize()
+            + '&' + loSelectedServices.map(id => `services[]=${id}`).join('&');
+
+        $.ajax({
+            url: '/app/lab-orders',
+            type: 'POST',
+            data: formData,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        })
+        .done(function (res) {
+            $('#addLabOrder').modal('hide');
+            if (typeof window.successSnackbar === 'function') {
+                window.successSnackbar('Lab order created successfully.');
+            }
+            // Reload page to show the new order in the table
+            setTimeout(function () { window.location.reload(); }, 800);
+        })
+        .fail(function (xhr) {
+            const msg = xhr.responseJSON?.message || xhr.responseJSON?.errors
+                ? Object.values(xhr.responseJSON.errors || {}).flat().join(' ')
+                : 'Failed to create lab order.';
+            window.errorSnackbar ? window.errorSnackbar(msg) : alert(msg);
+        })
+        .always(function () {
+            btn.prop('disabled', false);
+            $('#lo_submit_spinner').hide();
         });
-    </script>
+    };
+
+    // Reset on close
+    $('#addLabOrder').on('hidden.bs.modal', function () {
+        loSelectedServices = [];
+        $('#lo_lab_id').val('');
+        $('#lo_referral_notes').val('');
+        $('#lo_services_wrap').hide();
+        $('#lo_note_wrap').hide();
+        $('#lo_submit_btn').prop('disabled', true);
+    });
+})();
+</script>
 @endpush

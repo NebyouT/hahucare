@@ -230,7 +230,10 @@ function loadLabsForClinic(clinicId) {
         
         if (Array.isArray(data) && data.length > 0) {
             data.forEach(function(lab) {
-                labSelect.append(`<option value="${lab.id}">${lab.name}</option>`);
+                const label = lab.same_clinic
+                    ? lab.name
+                    : lab.name + (lab.clinic_name ? ' (' + lab.clinic_name + ')' : '');
+                labSelect.append(`<option value="${lab.id}">${label}</option>`);
             });
         } else {
             labSelect.append('<option value="">No labs available</option>');

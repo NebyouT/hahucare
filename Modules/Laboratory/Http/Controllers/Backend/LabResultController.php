@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Laboratory\Models\LabResult;
 use Modules\Laboratory\Models\LabTest;
+use Modules\Laboratory\Models\LabOrder;
+use Modules\Laboratory\Models\Lab;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Storage;
@@ -21,9 +23,38 @@ class LabResultController extends Controller
         $this->middleware('permission:delete_lab_results', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('laboratory::lab-results.index');
+        $query = LabOrder::with(['patient', 'doctor', 'lab', 'clinic', 'labOrderItems'])
+            ->orderBy('created_at', 'desc');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('order_number', 'like', "%{$search}%")
+                  ->orWhereHas('patient', function ($q2) use ($search) {
+                      $q2->where('first_name', 'like', "%{$search}%")
+                         ->orWhere('last_name', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        if ($request->filled('lab_id')) {
+            $query->where('lab_id', $request->lab_id);
+        }
+
+        if ($request->filled('date_from')) {
+            $query->whereDate('order_date', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('order_date', '<=', $request->date_to);
+        }
+
+        $orders = $query->paginate(15)->withQueryString();
+        $labs   = Lab::orderBy('name')->get(['id', 'name']);
+
+        return view('laboratory::lab-results.index', compact('orders', 'labs'));
     }
 
     public function index_data(Request $request)

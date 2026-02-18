@@ -839,14 +839,6 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'order' => 0,
     ]);
 
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-first-aid-kit',
-        'title' => 'Lab Equipment',
-        'route' => 'backend.lab-equipment.index',
-        'active' => ['app/lab-equipment'],
-        'permission' => ['view_lab_equipment'],
-        'order' => 0,
-    ]);
 }
 
 if (auth()->user()->hasRole(['doctor'])) {

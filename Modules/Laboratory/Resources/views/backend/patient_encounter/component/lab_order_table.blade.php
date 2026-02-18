@@ -1,131 +1,125 @@
+{{-- Lab Orders table shown inside the Patient Encounter page --}}
 <div class="table-responsive rounded mb-0">
-    <table class="table table-lg m-0" id="lab_order_table">
-        <thead>
-            <tr class="text-white">
-                <th scope="col">{{ __('laboratory.order_number') }}</th>
-                <th scope="col">{{ __('laboratory.lab') }}</th>
-                <th scope="col">{{ __('laboratory.services') }}</th>
-                <th scope="col">{{ __('laboratory.priority') }}</th>
-                <th scope="col">{{ __('laboratory.status') }}</th>
-                <th scope="col">{{ __('laboratory.order_date') }}</th>
-                @if ($data['status'] == 1)
-                    <th scope="col">{{ __('appointment.action') }}</th>
+    <table class="table table-sm align-middle m-0" id="lab_order_table">
+        <thead class="table-light">
+            <tr>
+                <th>Order #</th>
+                <th>Lab</th>
+                <th>Services</th>
+                <th>Status</th>
+                <th>Ordered</th>
+                <th>Result</th>
+                @if (($data['status'] ?? 0) == 1)
+                    <th class="text-end">Action</th>
                 @endif
             </tr>
         </thead>
         <tbody>
-            @if (isset($data['lab_orders']) && count($data['lab_orders']) > 0)
-                @foreach ($data['lab_orders'] as $labOrder)
-                    <tr>
-                        <td>
-                            <p class="m-0 fw-bold">{{ $labOrder['order_number'] }}</p>
-                        </td>
-                        <td>
-                            <p class="m-0">{{ $labOrder['lab_name'] ?? 'N/A' }}</p>
-                        </td>
-                        <td>
-                            @if (isset($labOrder['services']) && count($labOrder['services']) > 0)
-                                @foreach ($labOrder['services'] as $service)
-                                    <span class="badge bg-light text-dark me-1">{{ $service['service_name'] }}</span>
-                                @endforeach
-                            @else
-                                <span class="text-muted">No services</span>
-                            @endif
-                        </td>
-                        <td>
-                            <span class="badge bg-{{ $labOrder['priority'] == 'urgent' ? 'danger' : ($labOrder['priority'] == 'stat' ? 'danger' : 'primary') }}">
-                                {{ ucfirst($labOrder['priority']) }}
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge bg-{{ $labOrder['status'] == 'completed' ? 'success' : ($labOrder['status'] == 'processing' ? 'warning' : 'secondary') }}">
-                                {{ ucfirst($labOrder['status']) }}
-                            </span>
-                        </td>
-                        <td>{{ \Carbon\Carbon::parse($labOrder['order_date'])->format('M d, Y H:i') }}</td>
-                        @if ($data['status'] == 1)
-                            <td class="action">
-                                <div class="d-flex align-items-center gap-3">
-                                    @if ($labOrder['status'] == 'completed')
-                                        <button type="button" class="btn text-success p-0 fs-5"
-                                            onclick="viewLabResults({{ $labOrder['id'] }})"
-                                            data-bs-toggle="tooltip"
-                                            title="View Results">
-                                            <i class="ph ph-clipboard-text"></i>
-                                        </button>
-                                    @endif
-                                    <button type="button" class="btn text-danger p-0 fs-5"
-                                        onclick="destroyLabOrder({{ $labOrder['id'] }}, 'Are you sure you want to delete this lab order?')"
-                                        data-bs-toggle="tooltip"
-                                        title="Delete Order">
-                                        <i class="ph ph-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        @endif
-                    </tr>
-                @endforeach
-            @else
+            @forelse ($data['lab_orders'] ?? [] as $labOrder)
+                @php
+                    $statusColor = match($labOrder['status'] ?? 'pending') {
+                        'completed'  => 'success',
+                        'in_progress'=> 'warning',
+                        'cancelled'  => 'danger',
+                        default      => 'secondary',
+                    };
+                    $services    = $labOrder['services'] ?? [];
+                    $resultFile  = $labOrder['result_file'] ?? null;
+                    $techNote    = $labOrder['technician_note'] ?? null;
+                    $uploadedAt  = $labOrder['result_uploaded_at'] ?? null;
+                @endphp
                 <tr>
-                    <td colspan="{{ $data['status'] == 1 ? 7 : 6 }}">
-                        <div class="my-1 text-danger text-center no-lab-order-message">
-                            {{ __('laboratory.no_lab_orders_found') }}
-                        </div>
+                    <td><span class="fw-semibold text-primary">#{{ $labOrder['order_number'] }}</span></td>
+                    <td>{{ $labOrder['lab_name'] ?? '—' }}</td>
+                    <td>
+                        @forelse ($services as $svc)
+                            <span class="badge bg-light text-dark border me-1">{{ $svc['service_name'] }}</span>
+                        @empty
+                            <span class="text-muted small">—</span>
+                        @endforelse
+                    </td>
+                    <td>
+                        <span class="badge bg-{{ $statusColor }}">{{ ucfirst($labOrder['status'] ?? 'pending') }}</span>
+                    </td>
+                    <td class="text-nowrap small text-muted">
+                        {{ isset($labOrder['order_date']) ? \Carbon\Carbon::parse($labOrder['order_date'])->format('d M Y') : '—' }}
+                    </td>
+                    <td>
+                        @if ($labOrder['status'] === 'completed' && $resultFile)
+                            @foreach (explode(',', $resultFile) as $file)
+                                <a href="{{ asset('storage/' . trim($file)) }}" target="_blank"
+                                   class="btn btn-sm btn-outline-success py-0 px-1 me-1" title="View result file">
+                                    <i class="ph ph-file-arrow-down"></i>
+                                </a>
+                            @endforeach
+                            @if ($techNote)
+                                <span class="text-muted small d-block mt-1" title="{{ $techNote }}">
+                                    <i class="ph ph-note"></i> {{ \Illuminate\Support\Str::limit($techNote, 60) }}
+                                </span>
+                            @endif
+                            @if ($uploadedAt)
+                                <span class="text-muted" style="font-size:0.7rem;">
+                                    {{ \Carbon\Carbon::parse($uploadedAt)->format('d M Y H:i') }}
+                                </span>
+                            @endif
+                        @elseif ($labOrder['status'] === 'completed')
+                            <span class="text-muted small">Result recorded</span>
+                        @else
+                            <span class="text-muted small">Pending</span>
+                        @endif
+                    </td>
+                    @if (($data['status'] ?? 0) == 1)
+                        <td class="text-end">
+                            <button type="button" class="btn btn-sm btn-outline-danger py-0 px-1"
+                                onclick="destroyLabOrder({{ $labOrder['id'] }})"
+                                title="Delete order">
+                                <i class="ph ph-trash"></i>
+                            </button>
+                        </td>
+                    @endif
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-3">
+                        <i class="ph ph-flask me-1"></i> No lab orders yet.
                     </td>
                 </tr>
-            @endif
+            @endforelse
         </tbody>
     </table>
 </div>
 
 @push('after-scripts')
-    <script>
-        function destroyLabOrder(id, message) {
-            confirmDeleteSwal({
-                message
-            }).then((result) => {
-                if (!result.isConfirmed) return;
+<script>
+function destroyLabOrder(id) {
+    if (typeof confirmDeleteSwal === 'function') {
+        confirmDeleteSwal({ message: 'Delete this lab order?' }).then(result => {
+            if (result.isConfirmed) _doDeleteLabOrder(id);
+        });
+    } else if (confirm('Delete this lab order?')) {
+        _doDeleteLabOrder(id);
+    }
+}
 
-                $.ajax({
-                    url: "/app/encounter/delete-lab-order/" + id,
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: (response) => {
-                        if (response.html) {
-                            $('#lab_order_table').html(response.html);
-                            Swal.fire({
-                                title: 'Deleted',
-                                text: response.message,
-                                icon: 'success',
-                                showClass: {
-                                    popup: 'animate__animated animate__zoomIn'
-                                },
-                                hideClass: {
-                                    popup: 'animate__animated animate__zoomOut'
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: response.message || 'Failed to delete the lab order.',
-                                icon: 'error',
-                                showClass: {
-                                    popup: 'animate__animated animate__shakeX'
-                                },
-                                hideClass: {
-                                    popup: 'animate__animated animate__fadeOut'
-                                }
-                            });
-                        }
-                    }
-                });
-            });
+function _doDeleteLabOrder(id) {
+    $.ajax({
+        url: '/app/lab-orders/delete/' + id,
+        type: 'POST',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function (res) {
+            if (res.html) {
+                $('#lab_order_table').html(res.html);
+            }
+            window.successSnackbar
+                ? window.successSnackbar(res.message || 'Lab order deleted.')
+                : alert(res.message || 'Deleted.');
+        },
+        error: function () {
+            window.errorSnackbar
+                ? window.errorSnackbar('Failed to delete lab order.')
+                : alert('Failed to delete.');
         }
-
-        function viewLabResults(labOrderId) {
-            window.open("/app/lab-orders/results/" + labOrderId, '_blank');
-        }
-    </script>
+    });
+}
+</script>
 @endpush

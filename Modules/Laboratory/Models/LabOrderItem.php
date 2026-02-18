@@ -24,6 +24,9 @@ class LabOrderItem extends Model
         'sample_type',
         'fasting_required',
         'special_instructions',
+        'result_file',
+        'technician_note',
+        'result_uploaded_at',
     ];
 
     protected $casts = [
@@ -32,6 +35,7 @@ class LabOrderItem extends Model
         'final_price' => 'decimal:2',
         'urgent_flag' => 'boolean',
         'fasting_required' => 'boolean',
+        'result_uploaded_at' => 'datetime',
     ];
 
     public function labOrder()

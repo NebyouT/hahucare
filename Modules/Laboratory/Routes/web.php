@@ -81,6 +81,9 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
     // Lab Orders
     Route::group(['prefix' => 'lab-orders', 'as' => 'lab-orders.'], function () {
         Route::get('index_data', [LabOrderController::class, 'index_data'])->name('index_data');
+        Route::get('worklist', [LabOrderController::class, 'worklist'])->name('worklist');
+        Route::post('store-result/{order_id}', [LabOrderController::class, 'storeResult'])->name('store_result');
+        Route::post('delete/{id}', [LabOrderController::class, 'deleteLabOrder'])->name('delete_lab_order');
         Route::get('get-tests/{lab_id}', [LabOrderController::class, 'getLabTests'])->name('get_tests');
         Route::get('get-labs-by-clinic/{clinic_id}', [LabOrderController::class, 'getLabsByClinic'])->name('get_labs_by_clinic');
         Route::get('get-categories-by-lab/{lab_id}', [LabOrderController::class, 'getCategoriesByLab'])->name('get_categories_by_lab');

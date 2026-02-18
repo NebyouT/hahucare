@@ -980,6 +980,31 @@
                         });
                     }
 
+                    // Delete a lab order and refresh the table inline
+                    window.destroyLabOrder = function(orderId) {
+                        if (!confirm('Delete this lab order?')) return;
+                        $.ajax({
+                            url: '/app/lab-orders/delete/' + orderId,
+                            type: 'POST',
+                            data: { _token: $('meta[name="csrf-token"]').attr('content') },
+                            success: function(res) {
+                                if (res.status && res.html) {
+                                    $('#lab_order_table').html(res.html);
+                                }
+                                if (typeof window.successSnackbar === 'function') {
+                                    window.successSnackbar(res.message || 'Lab order deleted.');
+                                }
+                            },
+                            error: function(xhr) {
+                                const msg = xhr.responseJSON?.message || 'Failed to delete lab order.';
+                                if (typeof window.errorSnackbar === 'function') {
+                                    window.errorSnackbar(msg);
+                                } else {
+                                    alert(msg);
+                                }
+                            }
+                        });
+                    };
 
                 });
             </script>

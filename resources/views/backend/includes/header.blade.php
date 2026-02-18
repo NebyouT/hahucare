@@ -125,7 +125,7 @@ class="nav navbar navbar-expand-xl navbar-light iq-navbar header-hover-menu left
                     <a class="nav-link py-0" data-bs-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-md">
-                            <img class="avatar avatar-40 img-fluid rounded-pill" src="{{ asset(user_avatar()) }}"
+                            <img class="avatar avatar-40 img-fluid rounded-pill" src="{{ user_avatar() }}"
                                 alt="{{ auth()->user()->name ?? default_user_name() }}" loading="lazy">
                         </div>
                     </a>
@@ -133,7 +133,7 @@ class="nav navbar navbar-expand-xl navbar-light iq-navbar header-hover-menu left
                         <div class="dropdown-header bg-primary-subtle py-2 rounded">
                             <div class="d-flex gap-2">
                                 <img class="avatar avatar-40 img-fluid rounded-pill"
-                                    src="{{ asset(user_avatar()) }}" />
+                                    src="{{ user_avatar() }}" />
                                 <div class="d-flex flex-column align-items-start">
                                     <h6 class="m-0 text-primary">{{ Auth::user()->full_name ?? default_user_name() }}
                                     </h6>

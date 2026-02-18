@@ -1618,6 +1618,31 @@ class PatientEncounterController extends Controller
         $data['payment_status']          = $data->appointmentdetail->appointmenttransaction->payment_status ?? null;
         $data['billingrecord']           = $data->billingrecord ?? null;
         $data['billingrecord_payment']   = $data->billingrecord->payment_status ?? null;
+
+        // Lab orders for this encounter (with result data from order items)
+        $data['lab_orders'] = LabOrder::with(['lab', 'labOrderItems.labService'])
+            ->where('encounter_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($order) {
+                $firstItem = $order->labOrderItems->first();
+                return [
+                    'id'                 => $order->id,
+                    'order_number'       => $order->order_number,
+                    'lab_name'           => optional($order->lab)->name ?? 'N/A',
+                    'priority'           => $order->priority ?? 'routine',
+                    'status'             => $order->status,
+                    'order_date'         => $order->order_date,
+                    'notes'              => $order->notes,
+                    'result_file'        => $firstItem?->result_file,
+                    'technician_note'    => $firstItem?->technician_note,
+                    'result_uploaded_at' => $firstItem?->result_uploaded_at,
+                    'services'           => $order->labOrderItems->map(fn($i) => [
+                        'service_name' => $i->service_name,
+                    ])->toArray(),
+                ];
+            })->toArray();
+
         $data['customform']              = CustomForm::where('module_type', 'appointment_module')
             ->where('status', 1)
             ->get()

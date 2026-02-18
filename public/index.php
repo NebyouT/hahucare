@@ -5,6 +5,11 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Prevent PHP warnings/notices from polluting JSON API responses.
+// Errors are still logged; they just won't be echoed into the response body.
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance

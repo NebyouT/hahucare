@@ -69,7 +69,7 @@ class LabTestOrderController extends Controller
     public function store(Request $request, $encounter_id)
     {
         $validated = $request->validate([
-            'clinic_id' => 'required|exists:clinics,id',
+            'clinic_id' => 'required|exists:clinic,id',
             'lab_id' => 'required|exists:labs,id',
             'patient_id' => 'required|exists:users,id',
             'doctor_id' => 'required|exists:users,id',

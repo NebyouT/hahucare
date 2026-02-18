@@ -166,7 +166,7 @@ class LabController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'clinic_id' => 'required|exists:clinics,id',
+            'clinic_id' => 'required|exists:clinic,id',
             'lab_code' => 'required|string|unique:labs,lab_code,' . $id,
             'phone_number' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
