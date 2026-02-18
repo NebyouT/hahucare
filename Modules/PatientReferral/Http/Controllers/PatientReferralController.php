@@ -1,4 +1,4 @@
-<?php
+?php
 
 namespace Modules\PatientReferral\Http\Controllers;
 
@@ -340,52 +340,24 @@ class PatientReferralController extends Controller
                     ->with('error', 'This referral must be accepted before booking an appointment.');
             }
             
-            // Get data needed for appointment booking
-            $clinics = \Modules\Clinic\Models\Clinics::where('status', 1)->get();
-            $services = \Modules\Clinic\Models\ClinicsService::where('status', 1)->get();
-            
-            // Get the doctor's clinic information
+            // Get the doctor's clinic
             $doctorClinicMapping = \Modules\Clinic\Models\DoctorClinicMapping::where('doctor_id', $referral->referred_to)
                 ->with('clinics')
                 ->first();
-                
-            $doctorClinic = null;
-            if ($doctorClinicMapping && $doctorClinicMapping->clinics) {
-                $doctorClinic = $doctorClinicMapping->clinics;
+
+            $doctorClinic = $doctorClinicMapping?->clinics ?? null;
+
+            if (!$doctorClinic) {
+                return redirect()->route('backend.patientreferral.show', $referral)
+                    ->with('error', 'No clinic found for the referred doctor. Please assign the doctor to a clinic first.');
             }
-            
-            // Debug: Log the data
-            \Log::info('Referral booking data', [
-                'referral_id' => $referral->id,
-                'doctor_id' => $referral->referred_to,
-                'clinic_id' => $doctorClinic ? $doctorClinic->id : null,
-                'clinics_count' => $clinics->count(),
-                'services_count' => $services->count()
-            ]);
-            
-            return view('patientreferral::backend.book_appointment', compact('referral', 'clinics', 'services', 'doctorClinic'));
-            
+
+            return view('patientreferral::backend.book_appointment', compact('referral', 'doctorClinic'));
+
         } catch (\Exception $e) {
-            \Log::error('Referral booking error: ' . $e->getMessage(), [
-                'id' => $id,
-                'trace' => $e->getTraceAsString()
-            ]);
-            
-            // Return a simple error view for debugging
-            return response()->view('errors.500', [
-                'message' => 'Error loading booking page: ' . $e->getMessage()
-            ], 500);
+            \Log::error('Referral booking error: ' . $e->getMessage(), ['id' => $id]);
+            return redirect()->route('backend.patientreferral.show', $id)
+                ->with('error', 'Error loading booking page: ' . $e->getMessage());
         }
     }
-
-// Modules/PatientReferral/Http/Controllers/PatientReferralController.php
-
-public function __construct()
-{
-    $this->middleware('permission:view_patient_referral')->only(['index', 'show']);
-    $this->middleware('permission:add_patient_referral')->only(['create', 'store']);
-    $this->middleware('permission:edit_patient_referral')->only(['edit', 'update', 'acceptReferral', 'bookAppointment']);
-    $this->middleware('permission:delete_patient_referral')->only(['destroy']);
-}
-
 }
