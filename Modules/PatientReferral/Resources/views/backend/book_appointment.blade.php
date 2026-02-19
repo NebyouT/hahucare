@@ -1,5 +1,5 @@
 ﻿@php
-    $currencySymbol  = \App\Models\Currency::defaultSymbol();
+    $currencySymbol  = '$';
     $referralPatient = $referral->patient;
     $referralDoctor  = $referral->referredToDoctor;
     $referralClinic  = $doctorClinic;
@@ -204,7 +204,7 @@
 </div>
 @endsection
 
-@push('scripts')
+@push('after-scripts')
 <script>
 $(function () {
     var csrfToken      = '{{ csrf_token() }}';
@@ -254,10 +254,10 @@ $(function () {
                 $('#available-slots').html('<p class="text-muted text-center bg-body-secondary p-3 rounded">{{ __("appointment.lbl_slot_not_found") }}</p>');
                 return;
             }
-            var html = '<div class="d-flex flex-wrap gap-3 align-items-center">';
+            var html = '<div class="d-flex flex-wrap gap-2">';
             $.each(slots, function (i, s) {
-                html += '<input type="radio" class="btn-check form-check-input" id="slot' + i + '" name="appointment_time" value="' + s + '">';
-                html += '<label for="slot' + i + '" class="clickable-text form-check-label">' + s + '</label>';
+                html += '<input type="radio" class="btn-check" id="slot' + i + '" name="appointment_time" value="' + s + '" autocomplete="off">';
+                html += '<label for="slot' + i + '" class="btn btn-outline-primary slot-label">' + s + '</label>';
             });
             html += '</div>';
             $('#available-slots').html(html);
@@ -267,8 +267,8 @@ $(function () {
     }
 
     $(document).on('change', 'input[name="appointment_time"]', function () {
-        $('label.form-check-label').removeClass('selected_slot');
-        $(this).next('label').addClass('selected_slot');
+        $('.slot-label').removeClass('active');
+        $(this).next('label').addClass('active');
     });
 
     $('#service-select').on('change', function () {

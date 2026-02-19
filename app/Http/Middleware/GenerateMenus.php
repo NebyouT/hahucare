@@ -792,25 +792,18 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'order' => 0,
     ]);
 
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-currency-dollar',
-        'title' => 'Lab Services',
-        'route' => 'backend.lab-services.index',
-        'active' => ['app/lab-services'],
-        'permission' => ['view_lab_services'],
-        'order' => 0,
-    ]);
+  
 
     
 
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-test-tube',
-        'title' => 'Lab Tests',
-        'route' => 'backend.lab-tests.index',
-        'active' => ['app/lab-tests'],
-        'permission' => ['view_lab_tests'],
-        'order' => 0,
-    ]);
+    // $this->childMain($laboratory, [
+    //     'icon' => 'ph ph-test-tube',
+    //     'title' => 'Lab Tests',
+    //     'route' => 'backend.lab-tests.index',
+    //     'active' => ['app/lab-tests'],
+    //     'permission' => ['view_lab_tests'],
+    //     'order' => 0,
+    // ]);
 
     $this->childMain($laboratory, [
         'icon' => 'ph ph-folder',
@@ -818,6 +811,15 @@ if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
         'route' => 'backend.lab-categories.index',
         'active' => ['app/lab-categories'],
         'permission' => ['view_lab_categories'],
+        'order' => 0,
+    ]);
+
+      $this->childMain($laboratory, [
+        'icon' => 'ph ph-currency-dollar',
+        'title' => 'Lab Services',
+        'route' => 'backend.lab-services.index',
+        'active' => ['app/lab-services'],
+        'permission' => ['view_lab_services'],
         'order' => 0,
     ]);
 
@@ -857,14 +859,14 @@ if (auth()->user()->hasRole(['doctor'])) {
 if (auth()->user()->hasRole(['lab_technician'])) {
     $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
 
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-test-tube',
-        'title' => 'Lab Tests',
-        'route' => 'backend.lab-tests.index',
-        'active' => ['app/lab-tests'],
-        'permission' => ['view_lab_tests'],
-        'order' => 0,
-    ]);
+    // $this->mainRoute($menu, [
+    //     'icon' => 'ph ph-test-tube',
+    //     'title' => 'Lab Tests',
+    //     'route' => 'backend.lab-tests.index',
+    //     'active' => ['app/lab-tests'],
+    //     'permission' => ['view_lab_tests'],
+    //     'order' => 0,
+    // ]);
 
     $this->mainRoute($menu, [
         'icon' => 'ph ph-clipboard-text',

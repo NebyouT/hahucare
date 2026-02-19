@@ -210,19 +210,14 @@ class ClinicsServiceController extends Controller
                     }
                 }
             } else {
-                // For other roles (vendor, admin, etc.), apply SetRole scope
-                // But rebuild query to apply SetRole filter
-                if (!$hasDoctorMappings) {
-                    // If no doctor mappings, use SetRole to filter by vendor
+                // For other roles (vendor, admin, etc.)
+                if (!$hasDoctorMappings && !$clinic_id) {
+                    // No doctor mappings and no clinic filter — use SetRole to filter by vendor
                     $data = ClinicsService::SetRole($user)->where('status', 1)
                         ->with('category', 'sub_category', 'doctor_service', 'ClinicServiceMapping', 'systemservice');
-                    \Log::info('Service index_list - Using SetRole scope (no doctor mappings)');
-                } else {
-                    // If doctor has mappings, still apply vendor filter via SetRole
-                    $vendorFilter = ClinicsService::SetRole($user);
-                    $data->whereIn('id', $vendorFilter->pluck('id'));
-                    \Log::info('Service index_list - Applied vendor filter to doctor mappings');
+                    \Log::info('Service index_list - Using SetRole scope (no doctor mappings, no clinic)');
                 }
+                // If clinic_id is set, the clinic filter below will handle scoping — skip SetRole
             }
         } else {
             // No doctor selected - use SetRole scope

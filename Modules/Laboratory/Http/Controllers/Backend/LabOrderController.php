@@ -261,17 +261,19 @@ class LabOrderController extends Controller
 
     public function edit($id)
     {
-        $labOrder = LabOrder::findOrFail($id);
-        $clinics = Clinics::where('is_active', true)->orderBy('name')->get();
+        $labOrder = LabOrder::with(['labOrderItems.labService'])->findOrFail($id);
+        $clinics = Clinics::where('status', 1)->orderBy('name')->get();
         $labs = Lab::where('is_active', true)->orderBy('name')->get();
-        $patients = User::whereHas('roles', function($q) {
-            $q->where('name', 'patient');
-        })->orderBy('first_name')->orderBy('last_name')->get();
+        $labServices = LabService::where('lab_id', $labOrder->lab_id)->orderBy('name')->get();
+        $patients = User::where('user_type', 'user')->where('status', 1)
+            ->orderBy('first_name')->orderBy('last_name')->get();
         $doctors = User::whereHas('roles', function($q) {
             $q->where('name', 'doctor');
-        })->orderBy('first_name')->orderBy('last_name')->get();
+        })->orWhere('user_type', 'doctor')
+            ->where('status', 1)
+            ->orderBy('first_name')->orderBy('last_name')->get();
         
-        return view('laboratory::lab-orders.edit', compact('labOrder', 'clinics', 'labs', 'patients', 'doctors'));
+        return view('laboratory::lab-orders.edit', compact('labOrder', 'clinics', 'labs', 'labServices', 'patients', 'doctors'));
     }
 
     public function update(Request $request, $id)
