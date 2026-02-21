@@ -329,26 +329,28 @@ class AppointmentController extends Controller
         $advancePaid = $appointment->advance_paid_amount > 0;
 
         $paymentMethodsList = [
-            'cash' => 'cash_payment_method',
+            'cash'   => 'cash_payment_method',
             'Wallet' => 'wallet_payment_method',
-            'Stripe' => 'str_payment_method',
-            'Paystack' => 'paystack_payment_method',
-            'PayPal' => 'paypal_payment_method',
-            'Flutterwave' => 'flutterwave_payment_method',
-            'Airtel' => 'airtel_payment_method',
-            'PhonePay' => 'phonepay_payment_method',
-            'Midtrans' => 'midtrans_payment_method',
-            'Cinet' => 'cinet_payment_method',
-            'Sadad' => 'sadad_payment_method',
-            'Razor' => 'razor_payment_method',
+            'chapa'  => 'chapa_payment_method',
+            // 'Stripe'      => 'str_payment_method',
+            // 'Paystack'    => 'paystack_payment_method',
+            // 'PayPal'      => 'paypal_payment_method',
+            // 'Flutterwave' => 'flutterwave_payment_method',
+            // 'Airtel'      => 'airtel_payment_method',
+            // 'PhonePay'    => 'phonepay_payment_method',
+            // 'Midtrans'    => 'midtrans_payment_method',
+            // 'Cinet'       => 'cinet_payment_method',
+            // 'Sadad'       => 'sadad_payment_method',
+            // 'Razor'       => 'razor_payment_method',
         ];
 
-        $paymentMethods = ['Wallet'];
+        $paymentMethods = ['Wallet', 'cash', 'chapa'];
         foreach ($paymentMethodsList as $displayName => $settingKey) {
             if (setting($settingKey, 0) == 1) {
                 $paymentMethods[] = $displayName;
             }
         }
+        $paymentMethods = array_unique($paymentMethods);
         $appointment->currency_symbol = $currencySymbol;
 
         // Get medical reports uploaded by user during booking (not from encounter)
@@ -889,18 +891,19 @@ class AppointmentController extends Controller
         $price = $paymentData['payble_amount'];
 
         $paymentHandlers = [
-            'cash' => 'CashPayment',
-            'Wallet' => 'WalletPayment',
-            'Stripe' => 'StripePayment',
-            'Razor Pay' => 'RazorpayPayment',
-            'Paystack' => 'PaystackPayment',
-            'PayPal' => 'PayPalPayment',
-            'Flutterwave' => 'FlutterwavePayment',
-            'cinet' => 'CinetPayment',
-            'sadad' => 'SadadPayment',
-            'airtel' => 'AirtelPayment',
-            'PhonePay' => 'PhonePePayment',
-            'midtrans' => 'MidtransPayment',
+            'cash'      => 'CashPayment',
+            'Wallet'    => 'WalletPayment',
+            'chapa'     => 'ChapaPaymentProxy',
+            // 'Stripe'      => 'StripePayment',
+            // 'Razor Pay'   => 'RazorpayPayment',
+            // 'Paystack'    => 'PaystackPayment',
+            // 'PayPal'      => 'PayPalPayment',
+            // 'Flutterwave' => 'FlutterwavePayment',
+            // 'cinet'       => 'CinetPayment',
+            // 'sadad'       => 'SadadPayment',
+            // 'airtel'      => 'AirtelPayment',
+            // 'PhonePay'    => 'PhonePePayment',
+            // 'midtrans'    => 'MidtransPayment',
         ];
         if (array_key_exists($paymentMethod, $paymentHandlers)) {
 
@@ -988,18 +991,19 @@ class AppointmentController extends Controller
         $paymentData['product_name'] = $paymentData['service_name'];
 
         $paymentHandlers = [
-            'cash' => 'CashPayment',
+            'cash'   => 'CashPayment',
             'Wallet' => 'WalletPayment',
-            'Stripe' => 'StripePayment',
-            'Razor' => 'RazorpayPayment',
-            'Paystack' => 'PaystackPayment',
-            'PayPal' => 'PayPalPayment',
-            'Flutterwave' => 'FlutterwavePayment',
-            'cinet' => 'CinetPayment',
-            'sadad' => 'SadadPayment',
-            'airtel' => 'AirtelPayment',
-            'phonepe' => 'PhonePePayment',
-            'midtrans' => 'MidtransPayment',
+            'chapa'  => 'ChapaPaymentProxy',
+            // 'Stripe'      => 'StripePayment',
+            // 'Razor'       => 'RazorpayPayment',
+            // 'Paystack'    => 'PaystackPayment',
+            // 'PayPal'      => 'PayPalPayment',
+            // 'Flutterwave' => 'FlutterwavePayment',
+            // 'cinet'       => 'CinetPayment',
+            // 'sadad'       => 'SadadPayment',
+            // 'airtel'      => 'AirtelPayment',
+            // 'phonepe'     => 'PhonePePayment',
+            // 'midtrans'    => 'MidtransPayment',
         ];
 
         if (!array_key_exists($request->transaction_type, $paymentHandlers)) {
@@ -1016,6 +1020,13 @@ class AppointmentController extends Controller
 
         $message = 'Payment Successfull';
         return response()->json(['message' => $message, 'data' => $paymentData, 'currency' => $currencySymbol, 'status' => true], 200);
+    }
+
+    //chapa payment proxy — delegates to ChapaController
+    public function ChapaPaymentProxy(Request $request, $paymentData, $price)
+    {
+        return app(\Modules\Frontend\Http\Controllers\ChapaController::class)
+            ->ChapaPayment($request, $paymentData, $price);
     }
 
     //cash payment
@@ -2149,26 +2160,29 @@ class AppointmentController extends Controller
         $gateway = $request->input('gateway');
 
         switch ($gateway) {
-            case 'stripe':
-                return $this->handleStripeSuccess($request);
-            case 'razorpay':
-                return $this->handleRazorpaySuccess($request);
-            case 'paystack':
-                return $this->handlePaystackSuccess($request);
-            case 'paypal':
-                return $this->handlePayPalSuccess($request);
-            case 'flutterwave':
-                return $this->handleFlutterwaveSuccess($request);
-            case 'cinet':
-                return $this->handleCinetSuccess($request);
-            case 'sadad':
-                return $this->handleSadadSuccess($request);
-            case 'airtel':
-                return $this->handleAirtelSuccess($request);
-            case 'phonepe':
-                return $this->handlePhonePeSuccess($request);
-            case 'midtrans':
-                return $this->MidtransPayment($request);
+            case 'chapa':
+                return app(\Modules\Frontend\Http\Controllers\ChapaController::class)
+                    ->handleChapaSuccess($request);
+            // case 'stripe':
+            //     return $this->handleStripeSuccess($request);
+            // case 'razorpay':
+            //     return $this->handleRazorpaySuccess($request);
+            // case 'paystack':
+            //     return $this->handlePaystackSuccess($request);
+            // case 'paypal':
+            //     return $this->handlePayPalSuccess($request);
+            // case 'flutterwave':
+            //     return $this->handleFlutterwaveSuccess($request);
+            // case 'cinet':
+            //     return $this->handleCinetSuccess($request);
+            // case 'sadad':
+            //     return $this->handleSadadSuccess($request);
+            // case 'airtel':
+            //     return $this->handleAirtelSuccess($request);
+            // case 'phonepe':
+            //     return $this->handlePhonePeSuccess($request);
+            // case 'midtrans':
+            //     return $this->MidtransPayment($request);
             default:
                 return redirect('/')->with('error', 'Invalid payment gateway.');
         }
