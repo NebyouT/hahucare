@@ -31,14 +31,16 @@ class ChapaController extends Controller
             'return_url' => $baseURL . '/payment/success?gateway=chapa',
             'description' => $paymentData['description'] ?? 'Appointment Payment',
             'metadata' => [
-                'appointment_id' => $paymentData['id'] ?? null,
-                'clinic_id' => $paymentData['clinic_id'] ?? null,
-                'doctor_id' => $paymentData['doctor_id'] ?? null,
-                'service_id' => $paymentData['service_id'] ?? null,
-                'advance_payment_status' => $paymentData['advance_payment_status'] ?? 0,
-                'advance_paid_amount' => $paymentData['advance_paid_amount'] ?? 0,
+                'appointment_id'           => $paymentData['id'] ?? null,
+                'clinic_id'                => $paymentData['clinic_id'] ?? null,
+                'doctor_id'                => $paymentData['doctor_id'] ?? null,
+                'service_id'               => $paymentData['service_id'] ?? null,
+                'advance_payment_status'   => $paymentData['advance_payment_status'] ?? 0,
+                'advance_paid_amount'      => $paymentData['advance_paid_amount'] ?? 0,
                 'remaining_payment_amount' => $paymentData['remaining_payment_amount'] ?? 0,
-                'type' => $paymentData['type'] ?? 'appointment',
+                'appointment_date'         => $paymentData['appointment_date'] ?? null,
+                'appointment_time'         => $paymentData['appointment_time'] ?? null,
+                'type'                     => $paymentData['type'] ?? 'appointment',
             ],
         ];
 
@@ -156,32 +158,31 @@ class ChapaController extends Controller
         $isAdvance = isset($metadata['advance_payment_status']) && $metadata['advance_payment_status'] == 1;
         $paymentStatus = $isAdvance ? 0 : 1;
 
+        // Fetch appointment from DB to get date/time and fill any missing metadata
+        $appointment = \Modules\Appointment\Models\Appointment::find($appointmentIdResolved);
+
         $paymentData = [
-            'id' => $appointmentIdResolved,
-            'transaction_type' => 'chapa',
-            'external_transaction_id' => $reference,
-            'payment_status' => $paymentStatus,
-            'amountTotal' => (float) data_get($data, 'amount'),
-            'currency' => strtoupper(data_get($data, 'currency', 'ETB')),
-            'clinic_id' => $metadata['clinic_id'] ?? null,
-            'doctor_id' => $metadata['doctor_id'] ?? null,
-            'service_id' => $metadata['service_id'] ?? null,
-            'advance_payment_status' => $metadata['advance_payment_status'] ?? 0,
-            'advance_paid_amount' => $metadata['advance_paid_amount'] ?? 0,
-            'remaining_payment_amount' => $metadata['remaining_payment_amount'] ?? 0,
-            'metadata' => $metadata,
-            'type' => $metadata['type'] ?? 'appointment',
+            'id'                        => $appointmentIdResolved,
+            'appointment_id'            => $appointmentIdResolved,
+            'transaction_type'          => 'chapa',
+            'external_transaction_id'   => $reference,
+            'payment_status'            => $paymentStatus,
+            'amountTotal'               => (float) data_get($data, 'amount'),
+            'currency'                  => strtoupper(data_get($data, 'currency', 'ETB')),
+            'clinic_id'                 => $metadata['clinic_id'] ?? optional($appointment)->clinic_id,
+            'doctor_id'                 => $metadata['doctor_id'] ?? optional($appointment)->doctor_id,
+            'service_id'                => $metadata['service_id'] ?? optional($appointment)->service_id,
+            'advance_payment_status'    => $metadata['advance_payment_status'] ?? 0,
+            'advance_paid_amount'       => $metadata['advance_paid_amount'] ?? 0,
+            'remaining_payment_amount'  => $metadata['remaining_payment_amount'] ?? 0,
+            'appointment_date'          => optional($appointment)->appointment_date ?? '',
+            'appointment_time'          => optional($appointment)->appointment_time ?? '',
+            'tip'                       => 0,
+            'metadata'                  => $metadata,
+            'type'                      => $metadata['type'] ?? 'appointment',
         ];
 
-        // Save reference again safely
-        try {
-            \Modules\Appointment\Models\AppointmentTransaction::updateOrCreate(
-                ['appointment_id' => $paymentData['id']],
-                ['external_transaction_id' => $reference]
-            );
-        } catch (\Exception $e) {
-            Log::warning('Unable to persist reference after verify', ['error' => $e->getMessage()]);
-        }
+        Log::info('Chapa paymentData before savePayment', $paymentData);
 
         // Call AppointmentController → savePayment()
         try {
