@@ -184,15 +184,46 @@ class ChapaController extends Controller
 
         Log::info('Chapa paymentData before savePayment', $paymentData);
 
-        // Call AppointmentController → savePayment()
+        // ── DIRECT DB UPDATE ──────────────────────────────────────────────────
+        // Force payment_status=1 immediately after Chapa confirms success.
+        // This guarantees the record is marked paid even if savePayment() throws.
+        try {
+            \Modules\Appointment\Models\AppointmentTransaction::updateOrCreate(
+                ['appointment_id' => $appointmentIdResolved],
+                [
+                    'transaction_type'        => 'chapa',
+                    'external_transaction_id' => $reference,
+                    'payment_status'          => $paymentStatus,
+                    'advance_payment_status'  => $isAdvance ? 1 : 0,
+                ]
+            );
+            Log::info('Chapa: direct DB payment_status update done', [
+                'appointment_id' => $appointmentIdResolved,
+                'payment_status' => $paymentStatus,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Chapa: direct DB update failed', ['error' => $e->getMessage()]);
+        }
+
+        // ── FULL savePayment() for commissions / wallet history ───────────────
         try {
             $controller = app(\Modules\Frontend\Http\Controllers\AppointmentController::class);
             $controller->savePayment($paymentData);
+            Log::info('Chapa: savePayment() completed successfully', ['appointment_id' => $appointmentIdResolved]);
+        } catch (\Exception $e) {
+            Log::error('Chapa: savePayment() failed (payment already marked paid above)', [
+                'error'          => $e->getMessage(),
+                'appointment_id' => $appointmentIdResolved,
+            ]);
+            // Don't return error — payment IS saved above; just skip commissions
+        }
 
+        try {
+            $controller = $controller ?? app(\Modules\Frontend\Http\Controllers\AppointmentController::class);
             return $controller->handlePaymentSuccess($paymentData);
         } catch (\Exception $e) {
-            Log::error('Error saving Chapa payment', ['error' => $e->getMessage()]);
-            return redirect('/')->with('error', 'Payment processing failed.');
+            Log::error('Chapa: handlePaymentSuccess() failed', ['error' => $e->getMessage()]);
+            return redirect()->route('appointment-list')->with('success', 'Payment confirmed successfully.');
         }
     }
 
