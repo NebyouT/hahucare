@@ -27,8 +27,8 @@ class ChapaController extends Controller
             'first_name' => optional(auth()->user())->first_name ?? $paymentData['user_name'] ?? null,
             'last_name' => optional(auth()->user())->last_name ?? $paymentData['user_name'] ?? null,
             'tx_ref' => $txRef,
-            'callback_url' => $baseURL . '/payment/success?gateway=chapa',
-            'return_url' => $baseURL . '/payment/success?gateway=chapa',
+            'callback_url' => $baseURL . '/payment/success?gateway=chapa&tx_ref=' . $txRef . '&appointment_id=' . ($paymentData['id'] ?? ''),
+            'return_url'  => $baseURL . '/payment/success?gateway=chapa&tx_ref=' . $txRef . '&appointment_id=' . ($paymentData['id'] ?? ''),
             'description' => $paymentData['description'] ?? 'Appointment Payment',
             'metadata' => [
                 'appointment_id'           => $paymentData['id'] ?? null,
@@ -64,16 +64,13 @@ class ChapaController extends Controller
             return response()->json(['error' => 'Payment did not return a checkout url.'], 500);
         }
 
-        // Save tx_ref to DB
+        // Save tx_ref to AppointmentTransaction so callback can look it up
         try {
             if (!empty($paymentData['id'])) {
                 \Modules\Appointment\Models\AppointmentTransaction::updateOrCreate(
                     ['appointment_id' => $paymentData['id']],
-                    ['external_transaction_id' => $txRef]
+                    ['external_transaction_id' => $txRef, 'transaction_type' => 'chapa']
                 );
-
-                \Modules\Appointment\Models\Appointment::where('id', $paymentData['id'])
-                    ->update(['external_transaction_id' => $txRef]);
             }
         } catch (\Exception $e) {
             Log::warning('Failed to persist Chapa tx_ref', ['error' => $e->getMessage()]);
