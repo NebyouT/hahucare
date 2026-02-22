@@ -241,48 +241,18 @@ class ServiceController extends Controller
         }
         $selectedService = ClinicsService::CheckMultivendor()->findOrFail($id);
         $serviceId = $selectedService->id;
-        $paymentMethods = [];
-
-        // List of available payment methods
-        $paymentMethodsList = [
-            'cash' => 'cash_payment_method',  // Always available
-            'Wallet' => 'wallet_payment_method', 
-            'Chapa' => 'chapa_payment_method',// Always available
-            'Stripe' => 'str_payment_method',
-            'Paystack' => 'paystack_payment_method',
-            'PayPal' => 'paypal_payment_method',
-            'Flutterwave' => 'flutterwave_payment_method',
-            'Airtel' => 'airtel_payment_method',
-            'PhonePay' => 'phonepay_payment_method',
-            'Midtrans' => 'midtrans_payment_method',
-            'Cinet' => 'cinet_payment_method',
-            'Sadad' => 'sadad_payment_method',
-            'Razor Pay' => 'razor_payment_method',
-        ];
-
-        // $enabledPaymentMethods = ['cash', 'Wallet']; // Add Cash and Wallet by default
-
-        $enabledPaymentMethods = [];
-
-        // If service type is not 'online', allow 'cash' and 'Wallet' by default.
-        // If type is online, exclude 'cash'.
+        // Only cash, Wallet, and Chapa are active payment methods
         if ($selectedService->type != 'online') {
-            $enabledPaymentMethods = ['cash', 'Wallet'];
+            $enabledPaymentMethods = ['cash', 'Wallet', 'chapa'];
         } else {
-            $enabledPaymentMethods = ['Wallet'];
+            $enabledPaymentMethods = ['Wallet', 'chapa'];
         }
 
         if ($selectedService->is_enable_advance_payment == 1) {
-            $enabledPaymentMethods = array_filter($enabledPaymentMethods, function($method) {
+            $enabledPaymentMethods = array_filter($enabledPaymentMethods, function ($method) {
                 return $method !== 'cash';
             });
-        }
-        // Iterate through all payment methods and check if they are enabled
-        foreach ($paymentMethodsList as $displayName => $settingKey) {
-            if (setting($settingKey, 0) == 1) { // Assuming 1 means enabled
-                $enabledPaymentMethods[] = $displayName; // Add enabled methods to the list
-            }
-
+            $enabledPaymentMethods = array_values($enabledPaymentMethods);
         }
         return view('frontend::booking', compact('tabs', 'currentStep', 'selectedService', 'serviceId', 'selectedClinic', 'clinicId', 'selectedDoctor', 'doctorId', 'previousUrl', 'tabs', 'enabledPaymentMethods'));
     }

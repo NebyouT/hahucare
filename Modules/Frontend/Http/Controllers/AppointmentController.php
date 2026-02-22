@@ -2663,32 +2663,13 @@ class AppointmentController extends Controller
             'currency' => $currency ? $currency->currency_symbol : 'USD',
         ];
 
-        // List of available payment methods
-        $paymentMethodsList = [
-            'Cash' => 'cash_payment_method',  // Always available
-            'Wallet' => 'wallet_payment_method', // Always available
-            'Stripe' => 'str_payment_method',
-            'Paystack' => 'paystack_payment_method',
-            'PayPal' => 'paypal_payment_method',
-            'Flutterwave' => 'flutterwave_payment_method',
-            'Airtel' => 'airtel_payment_method',
-            'PhonePay' => 'phonepay_payment_method',
-            'Midtrans' => 'midtrans_payment_method',
-            'Cinet' => 'cinet_payment_method',
-            'Sadad' => 'sadad_payment_method',
-            'Razor' => 'razor_payment_method',
-        ];
+        $enabledPaymentMethods = ['cash', 'Wallet', 'chapa'];
 
-        $enabledPaymentMethods = ['Cash', 'Wallet']; // Add Cash and Wallet by default
-
-        // Iterate through all payment methods and check if they are enabled
-        foreach ($paymentMethodsList as $displayName => $settingKey) {
-            if (setting($settingKey, 0) == 1) { // Assuming 1 means enabled
-                $enabledPaymentMethods[] = $displayName; // Add enabled methods to the list
-            }
-        }
-        $selectedService = ClinicsService::CheckMultivendor()->findOrFail(1);
-        $serviceId = $selectedService->id;
+        $serviceId = $paymentData['service_id'] ?? null;
+        $selectedService = $serviceId
+            ? ClinicsService::CheckMultivendor()->find($serviceId)
+            : ClinicsService::CheckMultivendor()->first();
+        $serviceId = optional($selectedService)->id;
 
         if ($paymentData['type'] == 'appointment_detail') {
             return redirect()->route('appointment-details', ['id' => $paymentData['id']])->with(['payment_success' => true, 'paymentDetails' => $paymentDetails]);

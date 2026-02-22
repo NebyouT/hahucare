@@ -122,9 +122,11 @@ Route::get('service_index_data', [ServiceController::class, 'index_data'])->name
 Route::get('clinic_index_data', [ClinicController::class, 'index_data'])->name('clinic.index_data');
 Route::get('doctor_index_data', [DoctorController::class, 'index_data'])->name('doctor.index_data');
 Route::get('blog_index_data', [BlogController::class, 'index_data'])->name('blog.index_data');
-Route::get('appointment_index_data', [AppointmentController::class, 'index_data'])->name('appointment.index_data');
-Route::get('encounter_index_data', [AppointmentController::class, 'encounter_index_data'])->name('encounter.index_data');
-Route::get('medicine_index_data', [AppointmentController::class, 'medicine_index_data'])->name('medicine.index_data');
+Route::middleware(['auth', 'user_check'])->group(function () {
+    Route::get('appointment_index_data', [AppointmentController::class, 'index_data'])->name('appointment.index_data');
+    Route::get('encounter_index_data', [AppointmentController::class, 'encounter_index_data'])->name('encounter.index_data');
+    Route::get('medicine_index_data', [AppointmentController::class, 'medicine_index_data'])->name('medicine.index_data');
+});
 
 Route::post('/get-payment-data', [AppointmentController::class, 'getPaymentData'])->name('payment.data');
 Route::post('/slot-time-list', [AppointmentController::class, 'slot_time_list'])->name('slot_time_list');
