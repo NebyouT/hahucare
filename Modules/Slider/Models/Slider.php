@@ -17,6 +17,8 @@ class Slider extends BaseModel
     use SoftDeletes;
 
     protected $table = 'sliders';
+    
+    protected $appends = ['file_url'];
 
     const CUSTOM_FIELD_MODEL = 'Modules\Slider\Models\Slider';
 
@@ -63,5 +65,23 @@ class Slider extends BaseModel
     public function scopeActive($query)
     {
         return $query->where('status', 1);
+    }
+    
+    protected function getFileUrlAttribute()
+    {
+        // Try media library first (for newly uploaded images)
+        $media = $this->getFirstMediaUrl('file_url');
+        if (isset($media) && !empty($media)) {
+            return $media;
+        }
+        
+        // Fallback to dummy-images for existing slider images
+        $dummyImagePath = 'dummy-images/sliders/' . $this->id . '.jpg';
+        if (file_exists(public_path($dummyImagePath))) {
+            return asset($dummyImagePath);
+        }
+        
+        // Final fallback to default banner
+        return asset('img/frontend/banner.jpg');
     }
 }

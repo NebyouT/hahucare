@@ -2,7 +2,7 @@
     <div class="main-banner">
         @foreach ($sliders as $slider)
             <div class="slick-item">
-                <img class="main-banner-image" src="{{ $slider->getFirstMediaUrl('file_url') }}" alt="kivicare">
+                <img class="main-banner-image" src="{{ $slider->file_url }}" alt="kivicare">
             </div>
         @endforeach
     </div>

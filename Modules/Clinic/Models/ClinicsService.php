@@ -74,9 +74,28 @@ class ClinicsService extends BaseModel
     }
     protected function getFileUrlAttribute()
     {
+        // Try media library first (for newly uploaded images)
         $media = $this->getFirstMediaUrl('file_url');
-
-        return isset($media) && ! empty($media) ? $media : default_file_url();
+        if (isset($media) && !empty($media)) {
+            return $media;
+        }
+        
+        // Fallback to dummy-images for existing images
+        $dummyImagePath = 'dummy-images/system_service/' . $this->id . '.jpg';
+        if (file_exists(public_path($dummyImagePath))) {
+            return asset($dummyImagePath);
+        }
+        
+        // Try category-based dummy images
+        if ($this->category_id) {
+            $categoryPath = 'dummy-images/system_category/clinic/' . $this->category_id . '.jpg';
+            if (file_exists(public_path($categoryPath))) {
+                return asset($categoryPath);
+            }
+        }
+        
+        // Final fallback
+        return default_file_url();
     }
 
 
