@@ -81,6 +81,9 @@ Route::get('/home', function () {
     } else if (auth()->user()->hasRole('pharma')){
 
         return redirect(RouteServiceProvider::PHARMA_LOGIN_REDIRECT);
+    } else if (auth()->user()->hasRole('lab_technician')){
+
+        return redirect('/app/labs');
     }
 
     else {
