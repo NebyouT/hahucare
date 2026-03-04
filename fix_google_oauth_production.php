@@ -111,15 +111,26 @@ if (!$googleClientId || !$googleClientSecret) {
     
 } else {
     echo "===========================================\n";
-    echo "   ✅ Configuration Looks Good Locally\n";
+    echo "   ✅ Configuration Looks Good!\n";
     echo "===========================================\n\n";
     
-    echo "Your local .env has Google credentials set.\n\n";
+    echo "Google OAuth credentials are properly set.\n\n";
     
-    echo "⚠️  But the error is on PRODUCTION (hahucare.com)\n\n";
+    echo "Current server: " . ($_SERVER['HTTP_HOST'] ?? 'Unknown') . "\n\n";
     
-    echo "This means the .env file on your cPanel server\n";
-    echo "is missing these credentials.\n\n";
+    if (($_SERVER['HTTP_HOST'] ?? '') == 'hahucare.com') {
+        echo "🎉 You're running this on PRODUCTION server!\n\n";
+        echo "If Google login still doesn't work, check:\n";
+        echo "1. Google Cloud Console redirect URI\n";
+        echo "2. SSL certificate validity\n";
+        echo "3. OAuth consent screen setup\n";
+    } else {
+        echo "⚠️  You're running this on a local/development server\n\n";
+        echo "If you need to fix PRODUCTION (hahucare.com):\n";
+        echo "1. Copy these credentials to production .env\n";
+        echo "2. Clear cache on production server\n";
+    }
+    echo "\n";
     
     echo "===========================================\n";
     echo "   🔧 FIX FOR PRODUCTION\n";

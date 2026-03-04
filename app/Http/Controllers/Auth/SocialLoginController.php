@@ -52,9 +52,31 @@ class SocialLoginController extends Controller
 
             $authUser = $this->findOrCreateUser($user, $provider);
 
+            if ($authUser instanceof \Illuminate\Http\RedirectResponse) {
+                return $authUser;
+            }
+
+            if (!$authUser instanceof User) {
+                Log::error('Social Login Error: findOrCreateUser did not return a User', [
+                    'provider' => $provider,
+                    'returned_type' => gettype($authUser),
+                ]);
+                flash('Login failed. Please try again.')->error()->important();
+                return redirect('/admin/login');
+            }
+
             Auth::login($authUser, true);
         } catch (Exception $e) {
-            return redirect('/');
+            Log::error('Social Login Exception', [
+                'provider' => $provider,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            flash('Google login failed: ' . $e->getMessage())->error()->important();
+            return redirect('/admin/login');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -89,11 +111,13 @@ class SocialLoginController extends Controller
             $last_name = $name_parts[1];
             $email = $socialUser->getEmail();
 
-            if ($email == '') {
-
-                flash('Email address is required!')->error()->important();
-
-                return redirect()->intended(RouteServiceProvider::HOME);
+            if ($email == '' || $email === null) {
+                Log::warning('Social Login: No email provided by provider', [
+                    'provider' => $provider,
+                    'social_user_id' => $socialUser->getId(),
+                ]);
+                flash('Email address is required! Please use a Google account with an email address.')->error()->important();
+                return redirect('/admin/login');
             }
 
             $user = User::create([

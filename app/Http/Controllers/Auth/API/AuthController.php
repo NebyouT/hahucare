@@ -276,41 +276,47 @@ class AuthController extends Controller
     {
         $input = $request->all();
 
-        if ($input['login_type'] === 'mobile') {
+        \Log::info('Social Login API Request', [
+            'login_type' => $input['login_type'] ?? 'not_set',
+            'email' => $input['email'] ?? 'not_set',
+            'user_type' => $input['user_type'] ?? 'not_set',
+        ]);
+
+        if (($input['login_type'] ?? '') === 'mobile') {
             $user_data = User::where('username', $input['username'])->where('login_type', 'mobile')->first();
         } else {
-            $user_data = User::where('email', $input['email'])->first();
+            $user_data = User::where('email', $input['email'] ?? '')->first();
         }
 
         if ($user_data != null) {
+            \Log::info('Social Login: Existing user found', [
+                'user_id' => $user_data->id,
+                'email' => $user_data->email,
+                'login_type' => $user_data->login_type,
+                'user_type' => $user_data->user_type,
+            ]);
 
             $usertype = $user_data->user_type;
 
             if ($usertype == "doctor"  || $usertype == "vendor") {
-
                 if ($user_data->email_verified_at == null) {
-
+                    \Log::warning('Social Login: Account not verified', ['user_id' => $user_data->id]);
                     return response()->json(['status' => false, 'message' => __('messages.account_not_verify')]);
                 }
             }
 
-            if (!isset($user_data->login_type) || $user_data->login_type == '') {
-
-                if ($user_data->login_type == '') {
-
-                    return response()->json(['status' => false, 'message' => __('messages.already_taken')]);
-                }
+            // If user exists but was registered normally (not via social login),
+            // allow them to login via Google and update their login_type
+            if (!isset($user_data->login_type) || $user_data->login_type == '' || $user_data->login_type === null) {
+                // Update the user's login_type to allow social login
+                $user_data->login_type = $request->login_type;
+                $user_data->save();
+                \Log::info('Social Login: Updated existing user login_type', [
+                    'user_id' => $user_data->id,
+                    'new_login_type' => $request->login_type,
+                ]);
             }
 
-            if (!isset($user_data->login_type) || $user_data->login_type == '') {
-                if ($request->login_type === 'google') {
-                    $message = __('validation.unique', ['attribute' => 'email']);
-                } else {
-                    $message = __('validation.unique', ['attribute' => 'username']);
-                }
-
-                return $this->sendError($message, 400);
-            }
             $message = __('messages.login_success');
         } else {
 
