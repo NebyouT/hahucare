@@ -74,9 +74,15 @@ class GenerateMenus
                 ]);
             }
             else if (auth()->user()->hasRole('lab_technician')) {
-                // Lab Technician - Only show lab-related menus
-                // Skip all other menus and jump directly to lab section
-                // The lab menu items are defined later in this file
+                $this->staticMenu($menu, ['title' => 'Main', 'order' => 0]);
+
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-squares-four',
+                    'title' => __('sidebar.dashboard'),
+                    'route' => 'backend.home',
+                    'active' => ['app', 'app/dashboard'],
+                    'order' => 0,
+                ]);
             }
 
             // Only show these menus if NOT lab_technician
@@ -1457,11 +1463,23 @@ if (auth()->user()->hasRole('doctor')) {
             $menu->filter(function ($item) {
                 if ($item->data('permission')) {
                     if (auth()->check()) {
-                        if (\Auth::getDefaultDriver() == 'admin') {
+                        if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
                             return true;
                         }
-                        if (auth()->user()->hasAnyPermission($item->data('permission'), \Auth::getDefaultDriver())) {
-                            return true;
+                        try {
+                            $permissions = $item->data('permission');
+                            if (is_string($permissions)) {
+                                $permissions = [$permissions];
+                            }
+                            if (auth()->user()->hasAnyPermission($permissions)) {
+                                return true;
+                            }
+                        } catch (\Exception $e) {
+                            \Log::warning('Menu permission check failed', [
+                                'permission' => $item->data('permission'),
+                                'error' => $e->getMessage(),
+                            ]);
+                            return false;
                         }
                     }
 
