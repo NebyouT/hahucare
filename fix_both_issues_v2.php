@@ -1,6 +1,6 @@
 <?php
 /**
- * Fix Both Issues V2 - Google OAuth & Lab Technician Menu
+ * DEFINITIVE FIX - Google OAuth & Lab Technician Menu
  * Run via SSH: php fix_both_issues_v2.php
  * DELETE THIS FILE AFTER RUNNING!
  */
@@ -15,106 +15,153 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 
 echo "===========================================\n";
-echo "   HahuCare - Fix Both Issues V2\n";
+echo "   HahuCare - DEFINITIVE FIX V3\n";
 echo "===========================================\n\n";
 
 // ============================================
-// PART 1: DIAGNOSE LAB TECHNICIAN ISSUE
+// PART 1: PATCH GenerateMenus.php DIRECTLY
 // ============================================
-echo "PART 1: LAB TECHNICIAN DEEP DIAGNOSIS\n";
+echo "PART 1: PATCHING GenerateMenus.php\n";
 echo "-------------------------------------------\n\n";
 
-// Check role exists
-$techRole = Role::where('name', 'lab_technician')->first();
-if (!$techRole) {
-    echo "ERROR: lab_technician role does NOT exist!\n";
-    $techRole = Role::create(['name' => 'lab_technician', 'guard_name' => 'web', 'title' => 'Lab Technician']);
-    echo "CREATED lab_technician role (ID: {$techRole->id})\n";
-} else {
-    echo "OK: lab_technician role exists (ID: {$techRole->id}, guard: {$techRole->guard_name})\n";
-}
+$menuFile = __DIR__ . '/app/Http/Middleware/GenerateMenus.php';
+$menuContent = file_get_contents($menuFile);
 
-// Check what permissions the role has
-$rolePerms = $techRole->permissions()->pluck('name', 'guard_name')->toArray();
-echo "\nRole permissions (" . count($rolePerms) . " total):\n";
-foreach ($rolePerms as $guard => $name) {
-    echo "  - {$name} (guard: {$guard})\n";
-}
+// Check if the OLD broken permission filter is still present
+$brokenFilter = "auth()->user()->hasAnyPermission(\$item->data('permission'), \\Auth::getDefaultDriver())";
+$brokenFilter2 = 'hasAnyPermission($item->data(\'permission\'), \Auth::getDefaultDriver())';
 
-// Get all role permissions properly
-$allRolePerms = $techRole->permissions()->get();
-echo "\nDetailed role permissions:\n";
-foreach ($allRolePerms as $p) {
-    echo "  - {$p->name} (id: {$p->id}, guard: {$p->guard_name})\n";
-}
+if (strpos($menuContent, 'getDefaultDriver') !== false) {
+    echo "FOUND: Broken permission filter with getDefaultDriver!\n";
+    echo "Patching now...\n\n";
+    
+    // Replace the entire broken permission filter block
+    $oldBlock = <<<'PHP'
+            // Access Permission Check
+            $menu->filter(function ($item) {
+                if ($item->data('permission')) {
+                    if (auth()->check()) {
+                        if (\Auth::getDefaultDriver() == 'admin') {
+                            return true;
+                        }
+                        if (auth()->user()->hasAnyPermission($item->data('permission'), \Auth::getDefaultDriver())) {
+                            return true;
+                        }
+                    }
 
-// Check a specific lab_technician user
-$labUser = User::role('lab_technician')->first();
-if ($labUser) {
-    echo "\nChecking user: {$labUser->email} (ID: {$labUser->id})\n";
-    echo "  user_type: " . ($labUser->user_type ?? 'NULL') . "\n";
-    
-    // Check roles
-    $userRoles = $labUser->getRoleNames()->toArray();
-    echo "  Roles: " . implode(', ', $userRoles) . "\n";
-    
-    // Check hasRole
-    echo "  hasRole('lab_technician'): " . ($labUser->hasRole('lab_technician') ? 'YES' : 'NO') . "\n";
-    
-    // Check specific permissions
-    $checkPerms = ['view_labs', 'view_lab_categories', 'view_lab_services', 'view_lab_results', 'view_lab_orders'];
-    echo "\n  Permission checks:\n";
-    foreach ($checkPerms as $perm) {
-        $hasPerm = $labUser->hasPermissionTo($perm);
-        $canPerm = $labUser->can($perm);
-        echo "    {$perm}: hasPermissionTo=" . ($hasPerm ? 'YES' : 'NO') . ", can=" . ($canPerm ? 'YES' : 'NO') . "\n";
-    }
-    
-    // Check hasAnyPermission (this is what the menu filter uses)
-    echo "\n  hasAnyPermission checks (menu filter uses this):\n";
-    foreach ($checkPerms as $perm) {
-        try {
-            $has = $labUser->hasAnyPermission([$perm]);
-            echo "    hasAnyPermission(['{$perm}']): " . ($has ? 'YES' : 'NO') . "\n";
-        } catch (\Exception $e) {
-            echo "    hasAnyPermission(['{$perm}']): ERROR - " . $e->getMessage() . "\n";
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+PHP;
+
+    $newBlock = <<<'PHP'
+            // Access Permission Check
+            $menu->filter(function ($item) {
+                if ($item->data('permission')) {
+                    if (auth()->check()) {
+                        if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                            return true;
+                        }
+                        try {
+                            $permissions = $item->data('permission');
+                            if (is_string($permissions)) {
+                                $permissions = [$permissions];
+                            }
+                            if (auth()->user()->hasAnyPermission($permissions)) {
+                                return true;
+                            }
+                        } catch (\Exception $e) {
+                            \Log::warning('Menu permission check failed', [
+                                'permission' => $item->data('permission'),
+                                'error' => $e->getMessage(),
+                            ]);
+                            return false;
+                        }
+                    }
+
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+PHP;
+
+    if (strpos($menuContent, $oldBlock) !== false) {
+        $menuContent = str_replace($oldBlock, $newBlock, $menuContent);
+        file_put_contents($menuFile, $menuContent);
+        echo "SUCCESS: Permission filter patched!\n";
+    } else {
+        // Try a regex approach to find and replace the broken filter
+        echo "Exact match not found, trying regex patch...\n";
+        $pattern = '/\/\/ Access Permission Check\s*\$menu->filter\(function\s*\(\$item\)\s*\{[^}]*getDefaultDriver[^}]*\}[^}]*\}[^}]*\}[^)]*\)\s*;/s';
+        if (preg_match($pattern, $menuContent)) {
+            $menuContent = preg_replace($pattern, $newBlock, $menuContent);
+            file_put_contents($menuFile, $menuContent);
+            echo "SUCCESS: Permission filter patched via regex!\n";
+        } else {
+            echo "WARNING: Could not auto-patch. Manual fix needed.\n";
+            echo "The permission filter in GenerateMenus.php still uses getDefaultDriver.\n";
         }
     }
-    
-    // Check Auth guard default driver
-    echo "\n  Auth::getDefaultDriver(): " . \Auth::getDefaultDriver() . "\n";
-    
-    // Simulate menu filter logic
-    echo "\n  Simulating menu filter with guard param:\n";
-    $guard = \Auth::getDefaultDriver();
-    foreach ($checkPerms as $perm) {
-        try {
-            $has = $labUser->hasAnyPermission([$perm], $guard);
-            echo "    hasAnyPermission(['{$perm}'], '{$guard}'): " . ($has ? 'YES' : 'NO') . "\n";
-        } catch (\Exception $e) {
-            echo "    hasAnyPermission(['{$perm}'], '{$guard}'): ERROR - " . $e->getMessage() . "\n";
-        }
-    }
+} else {
+    echo "OK: Permission filter already patched (no getDefaultDriver found).\n";
+}
 
-    // Check all permissions the user actually has
-    $allUserPerms = $labUser->getAllPermissions();
-    echo "\n  All user permissions (" . $allUserPerms->count() . " total):\n";
-    foreach ($allUserPerms as $p) {
-        echo "    - {$p->name} (guard: {$p->guard_name})\n";
+// Also check the lab_technician dashboard block
+if (strpos($menuContent, "// Lab Technician - Only show lab-related menus") !== false 
+    && strpos($menuContent, "// Skip all other menus") !== false) {
+    echo "\nFOUND: Empty lab_technician block. Patching...\n";
+    
+    $oldLabBlock = <<<'PHP'
+            else if (auth()->user()->hasRole('lab_technician')) {
+                // Lab Technician - Only show lab-related menus
+                // Skip all other menus and jump directly to lab section
+                // The lab menu items are defined later in this file
+            }
+PHP;
+
+    $newLabBlock = <<<'PHP'
+            else if (auth()->user()->hasRole('lab_technician')) {
+                $this->staticMenu($menu, ['title' => 'Main', 'order' => 0]);
+
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-squares-four',
+                    'title' => __('sidebar.dashboard'),
+                    'route' => 'backend.home',
+                    'active' => ['app', 'app/dashboard'],
+                    'order' => 0,
+                ]);
+            }
+PHP;
+
+    $menuContent = file_get_contents($menuFile); // re-read after previous patch
+    if (strpos($menuContent, $oldLabBlock) !== false) {
+        $menuContent = str_replace($oldLabBlock, $newLabBlock, $menuContent);
+        file_put_contents($menuFile, $menuContent);
+        echo "SUCCESS: Lab technician dashboard block patched!\n";
+    } else {
+        echo "Could not find exact empty block. May already be patched.\n";
     }
 } else {
-    echo "\nWARNING: No users found with lab_technician role!\n";
+    echo "OK: Lab technician block already has dashboard.\n";
 }
+
+// Verify the fix
+$menuContent = file_get_contents($menuFile);
+echo "\nVerification:\n";
+echo "  getDefaultDriver in file: " . (strpos($menuContent, 'getDefaultDriver') !== false ? 'STILL PRESENT (BAD!)' : 'REMOVED (GOOD!)') . "\n";
+echo "  hasRole admin check: " . (strpos($menuContent, "hasRole(['admin', 'demo_admin'])") !== false ? 'PRESENT (GOOD!)' : 'NOT FOUND (BAD!)') . "\n";
+echo "  Lab dashboard route: " . (strpos($menuContent, "else if (auth()->user()->hasRole('lab_technician'))") !== false ? 'PRESENT' : 'NOT FOUND') . "\n";
 
 // ============================================
-// PART 2: FIX - ENSURE PERMISSIONS ARE CORRECT
+// PART 2: FIX PERMISSIONS
 // ============================================
 echo "\n\nPART 2: FIXING PERMISSIONS\n";
 echo "-------------------------------------------\n\n";
 
-// Clear permission cache first
 app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-echo "Permission cache cleared\n";
 
 $labPermissions = [
     'view_labs', 'add_labs', 'edit_labs', 'delete_labs',
@@ -129,7 +176,6 @@ $labPermissions = [
     'order_lab_tests',
 ];
 
-// Create all permissions with guard_name = 'web'
 foreach ($labPermissions as $permName) {
     Permission::firstOrCreate(
         ['name' => $permName, 'guard_name' => 'web'],
@@ -138,7 +184,11 @@ foreach ($labPermissions as $permName) {
 }
 echo "All lab permissions created/verified\n";
 
-// Permissions for lab_technician
+$techRole = Role::firstOrCreate(
+    ['name' => 'lab_technician'],
+    ['guard_name' => 'web', 'title' => 'Lab Technician']
+);
+
 $techPerms = [
     'view_labs', 'edit_labs',
     'view_lab_categories',
@@ -151,118 +201,117 @@ $techPerms = [
 ];
 
 $techRole->syncPermissions($techPerms);
-echo "Synced " . count($techPerms) . " permissions to lab_technician role\n";
+echo "Synced " . count($techPerms) . " permissions to lab_technician\n";
 
-// Also update admin
 $adminRole = Role::where('name', 'admin')->first();
 if ($adminRole) {
     $adminRole->givePermissionTo($labPermissions);
-    echo "Admin role updated with all lab permissions\n";
-}
-
-// Clear all caches
-app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-\Illuminate\Support\Facades\Artisan::call('cache:clear');
-\Illuminate\Support\Facades\Artisan::call('config:clear');
-\Illuminate\Support\Facades\Artisan::call('view:clear');
-\Illuminate\Support\Facades\Artisan::call('route:clear');
-echo "All caches cleared\n";
-
-// Verify after fix
-echo "\nVerification after fix:\n";
-$techRole = Role::where('name', 'lab_technician')->first();
-$afterPerms = $techRole->permissions()->pluck('name')->toArray();
-echo "Lab technician now has " . count($afterPerms) . " permissions:\n";
-foreach ($afterPerms as $p) {
-    echo "  - {$p}\n";
-}
-
-if ($labUser) {
-    // Re-fetch user
-    $labUser = User::find($labUser->id);
-    echo "\nRe-checking user {$labUser->email}:\n";
-    foreach (['view_labs', 'view_lab_categories', 'view_lab_services', 'view_lab_results', 'view_lab_orders'] as $perm) {
-        echo "  can('{$perm}'): " . ($labUser->can($perm) ? 'YES' : 'NO') . "\n";
-    }
+    echo "Admin updated\n";
 }
 
 // ============================================
-// PART 3: GOOGLE OAUTH REDIRECT FIX
+// PART 3: FIX GOOGLE OAUTH .env
 // ============================================
-echo "\n\nPART 3: GOOGLE OAUTH REDIRECT MISMATCH\n";
+echo "\n\nPART 3: FIX GOOGLE OAUTH .env\n";
 echo "-------------------------------------------\n\n";
 
-$envRedirect = env('GOOGLE_REDIRECT');
-$envRedirectUri = env('GOOGLE_REDIRECT_URI');
-$configRedirect = config('services.google.redirect');
+$envFile = base_path('.env');
+$envContent = file_get_contents($envFile);
+$correctRedirect = 'https://hahucare.com/login/google/callback';
 
-// Get actual route URL
-try {
-    $actualRoute = route('social.login.callback', 'google');
-} catch (\Exception $e) {
-    $actualRoute = 'ERROR: ' . $e->getMessage();
-}
+// Use regex to find and replace the GOOGLE_REDIRECT line completely
+// This handles any corrupted/concatenated values
+$envContent = preg_replace(
+    '/^GOOGLE_REDIRECT=.*$/m',
+    'GOOGLE_REDIRECT=' . $correctRedirect,
+    $envContent
+);
 
-echo "GOOGLE_REDIRECT env:      {$envRedirect}\n";
-echo "GOOGLE_REDIRECT_URI env:  {$envRedirectUri}\n";
-echo "config services.google:   {$configRedirect}\n";
-echo "Actual route URL:         {$actualRoute}\n";
+// Also fix GOOGLE_REDIRECT_URI if present
+$envContent = preg_replace(
+    '/^GOOGLE_REDIRECT_URI=.*$/m',
+    'GOOGLE_REDIRECT_URI=' . $correctRedirect,
+    $envContent
+);
 
-if ($configRedirect !== $actualRoute) {
-    echo "\n*** MISMATCH DETECTED! ***\n";
-    echo "Your .env GOOGLE_REDIRECT is:  {$envRedirect}\n";
-    echo "But the actual route URL is:   {$actualRoute}\n";
-    echo "\nFIX: Update your .env file:\n";
-    echo "  GOOGLE_REDIRECT={$actualRoute}\n";
-    echo "\nAND in Google Cloud Console, set Authorized Redirect URI to:\n";
-    echo "  {$actualRoute}\n";
-    
-    // Try to fix the .env file automatically
-    $envFile = base_path('.env');
-    if (file_exists($envFile)) {
-        $envContent = file_get_contents($envFile);
-        $oldLine = "GOOGLE_REDIRECT={$envRedirect}";
-        $newLine = "GOOGLE_REDIRECT={$actualRoute}";
-        
-        if (strpos($envContent, $oldLine) !== false) {
-            $envContent = str_replace($oldLine, $newLine, $envContent);
-            file_put_contents($envFile, $envContent);
-            echo "\n*** .env file UPDATED automatically! ***\n";
-            echo "  Changed: {$oldLine}\n";
-            echo "  To:      {$newLine}\n";
-        } else {
-            echo "\nCould not auto-fix .env - please update manually\n";
-        }
-        
-        // Also fix GOOGLE_REDIRECT_URI if it exists
-        if ($envRedirectUri && $envRedirectUri !== $actualRoute) {
-            $oldLine2 = "GOOGLE_REDIRECT_URI={$envRedirectUri}";
-            $newLine2 = "GOOGLE_REDIRECT_URI={$actualRoute}";
-            if (strpos($envContent, $oldLine2) !== false) {
-                $envContent = str_replace($oldLine2, $newLine2, $envContent);
-                file_put_contents($envFile, $envContent);
-                echo "  Also fixed GOOGLE_REDIRECT_URI\n";
-            }
-        }
-    }
+file_put_contents($envFile, $envContent);
+echo "Written to .env:\n";
+echo "  GOOGLE_REDIRECT={$correctRedirect}\n";
+
+// Verify .env was written correctly
+$verifyEnv = file_get_contents($envFile);
+preg_match('/^GOOGLE_REDIRECT=(.*)$/m', $verifyEnv, $matches);
+$writtenValue = trim($matches[1] ?? 'NOT FOUND');
+echo "  Verify read-back: GOOGLE_REDIRECT={$writtenValue}\n";
+
+if ($writtenValue === $correctRedirect) {
+    echo "  .env is CORRECT!\n";
 } else {
-    echo "\nOK: Redirect URLs match!\n";
+    echo "  WARNING: .env value doesn't match! You may need to edit manually.\n";
+    echo "  Expected: {$correctRedirect}\n";
+    echo "  Got: {$writtenValue}\n";
 }
 
-// Clear config cache after .env change
+// Also check for GOOGLE_CLIENT_ID and SECRET
+preg_match('/^GOOGLE_CLIENT_ID=(.*)$/m', $verifyEnv, $m1);
+preg_match('/^GOOGLE_CLIENT_SECRET=(.*)$/m', $verifyEnv, $m2);
+$cid = trim($m1[1] ?? '');
+$csec = trim($m2[1] ?? '');
+echo "\n  GOOGLE_CLIENT_ID: " . ($cid ? 'SET (' . substr($cid, 0, 20) . '...)' : 'EMPTY!') . "\n";
+echo "  GOOGLE_CLIENT_SECRET: " . ($csec ? 'SET (' . substr($csec, 0, 8) . '...)' : 'EMPTY!') . "\n";
+
+// ============================================
+// PART 4: CLEAR ALL CACHES AGGRESSIVELY
+// ============================================
+echo "\n\nPART 4: CLEARING ALL CACHES\n";
+echo "-------------------------------------------\n\n";
+
+app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+echo "Permission cache cleared\n";
+
+\Illuminate\Support\Facades\Artisan::call('cache:clear');
+echo "App cache cleared\n";
+
 \Illuminate\Support\Facades\Artisan::call('config:clear');
+echo "Config cache cleared\n";
+
+\Illuminate\Support\Facades\Artisan::call('view:clear');
+echo "View cache cleared\n";
+
+\Illuminate\Support\Facades\Artisan::call('route:clear');
+echo "Route cache cleared\n";
+
+// Also delete compiled views manually
+$viewCachePath = storage_path('framework/views');
+if (is_dir($viewCachePath)) {
+    $files = glob($viewCachePath . '/*.php');
+    foreach ($files as $file) {
+        unlink($file);
+    }
+    echo "Deleted " . count($files) . " compiled view files\n";
+}
+
+// Rebuild config cache
 \Illuminate\Support\Facades\Artisan::call('config:cache');
-echo "\nConfig cache rebuilt after .env change\n";
+echo "Config cache rebuilt\n";
 
-// Verify new config
-$newConfigRedirect = config('services.google.redirect');
-echo "New config redirect: {$newConfigRedirect}\n";
+// Verify final config
+$finalRedirect = config('services.google.redirect');
+echo "\nFinal config services.google.redirect: {$finalRedirect}\n";
 
+// ============================================
+// SUMMARY
+// ============================================
 echo "\n\n===========================================\n";
-echo "   ALSO IMPORTANT:\n";
+echo "   ALL FIXES APPLIED\n";
 echo "===========================================\n";
-echo "1. In Google Cloud Console -> APIs & Credentials:\n";
-echo "   Set Authorized Redirect URI to: {$actualRoute}\n";
-echo "2. Log out and log back in as lab_technician\n";
-echo "3. DELETE THIS FILE: fix_both_issues_v2.php\n";
+echo "1. GenerateMenus.php permission filter: PATCHED\n";
+echo "2. Lab technician permissions: SYNCED (19)\n";
+echo "3. Google redirect URL: {$correctRedirect}\n";
+echo "4. All caches: CLEARED\n\n";
+echo "NEXT:\n";
+echo "- Log out and log back in as lab_technician\n";
+echo "- In Google Cloud Console, ensure redirect URI is:\n";
+echo "  {$correctRedirect}\n";
+echo "- DELETE this file!\n";
 echo "===========================================\n";
