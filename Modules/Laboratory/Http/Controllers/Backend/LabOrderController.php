@@ -20,6 +20,18 @@ class LabOrderController extends Controller
         $query = LabOrder::with(['clinic', 'lab', 'patient', 'doctor'])
             ->orderBy('created_at', 'desc');
 
+        // For lab technicians, only show orders from their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            if ($userLab) {
+                $query->where('lab_id', $userLab->id);
+            } else {
+                // If lab technician has no lab, return empty
+                $orders = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 20, 1);
+                return view('laboratory::lab-orders.index', compact('orders'));
+            }
+        }
+
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
@@ -41,6 +53,22 @@ class LabOrderController extends Controller
     {
         $labOrders = LabOrder::with(['clinic', 'lab', 'patient', 'doctor'])
             ->orderBy('created_at', 'desc');
+
+        // For lab technicians, only show orders from their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            if ($userLab) {
+                $labOrders->where('lab_id', $userLab->id);
+            } else {
+                // If lab technician has no lab, return empty data
+                return response()->json([
+                    'draw' => intval($request->draw),
+                    'recordsTotal' => 0,
+                    'recordsFiltered' => 0,
+                    'data' => []
+                ]);
+            }
+        }
 
         if ($request->filled('status')) {
             $labOrders->where('status', $request->status);

@@ -28,6 +28,19 @@ class LabResultController extends Controller
         $query = LabOrder::with(['patient', 'doctor', 'lab', 'clinic', 'labOrderItems'])
             ->orderBy('created_at', 'desc');
 
+        // For lab technicians, only show orders from their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            if ($userLab) {
+                $query->where('lab_id', $userLab->id);
+            } else {
+                // If lab technician has no lab, return empty
+                $orders = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15, 1);
+                $labs = [];
+                return view('laboratory::lab-results.index', compact('orders', 'labs'));
+            }
+        }
+
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -52,7 +65,14 @@ class LabResultController extends Controller
         }
 
         $orders = $query->paginate(15)->withQueryString();
-        $labs   = Lab::orderBy('name')->get(['id', 'name']);
+        
+        // For lab technicians, only show their own lab in filter
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            $labs = $userLab ? [$userLab] : [];
+        } else {
+            $labs = Lab::orderBy('name')->get(['id', 'name']);
+        }
 
         return view('laboratory::lab-results.index', compact('orders', 'labs'));
     }
@@ -60,6 +80,24 @@ class LabResultController extends Controller
     public function index_data(Request $request)
     {
         $query = LabResult::with(['labTest', 'patient', 'doctor', 'technician']);
+
+        // For lab technicians, only show results from their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            if ($userLab) {
+                $query->whereHas('labTest', function($q) use ($userLab) {
+                    $q->where('lab_id', $userLab->id);
+                });
+            } else {
+                // If lab technician has no lab, return empty data
+                return response()->json([
+                    'draw' => intval($request->draw),
+                    'recordsTotal' => 0,
+                    'recordsFiltered' => 0,
+                    'data' => []
+                ]);
+            }
+        }
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];

@@ -859,14 +859,32 @@ if (auth()->user()->hasRole(['doctor'])) {
 if (auth()->user()->hasRole(['lab_technician'])) {
     $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
 
-    // $this->mainRoute($menu, [
-    //     'icon' => 'ph ph-test-tube',
-    //     'title' => 'Lab Tests',
-    //     'route' => 'backend.lab-tests.index',
-    //     'active' => ['app/lab-tests'],
-    //     'permission' => ['view_lab_tests'],
-    //     'order' => 0,
-    // ]);
+    $this->mainRoute($menu, [
+        'icon' => 'ph ph-hospital',
+        'title' => 'Labs',
+        'route' => 'backend.labs.index',
+        'active' => ['app/labs'],
+        'permission' => ['view_labs'],
+        'order' => 0,
+    ]);
+
+    $this->mainRoute($menu, [
+        'icon' => 'ph ph-folder',
+        'title' => 'Lab Categories',
+        'route' => 'backend.lab-categories.index',
+        'active' => ['app/lab-categories'],
+        'permission' => ['view_lab_categories'],
+        'order' => 0,
+    ]);
+
+    $this->mainRoute($menu, [
+        'icon' => 'ph ph-test-tube',
+        'title' => 'Lab Services',
+        'route' => 'backend.lab-services.index',
+        'active' => ['app/lab-services'],
+        'permission' => ['view_lab_services'],
+        'order' => 0,
+    ]);
 
     $this->mainRoute($menu, [
         'icon' => 'ph ph-clipboard-text',

@@ -12,12 +12,23 @@ class LaboratoryPermissionsSeeder extends Seeder
     {
         // Define all Laboratory module permissions
         $permissions = [
-            // Lab Tests
-            'view_lab_tests',
-            'create_lab_tests',
-            'edit_lab_tests',
-            'delete_lab_tests',
-            'export_lab_tests',
+            // Labs
+            'view_labs',
+            'create_labs',
+            'edit_labs',
+            'delete_labs',
+            
+            // Lab Categories
+            'view_lab_categories',
+            'create_lab_categories',
+            'edit_lab_categories',
+            'delete_lab_categories',
+            
+            // Lab Services
+            'view_lab_services',
+            'create_lab_services',
+            'edit_lab_services',
+            'delete_lab_services',
             
             // Lab Results
             'view_lab_results',
@@ -27,17 +38,11 @@ class LaboratoryPermissionsSeeder extends Seeder
             'approve_lab_results',
             'print_lab_results',
             
-            // Lab Categories
-            'view_lab_categories',
-            'create_lab_categories',
-            'edit_lab_categories',
-            'delete_lab_categories',
-            
-            // Lab Equipment
-            'view_lab_equipment',
-            'create_lab_equipment',
-            'edit_lab_equipment',
-            'delete_lab_equipment',
+            // Lab Orders
+            'view_lab_orders',
+            'create_lab_orders',
+            'edit_lab_orders',
+            'delete_lab_orders',
         ];
 
         // Create permissions
@@ -55,25 +60,28 @@ class LaboratoryPermissionsSeeder extends Seeder
     protected function assignPermissionsToRoles()
     {
         $allPermissions = [
-            'view_lab_tests',
-            'create_lab_tests',
-            'edit_lab_tests',
-            'delete_lab_tests',
-            'export_lab_tests',
+            'view_labs',
+            'create_labs',
+            'edit_labs',
+            'delete_labs',
+            'view_lab_categories',
+            'create_lab_categories',
+            'edit_lab_categories',
+            'delete_lab_categories',
+            'view_lab_services',
+            'create_lab_services',
+            'edit_lab_services',
+            'delete_lab_services',
             'view_lab_results',
             'create_lab_results',
             'edit_lab_results',
             'delete_lab_results',
             'approve_lab_results',
             'print_lab_results',
-            'view_lab_categories',
-            'create_lab_categories',
-            'edit_lab_categories',
-            'delete_lab_categories',
-            'view_lab_equipment',
-            'create_lab_equipment',
-            'edit_lab_equipment',
-            'delete_lab_equipment',
+            'view_lab_orders',
+            'create_lab_orders',
+            'edit_lab_orders',
+            'delete_lab_orders',
         ];
 
         // Admin gets all permissions
@@ -94,11 +102,17 @@ class LaboratoryPermissionsSeeder extends Seeder
             ['guard_name' => 'web', 'title' => 'Lab Technician']
         );
         $technicianRole->givePermissionTo([
-            'view_lab_tests',
+            'view_labs',
+            'edit_labs', // Can edit their own lab
+            'view_lab_categories',
+            'view_lab_services',
+            'create_lab_services',
+            'edit_lab_services', // Can edit their own services
             'view_lab_results',
             'create_lab_results',
             'edit_lab_results',
-            'view_lab_equipment',
+            'view_lab_orders',
+            'create_lab_orders',
         ]);
 
         // Doctor can view tests and results

@@ -24,16 +24,22 @@ class LabController extends Controller
 
     public function index()
     {
-        // Debug: Check if we can reach this method
         try {
-            $labCount = Lab::count();
-            // Get all labs with relationships for the simple table
-            $allLabs = Lab::with(['user', 'clinic'])->get();
-            // Get a few sample labs for debugging
-            $sampleLabs = Lab::take(3)->get(['id', 'name', 'lab_code', 'email']);
+            // For lab technicians, only show their own lab
+            if (auth()->user()->hasRole('lab_technician')) {
+                $lab = Lab::where('user_id', auth()->id())->first();
+                $allLabs = $lab ? [$lab] : [];
+                $labCount = $lab ? 1 : 0;
+                $sampleLabs = $allLabs;
+            } else {
+                // Admin and other roles see all labs
+                $labCount = Lab::count();
+                $allLabs = Lab::with(['user', 'clinic'])->get();
+                $sampleLabs = Lab::take(3)->get(['id', 'name', 'lab_code', 'email']);
+            }
+            
             return view('laboratory::labs.index', compact('labCount', 'sampleLabs', 'allLabs'));
         } catch (\Exception $e) {
-            // Return error info for debugging
             return response()->json([
                 'error' => 'Error in index method: ' . $e->getMessage(),
                 'trace' => $e->getTraceAsString()
@@ -43,8 +49,13 @@ class LabController extends Controller
 
     public function index_data(Request $request)
     {
-        // Simple test - return raw data first
-        $labs = Lab::with(['user', 'clinic'])->get();
+        // For lab technicians, only show their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $labs = Lab::where('user_id', auth()->id())->with(['user', 'clinic'])->get();
+        } else {
+            // Admin and other roles see all labs
+            $labs = Lab::with(['user', 'clinic'])->get();
+        }
         
         $data = [];
         foreach ($labs as $lab) {

@@ -23,9 +23,17 @@ class LabServiceController extends Controller
     public function index()
     {
         try {
-            $serviceCount = LabService::count();
-            // Get all services with relationships
-            $allServices = LabService::with(['category', 'lab'])->get();
+            // For lab technicians, only show services from their own lab
+            if (auth()->user()->hasRole('lab_technician')) {
+                $userLab = Lab::where('user_id', auth()->id())->first();
+                $serviceCount = $userLab ? LabService::where('lab_id', $userLab->id)->count() : 0;
+                $allServices = $userLab ? LabService::where('lab_id', $userLab->id)->with(['category', 'lab'])->get() : [];
+            } else {
+                // Admin and other roles see all services
+                $serviceCount = LabService::count();
+                $allServices = LabService::with(['category', 'lab'])->get();
+            }
+            
             return view('laboratory::lab-services.index', compact('serviceCount', 'allServices'));
         } catch (\Exception $e) {
             return response()->json([
@@ -38,6 +46,22 @@ class LabServiceController extends Controller
     public function index_data(Request $request)
     {
         $query = LabService::with(['category', 'lab']);
+
+        // For lab technicians, only show services from their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            if ($userLab) {
+                $query->where('lab_id', $userLab->id);
+            } else {
+                // If lab technician has no lab, return empty data
+                return response()->json([
+                    'draw' => intval($request->draw),
+                    'recordsTotal' => 0,
+                    'recordsFiltered' => 0,
+                    'data' => []
+                ]);
+            }
+        }
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -80,7 +104,15 @@ class LabServiceController extends Controller
     public function create()
     {
         $categories = LabTestCategory::where('is_active', true)->orderBy('name')->get();
-        $labs = Lab::where('is_active', true)->orderBy('name')->get();
+        
+        // For lab technicians, only show their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            $labs = $userLab ? [$userLab] : [];
+        } else {
+            $labs = Lab::where('is_active', true)->orderBy('name')->get();
+        }
+        
         return view('laboratory::lab-services.create', compact('categories', 'labs'));
     }
 
@@ -95,6 +127,16 @@ class LabServiceController extends Controller
             'is_active' => 'boolean',
             'sort_order' => 'nullable|integer',
         ]);
+
+        // For lab technicians, ensure they can only create services for their own lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLab = Lab::where('user_id', auth()->id())->first();
+            if (!$userLab || $validated['lab_id'] != $userLab->id) {
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['lab_id' => 'You can only create services for your own lab.']);
+            }
+        }
 
         // Generate unique slug
         $slug = Str::slug($validated['name']);
