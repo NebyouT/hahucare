@@ -14,7 +14,7 @@ class LabCategoryController extends Controller
     {
         // Restore permissions for proper role-based access
         $this->middleware('permission:view_lab_categories', ['only' => ['index', 'index_data']]);
-        $this->middleware('permission:create_lab_categories', ['only' => ['create', 'store']]);
+        $this->middleware('permission:add_lab_categories', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit_lab_categories', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete_lab_categories', ['only' => ['destroy']]);
     }

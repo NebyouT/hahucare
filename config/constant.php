@@ -340,10 +340,29 @@ return [
             'is_custom_permission' => 0,
         ],
         [
-            'module_name' => 'Laboratory',
+            'module_name' => 'Labs',
             'type' => '',
-            'is_custom_permission' => 1,
-            'more_permission' => ['labs', 'lab_services', 'lab_tests', 'lab_categories', 'lab_results', 'lab_equipment', 'lab_orders'],
+            'is_custom_permission' => 0,
+        ],
+        [
+            'module_name' => 'Lab Categories',
+            'type' => '',
+            'is_custom_permission' => 0,
+        ],
+        [
+            'module_name' => 'Lab Services',
+            'type' => '',
+            'is_custom_permission' => 0,
+        ],
+        [
+            'module_name' => 'Lab Results',
+            'type' => '',
+            'is_custom_permission' => 0,
+        ],
+        [
+            'module_name' => 'Lab Orders',
+            'type' => '',
+            'is_custom_permission' => 0,
         ],
     ],
     'TIMEZONE' => array(

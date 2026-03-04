@@ -14,33 +14,31 @@ class LaboratoryPermissionsSeeder extends Seeder
         $permissions = [
             // Labs
             'view_labs',
-            'create_labs',
+            'add_labs',
             'edit_labs',
             'delete_labs',
             
             // Lab Categories
             'view_lab_categories',
-            'create_lab_categories',
+            'add_lab_categories',
             'edit_lab_categories',
             'delete_lab_categories',
             
             // Lab Services
             'view_lab_services',
-            'create_lab_services',
+            'add_lab_services',
             'edit_lab_services',
             'delete_lab_services',
             
             // Lab Results
             'view_lab_results',
-            'create_lab_results',
+            'add_lab_results',
             'edit_lab_results',
             'delete_lab_results',
-            'approve_lab_results',
-            'print_lab_results',
             
             // Lab Orders
             'view_lab_orders',
-            'create_lab_orders',
+            'add_lab_orders',
             'edit_lab_orders',
             'delete_lab_orders',
         ];
@@ -61,25 +59,23 @@ class LaboratoryPermissionsSeeder extends Seeder
     {
         $allPermissions = [
             'view_labs',
-            'create_labs',
+            'add_labs',
             'edit_labs',
             'delete_labs',
             'view_lab_categories',
-            'create_lab_categories',
+            'add_lab_categories',
             'edit_lab_categories',
             'delete_lab_categories',
             'view_lab_services',
-            'create_lab_services',
+            'add_lab_services',
             'edit_lab_services',
             'delete_lab_services',
             'view_lab_results',
-            'create_lab_results',
+            'add_lab_results',
             'edit_lab_results',
             'delete_lab_results',
-            'approve_lab_results',
-            'print_lab_results',
             'view_lab_orders',
-            'create_lab_orders',
+            'add_lab_orders',
             'edit_lab_orders',
             'delete_lab_orders',
         ];
@@ -96,23 +92,26 @@ class LaboratoryPermissionsSeeder extends Seeder
             $demoAdminRole->givePermissionTo($allPermissions);
         }
 
-        // Lab Technician role
+        // Lab Technician role - Full CRUD permissions for their own lab data
         $technicianRole = Role::firstOrCreate(
             ['name' => 'lab_technician'],
             ['guard_name' => 'web', 'title' => 'Lab Technician']
         );
         $technicianRole->givePermissionTo([
             'view_labs',
-            'edit_labs', // Can edit their own lab
+            'edit_labs',
             'view_lab_categories',
             'view_lab_services',
-            'create_lab_services',
-            'edit_lab_services', // Can edit their own services
+            'add_lab_services',
+            'edit_lab_services',
+            'delete_lab_services',
             'view_lab_results',
-            'create_lab_results',
+            'add_lab_results',
             'edit_lab_results',
+            'delete_lab_results',
             'view_lab_orders',
-            'create_lab_orders',
+            'add_lab_orders',
+            'edit_lab_orders',
         ]);
 
         // Doctor can view tests and results

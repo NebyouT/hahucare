@@ -17,7 +17,7 @@ class LabController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view_labs', ['only' => ['index', 'index_data']]);
-        $this->middleware('permission:create_labs', ['only' => ['create', 'store']]);
+        $this->middleware('permission:add_labs', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit_labs', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete_labs', ['only' => ['destroy']]);
     }

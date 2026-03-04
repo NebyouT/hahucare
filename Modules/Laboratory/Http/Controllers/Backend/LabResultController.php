@@ -18,7 +18,7 @@ class LabResultController extends Controller
     {
         // Restore permissions for proper role-based access
         $this->middleware('permission:view_lab_results', ['only' => ['index', 'index_data', 'show']]);
-        $this->middleware('permission:create_lab_results', ['only' => ['create', 'store']]);
+        $this->middleware('permission:add_lab_results', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit_lab_results', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete_lab_results', ['only' => ['destroy']]);
     }
