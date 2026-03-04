@@ -73,20 +73,27 @@ class GenerateMenus
                     'order' => 0,
                 ]);
             }
+            else if (auth()->user()->hasRole('lab_technician')) {
+                // Lab Technician - Only show lab-related menus
+                // Skip all other menus and jump directly to lab section
+                // The lab menu items are defined later in this file
+            }
 
+            // Only show these menus if NOT lab_technician
+            if (!auth()->user()->hasRole('lab_technician')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-sliders-horizontal',
+                    'title' => __('sidebar.appointment'),
+                    'route' => 'backend.appointments.index',
+                    'permission' => ['view_clinic_appointment_list'],
+                    'active' => ['app/appointments'],
+                    'order' => 0,
+                ]);
+            }
 
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-sliders-horizontal',
-                'title' => __('sidebar.appointment'),
-                'route' => 'backend.appointments.index',
-                'permission' => ['view_clinic_appointment_list'],
-                'active' => ['app/appointments'],
-                'order' => 0,
-            ]);
-
-
-
-        $BedMannagement = $this->parentMenu($menu, [
+        // Only show Bed Management if NOT lab_technician
+        if (!auth()->user()->hasRole('lab_technician')) {
+            $BedMannagement = $this->parentMenu($menu, [
             'icon' => 'ph ph-bed',
             'title' =>  __('sidebar.bed_mannagement'),
             'nickname' => 'bed_mannagement',
@@ -129,6 +136,8 @@ class GenerateMenus
                 'active' => ['app/bed-status'],
                 'order' => 1,
             ]);
+        } // End of Bed Management - close the if block for non-lab_technician users
+            
             if(auth()->user()->hasRole('receptionist')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-list-bullets',
