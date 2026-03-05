@@ -13,5 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'api/quick-booking/*',
+        'login/*/callback',  // OAuth callbacks (backend)
+        'auth/*/callback',   // OAuth callbacks (frontend)
     ];
 }
