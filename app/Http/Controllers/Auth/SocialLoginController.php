@@ -47,12 +47,28 @@ class SocialLoginController extends Controller
      */
     public function handleProviderCallback($provider)
     {
+        Log::info('Social Login Callback Started', [
+            'provider' => $provider,
+            'url' => request()->fullUrl(),
+            'has_code' => request()->has('code'),
+            'has_error' => request()->has('error'),
+        ]);
+
         try {
+            Log::info('Attempting to get user from Socialite');
             $user = Socialite::driver($provider)->user();
+
+            Log::info('Socialite user retrieved', [
+                'provider' => $provider,
+                'social_id' => $user->getId(),
+                'email' => $user->getEmail(),
+                'name' => $user->getName(),
+            ]);
 
             $authUser = $this->findOrCreateUser($user, $provider);
 
             if ($authUser instanceof \Illuminate\Http\RedirectResponse) {
+                Log::warning('findOrCreateUser returned RedirectResponse');
                 return $authUser;
             }
 
@@ -60,12 +76,24 @@ class SocialLoginController extends Controller
                 Log::error('Social Login Error: findOrCreateUser did not return a User', [
                     'provider' => $provider,
                     'returned_type' => gettype($authUser),
+                    'returned_value' => $authUser,
                 ]);
                 flash('Login failed. Please try again.')->error()->important();
                 return redirect('/admin/login');
             }
 
+            Log::info('Attempting to login user', [
+                'user_id' => $authUser->id,
+                'email' => $authUser->email,
+            ]);
+
             Auth::login($authUser, true);
+
+            Log::info('User logged in successfully', [
+                'user_id' => $authUser->id,
+                'email' => $authUser->email,
+                'authenticated' => Auth::check(),
+            ]);
         } catch (Exception $e) {
             Log::error('Social Login Exception', [
                 'provider' => $provider,
@@ -79,6 +107,10 @@ class SocialLoginController extends Controller
             return redirect('/admin/login');
         }
 
+        Log::info('Redirecting to home', [
+            'home' => RouteServiceProvider::HOME,
+        ]);
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -90,11 +122,33 @@ class SocialLoginController extends Controller
      */
     private function findOrCreateUser($socialUser, $provider)
     {
+        Log::info('findOrCreateUser started', [
+            'provider' => $provider,
+            'social_id' => $socialUser->getId(),
+            'email' => $socialUser->getEmail(),
+        ]);
+
+        // Check if user already linked via UserProvider
         if ($authUser = UserProvider::where('provider_id', $socialUser->getId())->first()) {
+            Log::info('User found via UserProvider', [
+                'user_provider_id' => $authUser->id,
+                'user_id' => $authUser->user_id,
+            ]);
+
             $authUser = User::findOrFail($authUser->user->id);
+
+            Log::info('Returning existing user from UserProvider', [
+                'user_id' => $authUser->id,
+                'email' => $authUser->email,
+            ]);
 
             return $authUser;
         } elseif ($authUser = User::where('email', $socialUser->getEmail())->first()) {
+            Log::info('User found by email, linking to provider', [
+                'user_id' => $authUser->id,
+                'email' => $authUser->email,
+            ]);
+
             UserProvider::create([
                 'user_id' => $authUser->id,
                 'provider_id' => $socialUser->getId(),
@@ -102,8 +156,14 @@ class SocialLoginController extends Controller
                 'provider' => $provider,
             ]);
 
+            Log::info('UserProvider link created, returning user', [
+                'user_id' => $authUser->id,
+            ]);
+
             return $authUser;
         } else {
+            Log::info('User not found, creating new user');
+
             $name = $socialUser->getName();
 
             $name_parts = $this->split_name($name);
@@ -120,27 +180,53 @@ class SocialLoginController extends Controller
                 return redirect('/admin/login');
             }
 
-            $user = User::create([
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-                'name' => $name,
+            Log::info('Creating new user', [
                 'email' => $email,
+                'name' => $name,
             ]);
 
-            $media = $user->addMediaFromUrl($socialUser->getAvatar())->toMediaCollection('users');
-            $user->avatar = $media->getUrl();
-            $user->save();
+            try {
+                $user = User::create([
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'name' => $name,
+                    'email' => $email,
+                ]);
 
-            event(new UserRegistered($user));
+                Log::info('User created', [
+                    'user_id' => $user->id,
+                ]);
 
-            UserProvider::create([
-                'user_id' => $user->id,
-                'provider_id' => $socialUser->getId(),
-                'avatar' => $socialUser->getAvatar(),
-                'provider' => $provider,
-            ]);
+                $media = $user->addMediaFromUrl($socialUser->getAvatar())->toMediaCollection('users');
+                $user->avatar = $media->getUrl();
+                $user->save();
 
-            return $user;
+                Log::info('User avatar saved');
+
+                event(new UserRegistered($user));
+
+                Log::info('UserRegistered event fired');
+
+                UserProvider::create([
+                    'user_id' => $user->id,
+                    'provider_id' => $socialUser->getId(),
+                    'avatar' => $socialUser->getAvatar(),
+                    'provider' => $provider,
+                ]);
+
+                Log::info('UserProvider created, returning new user', [
+                    'user_id' => $user->id,
+                ]);
+
+                return $user;
+            } catch (\Exception $e) {
+                Log::error('Error creating user', [
+                    'message' => $e->getMessage(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine(),
+                ]);
+                throw $e;
+            }
         }
     }
 
