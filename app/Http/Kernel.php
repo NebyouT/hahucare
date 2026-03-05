@@ -80,5 +80,6 @@ class Kernel extends HttpKernel
         'role.access'        => \App\Http\Middleware\RoleBasedAccessControl::class,
         'check.permission' => \Modules\Pharma\Http\Middleware\CheckPermission::class,
         '2fa' => \PragmaRX\Google2FALaravel\Middleware::class,
+        'api.permission'     => \App\Http\Middleware\ApiPermissionMiddleware::class,
     ];
 }

@@ -50,8 +50,8 @@ Route::get('dashboard-detail', [DashboardController::class, 'DashboardDetail']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     ### database backup 
-    Route::get('backup', [DBBackupController::class, 'index']);
-    Route::post('download-backup-files', [DBBackupController::class, 'downloadBkFiles']);
+    Route::get('backup', [DBBackupController::class, 'index'])->middleware('api.permission:view_backups');
+    Route::post('download-backup-files', [DBBackupController::class, 'downloadBkFiles'])->middleware('api.permission:view_backups');
 
     Route::apiResource('setting', SettingController::class);
     Route::apiResource('notification', NotificationsController::class);
@@ -68,10 +68,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('remove-address', [AddressController::class, 'RemoveAddress']);
     Route::post('edit-address', [AddressController::class, 'EditAddress']);
 
-    Route::get('vendor-dashboard-list', [DashboardController::class, 'VendorDashboardDetail']);
-    Route::get('doctor-dashboard-list', [DashboardController::class, 'doctorDashboardDetail']);
-    Route::get('receptionist-dashboard-list', [DashboardController::class, 'receptionistDashboardDetail']);
-    Route::get('pharma-dashboard-list', [DashboardController::class, 'pharmaDashboardDetail']);
+    Route::get('vendor-dashboard-list', [DashboardController::class, 'VendorDashboardDetail'])->middleware('api.permission:view_dashboard');
+    Route::get('doctor-dashboard-list', [DashboardController::class, 'doctorDashboardDetail'])->middleware('api.permission:view_dashboard');
+    Route::get('receptionist-dashboard-list', [DashboardController::class, 'receptionistDashboardDetail'])->middleware('api.permission:view_dashboard');
+    Route::get('pharma-dashboard-list', [DashboardController::class, 'pharmaDashboardDetail'])->middleware('api.permission:view_dashboard');
     Route::get('advance_filter', [SearchController::class, 'advanceFilter'])->name('advance_filter');
 
     Route::apiResource('incidence-list', IncidenceController::class);

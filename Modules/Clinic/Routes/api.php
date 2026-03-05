@@ -30,43 +30,43 @@ Route::get('get-time-slots', [Modules\Clinic\Http\Controllers\DoctorController::
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::get('get-categories', [ClinicesController::class, 'CategoryList']);
-    Route::post('save-clinic-category', [Modules\Clinic\Http\Controllers\ClinicsCategoryController::class, 'store']);
-    Route::post('update-clinic-category/{id}', [Modules\Clinic\Http\Controllers\ClinicsCategoryController::class, 'update']);
-    Route::post('delete-clinic-category/{id}', [Modules\Clinic\Http\Controllers\ClinicsCategoryController::class, 'destroy']);
+    Route::get('get-categories', [ClinicesController::class, 'CategoryList'])->middleware('api.permission:view_categories');
+    Route::post('save-clinic-category', [Modules\Clinic\Http\Controllers\ClinicsCategoryController::class, 'store'])->middleware('api.permission:add_categories');
+    Route::post('update-clinic-category/{id}', [Modules\Clinic\Http\Controllers\ClinicsCategoryController::class, 'update'])->middleware('api.permission:edit_categories');
+    Route::post('delete-clinic-category/{id}', [Modules\Clinic\Http\Controllers\ClinicsCategoryController::class, 'destroy'])->middleware('api.permission:delete_categories');
 
-    Route::get('get-services', [ClinicesController::class, 'ServiceList']);
-    Route::post('save-clinic-service', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'store']);
-    Route::post('update-clinic-service/{id}', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'update']);
-    Route::post('delete-clinic-service/{id}', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'destroy']);
-    Route::get('service-detail', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'ServiceDetails']);
+    Route::get('get-services', [ClinicesController::class, 'ServiceList'])->middleware('api.permission:view_services');
+    Route::post('save-clinic-service', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'store'])->middleware('api.permission:add_services');
+    Route::post('update-clinic-service/{id}', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'update'])->middleware('api.permission:edit_services');
+    Route::post('delete-clinic-service/{id}', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'destroy'])->middleware('api.permission:delete_services');
+    Route::get('service-detail', [Modules\Clinic\Http\Controllers\ClinicsServiceController::class, 'ServiceDetails'])->middleware('api.permission:view_services');
 
-    Route::get('get-clinics', [ClinicesController::class, 'ClinicList']);
+    Route::get('get-clinics', [ClinicesController::class, 'ClinicList'])->middleware('api.permission:view_clinics');
 
-    Route::post('save-clinic', [Modules\Clinic\Http\Controllers\ClinicesController::class, 'store']);
-    Route::post('update-clinic/{id}', [Modules\Clinic\Http\Controllers\ClinicesController::class, 'update']);
-    Route::post('delete-clinic/{id}', [Modules\Clinic\Http\Controllers\ClinicesController::class, 'destroy']);
-    Route::get('clinic-session', [ClinicesController::class, 'clinicSession']);
+    Route::post('save-clinic', [Modules\Clinic\Http\Controllers\ClinicesController::class, 'store'])->middleware('api.permission:add_clinics');
+    Route::post('update-clinic/{id}', [Modules\Clinic\Http\Controllers\ClinicesController::class, 'update'])->middleware('api.permission:edit_clinics');
+    Route::post('delete-clinic/{id}', [Modules\Clinic\Http\Controllers\ClinicesController::class, 'destroy'])->middleware('api.permission:delete_clinics');
+    Route::get('clinic-session', [ClinicesController::class, 'clinicSession'])->middleware('api.permission:view_clinics');
 
 
-    Route::post('save-clinic-gallery', [ClinicesController::class, 'uploadGalleryImages']);
+    Route::post('save-clinic-gallery', [ClinicesController::class, 'uploadGalleryImages'])->middleware('api.permission:edit_clinics');
 
-    Route::post('save-clinic-session', [Modules\Clinic\Http\Controllers\ClinicSessionController::class, 'store']);
-    Route::get('get-clinic-session-list', [ClinicesController::class, 'clinicSessionList']);
+    Route::post('save-clinic-session', [Modules\Clinic\Http\Controllers\ClinicSessionController::class, 'store'])->middleware('api.permission:edit_clinics');
+    Route::get('get-clinic-session-list', [ClinicesController::class, 'clinicSessionList'])->middleware('api.permission:view_clinics');
 
-    Route::get('get-doctors', [DoctorController::class, 'DoctorList']);
-    Route::get('doctor-details', [DoctorController::class, 'DoctorList']);
-    Route::post('save-doctor', [Modules\Clinic\Http\Controllers\DoctorController::class, 'store']);
-    Route::post('update-doctor/{id}', [Modules\Clinic\Http\Controllers\DoctorController::class, 'update']);
-    Route::post('delete-doctor/{id}', [Modules\Clinic\Http\Controllers\DoctorController::class, 'destroy']);
-    Route::get('get-doctors-session_list', [DoctorController::class, 'DoctorSessionList']);
+    Route::get('get-doctors', [DoctorController::class, 'DoctorList'])->middleware('api.permission:view_doctors');
+    Route::get('doctor-details', [DoctorController::class, 'DoctorList'])->middleware('api.permission:view_doctors');
+    Route::post('save-doctor', [Modules\Clinic\Http\Controllers\DoctorController::class, 'store'])->middleware('api.permission:add_doctors');
+    Route::post('update-doctor/{id}', [Modules\Clinic\Http\Controllers\DoctorController::class, 'update'])->middleware('api.permission:edit_doctors');
+    Route::post('delete-doctor/{id}', [Modules\Clinic\Http\Controllers\DoctorController::class, 'destroy'])->middleware('api.permission:delete_doctors');
+    Route::get('get-doctors-session_list', [DoctorController::class, 'DoctorSessionList'])->middleware('api.permission:view_doctors');
     // Route::post('save-doctor-session', [Modules\Clinic\Http\Controllers\DoctorSessionController::class, 'store']);
-    Route::post('save-doctor-session/{id}', [Modules\Clinic\Http\Controllers\DoctorSessionController::class, 'update']);
-    Route::get('doctor-commission-list', [DoctorController::class, 'doctorCommissionList']);
-    Route::get('doctor-payout-history', [DoctorController::class, 'doctorPayoutHistory']);
-    Route::get('doctor-session', [DoctorController::class, 'doctorSession']);
-    Route::post('assign-doctor', [DoctorController::class, 'assignDoctor']);
-    Route::post('assign-doctor-service', [DoctorController::class, 'assignDoctorService']);
+    Route::post('save-doctor-session/{id}', [Modules\Clinic\Http\Controllers\DoctorSessionController::class, 'update'])->middleware('api.permission:edit_doctors');
+    Route::get('doctor-commission-list', [DoctorController::class, 'doctorCommissionList'])->middleware('api.permission:view_doctors');
+    Route::get('doctor-payout-history', [DoctorController::class, 'doctorPayoutHistory'])->middleware('api.permission:view_doctors');
+    Route::get('doctor-session', [DoctorController::class, 'doctorSession'])->middleware('api.permission:view_doctors');
+    Route::post('assign-doctor', [DoctorController::class, 'assignDoctor'])->middleware('api.permission:edit_doctors');
+    Route::post('assign-doctor-service', [DoctorController::class, 'assignDoctorService'])->middleware('api.permission:edit_doctors');
 
 
     Route::post('save-rating', [DoctorController::class, 'saveRating'])->name('save-rating');
@@ -74,13 +74,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('specialization-list', [ClinicesController::class, 'specializationList']);
 
-    Route::get('get-patients', [DoctorController::class, 'patientList']);
-    Route::get('get-patient-details', [DoctorController::class, 'patientList']);
+    Route::get('get-patients', [DoctorController::class, 'patientList'])->middleware('api.permission:view_patients');
+    Route::get('get-patient-details', [DoctorController::class, 'patientList'])->middleware('api.permission:view_patients');
 
-    Route::post('save-receptionist', [Modules\Clinic\Http\Controllers\ReceptionistController::class, 'store']);
-    Route::get('get-receptionists', [DoctorController::class, 'receptionistList']);
-    Route::get('get-receptionist-details', [DoctorController::class, 'receptionistList']);
-    Route::post('update-receptionist/{id}', [Modules\Clinic\Http\Controllers\ReceptionistController::class, 'update']);
-    Route::post('delete-receptionist/{id}', [Modules\Clinic\Http\Controllers\ReceptionistController::class, 'destroy']);
+    Route::post('save-receptionist', [Modules\Clinic\Http\Controllers\ReceptionistController::class, 'store'])->middleware('api.permission:add_receptionists');
+    Route::get('get-receptionists', [DoctorController::class, 'receptionistList'])->middleware('api.permission:view_receptionists');
+    Route::get('get-receptionist-details', [DoctorController::class, 'receptionistList'])->middleware('api.permission:view_receptionists');
+    Route::post('update-receptionist/{id}', [Modules\Clinic\Http\Controllers\ReceptionistController::class, 'update'])->middleware('api.permission:edit_receptionists');
+    Route::post('delete-receptionist/{id}', [Modules\Clinic\Http\Controllers\ReceptionistController::class, 'destroy'])->middleware('api.permission:delete_receptionists');
 
 });
