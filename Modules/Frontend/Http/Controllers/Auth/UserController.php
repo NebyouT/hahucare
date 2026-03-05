@@ -492,13 +492,26 @@ class UserController extends Controller
     // Handle Google Callback
     public function handleGoogleCallback(Request $request)
     {
+        \Log::info('Google OAuth Callback Started', [
+            'url' => $request->fullUrl(),
+            'has_code' => $request->has('code'),
+            'has_error' => $request->has('error'),
+        ]);
 
         try {
+            \Log::info('Attempting to get user from Google Socialite');
             $googleUser = Socialite::driver('google')->stateless()->user();
+
+            \Log::info('Google user retrieved', [
+                'google_id' => $googleUser->getId(),
+                'email' => $googleUser->getEmail(),
+                'name' => $googleUser->getName(),
+            ]);
 
             $user = User::where('email', $googleUser->getEmail())->first();
 
             if (!$user) {
+                \Log::info('User not found, creating new user');
 
                 $fullName = $googleUser->getName();
 
@@ -519,6 +532,11 @@ class UserController extends Controller
 
                 $user = User::create($data);
 
+                \Log::info('New user created', [
+                    'user_id' => $user->id,
+                    'email' => $user->email,
+                ]);
+
                 $request->session()->regenerate();
 
                 // $user->createOrUpdateProfileWithAvatar();
@@ -526,26 +544,70 @@ class UserController extends Controller
                 $user->assignRole($data['user_type']);
 
                 $user->save();
+
+                \Log::info('User role assigned and saved');
+            } else {
+                \Log::info('Existing user found', [
+                    'user_id' => $user->id,
+                    'email' => $user->email,
+                    'login_type' => $user->login_type,
+                    'user_type' => $user->user_type,
+                ]);
             }
+
+            // Check if user was created with different login method
             if ($user->login_type !== 'google' && $user->login_type !== null) {
-                return redirect('/user-login')->with('error', 'This account was not created using Google login.');
+                \Log::warning('User login_type mismatch', [
+                    'user_id' => $user->id,
+                    'email' => $user->email,
+                    'current_login_type' => $user->login_type,
+                    'attempted_login_type' => 'google',
+                ]);
+                return redirect('/login')->with('error', 'This account was not created using Google login. Please use your email and password.');
             }
+
+            // If user exists but login_type is null, update it to google
+            if ($user->login_type === null) {
+                \Log::info('Updating user login_type to google', [
+                    'user_id' => $user->id,
+                ]);
+                $user->login_type = 'google';
+                $user->save();
+            }
+
+            \Log::info('Attempting to login user', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+            ]);
 
             // Log the user in
             Auth::login($user, true);
+
+            \Log::info('User logged in successfully', [
+                'user_id' => $user->id,
+                'authenticated' => Auth::check(),
+            ]);
             
             $request->session()->regenerate();
             
             // Redirect based on user role or intended URL
             if (session()->has('url.intended')) {
+                $intended = session('url.intended');
+                \Log::info('Redirecting to intended URL', ['url' => $intended]);
                 return redirect()->intended();
             }
 
+            \Log::info('Redirecting to frontend index');
             // Redirect to home page
             return redirect()->route('frontend.index');
         } catch (\Exception $e) {
-            \Log::error('Google login error: ' . $e->getMessage());
-            return redirect()->route('frontend.index')->with('error', 'Something went wrong with Google login. Please try again.');
+            \Log::error('Google login error', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->route('login-page')->with('error', 'Something went wrong with Google login. Please try again.');
         }
     }
     public function destroy(Request $request)
