@@ -590,13 +590,9 @@ class UserController extends Controller
             
             $request->session()->regenerate();
             
-            // Redirect based on user role or intended URL
-            if (session()->has('url.intended')) {
-                $intended = session('url.intended');
-                \Log::info('Redirecting to intended URL', ['url' => $intended]);
-                return redirect()->intended();
-            }
-
+            // Clear any intended URL to avoid admin redirect
+            session()->forget('url.intended');
+            
             \Log::info('Redirecting to frontend index');
             // Redirect to home page
             return redirect()->route('frontend.index');
