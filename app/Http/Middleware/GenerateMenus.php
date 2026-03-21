@@ -1428,7 +1428,7 @@ if (auth()->user()->hasRole('doctor')) {
                 'order' => 0,
             ]);
         }
-        if(!auth()->user()->hasRole('pharma')){
+        if(auth()->user()->can('view_faqs')){
             $this->mainRoute($menu, [
                 'icon' => 'ph ph-question',
                 'title' => __('messages.faq_title'),

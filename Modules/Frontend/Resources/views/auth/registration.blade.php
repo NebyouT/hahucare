@@ -173,7 +173,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             var input = document.querySelector("#contact_number");
             var iti = window.intlTelInput(input, {
-                initialCountry: "in",
+                initialCountry: "et",
+                onlyCountries: ["et"],
                 separateDialCode: true,
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js" // To handle number formatting
             });

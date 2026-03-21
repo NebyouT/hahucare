@@ -302,6 +302,10 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
     Route::get('/auth/google/callback', [SettingController::class, 'handleGoogleCallback']);
     Route::post('/store-access-token', [SettingController::class, 'storeToken']);
     Route::get('google-key', [SettingController::class, 'googleKey']);
+    
+    // Google Meet Integration Routes (separate from patient login)
+    Route::get('/google-meet/connect', [SettingController::class, 'googleId']);
+    Route::get('/google-meet/callback', [SettingController::class, 'handleGoogleCallback']);
     Route::get('download-json', [SettingController::class, 'downloadJson']);
 });
 

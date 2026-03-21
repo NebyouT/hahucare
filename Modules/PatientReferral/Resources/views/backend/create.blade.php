@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <option value="">Select Doctor</option>
                                     @foreach($doctors as $doctor)
                                         <option value="{{ $doctor->id }}" {{ old('referred_by') == $doctor->id ? 'selected' : '' }}>
-                                            Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }} ({{ $doctor->email }})
+                                            Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <option value="">Select Doctor</option>
                                     @foreach($doctors as $doctor)
                                         <option value="{{ $doctor->id }}" {{ old('referred_to') == $doctor->id ? 'selected' : '' }}>
-                                            Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }} ({{ $doctor->email }})
+                                            Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }}
                                         </option>
                                     @endforeach
                                 </select>
