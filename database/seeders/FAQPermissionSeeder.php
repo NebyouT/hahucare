@@ -22,9 +22,9 @@ class FAQPermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission, 'is_fixed' => true]);
         }
 
-        // Assign permissions to roles
-        $admin = Role::findByName('admin');
-        $demo_admin = Role::findByName('demo_admin');
+        // Assign permissions to roles - use firstOrCreate to handle existing roles
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $demo_admin = Role::firstOrCreate(['name' => 'demo_admin']);
 
         // Give all permissions to admin and demo_admin only
         if ($admin) {
