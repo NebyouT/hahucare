@@ -227,17 +227,42 @@ class SettingController extends Controller
         $clientId = env('GOOGLE_CLIENT_ID');
         $clientSecret = env('GOOGLE_CLIENT_SECRET');
         
-        \Log::info('Google OAuth Configuration:', [
+        // Enhanced debugging
+        \Log::info('Google OAuth Configuration Check:', [
             'redirect_uri' => $redirectUri,
-            'client_id' => $clientId,
-            'has_secret' => !empty($clientSecret)
+            'redirect_uri_empty' => empty($redirectUri),
+            'client_id' => $clientId ? substr($clientId, 0, 10) . '...' : 'NULL',
+            'client_id_empty' => empty($clientId),
+            'has_secret' => !empty($clientSecret),
+            'secret_empty' => empty($clientSecret),
+            'env_file_exists' => file_exists(base_path('.env')),
+            'app_url' => env('APP_URL'),
         ]);
         
-        if (empty($clientId) || empty($clientSecret) || empty($redirectUri)) {
-            \Log::error('Google OAuth credentials are not configured');
+        $missingVars = [];
+        if (empty($clientId)) $missingVars[] = 'GOOGLE_CLIENT_ID';
+        if (empty($clientSecret)) $missingVars[] = 'GOOGLE_CLIENT_SECRET';
+        if (empty($redirectUri)) $missingVars[] = 'GOOGLE_REDIRECT';
+        
+        if (!empty($missingVars)) {
+            $errorMessage = 'Missing Google OAuth configuration: ' . implode(', ', $missingVars);
+            \Log::error($errorMessage, [
+                'missing_vars' => $missingVars,
+                'instructions' => 'Add these variables to your .env file and run: php artisan config:clear'
+            ]);
+            
             return response()->json([
                 'error' => 'Google OAuth is not configured',
-                'message' => 'Please configure GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT in your environment variables.'
+                'message' => $errorMessage,
+                'missing_variables' => $missingVars,
+                'instructions' => [
+                    '1. Add the following to your .env file:',
+                    'GOOGLE_CLIENT_ID=your_client_id_here',
+                    'GOOGLE_CLIENT_SECRET=your_client_secret_here',
+                    'GOOGLE_REDIRECT=https://yourdomain.com/app/auth/google/callback',
+                    '2. Run: php artisan config:clear',
+                    '3. Get credentials from: https://console.cloud.google.com/apis/credentials'
+                ]
             ], 500);
         }
         
@@ -252,59 +277,110 @@ class SettingController extends Controller
             ]);
             $authUrl = $client->createAuthUrl();
             
-            \Log::info('Google OAuth Auth URL:', ['url' => $authUrl]);
+            \Log::info('Google OAuth Auth URL Generated Successfully:', [
+                'url' => $authUrl,
+                'redirect_uri' => $redirectUri
+            ]);
             
             return response()->json($authUrl);
         } catch (\Exception $e) {
-            \Log::error('Google OAuth Error: ' . $e->getMessage());
+            \Log::error('Google OAuth Client Error:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
+            
             return response()->json([
                 'error' => 'Failed to initialize Google OAuth',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
+                'details' => 'Check server logs for more information'
             ], 500);
         }
     }
 
     public function handleGoogleCallback(Request $request)
     {
+        \Log::info('Google OAuth Callback Started', [
+            'has_code' => $request->filled('code'),
+            'has_error' => $request->has('error'),
+            'error' => $request->get('error'),
+            'user_id' => Auth::id(),
+            'full_url' => $request->fullUrl()
+        ]);
 
-        $client = new Google_Client();
+        try {
+            $client = new Google_Client();
 
-        $client->setClientId(env('GOOGLE_CLIENT_ID'));
-        $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-        $client->setRedirectUri(env('GOOGLE_REDIRECT'));
-        $client->setAccessType('offline');
-        $client->setPrompt('consent');
-        $client->addScope('https://www.googleapis.com/auth/calendar.events');
-        $client->addScope('https://www.googleapis.com/auth/userinfo.email');
+            $clientId = env('GOOGLE_CLIENT_ID');
+            $clientSecret = env('GOOGLE_CLIENT_SECRET');
+            $redirectUri = env('GOOGLE_REDIRECT');
 
-        if (!$request->filled('code')) {
-            // Redirect the user to Google's authorization endpoint
-            return redirect()->to($client->createAuthUrl());
+            if (empty($clientId) || empty($clientSecret) || empty($redirectUri)) {
+                \Log::error('Google OAuth Callback: Missing credentials');
+                return redirect('/app/profile')->with('error', 'Google OAuth is not configured properly. Please contact administrator.');
+            }
+
+            $client->setClientId($clientId);
+            $client->setClientSecret($clientSecret);
+            $client->setRedirectUri($redirectUri);
+            $client->setAccessType('offline');
+            $client->setPrompt('consent');
+            $client->addScope('https://www.googleapis.com/auth/calendar.events');
+            $client->addScope('https://www.googleapis.com/auth/userinfo.email');
+
+            if (!$request->filled('code')) {
+                \Log::info('No code provided, redirecting to Google auth');
+                return redirect()->to($client->createAuthUrl());
+            }
+
+            \Log::info('Authenticating with Google using code');
+            
+            // Exchange authorization code for access token
+            $client->authenticate($request->input('code'));
+            $accessToken = $client->getAccessToken();
+
+            \Log::info('Access token received', [
+                'has_access_token' => isset($accessToken['access_token']),
+                'has_refresh_token' => isset($accessToken['refresh_token']),
+                'expires_in' => $accessToken['expires_in'] ?? null
+            ]);
+
+            // Extract access token and expiration time
+            $token = $accessToken['access_token'];
+            $expiresIn = $accessToken['expires_in'];
+            $refreshToken = $accessToken['refresh_token'] ?? null;
+
+            // Calculate expiration timestamp (expires_in is in seconds from now)
+            $expiresAt = now()->addSeconds($expiresIn);
+
+            // Store the access token and expiration timestamp in the user's table
+            $user = Auth::user();
+            $user->google_access_token = json_encode($accessToken);
+            $user->google_refresh_token = $refreshToken;
+            $user->token_expires_at = $expiresAt;
+            $user->is_telmet = 1;
+            $user->save();
+
+            \Log::info('Google OAuth completed successfully', [
+                'user_id' => $user->id,
+                'has_refresh_token' => !empty($refreshToken),
+                'expires_at' => $expiresAt
+            ]);
+
+            // Redirect back to profile with success message and set localStorage
+            return redirect('/app/profile')->with('success', 'Google account connected successfully!')
+                ->cookie('google_oauth_success', 'true', 1);
+        } catch (\Exception $e) {
+            \Log::error('Google OAuth Callback Error:', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return redirect('/app/profile')->with('error', 'Failed to connect Google account: ' . $e->getMessage());
         }
-
-        // Exchange authorization code for access token
-        $client->authenticate($request->input('code'));
-        $accessToken = $client->getAccessToken();
-
-        // Extract access token and expiration time
-        $token = $accessToken['access_token'];
-        $expiresIn = $accessToken['expires_in'];
-        $refreshToken = $accessToken['refresh_token'] ?? null;
-
-        // Calculate expiration timestamp (expires_in is in seconds from now)
-        $expiresAt = now()->addSeconds($expiresIn);
-
-        // Store the access token and expiration timestamp in the user's table
-        $user = Auth::user();
-        $user->google_access_token = json_encode($accessToken);
-        $user->google_refresh_token = $refreshToken;
-        $user->token_expires_at = $expiresAt;
-        $user->is_telmet = 1;
-        $user->save();
-
-        // Redirect back to profile with success message and set localStorage
-        return redirect('/app/profile')->with('success', 'Google account connected successfully!')
-            ->cookie('google_oauth_success', 'true', 1);
     }
 
     public function storeToken(Request $request)
