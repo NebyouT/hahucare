@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
         $this->call(\Modules\FAQ\database\seeders\FAQDatabaseSeeder::class);
         $this->call(FAQPermissionSeeder::class);
         $this->call(\Modules\FrontendSetting\database\seeders\FrontendSettingDatabaseSeeder::class);
+        $this->call(PaymentPermissionSeeder::class);
         $this->call(\Modules\Laboratory\database\seeders\LaboratoryDatabaseSeeder::class);
     
 

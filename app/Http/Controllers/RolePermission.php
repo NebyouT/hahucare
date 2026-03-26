@@ -48,6 +48,7 @@ class RolePermission extends Controller
             'Patient Referral' => ['view_patient_referral', 'add_patient_referral', 'edit_patient_referral', 'delete_patient_referral'],
             'Blog' => ['view_blogs', 'add_blogs', 'edit_blogs', 'delete_blogs'],
             'Reviews' => ['view_reviews', 'add_reviews', 'edit_reviews', 'delete_reviews'],
+            'Payments' => ['view_payments', 'add_payments', 'edit_payments', 'delete_payments', 'update_payment_status'],
             'Doctors' => ['view_doctors', 'add_doctors', 'edit_doctors', 'delete_doctors'],
             'Patients' => ['view_patients', 'add_patients', 'edit_patients', 'delete_patients'],
             'Appointments' => ['view_appointments', 'add_appointments', 'edit_appointments', 'delete_appointments'],

@@ -733,27 +733,29 @@ class GenerateMenus
 
 // patient referal module
 
-if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
-    $this->staticMenu($menu, ['title' => 'Patient Referal', 'order' => 0]);
+if (auth()->user()->can('view_patient_referral')) {
+    $this->staticMenu($menu, ['title' => 'Patient Referral', 'order' => 0]);
 
     $patientReferal = $this->parentMenu($menu, [
         'icon' => 'ph ph-user-plus',
-        'title' => 'Patient Referal',
+        'title' => 'Patient Referral',
         'nickname' => 'patient_referal',
         'order' => 0,
     ]);
 
-    $this->childMain($patientReferal, [
-        'icon' => 'ph ph-user-plus',
-        'title' => 'Add Patient Referal',
-        'route' => 'backend.patientreferral.create',
-        'active' => ['app/patientreferral/create'],
-        'order' => 0,
-    ]);
+    if (auth()->user()->can('add_patient_referral')) {
+        $this->childMain($patientReferal, [
+            'icon' => 'ph ph-user-plus',
+            'title' => 'Add Patient Referral',
+            'route' => 'backend.patientreferral.create',
+            'active' => ['app/patientreferral/create'],
+            'order' => 0,
+        ]);
+    }
 
     $this->childMain($patientReferal, [
         'icon' => 'ph ph-list',
-        'title' => 'Patient Referal List',
+        'title' => 'Patient Referral List',
         'route' => 'backend.patientreferral.index',
         'active' => ['app/patientreferral'],
         'order' => 0,
@@ -934,42 +936,6 @@ if (auth()->user()->hasRole(['receptionist'])) {
 }
 
 
-if (auth()->user()->hasRole('doctor')) {
-    $this->staticMenu($menu, ['title' => 'Patient Referral', 'order' => 0]);
-
-    $patientReferal = $this->parentMenu($menu, [
-        'icon' => 'ph ph-user-plus',
-        'title' => 'Patient Referral',
-        'nickname' => 'patient_referal',
-        'order' => 0,
-    ]);
-
-    if (auth()->user()->can('view_patient_referral')) {
-        $this->mainRoute($menu, [
-            'icon' => 'ph ph-user-plus',
-            'title' => 'Patient Referrals',
-            'route' => 'backend.patientreferral.index',
-            'active' => ['app/patientreferral'],
-            'order' => 5, // After existing menus
-        ]);
-    }
-
-    $this->childMain($patientReferal, [
-        'icon' => 'ph ph-user-plus',
-        'title' => 'Add Patient Referral',
-        'route' => 'backend.patientreferral.create',
-        'active' => ['app/patientreferral/create'],
-        'order' => 0,
-    ]);
-
-    $this->childMain($patientReferal, [
-        'icon' => 'ph ph-list',
-        'title' => 'Patient Referral List',
-        'route' => 'backend.patientreferral.index',
-        'active' => ['app/patientreferral'],
-        'order' => 0,
-    ]);
-}
 
 
 
