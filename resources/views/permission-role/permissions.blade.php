@@ -181,6 +181,7 @@
                             </div>
                         </div>
                     @else
+                        @if($role->name == 'pharma')
                         <div class="permission-collapse border rounded p-3 mb-3" id="permission_{{$role->id}}">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h6>{{ ucfirst($role->title) }}</h6>
@@ -322,7 +323,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                        @endif
                 @endif
                 {{ html()->form()->close() }}
 
