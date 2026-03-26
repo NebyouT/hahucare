@@ -27,11 +27,78 @@ class RolePermission extends Controller
         $module_title = $this->module_title;
         $module_name = $this->module_name;
         $roles = Role::get();
-        $modules = config('constant.MODULES');
         $permissions = Permission::get();
         $module_action = 'List';
 
-        return view('permission-role.permissions', compact('roles', 'permissions', 'module_title', 'module_name', 'module_action', 'modules'));
+        // Group permissions by module automatically
+        $groupedPermissions = $permissions->groupBy(function($permission) {
+            $name = $permission->name;
+            
+            // Handle special cases first
+            if (str_starts_with($name, 'view_') || str_starts_with($name, 'add_') || 
+                str_starts_with($name, 'edit_') || str_starts_with($name, 'delete_')) {
+                
+                $parts = explode('_', $name);
+                if (count($parts) >= 2) {
+                    // Remove the action (view, add, edit, delete) and get the module name
+                    $action = array_shift($parts);
+                    $moduleName = implode('_', $parts);
+                    
+                    // Clean up common module name patterns
+                    $moduleName = str_replace(['_list', '_management', '_settings'], '', $moduleName);
+                    $moduleName = ucfirst(str_replace('_', ' ', $moduleName));
+                    
+                    return $moduleName;
+                }
+            }
+            
+            // Handle permission names with module prefix
+            if (preg_match('/^([a-z_]+)_/', $name, $matches)) {
+                $modulePart = $matches[1];
+                
+                // Map common module prefixes to readable names
+                $moduleMap = [
+                    'lab' => 'Laboratory',
+                    'faq' => 'FAQs',
+                    'patient' => 'Patient',
+                    'doctor' => 'Doctor',
+                    'clinic' => 'Clinic',
+                    'appointment' => 'Appointment',
+                    'billing' => 'Billing',
+                    'encounter' => 'Encounter',
+                    'prescription' => 'Prescription',
+                    'medicine' => 'Medicine',
+                    'pharma' => 'Pharmacy',
+                    'earning' => 'Earning',
+                    'wallet' => 'Wallet',
+                    'setting' => 'Settings',
+                    'backup' => 'Backup',
+                    'notification' => 'Notification',
+                    'report' => 'Reports',
+                    'role' => 'Role Management',
+                    'permission' => 'Permission Management',
+                    'user' => 'User Management',
+                    'vendor' => 'Vendor',
+                    'customer' => 'Customer',
+                    'review' => 'Reviews',
+                    'tax' => 'Tax',
+                    'commission' => 'Commission',
+                    'log' => 'Logs',
+                ];
+                
+                if (isset($moduleMap[$modulePart])) {
+                    return $moduleMap[$modulePart];
+                }
+                
+                return ucfirst(str_replace('_', ' ', $modulePart));
+            }
+            
+            // Fallback - group by first word or create "Other" category
+            $firstWord = explode('_', $name)[0];
+            return ucfirst($firstWord);
+        })->sortKeys();
+
+        return view('permission-role.permissions', compact('roles', 'permissions', 'module_title', 'module_name', 'module_action', 'groupedPermissions'));
     }
 
     public function store(Request $request, Role $role_id)
