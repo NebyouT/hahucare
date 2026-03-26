@@ -75,54 +75,66 @@
 
                                     <tbody>
                                         @foreach($groupedPermissions as $moduleName => $modulePermissions)
+                                            @php
+                                                // Extract specific permissions for this module
+                                                $viewPermission = $modulePermissions->where('name', 'like', 'view_%')->first();
+                                                $addPermission = $modulePermissions->where('name', 'like', 'add_%')->first();
+                                                $editPermission = $modulePermissions->where('name', 'like', 'edit_%')->first();
+                                                $deletePermission = $modulePermissions->where('name', 'like', 'delete_%')->first();
+                                                
+                                                // Get other permissions (non-CRUD)
+                                                $otherPermissions = $modulePermissions->whereNotIn('name', 
+                                                    $modulePermissions->whereIn('name', ['view_%', 'add_%', 'edit_%', 'delete_%'])->pluck('name')->toArray()
+                                                );
+                                            @endphp
                                             <tr>
                                                 <td><strong>{{ $moduleName }}</strong></td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'view_%')->first())
+                                                    @if($viewPermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-view_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[view_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$viewPermission->name}}"
+                                                                name="permission[{{$viewPermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'view_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $viewPermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'add_%')->first())
+                                                    @if($addPermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-add_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[add_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$addPermission->name}}"
+                                                                name="permission[{{$addPermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'add_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $addPermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'edit_%')->first())
+                                                    @if($editPermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-edit_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[edit_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$editPermission->name}}"
+                                                                name="permission[{{$editPermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'edit_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $editPermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'delete_%')->first())
+                                                    @if($deletePermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-delete_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[delete_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$deletePermission->name}}"
+                                                                name="permission[{{$deletePermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'delete_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $deletePermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
 
-                                                @if($modulePermissions->whereNotIn('name', ['view_'.strtolower(str_replace(' ', '_', $moduleName)), 'add_'.strtolower(str_replace(' ', '_', $moduleName)), 'edit_'.strtolower(str_replace(' ', '_', $moduleName)), 'delete_'.strtolower(str_replace(' ', '_', $moduleName))])->count() > 0)
+                                                @if($otherPermissions->count() > 0)
                                                     <td class="text-end">
                                                         <a data-bs-toggle="collapse" data-bs-target="#demo_{{str_replace(' ', '_', $moduleName)}}_{{$role->id}}" class="accordion-toggle btn btn-primary btn-xs">
                                                             <i class="fa-solid fa-chevron-down me-2"></i>More
@@ -133,13 +145,13 @@
                                                 @endif
                                             </tr>
 
-                                            @if($modulePermissions->whereNotIn('name', ['view_'.strtolower(str_replace(' ', '_', $moduleName)), 'add_'.strtolower(str_replace(' ', '_', $moduleName)), 'edit_'.strtolower(str_replace(' ', '_', $moduleName)), 'delete_'.strtolower(str_replace(' ', '_', $moduleName))])->count() > 0)
+                                            @if($otherPermissions->count() > 0)
                                                 <tr>
                                                     <td colspan="12" class="hiddenRow">
                                                         <div class="accordian-body collapse" id="demo_{{str_replace(' ', '_', $moduleName)}}_{{$role->id}}">
                                                             <table class="table table-striped mb-0">
                                                                 <tbody>
-                                                                    @foreach($modulePermissions->whereNotIn('name', ['view_'.strtolower(str_replace(' ', '_', $moduleName)), 'add_'.strtolower(str_replace(' ', '_', $moduleName)), 'edit_'.strtolower(str_replace(' ', '_', $moduleName)), 'delete_'.strtolower(str_replace(' ', '_', $moduleName))]) as $permission)
+                                                                    @foreach($otherPermissions as $permission)
                                                                         <tr>
                                                                             <td class="d-flex justify-content-center">
                                                                                 <div class="form-check form-switch">
@@ -205,54 +217,66 @@
 
                                     <tbody>
                                         @foreach($groupedPermissions as $moduleName => $modulePermissions)
+                                            @php
+                                                // Extract specific permissions for this module
+                                                $viewPermission = $modulePermissions->where('name', 'like', 'view_%')->first();
+                                                $addPermission = $modulePermissions->where('name', 'like', 'add_%')->first();
+                                                $editPermission = $modulePermissions->where('name', 'like', 'edit_%')->first();
+                                                $deletePermission = $modulePermissions->where('name', 'like', 'delete_%')->first();
+                                                
+                                                // Get other permissions (non-CRUD)
+                                                $otherPermissions = $modulePermissions->whereNotIn('name', 
+                                                    $modulePermissions->whereIn('name', ['view_%', 'add_%', 'edit_%', 'delete_%'])->pluck('name')->toArray()
+                                                );
+                                            @endphp
                                             <tr>
                                                 <td><strong>{{ $moduleName }}</strong></td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'view_%')->first())
+                                                    @if($viewPermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-view_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[view_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$viewPermission->name}}_pharma"
+                                                                name="permission[{{$viewPermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'view_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $viewPermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'add_%')->first())
+                                                    @if($addPermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-add_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[add_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$addPermission->name}}_pharma"
+                                                                name="permission[{{$addPermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'add_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $addPermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'edit_%')->first())
+                                                    @if($editPermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-edit_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[edit_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$editPermission->name}}_pharma"
+                                                                name="permission[{{$editPermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'edit_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $editPermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($modulePermissions->where('name', 'like', 'delete_%')->first())
+                                                    @if($deletePermission)
                                                         <span>
                                                             <input type="checkbox"
-                                                                id="role-{{$role->name}}-permission-delete_{{strtolower(str_replace(' ', '_', $moduleName))}}"
-                                                                name="permission[delete_{{strtolower(str_replace(' ', '_', $moduleName))}}][]"
+                                                                id="role-{{$role->name}}-permission-{{$deletePermission->name}}_pharma"
+                                                                name="permission[{{$deletePermission->name}}][]"
                                                                 value="{{$role->name}}" class="form-check-input"
-                                                                {{ (AuthHelper::checkRolePermission($role, 'delete_'.strtolower(str_replace(' ', '_', $moduleName)))) ? 'checked' : '' }}>
+                                                                {{ (AuthHelper::checkRolePermission($role, $deletePermission->name)) ? 'checked' : '' }}>
                                                         </span>
                                                     @endif
                                                 </td>
 
-                                                @if($modulePermissions->whereNotIn('name', ['view_'.strtolower(str_replace(' ', '_', $moduleName)), 'add_'.strtolower(str_replace(' ', '_', $moduleName)), 'edit_'.strtolower(str_replace(' ', '_', $moduleName)), 'delete_'.strtolower(str_replace(' ', '_', $moduleName))])->count() > 0)
+                                                @if($otherPermissions->count() > 0)
                                                     <td class="text-end">
                                                         <a data-bs-toggle="collapse" data-bs-target="#demo_{{str_replace(' ', '_', $moduleName)}}_{{$role->id}}_pharma" class="accordion-toggle btn btn-primary btn-xs">
                                                             <i class="fa-solid fa-chevron-down me-2"></i>More
@@ -263,13 +287,13 @@
                                                 @endif
                                             </tr>
 
-                                            @if($modulePermissions->whereNotIn('name', ['view_'.strtolower(str_replace(' ', '_', $moduleName)), 'add_'.strtolower(str_replace(' ', '_', $moduleName)), 'edit_'.strtolower(str_replace(' ', '_', $moduleName)), 'delete_'.strtolower(str_replace(' ', '_', $moduleName))])->count() > 0)
+                                            @if($otherPermissions->count() > 0)
                                                 <tr>
                                                     <td colspan="12" class="hiddenRow">
                                                         <div class="accordian-body collapse" id="demo_{{str_replace(' ', '_', $moduleName)}}_{{$role->id}}_pharma">
                                                             <table class="table table-striped mb-0">
                                                                 <tbody>
-                                                                    @foreach($modulePermissions->whereNotIn('name', ['view_'.strtolower(str_replace(' ', '_', $moduleName)), 'add_'.strtolower(str_replace(' ', '_', $moduleName)), 'edit_'.strtolower(str_replace(' ', '_', $moduleName)), 'delete_'.strtolower(str_replace(' ', '_', $moduleName))]) as $permission)
+                                                                    @foreach($otherPermissions as $permission)
                                                                         <tr>
                                                                             <td class="d-flex justify-content-center">
                                                                                 <div class="form-check form-switch">

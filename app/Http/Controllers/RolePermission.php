@@ -30,73 +30,63 @@ class RolePermission extends Controller
         $permissions = Permission::get();
         $module_action = 'List';
 
-        // Group permissions by module automatically
-        $groupedPermissions = $permissions->groupBy(function($permission) {
-            $name = $permission->name;
-            
-            // Handle special cases first
-            if (str_starts_with($name, 'view_') || str_starts_with($name, 'add_') || 
-                str_starts_with($name, 'edit_') || str_starts_with($name, 'delete_')) {
-                
-                $parts = explode('_', $name);
+        // Create a better permission grouping system
+        $groupedPermissions = collect();
+        
+        // Define module groups with their permission patterns
+        $moduleGroups = [
+            'FAQs' => ['view_faqs', 'add_faqs', 'edit_faqs', 'delete_faqs'],
+            'Laboratory' => [
+                'view_labs', 'add_labs', 'edit_labs', 'delete_labs',
+                'view_lab_tests', 'add_lab_tests', 'edit_lab_tests', 'delete_lab_tests',
+                'view_lab_results', 'add_lab_results', 'edit_lab_results', 'delete_lab_results',
+                'view_lab_orders', 'add_lab_orders', 'edit_lab_orders', 'delete_lab_orders',
+                'view_lab_services', 'add_lab_services', 'edit_lab_services', 'delete_lab_services',
+                'view_lab_categories', 'add_lab_categories', 'edit_lab_categories', 'delete_lab_categories',
+                'view_lab_equipment', 'add_lab_equipment', 'edit_lab_equipment', 'delete_lab_equipment'
+            ],
+            'Patient Referral' => ['view_patient_referral', 'add_patient_referral', 'edit_patient_referral', 'delete_patient_referral'],
+            'Blog' => ['view_blogs', 'add_blogs', 'edit_blogs', 'delete_blogs'],
+            'Reviews' => ['view_reviews', 'add_reviews', 'edit_reviews', 'delete_reviews'],
+            'Doctors' => ['view_doctors', 'add_doctors', 'edit_doctors', 'delete_doctors'],
+            'Patients' => ['view_patients', 'add_patients', 'edit_patients', 'delete_patients'],
+            'Appointments' => ['view_appointments', 'add_appointments', 'edit_appointments', 'delete_appointments'],
+            'Clinics' => ['view_clinics', 'add_clinics', 'edit_clinics', 'delete_clinics'],
+            'Settings' => ['view_settings', 'add_settings', 'edit_settings', 'delete_settings'],
+            'Roles' => ['view_roles', 'add_roles', 'edit_roles', 'delete_roles'],
+            'Permissions' => ['view_permissions', 'add_permissions', 'edit_permissions', 'delete_permissions'],
+        ];
+
+        // Group permissions by defined modules
+        foreach ($moduleGroups as $moduleName => $permissionNames) {
+            $modulePermissions = $permissions->whereIn('name', $permissionNames);
+            if ($modulePermissions->count() > 0) {
+                $groupedPermissions->put($moduleName, $modulePermissions);
+            }
+        }
+
+        // Add any remaining permissions to "Other" category
+        $usedPermissions = $groupedPermissions->flatten()->pluck('name');
+        $remainingPermissions = $permissions->whereNotIn('name', $usedPermissions);
+        
+        if ($remainingPermissions->count() > 0) {
+            // Group remaining permissions by their first part
+            $remainingGrouped = $remainingPermissions->groupBy(function($permission) {
+                $parts = explode('_', $permission->name);
                 if (count($parts) >= 2) {
-                    // Remove the action (view, add, edit, delete) and get the module name
-                    $action = array_shift($parts);
-                    $moduleName = implode('_', $parts);
-                    
-                    // Clean up common module name patterns
-                    $moduleName = str_replace(['_list', '_management', '_settings'], '', $moduleName);
-                    $moduleName = ucfirst(str_replace('_', ' ', $moduleName));
-                    
+                    $moduleName = ucfirst($parts[0]);
                     return $moduleName;
                 }
-            }
+                return 'Other';
+            });
             
-            // Handle permission names with module prefix
-            if (preg_match('/^([a-z_]+)_/', $name, $matches)) {
-                $modulePart = $matches[1];
-                
-                // Map common module prefixes to readable names
-                $moduleMap = [
-                    'lab' => 'Laboratory',
-                    'faq' => 'FAQs',
-                    'patient' => 'Patient',
-                    'doctor' => 'Doctor',
-                    'clinic' => 'Clinic',
-                    'appointment' => 'Appointment',
-                    'billing' => 'Billing',
-                    'encounter' => 'Encounter',
-                    'prescription' => 'Prescription',
-                    'medicine' => 'Medicine',
-                    'pharma' => 'Pharmacy',
-                    'earning' => 'Earning',
-                    'wallet' => 'Wallet',
-                    'setting' => 'Settings',
-                    'backup' => 'Backup',
-                    'notification' => 'Notification',
-                    'report' => 'Reports',
-                    'role' => 'Role Management',
-                    'permission' => 'Permission Management',
-                    'user' => 'User Management',
-                    'vendor' => 'Vendor',
-                    'customer' => 'Customer',
-                    'review' => 'Reviews',
-                    'tax' => 'Tax',
-                    'commission' => 'Commission',
-                    'log' => 'Logs',
-                ];
-                
-                if (isset($moduleMap[$modulePart])) {
-                    return $moduleMap[$modulePart];
-                }
-                
-                return ucfirst(str_replace('_', ' ', $modulePart));
+            foreach ($remainingGrouped as $moduleName => $perms) {
+                $groupedPermissions->put($moduleName, $perms);
             }
-            
-            // Fallback - group by first word or create "Other" category
-            $firstWord = explode('_', $name)[0];
-            return ucfirst($firstWord);
-        })->sortKeys();
+        }
+
+        // Sort the modules alphabetically
+        $groupedPermissions = $groupedPermissions->sortKeys();
 
         return view('permission-role.permissions', compact('roles', 'permissions', 'module_title', 'module_name', 'module_action', 'groupedPermissions'));
     }
