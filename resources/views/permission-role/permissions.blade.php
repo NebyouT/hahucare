@@ -78,13 +78,13 @@
                                             @php
                                                 // Extract specific permissions for this module
                                                 $viewPermission = $modulePermissions->where('name', 'like', 'view_%')->first();
-                                                $addPermission = $modulePermissions->where('name', 'like', 'add_%')->first();
+                                                $addPermission = $modulePermissions->where('name', 'like', 'create_%')->first();
                                                 $editPermission = $modulePermissions->where('name', 'like', 'edit_%')->first();
                                                 $deletePermission = $modulePermissions->where('name', 'like', 'delete_%')->first();
                                                 
                                                 // Get other permissions (non-CRUD)
                                                 $otherPermissions = $modulePermissions->whereNotIn('name', 
-                                                    $modulePermissions->whereIn('name', ['view_%', 'add_%', 'edit_%', 'delete_%'])->pluck('name')->toArray()
+                                                    $modulePermissions->whereIn('name', ['view_%', 'create_%', 'edit_%', 'delete_%'])->pluck('name')->toArray()
                                                 );
                                             @endphp
                                             <tr>
@@ -221,13 +221,13 @@
                                             @php
                                                 // Extract specific permissions for this module
                                                 $viewPermission = $modulePermissions->where('name', 'like', 'view_%')->first();
-                                                $addPermission = $modulePermissions->where('name', 'like', 'add_%')->first();
+                                                $addPermission = $modulePermissions->where('name', 'like', 'create_%')->first();
                                                 $editPermission = $modulePermissions->where('name', 'like', 'edit_%')->first();
                                                 $deletePermission = $modulePermissions->where('name', 'like', 'delete_%')->first();
                                                 
                                                 // Get other permissions (non-CRUD)
                                                 $otherPermissions = $modulePermissions->whereNotIn('name', 
-                                                    $modulePermissions->whereIn('name', ['view_%', 'add_%', 'edit_%', 'delete_%'])->pluck('name')->toArray()
+                                                    $modulePermissions->whereIn('name', ['view_%', 'create_%', 'edit_%', 'delete_%'])->pluck('name')->toArray()
                                                 );
                                             @endphp
                                             <tr>

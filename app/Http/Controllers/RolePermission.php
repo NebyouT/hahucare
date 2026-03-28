@@ -43,10 +43,16 @@ class RolePermission extends Controller
                 'view_lab_orders', 'add_lab_orders', 'edit_lab_orders', 'delete_lab_orders',
                 'view_lab_services', 'add_lab_services', 'edit_lab_services', 'delete_lab_services',
                 'view_lab_categories', 'add_lab_categories', 'edit_lab_categories', 'delete_lab_categories',
-                'view_lab_equipment', 'add_lab_equipment', 'edit_lab_equipment', 'delete_lab_equipment'
+                'view_lab_equipment', 'add_lab_equipment', 'edit_lab_equipment', 'delete_lab_equipment',
+                'order_lab_tests'
             ],
             'Patient Referral' => ['view_patient_referral', 'add_patient_referral', 'edit_patient_referral', 'delete_patient_referral'],
-            'Blog' => ['view_blogs', 'add_blogs', 'edit_blogs', 'delete_blogs'],
+            'Blog' => [
+                'view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs',
+                'manage_blog_status', 'feature_blogs', 'manage_blog_media',
+                'bulk_delete_blogs', 'bulk_restore_blogs', 'bulk_force_delete_blogs',
+                'export_blogs', 'import_blogs', 'view_blog_analytics', 'view_blog_statistics'
+            ],
             'Reviews' => ['view_reviews', 'add_reviews', 'edit_reviews', 'delete_reviews'],
             'Payments' => ['view_payments', 'add_payments', 'edit_payments', 'delete_payments', 'update_payment_status'],
             'Doctors' => ['view_doctors', 'add_doctors', 'edit_doctors', 'delete_doctors'],
