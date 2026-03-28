@@ -730,322 +730,63 @@ class GenerateMenus
                     //     ]);
                     // }
                 }
-
-// patient referal module
-
-if (auth()->user()->can('view_patient_referral')) {
-    $this->staticMenu($menu, ['title' => 'Patient Referral', 'order' => 0]);
-
-    $patientReferal = $this->parentMenu($menu, [
-        'icon' => 'ph ph-user-plus',
-        'title' => 'Patient Referral',
-        'nickname' => 'patient_referal',
-        'order' => 0,
-    ]);
-
-    if (auth()->user()->can('add_patient_referral')) {
-        $this->childMain($patientReferal, [
-            'icon' => 'ph ph-user-plus',
-            'title' => 'Add Patient Referral',
-            'route' => 'backend.patientreferral.create',
-            'active' => ['app/patientreferral/create'],
-            'order' => 0,
-        ]);
-    }
-
-    $this->childMain($patientReferal, [
-        'icon' => 'ph ph-list',
-        'title' => 'Patient Referral List',
-        'route' => 'backend.patientreferral.index',
-        'active' => ['app/patientreferral'],
-        'order' => 0,
-    ]);
-}
-
-if (auth()->user()->hasRole('doctor')) {
-   $this->staticMenu($menu, ['title' => 'Patient Referal', 'order' => 0]);
-
-    $patientReferal = $this->parentMenu($menu, [
-        'icon' => 'ph ph-user-plus',
-        'title' => 'Patient Referal',
-        'nickname' => 'patient_referal',
-        'order' => 0,
-    ]);
-
-    $this->childMain($patientReferal, [
-        'icon' => 'ph ph-user-plus',
-        'title' => 'Add Patient Referal',
-        'route' => 'backend.patientreferral.create',
-        'active' => ['app/patientreferral/create'],
-        'order' => 0,
-    ]);
-
-    $this->childMain($patientReferal, [
-        'icon' => 'ph ph-list',
-        'title' => 'Patient Referal List',
-        'route' => 'backend.patientreferral.index',
-        'active' => ['app/patientreferral'],
-        'order' => 0,
-    ]);
-}
-
-// Laboratory Module
-if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
-    $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
-
-    $laboratory = $this->parentMenu($menu, [
-        'icon' => 'ph ph-test-tube',
-        'title' => 'Laboratory',
-        'nickname' => 'laboratory',
-        'order' => 0,
-    ]);
-
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-building-office',
-        'title' => 'Labs',
-        'route' => 'backend.labs.index',
-        'active' => ['app/labs'],
-        'permission' => ['view_labs'],
-        'order' => 0,
-    ]);
-
-  
-
-    
-
-    // $this->childMain($laboratory, [
-    //     'icon' => 'ph ph-test-tube',
-    //     'title' => 'Lab Tests',
-    //     'route' => 'backend.lab-tests.index',
-    //     'active' => ['app/lab-tests'],
-    //     'permission' => ['view_lab_tests'],
-    //     'order' => 0,
-    // ]);
-
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-folder',
-        'title' => 'Lab Categories',
-        'route' => 'backend.lab-categories.index',
-        'active' => ['app/lab-categories'],
-        'permission' => ['view_lab_categories'],
-        'order' => 0,
-    ]);
-
-      $this->childMain($laboratory, [
-        'icon' => 'ph ph-currency-dollar',
-        'title' => 'Lab Services',
-        'route' => 'backend.lab-services.index',
-        'active' => ['app/lab-services'],
-        'permission' => ['view_lab_services'],
-        'order' => 0,
-    ]);
-
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-clipboard-text',
-        'title' => 'Lab Results',
-        'route' => 'backend.lab-results.index',
-        'active' => ['app/lab-results'],
-        'permission' => ['view_lab_results'],
-        'order' => 0,
-    ]);
-
-    $this->childMain($laboratory, [
-        'icon' => 'ph ph-list-bullets',
-        'title' => 'Lab Orders',
-        'route' => 'backend.lab-orders.index',
-        'active' => ['app/lab-orders'],
-        'permission' => ['view_lab_orders'],
-        'order' => 0,
-    ]);
-
-}
-
-if (auth()->user()->hasRole(['doctor'])) {
-    $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-list-bullets',
-        'title' => 'Lab Orders',
-        'route' => 'backend.lab-orders.index',
-        'active' => ['app/lab-orders'],
-        'permission' => ['view_lab_orders'],
-        'order' => 0,
-    ]);
-}
-
-if (auth()->user()->hasRole(['lab_technician'])) {
-    $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-hospital',
-        'title' => 'Labs',
-        'route' => 'backend.labs.index',
-        'active' => ['app/labs'],
-        'permission' => ['view_labs'],
-        'order' => 0,
-    ]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-folder',
-        'title' => 'Lab Categories',
-        'route' => 'backend.lab-categories.index',
-        'active' => ['app/lab-categories'],
-        'permission' => ['view_lab_categories'],
-        'order' => 0,
-    ]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-test-tube',
-        'title' => 'Lab Services',
-        'route' => 'backend.lab-services.index',
-        'active' => ['app/lab-services'],
-        'permission' => ['view_lab_services'],
-        'order' => 0,
-    ]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-clipboard-text',
-        'title' => 'Lab Results',
-        'route' => 'backend.lab-results.index',
-        'active' => ['app/lab-results'],
-        'permission' => ['view_lab_results'],
-        'order' => 0,
-    ]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-list-bullets',
-        'title' => 'Lab Orders',
-        'route' => 'backend.lab-orders.index',
-        'active' => ['app/lab-orders'],
-        'permission' => ['view_lab_orders'],
-        'order' => 0,
-    ]);
-}
-
-if (auth()->user()->hasRole(['receptionist'])) {
-    $this->staticMenu($menu, ['title' => 'Laboratory', 'order' => 0]);
-
-    $this->mainRoute($menu, [
-        'icon' => 'ph ph-list-bullets',
-        'title' => 'Lab Orders',
-        'route' => 'backend.lab-orders.index',
-        'active' => ['app/lab-orders'],
-        'permission' => ['view_lab_orders'],
-        'order' => 0,
-    ]);
-}
-
-
-
-
-
-      
-
-
-        
-
-            $permissionsToCheck = ['view_tax', 'view_earning', 'view_billing_record'];
-
-            if (collect($permissionsToCheck)->contains(fn ($permission) => auth()->user()->can($permission))) {
-                //dd("Dsdsd");
-                $this->staticMenu($menu, ['title' => __('sidebar.finance'), 'order' => 0]);
             }
 
-            if(auth()->user()->user_type != 'pharma'){
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-percent',
-                    'title' => __('sidebar.tax'),
-                    'route' => 'backend.tax.index',
-                    'active' => ['app/tax'],
-                    // 'permission' => 'view_tax',
-                    'order' => 0,
-                ]);
-            }
-            if(auth()->user()->hasRole(['admin','demo_admin'])){
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-invoice',
-                    'title' => __('sidebar.billing_record'),
-                    'route' => 'backend.billing-record.index',
-                    'active' => ['app/billing-record'],
-                    'permission' => 'view_billing_record',
+            if (auth()->user()->can('view_patient_referral')) {
+                $this->staticMenu($menu, ['title' => 'Patient Referral', 'order' => 0]);
+
+                $patientReferal = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-user-plus',
+                    'title' => 'Patient Referral',
+                    'nickname' => 'patient_referal',
                     'order' => 0,
                 ]);
 
-            }
-            if(auth()->user()->hasRole('pharma')){
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-invoice',
-                    'title' => __('sidebar.billing_record'),
-                    'route' => 'backend.pharma.billing-records.index',
-                    'active' => ['app/pharma/billing-records'],
-                    'permission' => 'view_billing_record',
-                    'order' => 0,
-                ]);
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-currency-dollar',
-                    'title' => __('sidebar.pharma_payout'),
-                    'route' => 'backend.payout.pharma-payout-report',
-                    'active' => ['app/pharma-payout'],
-                    'permission' => 'view_pharma_payout',
-                    'order' => 0,
-                ]);
-
-                if(auth()->user()->user_type != 'pharma'){
-                    $this->mainRoute($menu, [
-                        'icon' => 'ph ph-percent',
-                        'title' => __('sidebar.commission'),
-                        // 'route' => 'backend.billing-record.index',
-                        'active' => ['app/pharma-payout'],
-                        'permission' => 'view_commission',
+                if (auth()->user()->can('add_patient_referral')) {
+                    $this->childMain($patientReferal, [
+                        'icon' => 'ph ph-user-plus',
+                        'title' => 'Add Patient Referral',
+                        'route' => 'backend.patientreferral.create',
+                        'active' => ['app/patientreferral/create'],
                         'order' => 0,
                     ]);
                 }
 
-                // Bed Management for pharma users
-                $BedMannagementPharma = $this->parentMenu($menu, [
-                    'icon' => 'ph ph-bed',
-                    'title' =>  __('sidebar.bed_mannagement'),
-                    'nickname' => 'bed_mannagement',
+                $this->childMain($patientReferal, [
+                    'icon' => 'ph ph-list',
+                    'title' => 'Patient Referral List',
+                    'route' => 'backend.patientreferral.index',
+                    'active' => ['app/patientreferral'],
                     'order' => 0,
                 ]);
-
-                //bed allocation
-                $this->childMain($BedMannagementPharma, [
-                    'icon' => 'ph ph-sliders-horizontal',
-                    'title' => __('sidebar.bed_allocation'),
-                    'route' => 'backend.bed-allocation.index',
-                    'active' => ['app/bed-allocation'],
-                    'permission' => ['view_allocations'],
-                    'order' => 0,
-                ]);
-                // All Bed
-                $this->childMain($BedMannagementPharma, [
-                    'icon' => 'ph ph-bed',
-                    'title' => __('sidebar.all_bed'),
-                    'route' => 'backend.bed-master.index',
-                    'active' => ['app/bed-master'],
-                    'permission' => ['view_bed_master'],
-                    'order' => 0,
-                ]);
-                // Bed Type
-                $this->childMain($BedMannagementPharma, [
-                    'icon' => 'ph ph-squares-four',
-                    'title' => __('sidebar.bed_type'),
-                    'route' => 'backend.bed-type.index',
-                    'active' => ['app/bed-type'],
-                    'permission' => ['view_bed_type'],
-                    'order' => 1,
-                ]);
-                //bed status
-                $this->childMain($BedMannagementPharma, [
-                    'icon' => 'ph ph-sliders-horizontal',
-                    'title' => __('sidebar.bed_satus'),
-                    'route' => 'backend.bed-status.index',
-                    'active' => ['app/bed-status'],
-                    'order' => 1,
-                ]);
-
             }
+
+            if(!auth()->user()->hasRole('pharma') && auth()->user()->can('view_blogs')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-pencil-simple',
+                    'title' => __('sidebar.blog'),
+                    'route' => 'backend.blog.index',
+                    'active' => ['app/blog'],
+                    'order' => 0,
+                ]);
+            }
+
+            $location = $this->parentMenu($menu, [
+                'icon' => 'ph ph-map-pin-line',
+                'title' => __('sidebar.location'),
+                'nickname' => 'location',
+                'permission' => ['view_location'],
+                'order' => 0,
+            ]);
+
+            $this->childMain($location, [
+                'title' => __('sidebar.city'),
+                'route' => 'backend.city.index',
+                'active' => 'app/city',
+                'shortTitle' => 'CT',
+                'permission' => ['view_city'],
+                'order' => 0,
+            ]);
 
             $this->mainRoute($menu, [
                 'icon' => 'ph ph-currency-dollar',
