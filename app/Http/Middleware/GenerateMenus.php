@@ -1232,7 +1232,7 @@ if (auth()->user()->hasRole(['receptionist'])) {
                 ]);
             }
 
-            if(!auth()->user()->hasRole('pharma')){
+            if(!auth()->user()->hasRole('pharma') && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',
                     'title' => __('sidebar.blog'),
