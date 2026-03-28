@@ -31,9 +31,18 @@ class BlogController extends Controller
 
         view()->share([
             'module_title' => $this->module_title,
-            'module_icon' => $this->module_icon,
-            'module_name' => $this->module_name,
+            'module_icon'  => $this->module_icon,
+            'module_name'  => $this->module_name,
         ]);
+
+        // Permission middleware
+        $this->middleware('check.permission:view_blogs')->only(['index', 'index_data']);
+        $this->middleware('check.permission:create_blogs')->only(['create', 'store']);
+        $this->middleware('check.permission:edit_blogs')->only(['edit', 'update']);
+        $this->middleware('check.permission:delete_blogs')->only(['destroy']);
+        $this->middleware('check.permission:manage_blog_status')->only(['update_status']);
+        $this->middleware('check.permission:bulk_delete_blogs')->only(['bulk_action']);
+        $this->middleware('check.permission:feature_blogs')->only(['featureBlog']);
     }
 
     public function index(Request $request)

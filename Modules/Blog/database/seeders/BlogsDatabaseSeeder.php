@@ -15,6 +15,7 @@ class BlogsDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+        // Call the permission seeder
+        $this->call(BlogPermissionSeeder::class);
     }
 }

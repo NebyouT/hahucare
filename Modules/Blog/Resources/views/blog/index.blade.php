@@ -10,23 +10,21 @@
     <div class="card-main mb-5">
           <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-                {{-- @if(auth()->user()->can('edit_' . $module_name) || auth()->user()->can('delete_' . $module_name)) --}}
+                @if(auth()->user()->can('manage_blog_status') || auth()->user()->can('delete_blogs') || auth()->user()->can('bulk_restore_blogs'))
                 <x-backend.quick-action url="{{ route('backend.' . $module_name . '.bulk_action') }}">
                     <div class="">
                         <select name="action_type" class="select2 form-select col-12" id="quick-action-type" style="width:100%">
                             <option value="">{{ __('messages.no_action') }}</option>
-                            {{-- @can('edit_' . $module_name) --}}
+                            @if(auth()->user()->can('manage_blog_status'))
                             <option value="change-status">{{ __('messages.lbl_status') }}</option>
-                            {{-- @endcan
-                            @can('delete_' . $module_name) --}}
+                            @endif
+                            @if(auth()->user()->can('delete_blogs'))
                             <option value="delete">{{ __('messages.delete') }}</option>
-                            {{-- @endcan
-                            @can('restore_' . $module_name) --}}
+                            @endif
+                            @if(auth()->user()->can('bulk_restore_blogs'))
                             <option value="restore">{{ __('messages.restore') }}</option>
-                            {{-- @endcan
-                            @can('force_delete_' . $module_name) --}}
                             <option value="permanently-delete">{{ __('messages.permanent_delete') }}</option>
-                            {{-- @endcan --}}
+                            @endif
                         </select>
                     </div>
                     <div class="select-status d-none quick-action-field" id="change-status-action">
@@ -36,7 +34,7 @@
                         </select>
                     </div>
                 </x-backend.quick-action>
-                {{-- @endif --}}
+                @endif
 
                
             </div>
@@ -58,11 +56,11 @@
                     <input type="text" class="form-control dt-search" placeholder="{{__('messages.search')}}" aria-label="Search" aria-describedby="addon-wrapping">
                 </div>
 
-                 {{-- @can('add_' . $module_name) --}}
+                 @if(auth()->user()->can('create_blogs'))
                  <a href="{{ route('backend.' . $module_name . '.create') }}" class="btn btn-primary d-flex align-items-center gap-1" id="add-post-button">
                     <i class="ph ph-plus-circle"></i>{{ __('messages.new') }}
                 </a>
-                {{-- @endcan --}}
+                @endif
             </x-slot>
         </x-backend.section-header>
           
