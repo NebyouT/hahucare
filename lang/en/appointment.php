@@ -199,6 +199,7 @@ return [
     'add' => 'Add',
     'prescription'=> 'Prescription',
     'add_prescription' => 'Add Prescription',
+    'add_manual_prescription' => 'Add Manual Prescription',
     'name' => 'Name',
     'frequency' => 'Frequency',
     'duration' => 'Duration',

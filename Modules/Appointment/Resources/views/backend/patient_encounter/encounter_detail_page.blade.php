@@ -216,13 +216,22 @@
                                             <div class="d-flex align-items-center flex-wrap gap-3">
                                                 @if ($data['status'] == 1)
                                                     @if (checkPlugin('pharma') == 'active')
-                                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                                            data-bs-target="#addprescription">
-                                                            <div class="d-inline-flex align-items-center gap-1">
-                                                                <i class="ph ph-plus"></i>
-                                                                {{ __('appointment.add_prescription') }}
-                                                            </div>
-                                                        </button>
+                                                        <div class="d-flex align-items-center flex-wrap gap-2">
+                                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                                data-bs-target="#addprescription">
+                                                                <div class="d-inline-flex align-items-center gap-1">
+                                                                    <i class="ph ph-plus"></i>
+                                                                    {{ __('appointment.add_prescription') }}
+                                                                </div>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                                                data-bs-target="#addprescriptionswithoutpharma">
+                                                                <div class="d-inline-flex align-items-center gap-1">
+                                                                    <i class="ph ph-pencil-simple"></i>
+                                                                    {{ __('appointment.add_manual_prescription') }}
+                                                                </div>
+                                                            </button>
+                                                        </div>
                                                     @else
                                                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                                             data-bs-target="#addprescriptionswithoutpharma">
@@ -389,6 +398,12 @@
                             'data' => $data,
                         ]
                     )
+                @endif
+                
+                @if (checkPlugin('pharma') == 'active')
+                    @include('appointment::backend.patient_encounter.component.without_pharma_prescription', [
+                        'data' => $data,
+                    ])
                 @endif
 
                 @include('laboratory::backend.patient_encounter.component.lab_order_modal', [
