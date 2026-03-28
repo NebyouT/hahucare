@@ -771,22 +771,25 @@ class GenerateMenus
                 ]);
             }
 
-            $location = $this->parentMenu($menu, [
-                'icon' => 'ph ph-map-pin-line',
-                'title' => __('sidebar.location'),
-                'nickname' => 'location',
-                'permission' => ['view_location'],
-                'order' => 0,
-            ]);
+            // Location menu - only for admin and demo_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_location')) {
+                $location = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-map-pin-line',
+                    'title' => __('sidebar.location'),
+                    'nickname' => 'location',
+                    'permission' => ['view_location'],
+                    'order' => 0,
+                ]);
 
-            $this->childMain($location, [
-                'title' => __('sidebar.city'),
-                'route' => 'backend.city.index',
-                'active' => 'app/city',
-                'shortTitle' => 'CT',
-                'permission' => ['view_city'],
-                'order' => 0,
-            ]);
+                $this->childMain($location, [
+                    'title' => __('sidebar.city'),
+                    'route' => 'backend.city.index',
+                    'active' => 'app/city',
+                    'shortTitle' => 'CT',
+                    'permission' => ['view_city'],
+                    'order' => 0,
+                ]);
+            }
 
             $this->mainRoute($menu, [
                 'icon' => 'ph ph-currency-dollar',
@@ -905,34 +908,36 @@ class GenerateMenus
                 ]);
             }
 
-            // System Static
-            $permissionsToCheck = [
-                'view_setting',
-                'add_setting',
-                'edit_setting',
-                'delete_setting',
-                'view_location',
-                'view_city',
-                'view_state',
-                'view_country',
-                'view_pages',
-                'view_notification',
-                'view_notification_template',
-                'view_app_banner',
-                'view_constant',
-                'view_permission',
-                'view_promotions',
-                'view_vital',
-                'view_subscription',
-                'view_my_account',
-                'view_subscription_list',
-                'view_plan_list',
-                'view_plan_limitation',
-                'view_backup'
-            ];
+            // System Static - only for admin and demo_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                $permissionsToCheck = [
+                    'view_setting',
+                    'add_setting',
+                    'edit_setting',
+                    'delete_setting',
+                    'view_location',
+                    'view_city',
+                    'view_state',
+                    'view_country',
+                    'view_pages',
+                    'view_notification',
+                    'view_notification_template',
+                    'view_app_banner',
+                    'view_constant',
+                    'view_permission',
+                    'view_promotions',
+                    'view_vital',
+                    'view_subscription',
+                    'view_my_account',
+                    'view_subscription_list',
+                    'view_plan_list',
+                    'view_plan_limitation',
+                    'view_backup'
+                ];
 
-            if (collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission))) {
-                $this->staticMenu($menu, ['title' => __('sidebar.system'), 'order' => 0]);
+                if (collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission))) {
+                    $this->staticMenu($menu, ['title' => __('sidebar.system'), 'order' => 0]);
+                }
             }
             if(auth()->user()->hasRole(['admin', 'demo_admin'])) {
                 $this->mainRoute($menu, [
@@ -962,7 +967,8 @@ class GenerateMenus
                 'order' => 0,
             ]);
 
-            if(auth()->user()->user_type != 'pharma'){
+            // Settings menu - only for admin and demo_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->user_type != 'pharma' && auth()->user()->can('view_setting')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-gear-six',
                     'title' => __('menu.settings'),
@@ -983,50 +989,17 @@ class GenerateMenus
                 ]);
             }
 
-            $location = $this->parentMenu($menu, [
-                'icon' => 'ph ph-map-pin-line',
-                'title' => __('sidebar.location'),
-                'nickname' => 'location',
-                'permission' => ['view_location'],
-                'order' => 0,
-            ]);
-
-            $this->childMain($location, [
-                'title' => __('sidebar.city'),
-                'route' => 'backend.city.index',
-                'active' => 'app/city',
-                'shortTitle' => 'CT',
-                'permission' => ['view_city'],
-                'order' => 0,
-                'icon' => 'ph ph-city',
-            ]);
-            $this->childMain($location, [
-                'title' => __('sidebar.state'),
-                'route' => 'backend.state.index',
-                'shortTitle' => 'CT',
-                'permission' => ['view_state'],
-                'active' => ['app/state'],
-                'order' => 0,
-                'icon' => 'ph ph-map-trifold',
-            ]);
-            $this->childMain($location, [
-                'title' => __('sidebar.country'),
-                'route' => 'backend.country.index',
-                'shortTitle' => 'CT',
-                'active' => ['app/country'],
-                'permission' => ['view_country'],
-                'order' => 0,
-                'icon' => 'ph ph-globe-hemisphere-east',
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => ' ph ph-note',
-                'title' => __('page.title'),
-                'route' => ['backend.pages.index'],
-                'active' => ['app/pages'],
-                'permission' => ['view_pages'],
-                'order' => 0,
-            ]);
+            // Pages menu - only for admin and demo_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_pages')) {
+                $this->mainRoute($menu, [
+                    'icon' => ' ph ph-note',
+                    'title' => __('page.title'),
+                    'route' => ['backend.pages.index'],
+                    'active' => ['app/pages'],
+                    'permission' => ['view_pages'],
+                    'order' => 0,
+                ]);
+            }
 
             // --- APP BANNER ---
             $this->mainRoute($menu, [
@@ -1058,34 +1031,36 @@ class GenerateMenus
                 ]);
             }
 
-            // --- NOTIFICATION ---
-            $notification = $this->parentMenu($menu, [
-                'icon' => 'ph ph-bell',
-                'title' => __('notification.title'),
-                'nickname' => 'notifications',
-                'permission' => ['view_notification'],
-                'order' => 0,
-            ]);
-
-            $this->childMain($notification, [
-                'icon' => 'ph ph-list-bullets',
-                'title' => __('notification.list'),
-                'route' => 'backend.notifications.index',
-                'shortTitle' => 'Li',
-                'active' => 'app/notifications',
-                'permission' => ['view_notification'],
-                'order' => 0,
-            ]);
-            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')) {
-                $this->childMain($notification, [
-                    'icon' => 'ph ph-layout',
-                    'title' => __('notification.template'),
-                    'route' => 'backend.notification-templates.index',
-                    'shortTitle' => 'TE',
-                    'active' => 'app/notification-templates*',
-                    'permission' => ['view_notification_template'],
+            // --- NOTIFICATION - only for admin and demo_admin ---
+            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_notification')) {
+                $notification = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-bell',
+                    'title' => __('notification.title'),
+                    'nickname' => 'notifications',
+                    'permission' => ['view_notification'],
                     'order' => 0,
                 ]);
+
+                $this->childMain($notification, [
+                    'icon' => 'ph ph-list-bullets',
+                    'title' => __('notification.list'),
+                    'route' => 'backend.notifications.index',
+                    'shortTitle' => 'Li',
+                    'active' => 'app/notifications',
+                    'permission' => ['view_notification'],
+                    'order' => 0,
+                ]);
+                if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')) {
+                    $this->childMain($notification, [
+                        'icon' => 'ph ph-layout',
+                        'title' => __('notification.template'),
+                        'route' => 'backend.notification-templates.index',
+                        'shortTitle' => 'TE',
+                        'active' => 'app/notification-templates*',
+                        'permission' => ['view_notification_template'],
+                        'order' => 0,
+                    ]);
+                }
             }
 
             // --- FRONTEND SETTING ---
@@ -1126,8 +1101,8 @@ class GenerateMenus
                 ]);
             }
 
-            // --- LOG/BACKUPS ---
-            if(auth()->user()->can('view_backup')){
+            // --- LOG/BACKUPS - only for admin and demo_admin ---
+            if(auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_backup')){
                 $location11 = $this->parentMenu($menu, [
                     'icon' => 'ph ph-note',
                     'title' => __('sidebar.log'),
