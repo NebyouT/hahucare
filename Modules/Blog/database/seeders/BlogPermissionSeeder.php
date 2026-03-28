@@ -40,47 +40,47 @@ class BlogPermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate([
-                'name' => $permission,
-                'guard_name' => 'web'
-            ], ['is_fixed' => true]);
+            Permission::firstOrCreate(['name' => $permission, 'is_fixed' => true]);
         }
 
-        // Assign permissions to roles
-        $roles = [
-            'admin' => $permissions,
-            'demo_admin' => $permissions,
-            'vendor' => [
-                'view_blogs',
-                'create_blogs',
-                'edit_blogs',
-                'delete_blogs',
-                'manage_blog_media',
-            ],
-            'doctor' => [
-                'view_blogs',
-                'create_blogs',
-                'edit_blogs',
-                'delete_blogs',
-                'manage_blog_media',
-            ],
-            'receptionist' => [
-                'view_blogs',
-            ],
-            'patient' => [
-                'view_blogs',
-            ],
-        ];
+        // Assign permissions to roles - use firstOrCreate to handle existing roles
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $demo_admin = Role::firstOrCreate(['name' => 'demo_admin']);
 
-        foreach ($roles as $roleName => $rolePermissions) {
-            $role = Role::where('name', $roleName)->first();
-            if ($role) {
-                foreach ($rolePermissions as $permission) {
-                    if (!$role->hasPermissionTo($permission)) {
-                        $role->givePermissionTo($permission);
-                    }
-                }
-            }
+        // Give all permissions to admin and demo_admin
+        if ($admin) {
+            $admin->givePermissionTo($permissions);
+        }
+        
+        if ($demo_admin) {
+            $demo_admin->givePermissionTo($permissions);
+        }
+
+        // Give limited permissions to other roles
+        $vendor = Role::firstOrCreate(['name' => 'vendor']);
+        $doctor = Role::firstOrCreate(['name' => 'doctor']);
+        $receptionist = Role::firstOrCreate(['name' => 'receptionist']);
+        $patient = Role::firstOrCreate(['name' => 'patient']);
+
+        $vendor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media'];
+        $doctor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media'];
+        $receptionist_permissions = ['view_blogs'];
+        $patient_permissions = ['view_blogs'];
+
+        if ($vendor) {
+            $vendor->givePermissionTo($vendor_permissions);
+        }
+        
+        if ($doctor) {
+            $doctor->givePermissionTo($doctor_permissions);
+        }
+
+        if ($receptionist) {
+            $receptionist->givePermissionTo($receptionist_permissions);
+        }
+
+        if ($patient) {
+            $patient->givePermissionTo($patient_permissions);
         }
     }
 }
