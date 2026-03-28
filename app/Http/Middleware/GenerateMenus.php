@@ -1127,44 +1127,46 @@ class GenerateMenus
             }
 
             // --- LOG/BACKUPS ---
-            $location11 = $this->parentMenu($menu, [
-                'icon' => 'ph ph-note',
-                'title' => __('sidebar.log'),
-                'nickname' => 'log',
-                'permission' => ['view_backup'],
-                'order' => 0,
-            ]);
-        }
-        if(auth()->user()->can('view_faqs')){
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-question',
-                'title' => __('messages.faq_title'),
-                'route' => 'backend.faqs.index',
-                'active' => ['app/faqs'],
-                'order' => 0,
-            ]);
-        }
+            if(auth()->user()->can('view_backup')){
+                $location11 = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-note',
+                    'title' => __('sidebar.log'),
+                    'nickname' => 'log',
+                    'permission' => ['view_backup'],
+                    'order' => 0,
+                ]);
 
-        if (isset($location11)) {
-            $this->childMain($location11, [
-                'title' => __('sidebar.backups'),
-                'route' => 'backend.backups.index',
-                'active' => 'app/backups',
-                'shortTitle' => '',
-                'permission' => ['view_backup'],
-                'order' => 0,
-                'icon' => 'ph ph-note',
-            ]);
-            $this->childMain($location11, [
-                'title' => __('sidebar.activity_logs'),
-                'route' => 'backend.backups.logs',
-                'active' => 'app/backups/logs',
-                'shortTitle' => '',
-                'permission' => ['view_backup'],
-                'order' => 0,
-                'icon' => 'ph ph-note',
-            ]);
-        }
+                if (isset($location11)) {
+                    $this->childMain($location11, [
+                        'title' => __('sidebar.backups'),
+                        'route' => 'backend.backups.index',
+                        'active' => 'app/backups',
+                        'shortTitle' => '',
+                        'permission' => ['view_backup'],
+                        'order' => 0,
+                        'icon' => 'ph ph-note',
+                    ]);
+                    $this->childMain($location11, [
+                        'title' => __('sidebar.activity_logs'),
+                        'route' => 'backend.backups.logs',
+                        'active' => 'app/backups/logs',
+                        'shortTitle' => '',
+                        'permission' => ['view_backup'],
+                        'order' => 0,
+                        'icon' => 'ph ph-note',
+                    ]);
+                }
+            }
+
+            if(auth()->user()->can('view_faqs')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-question',
+                    'title' => __('messages.faq_title'),
+                    'route' => 'backend.faqs.index',
+                    'active' => ['app/faqs'],
+                    'order' => 0,
+                ]);
+            }
 
             // Access Permission Check
             $menu->filter(function ($item) {
