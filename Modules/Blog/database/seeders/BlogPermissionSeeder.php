@@ -44,8 +44,8 @@ class BlogPermissionSeeder extends Seeder
         }
 
         // Assign permissions to roles - use firstOrCreate to handle existing roles
-        $admin = Role::firstOrCreate(['name' => 'admin']);
-        $demo_admin = Role::firstOrCreate(['name' => 'demo_admin']);
+        $admin = Role::firstOrCreate(['name' => 'admin'], ['title' => 'Admin']);
+        $demo_admin = Role::firstOrCreate(['name' => 'demo_admin'], ['title' => 'Demo Admin']);
 
         // Give all permissions to admin and demo_admin
         if ($admin) {
@@ -57,10 +57,10 @@ class BlogPermissionSeeder extends Seeder
         }
 
         // Give limited permissions to other roles
-        $vendor = Role::firstOrCreate(['name' => 'vendor']);
-        $doctor = Role::firstOrCreate(['name' => 'doctor']);
-        $receptionist = Role::firstOrCreate(['name' => 'receptionist']);
-        $patient = Role::firstOrCreate(['name' => 'patient']);
+        $vendor = Role::firstOrCreate(['name' => 'vendor'], ['title' => 'Vendor']);
+        $doctor = Role::firstOrCreate(['name' => 'doctor'], ['title' => 'Doctor']);
+        $receptionist = Role::firstOrCreate(['name' => 'receptionist'], ['title' => 'Receptionist']);
+        $patient = Role::firstOrCreate(['name' => 'patient'], ['title' => 'Patient']);
 
         $vendor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media'];
         $doctor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media'];
