@@ -17,7 +17,7 @@ class ClinicsCategoryRequest extends FormRequest
         switch (strtolower($this->getMethod())) {
             case 'post':
                 return [
-                    'name' => 'required|string|max:255|unique:clinics_categories,name',
+                    'name' => 'required|string|max:255|unique:clinics_categories,name,NULL,id,deleted_at,NULL',
                     'status' => 'boolean',
                     'file_url' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
                 ];
@@ -25,7 +25,7 @@ class ClinicsCategoryRequest extends FormRequest
             case 'put':
             case 'patch':
                 return [
-                    'name' => 'required|string|max:255|unique:clinics_categories,name,'.$id,
+                    'name' => 'required|string|max:255|unique:clinics_categories,name,'.$id.',id,deleted_at,NULL',
                     'status' => 'boolean',
                     'file_url' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
                     'remove_image' => 'nullable|in:0,1',

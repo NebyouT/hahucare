@@ -155,6 +155,11 @@ class ServiceController extends Controller
     public function serviceDetails($id)
     {
         $service = ClinicsService::CheckMultivendor()->where('id', $id)->with('category', 'sub_category', 'ClinicServiceMapping', 'doctor_service', 'systemservice')->first();
+
+        if (!$service) {
+            abort(404, __('messages.service_not_found'));
+        }
+
         $amount = $service->charges;
         if($service->is_inclusive_tax == 1) {
             $amount = $service->charges + $service->inclusive_tax_price;
