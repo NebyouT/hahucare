@@ -20,6 +20,9 @@ return [
     ],
     'ORDER_STATUS' => [
         'PENDING' => 'pending',
+        'CONFIRMED' => 'confirmed',
+        'PROCESSING' => 'processing',
+        'OUT_FOR_DELIVERY' => 'out_for_delivery',
         'DELIVERED' => 'delivered',
         'CANCELLED' => 'cancelled',
     ],

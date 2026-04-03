@@ -200,8 +200,14 @@ class OrdersController extends Controller
         $status = $request->status;
 
         switch ($status) {
+            case 'confirmed':
+                $notify_type = 'order_confirmed';
+                break;
             case 'processing':
-                $notify_type = 'order_proccessing';
+                $notify_type = 'order_processing';
+                break;
+            case 'out_for_delivery':
+                $notify_type = 'order_out_for_delivery';
                 break;
             case 'delivered':
                 $notify_type = 'order_delivered';
