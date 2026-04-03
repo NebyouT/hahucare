@@ -332,54 +332,33 @@ class CommonNotification extends Notification implements ShouldQueue
 
 
     function sendSmsMessage($data) {
-        Log::info('[SMS:Notification] === sendSmsMessage START ===', [
-            'notification_type' => $data['notification_type'] ?? $data['type'] ?? 'unknown',
-            'person_id' => $data['person_id'] ?? null,
-            'message_preview' => isset($data['message']) ? substr(strip_tags($data['message']), 0, 80) . '...' : 'NO MESSAGE',
-        ]);
-
         $settings = Setting::where('type', 'is_sms_integration')
             ->whereIn('name', ['sms_api_token', 'sms_identifier_id', 'sms_sender'])
             ->pluck('val', 'name');
 
-        Log::info('[SMS:Notification] SMS settings loaded', [
-            'token_set' => !empty($settings['sms_api_token']),
-            'token_length' => strlen($settings['sms_api_token'] ?? ''),
-            'identifier_set' => !empty($settings['sms_identifier_id']),
-            'sender' => $settings['sms_sender'] ?? 'NOT SET',
-        ]);
-
         $user = User::where('id', $data['person_id'])->first();
 
         if (empty($settings['sms_api_token']) || empty($settings['sms_identifier_id']) || empty($settings['sms_sender'])) {
-            Log::warning('[SMS:Notification] ABORTED - AfroMessage SMS credentials not configured in settings');
+            Log::warning('AfroMessage SMS credentials not configured in settings');
             return false;
         }
 
         if (empty($data['person_id']) || empty($data['message'])) {
-            Log::warning('[SMS:Notification] ABORTED - SMS data incomplete', ['person_id' => $data['person_id'] ?? null]);
+            Log::warning('SMS data incomplete', ['person_id' => $data['person_id'] ?? null]);
             return false;
         }
 
         if (!$user || empty($user->mobile)) {
-            Log::warning('[SMS:Notification] ABORTED - User mobile number not found', [
-                'user_id' => $data['person_id'],
-                'user_exists' => (bool) $user,
-                'mobile' => $user->mobile ?? 'NULL',
-            ]);
+            Log::warning('User mobile number not found', ['user_id' => $data['person_id']]);
             return false;
         }
 
         $recipientNumber = $user->mobile;
         $messageBody = strip_tags($data['message']);
 
-        Log::info('[SMS:Notification] Preparing to send SMS', [
-            'recipient' => $recipientNumber,
-            'user_id' => $user->id,
-            'user_name' => $user->name ?? $user->first_name ?? 'unknown',
-            'message_length' => strlen($messageBody),
-        ]);
-
+        // Create AfroMessage service with admin panel settings
+        $smsService = new AfroMessageService();
+        
         // Temporarily override config with admin panel settings
         config([
             'services.afromessage.token' => $settings['sms_api_token'],
@@ -390,30 +369,26 @@ class CommonNotification extends Notification implements ShouldQueue
         try {
             // Reinitialize service with new config
             $smsService = new AfroMessageService();
-            Log::info('[SMS:Notification] AfroMessageService initialized with admin settings, sending...');
             $result = $smsService->sendSms($recipientNumber, $messageBody);
 
             if ($result['success']) {
-                Log::info('[SMS:Notification] === SMS SENT SUCCESSFULLY ===', [
+                Log::info('SMS sent successfully via AfroMessage', [
                     'recipient' => $recipientNumber,
-                    'person_id' => $data['person_id'],
-                    'notification_type' => $data['notification_type'] ?? 'unknown',
+                    'person_id' => $data['person_id']
                 ]);
                 return true;
             } else {
-                Log::error('[SMS:Notification] === SMS SEND FAILED ===', [
+                Log::error('AfroMessage SMS failed', [
                     'recipient' => $recipientNumber,
-                    'error' => $result['message'],
-                    'response_data' => $result['data'] ?? null,
+                    'error' => $result['message']
                 ]);
                 return false;
             }
 
         } catch (\Exception $e) {
-            Log::error('[SMS:Notification] === SMS EXCEPTION ===', [
+            Log::error('AfroMessage SMS exception', [
                 'recipient' => $recipientNumber,
-                'error' => $e->getMessage(),
-                'file' => $e->getFile() . ':' . $e->getLine(),
+                'error' => $e->getMessage()
             ]);
             return false;
         }

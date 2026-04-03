@@ -10,7 +10,6 @@ use App\Services\AfroMessageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class OtpAuthController extends Controller
@@ -37,21 +36,11 @@ class OtpAuthController extends Controller
      */
     public function sendOtp(Request $request)
     {
-        Log::info('[OTP:Login] === sendOtp START ===', [
-            'raw_phone_input' => $request->phone,
-            'ip' => $request->ip(),
-            'user_agent' => $request->userAgent(),
-        ]);
-
         $request->validate([
             'phone' => 'required|string|min:9|max:15',
         ]);
 
         $phone = AfroMessageService::normalizeForStorage($request->phone);
-        Log::info('[OTP:Login] Phone normalized for storage', [
-            'raw_input' => $request->phone,
-            'normalized' => $phone,
-        ]);
 
         // Check for existing valid OTP and rate limiting
         $existingOtp = OtpVerification::where('phone', $phone)
@@ -59,11 +48,6 @@ class OtpAuthController extends Controller
             ->first();
 
         if ($existingOtp) {
-            Log::warning('[OTP:Login] Rate limited - OTP requested too soon', [
-                'phone' => $phone,
-                'last_otp_created' => $existingOtp->created_at,
-                'seconds_ago' => now()->diffInSeconds($existingOtp->created_at),
-            ]);
             return back()->withErrors([
                 'phone' => __('Please wait 1 minute before requesting a new OTP.')
             ])->withInput();
@@ -71,46 +55,21 @@ class OtpAuthController extends Controller
 
         // Generate 6-digit OTP
         $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-        Log::info('[OTP:Login] OTP generated', [
-            'phone' => $phone,
-            'otp_length' => strlen($otp),
-        ]);
 
         // Delete old OTPs for this phone
-        $deletedCount = OtpVerification::where('phone', $phone)->delete();
-        Log::info('[OTP:Login] Old OTPs cleaned up', [
-            'phone' => $phone,
-            'deleted_count' => $deletedCount,
-        ]);
+        OtpVerification::where('phone', $phone)->delete();
 
         // Create new OTP record
-        $otpRecord = OtpVerification::create([
+        OtpVerification::create([
             'phone' => $phone,
             'otp' => Hash::make($otp),
             'expires_at' => now()->addMinutes(5),
         ]);
-        Log::info('[OTP:Login] OTP record created in DB', [
-            'phone' => $phone,
-            'record_id' => $otpRecord->id ?? null,
-            'expires_at' => $otpRecord->expires_at ?? null,
-        ]);
 
         // Send OTP via AfroMessage
-        Log::info('[OTP:Login] Calling AfroMessageService->sendOtp()', ['phone' => $phone]);
         $result = $this->smsService->sendOtp($phone, $otp);
-        Log::info('[OTP:Login] AfroMessageService->sendOtp() returned', [
-            'phone' => $phone,
-            'success' => $result['success'],
-            'message' => $result['message'],
-            'has_data' => isset($result['data']),
-        ]);
 
         if (!$result['success']) {
-            Log::error('[OTP:Login] OTP send FAILED - returning error to user', [
-                'phone' => $phone,
-                'error_message' => $result['message'],
-                'response_data' => $result['data'] ?? null,
-            ]);
             return back()->withErrors([
                 'phone' => __('Failed to send OTP. Please try again.')
             ])->withInput();
@@ -118,9 +77,6 @@ class OtpAuthController extends Controller
 
         // Store phone in session for verification step
         session(['otp_phone' => $phone]);
-        Log::info('[OTP:Login] === sendOtp SUCCESS === Redirecting to verify form', [
-            'phone' => $phone,
-        ]);
 
         return redirect()->route('otp.verify.form')
             ->with('success', __('OTP sent successfully to your phone.'));
@@ -145,10 +101,6 @@ class OtpAuthController extends Controller
      */
     public function verifyOtp(Request $request)
     {
-        Log::info('[OTP:Verify] === verifyOtp START ===', [
-            'ip' => $request->ip(),
-        ]);
-
         $request->validate([
             'otp' => 'required|string|size:6',
         ]);
@@ -156,37 +108,21 @@ class OtpAuthController extends Controller
         $phone = session('otp_phone');
 
         if (!$phone) {
-            Log::warning('[OTP:Verify] No phone in session - session expired');
             return redirect()->route('otp.phone.form')
                 ->withErrors(['phone' => __('Session expired. Please enter your phone number again.')]);
         }
-
-        Log::info('[OTP:Verify] Phone from session', ['phone' => $phone]);
 
         // Find valid OTP
         $otpRecord = OtpVerification::validForPhone($phone)->first();
 
         if (!$otpRecord) {
-            Log::warning('[OTP:Verify] No valid OTP record found', ['phone' => $phone]);
             return back()->withErrors([
                 'otp' => __('OTP expired or invalid. Please request a new one.')
             ]);
         }
 
-        Log::info('[OTP:Verify] OTP record found', [
-            'phone' => $phone,
-            'record_id' => $otpRecord->id,
-            'attempts' => $otpRecord->attempts ?? 0,
-            'expires_at' => $otpRecord->expires_at,
-            'created_at' => $otpRecord->created_at,
-        ]);
-
         // Check max attempts
         if ($otpRecord->maxAttemptsReached()) {
-            Log::warning('[OTP:Verify] Max attempts reached', [
-                'phone' => $phone,
-                'attempts' => $otpRecord->attempts,
-            ]);
             $otpRecord->delete();
             return redirect()->route('otp.phone.form')
                 ->withErrors(['phone' => __('Too many failed attempts. Please request a new OTP.')]);
@@ -195,10 +131,6 @@ class OtpAuthController extends Controller
         // Verify OTP
         if (!Hash::check($request->otp, $otpRecord->otp)) {
             $otpRecord->incrementAttempts();
-            Log::warning('[OTP:Verify] OTP mismatch - invalid code entered', [
-                'phone' => $phone,
-                'attempts_now' => $otpRecord->attempts,
-            ]);
             return back()->withErrors([
                 'otp' => __('Invalid OTP. Please try again. Attempts remaining: ') . (5 - $otpRecord->attempts)
             ]);
@@ -206,18 +138,11 @@ class OtpAuthController extends Controller
 
         // OTP is valid - mark as verified
         $otpRecord->markAsVerified();
-        Log::info('[OTP:Verify] OTP verified successfully', ['phone' => $phone]);
 
         // Check if user exists with this phone
         $user = User::where('mobile', $phone)->first();
 
         if ($user) {
-            Log::info('[OTP:Verify] Existing user found - logging in', [
-                'phone' => $phone,
-                'user_id' => $user->id,
-                'user_name' => $user->name,
-                'user_email' => $user->email,
-            ]);
             // User exists - log them in
             Auth::login($user, true);
             
@@ -229,16 +154,10 @@ class OtpAuthController extends Controller
             \Artisan::call('cache:clear');
             \Artisan::call('config:clear');
 
-            Log::info('[OTP:Verify] === verifyOtp SUCCESS === User logged in', [
-                'user_id' => $user->id,
-            ]);
             return redirect('/home')->with('success', __('Login successful!'));
         }
 
         // User doesn't exist - show registration form
-        Log::info('[OTP:Verify] No user found for phone - redirecting to registration', [
-            'phone' => $phone,
-        ]);
         session(['otp_verified' => true]);
         
         return redirect()->route('otp.register.form');
@@ -349,16 +268,11 @@ class OtpAuthController extends Controller
      */
     public function resendOtp(Request $request)
     {
-        Log::info('[OTP:Resend] === resendOtp START ===', ['ip' => $request->ip()]);
-
         $phone = session('otp_phone');
 
         if (!$phone) {
-            Log::warning('[OTP:Resend] No phone in session - redirecting to phone form');
             return redirect()->route('otp.phone.form');
         }
-
-        Log::info('[OTP:Resend] Phone from session', ['phone' => $phone]);
 
         // Rate limiting - check last OTP sent time
         $lastOtp = OtpVerification::where('phone', $phone)
@@ -366,10 +280,6 @@ class OtpAuthController extends Controller
             ->first();
 
         if ($lastOtp) {
-            Log::warning('[OTP:Resend] Rate limited', [
-                'phone' => $phone,
-                'last_created' => $lastOtp->created_at,
-            ]);
             return back()->withErrors([
                 'otp' => __('Please wait 1 minute before requesting a new OTP.')
             ]);
@@ -377,11 +287,9 @@ class OtpAuthController extends Controller
 
         // Generate new OTP
         $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-        Log::info('[OTP:Resend] New OTP generated', ['phone' => $phone]);
 
         // Delete old OTPs
-        $deletedCount = OtpVerification::where('phone', $phone)->delete();
-        Log::info('[OTP:Resend] Old OTPs deleted', ['phone' => $phone, 'deleted_count' => $deletedCount]);
+        OtpVerification::where('phone', $phone)->delete();
 
         // Create new OTP record
         OtpVerification::create([
@@ -391,25 +299,14 @@ class OtpAuthController extends Controller
         ]);
 
         // Send OTP
-        Log::info('[OTP:Resend] Calling AfroMessageService->sendOtp()', ['phone' => $phone]);
         $result = $this->smsService->sendOtp($phone, $otp);
-        Log::info('[OTP:Resend] AfroMessageService result', [
-            'phone' => $phone,
-            'success' => $result['success'],
-            'message' => $result['message'],
-        ]);
 
         if (!$result['success']) {
-            Log::error('[OTP:Resend] Resend FAILED', [
-                'phone' => $phone,
-                'error' => $result['message'],
-            ]);
             return back()->withErrors([
                 'otp' => __('Failed to send OTP. Please try again.')
             ]);
         }
 
-        Log::info('[OTP:Resend] === resendOtp SUCCESS ===', ['phone' => $phone]);
         return back()->with('success', __('New OTP sent successfully.'));
     }
 }
