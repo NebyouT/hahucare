@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
         $this->call(\Modules\FrontendSetting\database\seeders\FrontendSettingDatabaseSeeder::class);
         $this->call(PaymentPermissionSeeder::class);
         $this->call(\Modules\Laboratory\database\seeders\LaboratoryDatabaseSeeder::class);
-    
+        $this->call(MobileApiPermissionSeeder::class);
 
         Schema::enableForeignKeyConstraints();
 

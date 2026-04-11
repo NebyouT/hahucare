@@ -30,8 +30,12 @@ trait Authorizable
      */
     public function callAction($method, $parameters)
     {
-        if ($ability = $this->getAbility($method)) {
-            $this->authorize($ability);
+        // Skip authorization for API requests — they are already protected
+        // by the ApiPermissionMiddleware (api.permission) in the route definition.
+        if (!$this->isApiRequest()) {
+            if ($ability = $this->getAbility($method)) {
+                $this->authorize($ability);
+            }
         }
 
         return parent::callAction($method, $parameters);
@@ -39,10 +43,27 @@ trait Authorizable
 
     public function getAbility($method)
     {
-        $routeName = explode('.', \Request::route()->getName());
+        $route = \Request::route();
+        $routeName = $route ? $route->getName() : null;
+
+        // If route has no name or name doesn't contain a dot, skip
+        if (!$routeName || !str_contains($routeName, '.')) {
+            return null;
+        }
+
+        $routeParts = explode('.', $routeName);
         $action = Arr::get($this->getAbilities(), $method);
 
-        return $action ? $action.'_'.$routeName[1] : null;
+        return ($action && isset($routeParts[1])) ? $action.'_'.$routeParts[1] : null;
+    }
+
+    /**
+     * Check if the current request is an API request.
+     */
+    private function isApiRequest(): bool
+    {
+        $request = request();
+        return $request->is('api/*') || $request->expectsJson() || $request->bearerToken();
     }
 
     private function getAbilities()
