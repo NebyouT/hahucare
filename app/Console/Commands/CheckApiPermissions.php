@@ -72,6 +72,71 @@ class CheckApiPermissions extends Command
         'delete_encounter'     => ['delete_encounter'],
     ];
 
+    /**
+     * Expected API permissions per role.
+     * Only these are checked — anything not listed is intentionally denied.
+     */
+    private array $roleExpectedPermissions = [
+        'vendor' => [
+            'view_dashboard',
+            'view_appointment', 'add_appointment', 'edit_appointment', 'delete_appointment',
+            'view_encounter', 'add_encounter', 'edit_encounter', 'delete_encounter',
+            'view_medical_report', 'add_medical_report', 'edit_medical_report', 'delete_medical_report',
+            'view_prescription', 'add_prescription', 'edit_prescription', 'delete_prescription',
+            'view_billing', 'add_billing', 'edit_billing', 'delete_billing',
+            'view_categories', 'add_categories', 'edit_categories', 'delete_categories',
+            'view_services', 'add_services', 'edit_services', 'delete_services',
+            'view_clinics', 'add_clinics', 'edit_clinics', 'delete_clinics',
+            'view_doctors', 'add_doctors', 'edit_doctors', 'delete_doctors',
+            'view_patients', 'add_patients', 'edit_patients', 'delete_patients',
+            'view_receptionists', 'add_receptionists', 'edit_receptionists', 'delete_receptionists',
+        ],
+        'doctor' => [
+            'view_dashboard',
+            'view_appointment', 'add_appointment', 'edit_appointment',
+            'view_encounter', 'add_encounter', 'edit_encounter', 'delete_encounter',
+            'view_medical_report', 'add_medical_report', 'edit_medical_report', 'delete_medical_report',
+            'view_prescription', 'add_prescription', 'edit_prescription', 'delete_prescription',
+            'view_billing', 'add_billing', 'edit_billing', 'delete_billing',
+            'view_services',
+            'view_clinics',
+            'view_doctors',
+            'view_patients', 'add_patients',
+        ],
+        'receptionist' => [
+            'view_dashboard',
+            'view_appointment', 'add_appointment', 'delete_appointment',
+            'view_encounter',
+            'view_billing',
+            'view_categories',
+            'view_services', 'add_services', 'edit_services', 'delete_services',
+            'view_clinics',
+            'view_doctors', 'add_doctors', 'edit_doctors', 'delete_doctors',
+            'view_patients', 'add_patients', 'edit_patients', 'delete_patients',
+            'view_receptionists',
+        ],
+        'user' => [
+            'view_dashboard',
+            'view_appointment', 'add_appointment',
+            'view_services',
+            'view_clinics',
+            'view_doctors',
+            'view_billing',
+            'view_encounter',
+            'view_prescription',
+        ],
+        'pharma' => [
+            'view_dashboard',
+            'view_prescription', 'add_prescription', 'edit_prescription', 'delete_prescription',
+            'view_billing',
+        ],
+        'lab_technician' => [
+            'view_dashboard',
+            'view_patients',
+            'view_encounter',
+        ],
+    ];
+
     public function handle(): int
     {
         $targetRole = $this->option('role');
@@ -104,12 +169,21 @@ class CheckApiPermissions extends Command
                 continue;
             }
 
+            $expectedPerms = $this->roleExpectedPermissions[$role->name] ?? [];
+            if (empty($expectedPerms)) {
+                $this->warn("  ⚠ No expected permissions defined for role '{$role->name}'.");
+                $this->newLine();
+                continue;
+            }
+
             $rolePermissions = $role->permissions->pluck('name')->toArray();
             $passed = 0;
             $failed = 0;
             $failedList = [];
 
-            foreach ($this->permissionMap as $apiPerm => $dbPerms) {
+            foreach ($expectedPerms as $apiPerm) {
+                // Check __allow_authenticated__ special case
+                $dbPerms = $this->permissionMap[$apiPerm] ?? [];
                 if (in_array('__allow_authenticated__', $dbPerms)) {
                     $passed++;
                     continue;
@@ -134,28 +208,33 @@ class CheckApiPermissions extends Command
                     $passed++;
                 } else {
                     $failed++;
+                    $neededPerms = !empty($dbPerms)
+                        ? $apiPerm . ' OR ' . implode(' | ', $dbPerms)
+                        : $apiPerm;
                     $failedList[] = [
                         'api_perm' => $apiPerm,
-                        'db_perms' => implode(' | ', $dbPerms),
+                        'needed'   => $neededPerms,
                     ];
                 }
             }
 
-            $this->line("  Permissions: {$passed} ✅ passed, {$failed} ❌ missing");
-
-            if (!empty($failedList)) {
+            $total = count($expectedPerms);
+            if ($failed === 0) {
+                $this->line("  ✅ All {$total} expected permissions are granted.");
+            } else {
+                $this->line("  Permissions: {$passed}/{$total} ✅ granted, {$failed} ❌ MISSING (will cause 403)");
                 $this->table(
-                    ['API Permission', 'Needs DB Permission (any of)'],
-                    array_map(fn($f) => [$f['api_perm'], $f['db_perms']], $failedList)
+                    ['API Permission', 'Needs (any of)'],
+                    array_map(fn($f) => [$f['api_perm'], $f['needed']], $failedList)
                 );
             }
 
             $this->newLine();
         }
 
-        if (!$fix && $this->confirm('Would you like to auto-fix missing permissions by running the seeder?')) {
+        if (!$fix && $this->confirm('Would you like to auto-fix by running MobileApiPermissionSeeder?')) {
             $this->call('db:seed', ['--class' => 'Database\\Seeders\\MobileApiPermissionSeeder']);
-            $this->info('Permissions fixed! Run this command again to verify.');
+            $this->info('Permissions seeded! Run this command again to verify.');
         }
 
         return 0;
