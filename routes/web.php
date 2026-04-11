@@ -127,6 +127,15 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
             Route::get('/stats', [App\Http\Controllers\RoleManagementController::class, 'getRoleStats'])->name('stats');
         });
 
+        // Mobile App Permission Management
+        Route::group(['prefix' => 'mobile-permissions', 'as' => 'mobile-permissions.', 'middleware' => ['role:admin|demo_admin']], function () {
+            Route::get('/', [App\Http\Controllers\MobilePermissionController::class, 'index'])->name('index');
+            Route::post('/{role}/update', [App\Http\Controllers\MobilePermissionController::class, 'updateRole'])->name('update');
+            Route::post('/store', [App\Http\Controllers\MobilePermissionController::class, 'store'])->name('store');
+            Route::post('/sync', [App\Http\Controllers\MobilePermissionController::class, 'sync'])->name('sync');
+            Route::delete('/destroy', [App\Http\Controllers\MobilePermissionController::class, 'destroy'])->name('destroy');
+        });
+
         Route::group(['prefix' => 'module', 'as' => 'module.'], function () {
             Route::get('index_data', [ModuleController::class, 'index_data'])->name('index_data');
             Route::post('update-status/{id}', [ModuleController::class, 'update_status'])->name('update_status');

@@ -1099,6 +1099,14 @@ class GenerateMenus
                     'active' => ['app/permission-role'],
                     'order' => 1,
                 ]);
+
+                $this->childMain($accessControl, [
+                    'icon' => 'ph ph-device-mobile',
+                    'title' => 'Mobile Permissions',
+                    'route' => 'backend.mobile-permissions.index',
+                    'active' => ['app/mobile-permissions'],
+                    'order' => 2,
+                ]);
             }
 
             // --- LOG/BACKUPS - only for admin and demo_admin ---
