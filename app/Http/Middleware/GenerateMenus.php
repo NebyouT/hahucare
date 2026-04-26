@@ -979,16 +979,6 @@ class GenerateMenus
                 ]);
             }
 
-            if(!auth()->user()->hasRole('pharma') && auth()->user()->can('view_blogs')){
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-pencil-simple',
-                    'title' => __('sidebar.blog'),
-                    'route' => 'backend.blog.index',
-                    'active' => ['app/blog'],
-                    'order' => 0,
-                ]);
-            }
-
             // Pages menu - only for admin and demo_admin
             if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_pages')) {
                 $this->mainRoute($menu, [

@@ -20,14 +20,14 @@ class PermissionRoleTableSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        $admin = Role::firstOrCreate(['name' => 'admin', 'title' => 'Admin', 'is_fixed' => true]);
-        $demo_admin = Role::firstOrCreate(['name' => 'demo_admin', 'title' => 'Demo Admin', 'is_fixed' => true]);
-        $user = Role::firstOrCreate(['name' => 'user', 'title' => 'Patient', 'is_fixed' => true]);
-        $doctor = Role::firstOrCreate(['name' => 'doctor', 'title' => 'doctor', 'is_fixed' => true]);
-        $vendor = Role::firstOrCreate(['name' => 'vendor', 'title' => 'Clinic Admin', 'is_fixed' => true]);
-        $shopmanager = Role::firstOrCreate(['name' => 'shopmanager', 'title' => 'shopmanager', 'is_fixed' => true]);
-        $receptionist = Role::firstOrCreate(['name' => 'receptionist', 'title' => 'receptionist', 'is_fixed' => true]);
-        $pharma = Role::firstOrCreate(['name' => 'pharma', 'title' => 'Pharma', 'is_fixed' => true]);
+        $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web'], ['title' => 'Admin', 'is_fixed' => true]);
+        $demo_admin = Role::firstOrCreate(['name' => 'demo_admin', 'guard_name' => 'web'], ['title' => 'Demo Admin', 'is_fixed' => true]);
+        $user = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web'], ['title' => 'Patient', 'is_fixed' => true]);
+        $doctor = Role::firstOrCreate(['name' => 'doctor', 'guard_name' => 'web'], ['title' => 'doctor', 'is_fixed' => true]);
+        $vendor = Role::firstOrCreate(['name' => 'vendor', 'guard_name' => 'web'], ['title' => 'Clinic Admin', 'is_fixed' => true]);
+        $shopmanager = Role::firstOrCreate(['name' => 'shopmanager', 'guard_name' => 'web'], ['title' => 'shopmanager', 'is_fixed' => true]);
+        $receptionist = Role::firstOrCreate(['name' => 'receptionist', 'guard_name' => 'web'], ['title' => 'receptionist', 'is_fixed' => true]);
+        $pharma = Role::firstOrCreate(['name' => 'pharma', 'guard_name' => 'web'], ['title' => 'Pharma', 'is_fixed' => true]);
 
         Permission::firstOrCreate(['name' => 'edit_settings', 'is_fixed' => true]);
         Permission::firstOrCreate(['name' => 'view_logs', 'is_fixed' => true]);
