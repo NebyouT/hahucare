@@ -406,7 +406,7 @@ class UserTableSeeder extends Seeder
             }
             $featureImage = $user_data['profile_image'] ?? null;
             $userData = Arr::except($user_data, ['profile_image', 'address']);
-            $user = User::create($userData);
+            $user = User::firstOrCreate(['email' => $userData['email']], $userData);
 
             if (isset($user_data['address'])) {
                 $addresses = $user_data['address'];
