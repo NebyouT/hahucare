@@ -66,6 +66,14 @@
                     </a>
                 </li>
             @endif
+
+            @if(!empty($sectionData['blogs']))
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('blogs') ? 'active' : '' }}" href="{{ route('blogs') }}">
+                        <span class="item-name">{{ __('frontend.blogs') }}</span>
+                    </a>
+                </li>
+            @endif
             @auth
                 @if(!empty($sectionData['incidence']) && auth()->user()->hasRole('user'))
                     <li class="nav-item">

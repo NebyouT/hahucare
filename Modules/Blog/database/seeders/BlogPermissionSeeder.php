@@ -62,8 +62,8 @@ class BlogPermissionSeeder extends Seeder
         $receptionist = Role::firstOrCreate(['name' => 'receptionist'], ['title' => 'Receptionist']);
         $patient = Role::firstOrCreate(['name' => 'patient'], ['title' => 'Patient']);
 
-        $vendor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media'];
-        $doctor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media'];
+        $vendor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'delete_blogs', 'manage_blog_media', 'manage_blog_status'];
+        $doctor_permissions = ['view_blogs', 'create_blogs', 'edit_blogs', 'manage_blog_media'];
         $receptionist_permissions = ['view_blogs'];
         $patient_permissions = ['view_blogs'];
 

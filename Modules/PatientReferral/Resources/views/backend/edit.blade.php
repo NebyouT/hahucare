@@ -47,7 +47,7 @@
                                             <option value="">Select Doctor</option>
                                             @foreach($doctors as $doctor)
                                                 <option value="{{ $doctor->id }}" {{ $patientReferral->referred_by == $doctor->id ? 'selected' : '' }}>
-                                                    {{ $doctor->first_name }} {{ $doctor->last_name }} ({{ $doctor->email }})
+                                                    Dr. {{ $doctor->first_name }} {{ $doctor->last_name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -66,13 +66,13 @@
                                         @if(isset($referredToDoctors))
                                             @foreach($referredToDoctors as $doctor)
                                                 <option value="{{ $doctor->id }}" {{ $patientReferral->referred_to == $doctor->id ? 'selected' : '' }}>
-                                                    {{ $doctor->first_name }} {{ $doctor->last_name }} ({{ $doctor->email }})
+                                                    Dr. {{ $doctor->first_name }} {{ $doctor->last_name }}
                                                 </option>
                                             @endforeach
                                         @else
                                             @foreach($doctors as $doctor)
                                                 <option value="{{ $doctor->id }}" {{ $patientReferral->referred_to == $doctor->id ? 'selected' : '' }}>
-                                                    {{ $doctor->first_name }} {{ $doctor->last_name }} ({{ $doctor->email }})
+                                                    Dr. {{ $doctor->first_name }} {{ $doctor->last_name }}
                                                 </option>
                                             @endforeach
                                         @endif
