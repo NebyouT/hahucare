@@ -77,4 +77,83 @@
     
     <!-- Video Meeting Script -->
     <script src="{{ asset('js/video-meeting.js') }}"></script>
+
+    <!-- Floating Call Us Button -->
+    <a href="tel:6670" class="floating-call-button">
+        <div class="call-button-content">
+            <i class="ph ph-phone-call"></i>
+            <span>6670</span>
+        </div>
+    </a>
+
+    <style>
+        .floating-call-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            padding: 12px 24px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            animation: glowing 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-call-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        @keyframes glowing {
+            0% {
+                box-shadow: 0 0 5px rgba(102, 126, 234, 0.4),
+                            0 0 10px rgba(102, 126, 234, 0.3),
+                            0 0 15px rgba(102, 126, 234, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(102, 126, 234, 0.6),
+                            0 0 20px rgba(102, 126, 234, 0.5),
+                            0 0 30px rgba(102, 126, 234, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(102, 126, 234, 0.4),
+                            0 0 10px rgba(102, 126, 234, 0.3),
+                            0 0 15px rgba(102, 126, 234, 0.2);
+            }
+        }
+
+        .call-button-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .call-button-content i {
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .floating-call-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 20px;
+            }
+
+            .call-button-content {
+                font-size: 16px;
+            }
+
+            .call-button-content i {
+                font-size: 20px;
+            }
+        }
+    </style>
 </body>
