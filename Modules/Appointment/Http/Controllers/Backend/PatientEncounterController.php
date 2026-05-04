@@ -1643,6 +1643,36 @@ class PatientEncounterController extends Controller
                 ];
             })->toArray();
 
+        // Patient referrals - load past referrals for this patient
+        $data['patient_referrals'] = \Modules\PatientReferral\Models\PatientReferral::with(['referredByDoctor', 'referredToDoctor'])
+            ->where('patient_id', $data->user_id)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($referral) {
+                return [
+                    'id' => $referral->id,
+                    'referred_by' => optional($referral->referredByDoctor)->first_name . ' ' . optional($referral->referredByDoctor)->last_name,
+                    'referred_to' => optional($referral->referredToDoctor)->first_name . ' ' . optional($referral->referredToDoctor)->last_name,
+                    'reason' => $referral->reason,
+                    'notes' => $referral->notes,
+                    'status' => $referral->status,
+                    'referral_date' => $referral->referral_date,
+                    'created_at' => $referral->created_at,
+                ];
+            })->toArray();
+
+        // Load all doctors for referral dropdown
+        $data['doctors_list'] = \App\Models\User::where('user_type', 'doctor')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name')
+            ->get()
+            ->map(function ($doctor) {
+                return [
+                    'id' => $doctor->id,
+                    'name' => 'Dr. ' . $doctor->first_name . ' ' . $doctor->last_name,
+                ];
+            })->toArray();
+
         $data['customform']              = CustomForm::where('module_type', 'appointment_module')
             ->where('status', 1)
             ->get()

@@ -312,6 +312,27 @@
                                     </div>
                                 </div>
 
+                                <!-- Patient Referrals Section -->
+                                <div class="mb-4">
+                                    <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
+                                        <h5 class="card-title">Patient Referrals</h5>
+                                        @if ($data['status'] == 1)
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#addReferral">
+                                                <div class="d-inline-flex align-items-center gap-1">
+                                                    <i class="ph ph-plus"></i>
+                                                    {{ __('Add Referral') }}
+                                                </div>
+                                            </button>
+                                        @endif
+                                    </div>
+
+                                    <div class="card-body bg-body" style="padding: 1px">
+                                        <div id="referral_table">
+                                            @include('patientreferral::backend.patient_encounter.component.referral_table', ['data' => $data])
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="other-detail">
                                     <div class="card-header px-0 mb-3">
@@ -407,6 +428,10 @@
                 @endif
 
                 @include('laboratory::backend.patient_encounter.component.lab_order_modal', [
+                    'data' => $data,
+                ])
+
+                @include('patientreferral::backend.patient_encounter.component.referral_modal', [
                     'data' => $data,
                 ])
 
