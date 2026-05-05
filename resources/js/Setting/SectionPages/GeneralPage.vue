@@ -194,6 +194,27 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group mb-3 col-md-6">
+        <label for="logo" class="form-label">Referral Stamp</label>
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <div class="card text-center inline-block">
+              <div class="card-body">
+                <img :src="referralStampViewer || DEFAULT_STAMP" class="img-fluid" alt="referral_stamp" />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="d-flex align-items-center gap-2">
+              <input type="file" ref="referralStampInputRef" class="form-control d-none" id="referral-stamp" name="referral_stamp" accept=".jpeg, .jpg, .png, .gif" @change="changeReferralStamp" />
+              <label class="btn btn-primary mb-5" for="referral-stamp">{{ $t('messages.upload') }}</label>
+              <input type="button" class="btn btn-danger mb-5" name="remove" value="Remove" @click="removeReferralStamp()" v-if="referral_stamp" />
+            </div>
+            <span class="text-danger">{{ errors.referral_stamp }}</span>
+          </div>
+        </div>
+      </div>
     </div>
     <SubmitButton :IS_SUBMITED="IS_SUBMITED"></SubmitButton>
   </form>
@@ -219,6 +240,7 @@ const DEFAULT_MINI_LOGO = document.querySelector('[name="mini-logo"]').value
 const DEFAULT_DARK_LOGO = document.querySelector('[name="dark-logo"]').value
 const DEFAULT_DARK_MINI_LOGO = document.querySelector('[name="dark-mini-logo"]').value
 const DEFAULT_FAVICON = document.querySelector('[name="favicon"]').value
+const DEFAULT_STAMP = ''
 const IS_SUBMITED = ref(false)
 
 const { storeRequest,deleteRequest  } = useRequest()
@@ -228,6 +250,7 @@ let logoMiniInputRef = ref(null)
 let darkLogoInputRef = ref(null)
 let darkLogoMiniInputRef = ref(null)
 let faviconInputRef = ref(null)
+let referralStampInputRef = ref(null)
 
 const handleInput = (Number, phoneObject) => {
   if (phoneObject?.formatted) {
@@ -283,6 +306,10 @@ const faviconViewer = ref(DEFAULT_FAVICON)
 const changeFavicon = (e) => fileUpload(e, { imageViewerBS64: faviconViewer, changeFile: favicon })
 const removeFavicon = () => removeImage({ imageViewerBS64: faviconViewer, changeFile: favicon })
 
+const referralStampViewer = ref(DEFAULT_STAMP)
+const changeReferralStamp = (e) => fileUpload(e, { imageViewerBS64: referralStampViewer, changeFile: referral_stamp })
+const removeReferralStamp = () => removeImage({ imageViewerBS64: referralStampViewer, changeFile: referral_stamp })
+
 //  Reset Form
 const setFormData = (data) => {
   console.log(data);
@@ -291,6 +318,7 @@ const setFormData = (data) => {
     (darkLogoViewer.value = data.dark_logo),
     (darkMiniLogoViewer.value = data.dark_mini_logo),
     (faviconViewer.value = data.favicon),
+    (referralStampViewer.value = data.referral_stamp),
     getState(data.country)
     getCity(data.state)
     resetForm({
@@ -379,6 +407,7 @@ const { value: mini_logo } = useField('mini_logo')
 const { value: dark_logo } = useField('dark_logo')
 const { value: dark_mini_logo } = useField('dark_mini_logo')
 const { value: favicon } = useField('favicon')
+const { value: referral_stamp } = useField('referral_stamp')
 const { value: bussiness_address_line_1 } = useField('bussiness_address_line_1')
 const { value: bussiness_address_line_2 } = useField('bussiness_address_line_2')
 const { value: country } = useField('country')
@@ -388,7 +417,7 @@ const { value: bussiness_address_postal_code } = useField('bussiness_address_pos
 const { value: bussiness_address_latitude } = useField('bussiness_address_latitude')
 const { value: bussiness_address_longitude } = useField('bussiness_address_longitude')
 //fetch data
-const data = 'app_name,doctor_app_name,user_app_name,helpline_number,inquriy_email,short_description,logo,mini_logo,dark_logo,dark_mini_logo,favicon,bussiness_address_postal_code,bussiness_address_line_1,bussiness_address_line_2,country,state,city,bussiness_address_latitude,bussiness_address_longitude'
+const data = 'app_name,doctor_app_name,user_app_name,helpline_number,inquriy_email,short_description,logo,mini_logo,dark_logo,dark_mini_logo,favicon,referral_stamp,bussiness_address_postal_code,bussiness_address_line_1,bussiness_address_line_2,country,state,city,bussiness_address_latitude,bussiness_address_longitude'
 onMounted(() => {
   createRequest(GET_URL(data)).then((response) => {
     setFormData(response)

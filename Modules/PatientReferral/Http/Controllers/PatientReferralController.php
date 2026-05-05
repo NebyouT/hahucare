@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\PatientReferral\Models\PatientReferral;
 use Modules\Appointment\Models\Appointment;
-use Illuminate\Support\Facades\Auth; // <-- ADD THIS IMPORT
+use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class PatientReferralController extends Controller
 {
@@ -86,6 +87,28 @@ class PatientReferralController extends Controller
     }
 
     /**
+     * Show the form for creating a new advanced referral.
+     */
+    public function createAdvanced()
+    {
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $patients = \App\Models\User::where('user_type', 'user')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        $doctors = \App\Models\User::where('user_type', 'doctor')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        return view('patientreferral::backend.create_advanced', compact('patients', 'doctors'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -131,6 +154,55 @@ class PatientReferralController extends Controller
         
         return redirect()->route('backend.patientreferral.index')
             ->with('success', 'Referral created successfully');
+    }
+
+    /**
+     * Store a newly created advanced referral in storage.
+     */
+    public function storeAdvanced(Request $request)
+    {
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $validated = $request->validate([
+            'patient_id' => 'required|exists:users,id',
+            'referred_by' => 'required|exists:users,id',
+            'referred_to' => 'required|exists:users,id|different:referred_by',
+            'referral_date' => 'required|date',
+            'referral_type' => 'required|in:quick,advanced',
+            'patient_age' => 'nullable|integer',
+            'patient_sex' => 'nullable|string|max:20',
+            'patient_address' => 'nullable|string',
+            'referring_faculty' => 'nullable|string|max:255',
+            'receiving_faculty' => 'nullable|string|max:255',
+            'chief_complaint' => 'required|string',
+            'history_findings' => 'nullable|string',
+            'diagnosis' => 'nullable|string',
+            'treatment_given' => 'nullable|string',
+            'investigation_done' => 'nullable|string',
+            'referring_clinic_name' => 'nullable|string|max:255',
+            'contact_information' => 'nullable|string',
+            'reason' => 'required|string',
+            'notes' => 'nullable|string',
+            'encounter_ids' => 'nullable|array',
+            'encounter_ids.*' => 'exists:patient_encounters,id',
+        ]);
+
+        // Generate unique referral code
+        $validated['referral_code'] = 'REF' . date('Ymd') . str_pad(PatientReferral::count() + 1, 4, '0', STR_PAD_LEFT);
+        $validated['status'] = 'pending';
+        $validated['encounter_ids'] = $request->input('encounter_ids', []);
+
+        $referral = PatientReferral::create($validated);
+        
+        // Sync encounters to pivot table
+        if (!empty($validated['encounter_ids'])) {
+            $referral->encounters()->sync($validated['encounter_ids']);
+        }
+        
+        return redirect()->route('backend.patientreferral.index')
+            ->with('success', 'Advanced referral created successfully');
     }
 
     /**
@@ -208,6 +280,30 @@ class PatientReferralController extends Controller
     }
 
     /**
+     * Show the form for editing the specified advanced referral.
+     */
+    public function editAdvanced($id)
+    {
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $referral = PatientReferral::findOrFail($id);
+        
+        $patients = \App\Models\User::where('user_type', 'user')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        $doctors = \App\Models\User::where('user_type', 'doctor')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        return view('patientreferral::backend.edit_advanced', compact('referral', 'patients', 'doctors'));
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id): RedirectResponse
@@ -255,6 +351,51 @@ class PatientReferralController extends Controller
         
         return redirect()->route('backend.patientreferral.index')
             ->with('success', 'Referral updated successfully');
+    }
+
+    /**
+     * Update the specified advanced referral in storage.
+     */
+    public function updateAdvanced(Request $request, $id): RedirectResponse
+    {
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $referral = PatientReferral::findOrFail($id);
+        
+        $validated = $request->validate([
+            'patient_id' => 'required|exists:users,id',
+            'referred_by' => 'required|exists:users,id',
+            'referred_to' => 'required|exists:users,id|different:referred_by',
+            'referral_date' => 'required|date',
+            'patient_age' => 'nullable|integer',
+            'patient_sex' => 'nullable|string|max:20',
+            'patient_address' => 'nullable|string',
+            'referring_faculty' => 'nullable|string|max:255',
+            'receiving_faculty' => 'nullable|string|max:255',
+            'chief_complaint' => 'required|string',
+            'history_findings' => 'nullable|string',
+            'diagnosis' => 'nullable|string',
+            'treatment_given' => 'nullable|string',
+            'investigation_done' => 'nullable|string',
+            'referring_clinic_name' => 'nullable|string|max:255',
+            'contact_information' => 'nullable|string',
+            'reason' => 'required|string',
+            'notes' => 'nullable|string',
+            'encounter_ids' => 'nullable|array',
+            'encounter_ids.*' => 'exists:patient_encounters,id',
+        ]);
+
+        $validated['encounter_ids'] = $request->input('encounter_ids', []);
+        
+        $referral->update($validated);
+        
+        // Sync encounters to pivot table
+        $referral->encounters()->sync($validated['encounter_ids']);
+        
+        return redirect()->route('backend.patientreferral.index')
+            ->with('success', 'Advanced referral updated successfully');
     }
 
     /**
@@ -358,5 +499,65 @@ class PatientReferralController extends Controller
             return redirect()->route('backend.patientreferral.show', $id)
                 ->with('error', 'Error loading booking page: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Get patient data for advanced referral form (API endpoint).
+     */
+    public function getPatientData($patientId)
+    {
+        $patient = \App\Models\User::where('id', $patientId)
+            ->where('user_type', 'user')
+            ->first();
+
+        if (!$patient) {
+            return response()->json(['error' => 'Patient not found'], 404);
+        }
+
+        // Calculate age from date of birth if available
+        $age = null;
+        if ($patient->date_of_birth) {
+            $age = \Carbon\Carbon::parse($patient->date_of_birth)->age;
+        }
+
+        // Get patient encounters
+        $encounters = \Modules\Appointment\Models\PatientEncounter::where('patient_id', $patientId)
+            ->orderBy('encounter_date', 'desc')
+            ->take(10)
+            ->get(['id', 'encounter_date', 'encounter_type'])
+            ->map(function ($encounter) {
+                return [
+                    'id' => $encounter->id,
+                    'date' => $encounter->encounter_date ? $encounter->encounter_date->format('Y-m-d') : 'N/A',
+                    'type' => $encounter->encounter_type ?? 'General',
+                ];
+            });
+
+        return response()->json([
+            'age' => $age,
+            'sex' => $patient->gender ?? 'N/A',
+            'address' => $patient->address ?? 'N/A',
+            'encounters' => $encounters,
+        ]);
+    }
+
+    /**
+     * Download referral as PDF.
+     */
+    public function downloadPDF($id)
+    {
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+        
+        $referral = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor', 'encounters'])
+            ->findOrFail($id);
+        
+        // Get referral stamp from settings
+        $referralStamp = \App\Models\Setting::where('key', 'referral_stamp')->value('value');
+        
+        $pdf = \PDF::loadView('patientreferral::backend.pdf', compact('referral', 'referralStamp'));
+        
+        return $pdf->download('referral_' . $referral->referral_code . '.pdf');
     }
 }

@@ -166,7 +166,19 @@ return [
                 'value' => 'img/logo/mini_logo.webp', // default value if you want
                 'help' => '', // Help text for the input field.
                 'display' => 'raw', // Help text for the input field.
-                
+
+            ],
+            [
+                'type' => 'file', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'referral_stamp', // unique name for field
+                'label' => 'Referral Stamp', // you know what label it is
+                'rules' => 'nullable|image|mimes:jpg,png,gif', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '', // default value if you want
+                'help' => 'Upload your company stamp for referral documents', // Help text for the input field.
+                'display' => 'raw', // Help text for the input field.
+
             ],
             [
                 'type' => 'text', // input fields type
@@ -174,7 +186,7 @@ return [
                 'name' => 'bussiness_address_line_1', // unique name for field
                 'rules' => 'nullable|min:2|max:199', // validation rule of laravel
                 'value' => '', // default value if you want
-                
+
             ],
             [
                 'type' => 'text', // input fields type

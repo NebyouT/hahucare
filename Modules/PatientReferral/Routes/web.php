@@ -52,4 +52,29 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
     Route::get('patientreferral/{id}/book', [PatientReferralController::class, 'bookAppointment'])
         ->name('patientreferral.book')
         ->middleware('permission:edit_patient_referral');
+
+    // Advanced Referral Routes
+    Route::get('patientreferral/create-advanced', [PatientReferralController::class, 'createAdvanced'])
+        ->name('patientreferral.create-advanced')
+        ->middleware('permission:add_patient_referral');
+        
+    Route::post('patientreferral/store-advanced', [PatientReferralController::class, 'storeAdvanced'])
+        ->name('patientreferral.store-advanced')
+        ->middleware('permission:add_patient_referral');
+        
+    Route::get('patientreferral/{id}/edit-advanced', [PatientReferralController::class, 'editAdvanced'])
+        ->name('patientreferral.edit-advanced')
+        ->middleware('permission:edit_patient_referral');
+        
+    Route::put('patientreferral/{id}/update-advanced', [PatientReferralController::class, 'updateAdvanced'])
+        ->name('patientreferral.update-advanced')
+        ->middleware('permission:edit_patient_referral');
+
+    // PDF Download Route
+    Route::get('patientreferral/{id}/pdf', [PatientReferralController::class, 'downloadPDF'])
+        ->name('patientreferral.pdf')
+        ->middleware('permission:view_patient_referral');
 });
+
+// API endpoint for patient data (no auth middleware for AJAX calls)
+Route::get('api/patient-referral/patient-data/{patientId}', [PatientReferralController::class, 'getPatientData']);

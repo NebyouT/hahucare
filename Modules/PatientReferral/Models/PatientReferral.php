@@ -18,12 +18,29 @@ class PatientReferral extends Model
         'notes',
         'status',
         'referral_date',
+        'referral_code',
+        'referral_type',
+        'patient_age',
+        'patient_sex',
+        'patient_address',
+        'referring_faculty',
+        'receiving_faculty',
+        'chief_complaint',
+        'history_findings',
+        'diagnosis',
+        'treatment_given',
+        'investigation_done',
+        'referring_clinic_name',
+        'contact_information',
+        'encounter_ids',
+        'signature_data',
     ];
 
     protected $casts = [
         'referral_date' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'encounter_ids' => 'array',
     ];
 
     public function patient()
@@ -39,5 +56,10 @@ class PatientReferral extends Model
     public function referredToDoctor()
     {
         return $this->belongsTo(\App\Models\User::class, 'referred_to');
+    }
+
+    public function encounters()
+    {
+        return $this->belongsToMany(\Modules\Appointment\Models\PatientEncounter::class, 'patient_referral_encounter', 'referral_id', 'encounter_id');
     }
 }
