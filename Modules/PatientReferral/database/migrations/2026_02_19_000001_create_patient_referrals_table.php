@@ -8,22 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('patient_referrals', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('referred_by');
-            $table->unsignedBigInteger('referred_to');
-            $table->text('reason');
-            $table->text('notes')->nullable();
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
-            $table->date('referral_date');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Table already exists in production, skip creation
+        // This migration is kept for reference only
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('patient_referrals');
+        // No-op since table already exists
     }
 };

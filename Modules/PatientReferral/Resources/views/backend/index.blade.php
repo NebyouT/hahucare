@@ -45,7 +45,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($referrals as $referral)
+                                    @foreach($quickReferrals as $referral)
                                     <tr>
                                         <td>{{ $referral->id }}</td>
                                         <td>{{ $referral->patient ? $referral->patient->first_name . ' ' . $referral->patient->last_name : 'N/A' }}</td>
@@ -67,7 +67,7 @@
                                                     <span class="badge badge-secondary">{{ ucfirst($referral->status) }}</span>
                                             @endswitch
                                         </td>
-                                        <td>{{ $referral->referral_date->format('Y-m-d') }}</td>
+                                        <td>{{ $referral->referral_date ? $referral->referral_date->format('Y-m-d') : 'N/A' }}</td>
                                         <td>
                                             <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary">View</a>
                                             
@@ -95,6 +95,11 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @if($quickReferrals->count() === 0)
+                                    <tr>
+                                        <td colspan="8" class="text-center">No quick referrals found</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -120,7 +125,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($referrals as $referral)
+                                    @foreach($advancedReferrals as $referral)
                                     <tr>
                                         <td>{{ $referral->id }}</td>
                                         <td>{{ $referral->patient ? $referral->patient->first_name . ' ' . $referral->patient->last_name : 'N/A' }}</td>
@@ -142,9 +147,10 @@
                                                     <span class="badge badge-secondary">{{ ucfirst($referral->status) }}</span>
                                             @endswitch
                                         </td>
-                                        <td>{{ $referral->referral_date->format('Y-m-d') }}</td>
+                                        <td>{{ $referral->referral_date ? $referral->referral_date->format('Y-m-d') : 'N/A' }}</td>
                                         <td>
                                             <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary">View</a>
+                                            <a href="{{ route('backend.patientreferral.pdf', $referral) }}" class="btn btn-sm btn-secondary" target="_blank">PDF</a>
                                             
                                             @if((auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id && $referral->status === 'pending') || 
                                            (in_array(auth()->user()->user_type, ['admin', 'demo_admin']) && $referral->status === 'pending'))
@@ -157,7 +163,7 @@
                                             @endif
                                             
                                             @if(auth()->user()->user_type !== 'doctor' || $referral->referred_to !== auth()->user()->id)
-                                                <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-sm btn-info">Edit</a>
+                                                <a href="{{ route('backend.patientreferral.edit-advanced', $referral) }}" class="btn btn-sm btn-info">Edit</a>
                                             @endif
                                             
                                             @if(auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id)
@@ -170,6 +176,11 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @if($advancedReferrals->count() === 0)
+                                    <tr>
+                                        <td colspan="8" class="text-center">No advanced referrals found</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

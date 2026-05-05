@@ -25,19 +25,31 @@ class PatientReferralController extends Controller
         $user = Auth::user();
         
         if ($user->user_type === 'doctor') {
-            // Doctors can only see referrals where they are the referred_to doctor
+            // For doctors: show referrals where they are either referred_by or referred_to
             $referrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
-                ->where('referred_to', $user->id)
-                ->latest()
-                ->paginate(10);
+                ->where(function($query) use ($user) {
+                    $query->where('referred_by', $user->id)
+                          ->orWhere('referred_to', $user->id);
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
         } else {
-            // Admins and other roles can see all referrals
+            // For admins and other roles: show all referrals
             $referrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
-                ->latest()
-                ->paginate(10);
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
-
-        return view('patientreferral::backend.index', compact('referrals'));
+        
+        // Filter referrals by type
+        $quickReferrals = $referrals->filter(function($referral) {
+            return $referral->referral_type === 'quick' || $referral->referral_type === null;
+        });
+        
+        $advancedReferrals = $referrals->filter(function($referral) {
+            return $referral->referral_type === 'advanced';
+        });
+        
+        return view('patientreferral::backend.index', compact('quickReferrals', 'advancedReferrals'));
     }
 
     /**
@@ -150,6 +162,9 @@ class PatientReferralController extends Controller
             ]);
         }
 
+        // Set referral_type to quick for standard referrals
+        $validated['referral_type'] = 'quick';
+        
         PatientReferral::create($validated);
         
         return redirect()->route('backend.patientreferral.index')
