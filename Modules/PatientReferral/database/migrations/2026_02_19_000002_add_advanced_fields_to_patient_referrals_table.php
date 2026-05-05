@@ -3,28 +3,25 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     public function up(): void
     {
         Schema::table('patient_referrals', function (Blueprint $table) {
-            // Add foreign key constraints if they don't exist
-            if (!Schema::hasColumn('patient_referrals', 'patient_id')) {
-                $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
-            } else {
+            // Add foreign key constraints only if they don't exist
+            $foreignKeys = collect(DB::select("SELECT CONSTRAINT_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'patient_referrals' AND CONSTRAINT_NAME LIKE '%_foreign'"))->pluck('CONSTRAINT_NAME')->toArray();
+
+            if (!in_array('patient_referrals_patient_id_foreign', $foreignKeys)) {
                 $table->foreign('patient_id')->references('id')->on('users')->onDelete('cascade');
             }
 
-            if (!Schema::hasColumn('patient_referrals', 'referred_by')) {
-                $table->foreignId('referred_by')->constrained('users')->onDelete('cascade');
-            } else {
+            if (!in_array('patient_referrals_referred_by_foreign', $foreignKeys)) {
                 $table->foreign('referred_by')->references('id')->on('users')->onDelete('cascade');
             }
 
-            if (!Schema::hasColumn('patient_referrals', 'referred_to')) {
-                $table->foreignId('referred_to')->constrained('users')->onDelete('cascade');
-            } else {
+            if (!in_array('patient_referrals_referred_to_foreign', $foreignKeys)) {
                 $table->foreign('referred_to')->references('id')->on('users')->onDelete('cascade');
             }
 
