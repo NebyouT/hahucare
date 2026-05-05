@@ -25,4 +25,6 @@ return [
     'lbl_midtrans'=>'Midtrans',
     'lbl_cinet' => 'Cinet',
     'lbl_sadad' => 'Sadad',
+    'lbl_starpay' => 'StarPay Ethiopia',
+    'lbl_starpay_mode' => 'Mode (Sandbox/Production)',
 ];

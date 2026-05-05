@@ -332,6 +332,7 @@ class AppointmentController extends Controller
             'cash'   => 'cash_payment_method',
             'Wallet' => 'wallet_payment_method',
             'chapa'  => 'chapa_payment_method',
+            'starpay' => 'starpay_payment_method',
             // 'Stripe'      => 'str_payment_method',
             // 'Paystack'    => 'paystack_payment_method',
             // 'PayPal'      => 'paypal_payment_method',
@@ -894,6 +895,7 @@ class AppointmentController extends Controller
             'cash'      => 'CashPayment',
             'Wallet'    => 'WalletPayment',
             'chapa'     => 'ChapaPaymentProxy',
+            'starpay'   => 'StarPayPaymentProxy',
             // 'Stripe'      => 'StripePayment',
             // 'Razor Pay'   => 'RazorpayPayment',
             // 'Paystack'    => 'PaystackPayment',
@@ -1027,6 +1029,13 @@ class AppointmentController extends Controller
     {
         return app(\Modules\Frontend\Http\Controllers\ChapaController::class)
             ->ChapaPayment($request, $paymentData, $price);
+    }
+
+    //starpay payment proxy — delegates to StarPayController
+    public function StarPayPaymentProxy(Request $request, $paymentData, $price)
+    {
+        return app(\Modules\Frontend\Http\Controllers\StarPayController::class)
+            ->starPayPayment($request, $paymentData, $price);
     }
 
     //cash payment
@@ -2163,6 +2172,9 @@ class AppointmentController extends Controller
             case 'chapa':
                 return app(\Modules\Frontend\Http\Controllers\ChapaController::class)
                     ->handleChapaSuccess($request);
+            case 'starpay':
+                return app(\Modules\Frontend\Http\Controllers\StarPayController::class)
+                    ->handleStarPaySuccess($request);
             // case 'stripe':
             //     return $this->handleStripeSuccess($request);
             // case 'razorpay':

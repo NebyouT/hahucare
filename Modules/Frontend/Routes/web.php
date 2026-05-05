@@ -8,6 +8,7 @@ use Modules\Frontend\Http\Controllers\ClinicController;
 use Modules\Frontend\Http\Controllers\DoctorController;
 use Modules\Frontend\Http\Controllers\BlogController;
 use Modules\Frontend\Http\Controllers\AppointmentController;
+use Modules\Frontend\Http\Controllers\StarPayController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Backend\NotificationsController;
 use Modules\Frontend\Http\Controllers\Auth\UserController;
@@ -25,6 +26,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 Route::post('/payment/chapa/webhook', [\Modules\Frontend\Http\Controllers\ChapaController::class, 'handleChapaWebhook'])->name('payment.chapa.webhook');
+Route::post('/payment/starpay/webhook', [\Modules\Frontend\Http\Controllers\StarPayController::class, 'handleStarPayWebhook'])->name('payment.starpay.webhook');
+Route::get('/payment/starpay/initialize', [\Modules\Frontend\Http\Controllers\StarPayController::class, 'starPayPayment'])->name('payment.starpay.initialize');
 Route::get('/login', [UserController::class, 'login'])->name('login-page');
 Route::get('/register', [UserController::class, 'registration'])->name('register-page');
 Route::get('/forgot-password', [UserController::class, 'forgotpassword'])->name('forgot-password');

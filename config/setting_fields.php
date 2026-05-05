@@ -1211,6 +1211,50 @@ return [
             ],
             [
                 'type' => 'checkbox', // input fields type
+                'data' => 'starpayPayment', // data type, string, int, boolean
+                'name' => 'starpay_payment_method', // unique name for field
+                'label' => 'Is Type', // you know what label it is
+                'rules' => '', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '0', // default value if you want
+
+            ],
+            [
+                'type' => 'text', // input fields type
+                'data' => 'starpay_payment_method', // data type, string, int, boolean
+                'name' => 'starpay_secretkey', // unique name for field
+                'label' => 'starpayPayment', // you know what label it is
+                'rules' => 'required|max:191', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '', // default value if you want
+                'help' => 'Enter the API Secret provided by StarPay Ethiopia.', // Help text for the input field.
+            ],
+            [
+                'type' => 'text', // input fields type
+                'data' => 'starpay_payment_method', // data type, string, int, boolean
+                'name' => 'starpay_merchant_id', // unique name for field
+                'label' => 'starpayPayment', // you know what label it is
+                'rules' => 'required|max:191', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '', // default value if you want
+                'help' => 'Enter the Merchant ID provided by StarPay Ethiopia.', // Help text for the input field.
+            ],
+            [
+                'type' => 'select', // input fields type
+                'data' => 'starpay_payment_method', // data type, string, int, boolean
+                'name' => 'starpay_mode', // unique name for field
+                'label' => 'starpayPayment', // you know what label it is
+                'rules' => 'required|max:191', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => 'sandbox', // default value if you want
+                'help' => 'Select sandbox for testing or production for live payments.', // Help text for the input field.
+                'options' => [
+                    'sandbox' => 'Sandbox',
+                    'production' => 'Production'
+                ]
+            ],
+            [
+                'type' => 'checkbox', // input fields type
                 'data' => 'airtelPayment', // data type, string, int, boolean
                 'name' => 'airtel_payment_method', // unique name for field
                 'label' => 'Is Type', // you know what label it is

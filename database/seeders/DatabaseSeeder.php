@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(\Modules\Clinic\database\seeders\ClinicDatabaseSeeder::class);
 
         $this->call(\Modules\Commission\database\seeders\CommissionDatabaseSeeder::class);
+        $this->call(CommissionPermissionSeeder::class);
         $this->call(\Modules\Currency\database\seeders\CurrencyDatabaseSeeder::class);
         $this->call(\Modules\NotificationTemplate\database\seeders\NotificationTemplateSeeder::class);
         $this->call(\Modules\Slider\database\seeders\SliderDatabaseSeeder::class);

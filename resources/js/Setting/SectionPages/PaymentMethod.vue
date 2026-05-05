@@ -168,6 +168,50 @@
       </div>
     </div>
 
+    <div class="form-group border-bottom pb-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <label class="form-label m-0" for="payment_method_starpay">{{ $t('setting_payment_method.lbl_starpay') }}</label>
+        <div class="form-check form-switch m-0">
+          <input class="form-check-input" :true-value="1" :false-value="0" :value="starpay_payment_method"
+            :checked="starpay_payment_method == 1 ? true : false" name="starpay_payment_method" id="payment_method_starpay"
+            type="checkbox" v-model="starpay_payment_method" />
+        </div>
+      </div>
+    </div>
+    <div v-if="starpay_payment_method == 1">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-label" for="starpay_secretkey">{{ $t('setting_payment_method.lbl_secret_key') }}</label>
+            <input type="text" class="form-control" v-model="starpay_secretkey" id="starpay_secretkey"
+              name="starpay_secretkey" :errorMessage="errors.starpay_secretkey"
+              :errorMessages="errorMessages.starpay_secretkey" />
+            <p class="text-danger" v-for="msg in errorMessages.starpay_secretkey" :key="msg">{{ msg }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-label" for="starpay_merchant_id">{{ $t('setting_payment_method.lbl_merchant_id') }}</label>
+            <input type="text" class="form-control" v-model="starpay_merchant_id" id="starpay_merchant_id"
+              name="starpay_merchant_id" :errorMessage="errors.starpay_merchant_id"
+              :errorMessages="errorMessages.starpay_merchant_id" />
+            <p class="text-danger" v-for="msg in errorMessages.starpay_merchant_id" :key="msg">{{ msg }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-label" for="starpay_mode">{{ $t('setting_payment_method.lbl_starpay_mode') }}</label>
+            <select class="form-select" v-model="starpay_mode" id="starpay_mode" name="starpay_mode"
+              :errorMessage="errors.starpay_mode" :errorMessages="errorMessages.starpay_mode">
+              <option value="sandbox">Sandbox</option>
+              <option value="production">Production</option>
+            </select>
+            <p class="text-danger" v-for="msg in errorMessages.starpay_mode" :key="msg">{{ msg }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="form-group">
       <div class="d-flex justify-content-between align-items-center">
         <label class="form-label" for="airtel_money">{{ $t('setting_payment_method.lbl_airtel_money') }}</label>
@@ -441,6 +485,10 @@ const setFormData = (data) => {
       sadad_id: data.sadad_id || '',
       sadad_key: data.sadad_key || '',
       sadad_domain: data.sadad_domain || '',
+      starpay_payment_method: data.starpay_payment_method || 0,
+      starpay_secretkey: data.starpay_secretkey || '',
+      starpay_merchant_id: data.starpay_merchant_id || '',
+      starpay_mode: data.starpay_mode || 'sandbox',
     }
   })
 }
@@ -596,6 +644,24 @@ const validationSchema = yup.object({
     }
     return true
   }),
+  starpay_secretkey: yup.string().test('starpay_secretkey', 'Must be a valid StarPay Secret Key', function (value) {
+    if (this.parent.starpay_payment_method == '1' && !value) {
+      return false;
+    }
+    return true
+  }),
+  starpay_merchant_id: yup.string().test('starpay_merchant_id', 'Must be a valid StarPay Merchant ID', function (value) {
+    if (this.parent.starpay_payment_method == '1' && !value) {
+      return false;
+    }
+    return true
+  }),
+  starpay_mode: yup.string().test('starpay_mode', 'Must select a mode', function (value) {
+    if (this.parent.starpay_payment_method == '1' && !value) {
+      return false;
+    }
+    return true
+  }),
 })
 const { handleSubmit, errors, resetForm } = useForm({ validationSchema })
 const errorMessages = ref({})
@@ -632,6 +698,10 @@ const { value: sadad_payment_method } = useField('sadad_payment_method')
 const { value: sadad_id } = useField('sadad_id')
 const { value: sadad_key } = useField('sadad_key')
 const { value: sadad_domain } = useField('sadad_domain')
+const { value: starpay_payment_method } = useField('starpay_payment_method')
+const { value: starpay_secretkey } = useField('starpay_secretkey')
+const { value: starpay_merchant_id } = useField('starpay_merchant_id')
+const { value: starpay_mode } = useField('starpay_mode')
 
 watch(() => razor_payment_method.value, (value) => {
   if(value == '0') {
@@ -699,6 +769,15 @@ watch(() => sadad_payment_method.value, (value) => {
     sadad_domain.value = ''
   }
 }, {deep: true})
+
+watch(() => starpay_payment_method.value, (value) => {
+  if(value == '0') {
+    starpay_secretkey.value = ''
+    starpay_merchant_id.value = ''
+    starpay_mode.value = 'sandbox'
+  }
+}, {deep: true})
+
 // message
 const display_submit_message = (res) => {
   IS_SUBMITED.value = false
@@ -711,7 +790,7 @@ const display_submit_message = (res) => {
 }
 
 //fetch data
-const data = 'razor_payment_method,razorpay_secretkey,razorpay_publickey,str_payment_method,stripe_secretkey,stripe_publickey,paystack_payment_method,paystack_secretkey,paystack_publickey,paypal_payment_method,paypal_secretkey,paypal_clientid,,flutterwave_payment_method,flutterwave_secretkey,flutterwave_publickey,airtel_payment_method,airtel_secretkey,airtel_clientid,phonepay_payment_method,phonepay_app_id,phonepay_merchant_id,phonepay_salt_key,phonepay_salt_index,midtrans_payment_method,midtrans_clientid,cinet_payment_method,cinet_siteid,cinet_apikey,cinet_secretkey,sadad_payment_method,sadad_id,sadad_key,sadad_domain,'
+const data = 'razor_payment_method,razorpay_secretkey,razorpay_publickey,str_payment_method,stripe_secretkey,stripe_publickey,paystack_payment_method,paystack_secretkey,paystack_publickey,paypal_payment_method,paypal_secretkey,paypal_clientid,,flutterwave_payment_method,flutterwave_secretkey,flutterwave_publickey,airtel_payment_method,airtel_secretkey,airtel_clientid,phonepay_payment_method,phonepay_app_id,phonepay_merchant_id,phonepay_salt_key,phonepay_salt_index,midtrans_payment_method,midtrans_clientid,cinet_payment_method,cinet_siteid,cinet_apikey,cinet_secretkey,sadad_payment_method,sadad_id,sadad_key,sadad_domain,starpay_payment_method,starpay_secretkey,starpay_merchant_id,starpay_mode,'
 onMounted(() => {
   createRequest(GET_URL(data)).then((response) => {
     setFormData(response)
