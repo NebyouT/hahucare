@@ -5,8 +5,8 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Edit Advanced Referral</h3>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('backend.patientreferral.update-advanced', $referral) }}">
+                    <form method="POST" action="{{ route('backend.patientreferral.update-advanced', $referral->id) }}">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="referral_type" value="advanced">
