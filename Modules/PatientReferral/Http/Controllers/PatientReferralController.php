@@ -569,7 +569,7 @@ class PatientReferralController extends Controller
             ->findOrFail($id);
         
         // Get referral stamp from settings
-        $referralStamp = \App\Models\Setting::where('key', 'referral_stamp')->value('value');
+        $referralStamp = \App\Models\Setting::where('name', 'referral_stamp')->value('val');
         
         $pdf = \PDF::loadView('patientreferral::backend.pdf', compact('referral', 'referralStamp'));
         
