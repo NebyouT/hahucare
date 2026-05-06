@@ -745,10 +745,18 @@ class GenerateMenus
                 if (auth()->user()->can('add_patient_referral')) {
                     $this->childMain($patientReferal, [
                         'icon' => 'ph ph-user-plus',
-                        'title' => 'Add Patient Referral',
+                        'title' => 'Add Quick Referral',
                         'route' => 'backend.patientreferral.create',
                         'active' => ['app/patientreferral/create'],
                         'order' => 0,
+                    ]);
+
+                    $this->childMain($patientReferal, [
+                        'icon' => 'ph ph-file-plus',
+                        'title' => 'Add Advanced Referral',
+                        'route' => 'backend.patientreferral.create-advanced',
+                        'active' => ['app/patientreferral/create-advanced'],
+                        'order' => 1,
                     ]);
                 }
 
@@ -757,7 +765,7 @@ class GenerateMenus
                     'title' => 'Patient Referral List',
                     'route' => 'backend.patientreferral.index',
                     'active' => ['app/patientreferral'],
-                    'order' => 0,
+                    'order' => 2,
                 ]);
             }
 
