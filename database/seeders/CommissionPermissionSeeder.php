@@ -12,10 +12,10 @@ class CommissionPermissionSeeder extends Seeder
     {
         // Create permissions for Commission module
         $permissions = [
-            'view_commissions',
-            'add_commissions', 
-            'edit_commissions',
-            'delete_commissions',
+            'view_commission',
+            'add_commission', 
+            'edit_commission',
+            'delete_commission',
         ];
 
         foreach ($permissions as $permission) {
