@@ -769,6 +769,71 @@ class GenerateMenus
                 ]);
             }
 
+            // Laboratory menu - only for admin and demo_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_labs')) {
+                $laboratory = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-flask',
+                    'title' => __('sidebar.laboratory'),
+                    'nickname' => 'laboratory',
+                    'permission' => ['view_labs'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-list',
+                    'title' => __('sidebar.lab_orders'),
+                    'route' => 'backend.lab-orders.index',
+                    'active' => ['app/lab-orders'],
+                    'permission' => ['view_lab_orders'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-test-tube',
+                    'title' => __('sidebar.lab_tests'),
+                    'route' => 'backend.lab-tests.index',
+                    'active' => ['app/lab-tests'],
+                    'permission' => ['view_lab_tests'],
+                    'order' => 1,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-file-text',
+                    'title' => __('sidebar.lab_results'),
+                    'route' => 'backend.lab-results.index',
+                    'active' => ['app/lab-results'],
+                    'permission' => ['view_lab_results'],
+                    'order' => 2,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-folder',
+                    'title' => __('sidebar.lab_categories'),
+                    'route' => 'backend.lab-categories.index',
+                    'active' => ['app/lab-categories'],
+                    'permission' => ['view_lab_categories'],
+                    'order' => 3,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-first-aid-kit',
+                    'title' => __('sidebar.lab_equipment'),
+                    'route' => 'backend.lab-equipment.index',
+                    'active' => ['app/lab-equipment'],
+                    'permission' => ['view_lab_equipment'],
+                    'order' => 4,
+                ]);
+
+                $this->childMain($laboratory, [
+                    'icon' => 'ph ph-buildings',
+                    'title' => __('sidebar.labs'),
+                    'route' => 'backend.labs.index',
+                    'active' => ['app/labs'],
+                    'permission' => ['view_labs'],
+                    'order' => 5,
+                ]);
+            }
+
             if(!auth()->user()->hasRole('pharma') && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',
