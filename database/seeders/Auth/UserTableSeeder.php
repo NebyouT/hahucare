@@ -33,8 +33,8 @@ class UserTableSeeder extends Seeder
             [
                 'first_name' => 'Super',
                 'last_name' => 'Admin',
-                'email' => 'admin@kivicare.com',
-                'password' => Hash::make('12345678'),
+                'email' => 'admin@hahucare.com',
+                'password' => Hash::make('P0o9i8u7!'),
                 'mobile' => '+91 81859861',
                 'date_of_birth' => '1990-08-17',
 
@@ -53,8 +53,8 @@ class UserTableSeeder extends Seeder
             [
                 'first_name' => 'Ivan',
                 'last_name' => 'Norris',
-                'email' => 'demo@kivicare.com',
-                'password' => Hash::make('12345678'),
+                'email' => 'demo@hahucare.com',
+                'password' => Hash::make('P0o9i8u7!'),
                 'mobile' => '+91 74858414',
                 'date_of_birth' => '1989-02-08',
 
@@ -75,8 +75,8 @@ class UserTableSeeder extends Seeder
             [
                 'first_name' => 'Liam',
                 'last_name' => 'Long',
-                'email' => 'vendor@kivicare.com',
-                'password' => Hash::make('12345678'),
+                'email' => 'vendor@hahucare.com',
+                'password' => Hash::make('P0o9i8u7!'),
                 'mobile' => '+91 8574965162',
                 'date_of_birth' => '1986-05-07',
 
@@ -115,8 +115,8 @@ class UserTableSeeder extends Seeder
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
-                'email' => 'pharma@kivicare.com',
-                'password' => Hash::make('12345678'),
+                'email' => 'pharma@hahucare.com',
+                'password' => Hash::make('P0o9i8u7!'),
                 'mobile' => '+91 2381547861',
                 'date_of_birth' => '1984-10-05',
                 'clinic_id' => 1,
@@ -211,6 +211,28 @@ class UserTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'user_type' => 'vendor',
+            ],
+
+            //lab technician
+            [
+                'first_name' => 'Lab',
+                'last_name' => 'Technician',
+                'email' => 'lab@hahucare.com',
+                'password' => Hash::make('P0o9i8u7!'),
+                'mobile' => '+91 9998887776',
+                'date_of_birth' => '1985-03-15',
+                'clinic_id' => 1,
+                'country' => 230,
+                'state' => 3812,
+                'city' => 41432,
+                'pincode' => '12345',
+                'avatar' => null,
+                'profile_image' => public_path('/dummy-images/profile/vendor/susan.png'),
+                'gender' => 'Male',
+                'email_verified_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'user_type' => 'lab_technician',
             ],
 
 
