@@ -2,29 +2,29 @@
 -- Run this SQL script to update existing demo users in the database
 -- Password hash for 'P0o9i8u7!': $2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci
 
--- Update admin user
+-- First, delete any old kivicare.com users to avoid duplicates
+DELETE FROM model_has_roles WHERE model_id IN (SELECT id FROM users WHERE email LIKE '%@kivicare.com');
+DELETE FROM users WHERE email LIKE '%@kivicare.com';
+
+-- Update admin user (only if exists with hahucare.com, update password)
 UPDATE users 
-SET email = 'admin@hahucare.com', 
-    password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
-WHERE email = 'admin@kivicare.com' OR email = 'admin@hahucare.com';
+SET password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
+WHERE email = 'admin@hahucare.com';
 
 -- Update demo_admin user
 UPDATE users 
-SET email = 'demo@hahucare.com', 
-    password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
-WHERE email = 'demo@kivicare.com' OR email = 'demo@hahucare.com';
+SET password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
+WHERE email = 'demo@hahucare.com';
 
 -- Update vendor (clinic admin) user
 UPDATE users 
-SET email = 'vendor@hahucare.com', 
-    password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
-WHERE email = 'vendor@kivicare.com' OR email = 'vendor@hahucare.com';
+SET password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
+WHERE email = 'vendor@hahucare.com';
 
 -- Update pharma user
 UPDATE users 
-SET email = 'pharma@hahucare.com', 
-    password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
-WHERE email = 'pharma@kivicare.com' OR email = 'pharma@hahucare.com';
+SET password = '$2y$10$mN.cqqo2BLJOvoE6b0MDUOqLy0aXdDJyj3e8NUA9EEx3uP20Ygrci'
+WHERE email = 'pharma@hahucare.com';
 
 -- Insert lab technician user if not exists
 INSERT INTO users (first_name, last_name, email, password, mobile, date_of_birth, country, state, city, pincode, gender, email_verified_at, created_at, updated_at, user_type, clinic_id)
