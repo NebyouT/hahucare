@@ -1,37 +1,17 @@
 @extends('backend.layouts.app')
 
-@section('title')
-    {{ __('medicalcertificate.create_medical_certificate') }}
-@endsection
+@section('title', __('medicalcertificate.create_medical_certificate'))
 
 @section('content')
-<div class="page-header">
-    <div class="page-block">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="page-header-title">
-                    <h4 class="m-b-10">{{ __('medicalcertificate.create_medical_certificate') }}</h4>
-                </div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('backend.home') }}">{{ __('sidebar.home') }}</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('backend.medical-certificates.index') }}">{{ __('medicalcertificate.medical_certificates') }}</a>
-                    </li>
-                    <li class="breadcrumb-item">{{ __('medicalcertificate.create_medical_certificate') }}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="main-content">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h5>{{ __('medicalcertificate.create_medical_certificate') }}</h5>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">{{ __('medicalcertificate.create_medical_certificate') }}</h4>
+                    <a href="{{ route('backend.medical-certificates.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> {{ __('messages.back') }}
+                    </a>
                 </div>
                 <div class="card-body">
                     <form id="medical-certificate-form" method="POST" action="{{ route('backend.medical-certificates.store') }}">

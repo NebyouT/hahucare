@@ -1,38 +1,15 @@
 @extends('backend.layouts.app')
 
-@section('title')
-    {{ __('medicalcertificate.medical_certificate') }} - {{ $medicalCertificate->certificate_number }}
-@endsection
+@section('title', __('medicalcertificate.medical_certificate') . ' - ' . $medicalCertificate->certificate_number)
 
 @section('content')
-<div class="page-header">
-    <div class="page-block">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="page-header-title">
-                    <h4 class="m-b-10">{{ __('medicalcertificate.medical_certificate') }}</h4>
-                </div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('backend.home') }}">{{ __('sidebar.home') }}</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('backend.medical-certificates.index') }}">{{ __('medicalcertificate.medical_certificates') }}</a>
-                    </li>
-                    <li class="breadcrumb-item">{{ $medicalCertificate->certificate_number }}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="main-content">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h5>{{ __('medicalcertificate.medical_certificate_details') }}</h5>
-                    <div class="card-header-right">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">{{ __('medicalcertificate.medical_certificate_details') }}</h4>
+                    <div class="d-flex gap-2">
                         @can('print_medical_certificate')
                         <a href="{{ route('backend.medical-certificates.print', $medicalCertificate->id) }}" class="btn btn-primary">
                             <i class="fas fa-print"></i> {{ __('messages.print') }}
