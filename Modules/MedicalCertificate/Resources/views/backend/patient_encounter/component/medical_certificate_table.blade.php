@@ -50,8 +50,8 @@
                             <i class="fas fa-print"></i>
                         </a>
                         @endcan
-                        @can('download_medical_certificate')
-                        <a href="{{ route('backend.medical-certificates.download', $certificate->id) }}" class="btn btn-sm btn-success" target="_blank">
+                        @can('print_medical_certificate')
+                        <a href="{{ route('backend.medical-certificates.print', $certificate->id) }}" class="btn btn-sm btn-success" target="_blank">
                             <i class="fas fa-download"></i>
                         </a>
                         @endcan
