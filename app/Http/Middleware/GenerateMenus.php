@@ -799,7 +799,7 @@ class GenerateMenus
                         'order' => 1,
                     ]);
                 } else {
-                    // For admin and demo_admin, show all lab menu items
+                    // For admin and demo_admin, show all lab menu items (except Lab Tests)
                     $this->childMain($laboratory, [
                         'icon' => 'ph ph-list',
                         'title' => __('sidebar.lab_orders'),
@@ -810,21 +810,12 @@ class GenerateMenus
                     ]);
 
                     $this->childMain($laboratory, [
-                        'icon' => 'ph ph-test-tube',
-                        'title' => __('sidebar.lab_tests'),
-                        'route' => 'backend.lab-tests.index',
-                        'active' => ['app/lab-tests'],
-                        'permission' => ['view_lab_tests'],
-                        'order' => 1,
-                    ]);
-
-                    $this->childMain($laboratory, [
                         'icon' => 'ph ph-medical-services',
                         'title' => __('sidebar.lab_services'),
                         'route' => 'backend.lab-services.index',
                         'active' => ['app/lab-services'],
                         'permission' => ['view_lab_services'],
-                        'order' => 2,
+                        'order' => 1,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -833,7 +824,7 @@ class GenerateMenus
                         'route' => 'backend.lab-results.index',
                         'active' => ['app/lab-results'],
                         'permission' => ['view_lab_results'],
-                        'order' => 3,
+                        'order' => 2,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -842,7 +833,7 @@ class GenerateMenus
                         'route' => 'backend.lab-categories.index',
                         'active' => ['app/lab-categories'],
                         'permission' => ['view_lab_categories'],
-                        'order' => 4,
+                        'order' => 3,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -851,7 +842,7 @@ class GenerateMenus
                         'route' => 'backend.lab-equipment.index',
                         'active' => ['app/lab-equipment'],
                         'permission' => ['view_lab_equipment'],
-                        'order' => 5,
+                        'order' => 4,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -860,7 +851,7 @@ class GenerateMenus
                         'route' => 'backend.labs.index',
                         'active' => ['app/labs'],
                         'permission' => ['view_labs'],
-                        'order' => 6,
+                        'order' => 5,
                     ]);
                 }
             }
