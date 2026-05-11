@@ -819,12 +819,21 @@ class GenerateMenus
                     ]);
 
                     $this->childMain($laboratory, [
+                        'icon' => 'ph ph-medical-services',
+                        'title' => __('sidebar.lab_services'),
+                        'route' => 'backend.lab-services.index',
+                        'active' => ['app/lab-services'],
+                        'permission' => ['view_lab_services'],
+                        'order' => 2,
+                    ]);
+
+                    $this->childMain($laboratory, [
                         'icon' => 'ph ph-file-text',
                         'title' => __('sidebar.lab_results'),
                         'route' => 'backend.lab-results.index',
                         'active' => ['app/lab-results'],
                         'permission' => ['view_lab_results'],
-                        'order' => 2,
+                        'order' => 3,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -833,7 +842,7 @@ class GenerateMenus
                         'route' => 'backend.lab-categories.index',
                         'active' => ['app/lab-categories'],
                         'permission' => ['view_lab_categories'],
-                        'order' => 3,
+                        'order' => 4,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -842,7 +851,7 @@ class GenerateMenus
                         'route' => 'backend.lab-equipment.index',
                         'active' => ['app/lab-equipment'],
                         'permission' => ['view_lab_equipment'],
-                        'order' => 4,
+                        'order' => 5,
                     ]);
 
                     $this->childMain($laboratory, [
@@ -851,7 +860,7 @@ class GenerateMenus
                         'route' => 'backend.labs.index',
                         'active' => ['app/labs'],
                         'permission' => ['view_labs'],
-                        'order' => 5,
+                        'order' => 6,
                     ]);
                 }
             }

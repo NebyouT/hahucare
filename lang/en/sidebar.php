@@ -126,6 +126,15 @@ return [
     'bed_satus' => 'Bed Status',
     'bed_allocation'=>'Patient Bed Allocation',
 
+    'laboratory' => 'Laboratory',
+    'lab_orders' => 'Lab Orders',
+    'lab_tests' => 'Lab Tests',
+    'lab_services' => 'Lab Services',
+    'lab_results' => 'Lab Results',
+    'lab_categories' => 'Lab Categories',
+    'lab_equipment' => 'Lab Equipment',
+    'labs' => 'Labs',
+
     'id' =>'Id',
     'appoitment_id' =>'Appointment Id',
 
