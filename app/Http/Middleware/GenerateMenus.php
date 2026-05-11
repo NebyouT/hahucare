@@ -779,7 +779,7 @@ class GenerateMenus
                     'order' => 0,
                 ]);
 
-                // For lab technicians, show only Lab Orders
+                // For lab technicians, show all lab module items
                 if (auth()->user()->hasRole('lab_technician')) {
                     $this->childMain($laboratory, [
                         'icon' => 'ph ph-list',
@@ -791,12 +791,39 @@ class GenerateMenus
                     ]);
 
                     $this->childMain($laboratory, [
+                        'icon' => 'ph ph-medical-services',
+                        'title' => __('sidebar.lab_services'),
+                        'route' => 'backend.lab-services.index',
+                        'active' => ['app/lab-services'],
+                        'permission' => ['view_lab_services'],
+                        'order' => 1,
+                    ]);
+
+                    $this->childMain($laboratory, [
                         'icon' => 'ph ph-file-text',
                         'title' => __('sidebar.lab_results'),
                         'route' => 'backend.lab-results.index',
                         'active' => ['app/lab-results'],
                         'permission' => ['view_lab_results'],
-                        'order' => 1,
+                        'order' => 2,
+                    ]);
+
+                    $this->childMain($laboratory, [
+                        'icon' => 'ph ph-folder',
+                        'title' => __('sidebar.lab_categories'),
+                        'route' => 'backend.lab-categories.index',
+                        'active' => ['app/lab-categories'],
+                        'permission' => ['view_lab_categories'],
+                        'order' => 3,
+                    ]);
+
+                    $this->childMain($laboratory, [
+                        'icon' => 'ph ph-first-aid-kit',
+                        'title' => __('sidebar.lab_equipment'),
+                        'route' => 'backend.lab-equipment.index',
+                        'active' => ['app/lab-equipment'],
+                        'permission' => ['view_lab_equipment'],
+                        'order' => 4,
                     ]);
                 } else {
                     // For admin and demo_admin, show all lab menu items (except Lab Tests)
