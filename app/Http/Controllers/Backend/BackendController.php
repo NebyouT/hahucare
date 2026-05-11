@@ -41,10 +41,6 @@ class BackendController extends Controller
             return redirect(RouteServiceProvider::EMPLOYEE_LOGIN_REDIRECT);
         }
 
-        // For lab technicians, redirect to their specific dashboard
-        if (auth()->user()->hasRole('lab_technician')) {
-            return $this->labTechnicianDashboard($request);
-        }
         $current_user = setNamePrefix(User::find(auth()->user()->id));
         $today = Carbon::today();
         $action = $request->action ?? 'reset';

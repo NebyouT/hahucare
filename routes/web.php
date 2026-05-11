@@ -259,6 +259,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
         Route::get('/get-clinic-appointments', [BackendController::class, 'getClinicAppointments'])->name('get-clinic-appointments');
         Route::get('/vendor-dashboard', [BackendController::class, 'vendorDashboard'])->name('vendor-dashboard');
         Route::get('/receptionist-dashboard', [BackendController::class, 'receptionistDashboard'])->name('receptionist-dashboard');
+        Route::get('/lab-technician-dashboard', [BackendController::class, 'labTechnicianDashboard'])->name('lab-technician-dashboard');
         if (checkPlugin('pharma') == 'active' && class_exists(PharmaController::class)) {
             Route::middleware(['pharmaStatus'])->group(function () {
                 Route::get('/pharma-dashboard', [PharmaController::class, 'pharmaDashboard'])->name('pharma-dashboard');

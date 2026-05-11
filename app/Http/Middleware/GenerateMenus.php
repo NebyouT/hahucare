@@ -79,8 +79,8 @@ class GenerateMenus
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-squares-four',
                     'title' => __('sidebar.dashboard'),
-                    'route' => 'backend.home',
-                    'active' => ['app', 'app/dashboard'],
+                    'route' => 'backend.lab-technician-dashboard',
+                    'active' => ['app', 'app/lab-technician-dashboard'],
                     'order' => 0,
                 ]);
             }
@@ -779,7 +779,7 @@ class GenerateMenus
                     'order' => 0,
                 ]);
 
-                // For lab technicians, show all lab module items
+                // For lab technicians, show all lab module items (except lab equipment)
                 if (auth()->user()->hasRole('lab_technician')) {
                     $this->childMain($laboratory, [
                         'icon' => 'ph ph-list',
@@ -815,15 +815,6 @@ class GenerateMenus
                         'active' => ['app/lab-categories'],
                         'permission' => ['view_lab_categories'],
                         'order' => 3,
-                    ]);
-
-                    $this->childMain($laboratory, [
-                        'icon' => 'ph ph-first-aid-kit',
-                        'title' => __('sidebar.lab_equipment'),
-                        'route' => 'backend.lab-equipment.index',
-                        'active' => ['app/lab-equipment'],
-                        'permission' => ['view_lab_equipment'],
-                        'order' => 4,
                     ]);
                 } else {
                     // For admin and demo_admin, show all lab menu items (except Lab Tests)
