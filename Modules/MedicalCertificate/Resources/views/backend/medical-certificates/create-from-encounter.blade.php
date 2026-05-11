@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info">
-                        <strong>{{ __('medicalcertificate.patient') }}:</strong> {{ $encounter->patient ? $encounter->patient->full_name : 'N/A' }}<br>
+                        <strong>{{ __('medicalcertificate.patient') }}:</strong> {{ $encounter->user ? $encounter->user->full_name : 'N/A' }}<br>
                         <strong>{{ __('medicalcertificate.doctor') }}:</strong> {{ $encounter->doctor ? $encounter->doctor->full_name : 'N/A' }}
                     </div>
 

@@ -204,7 +204,7 @@ class MedicalCertificateController extends Controller
 
     public function createFromEncounter($encounter_id)
     {
-        $encounter = \Modules\Appointment\Models\PatientEncounter::with(['patient', 'doctor', 'clinic'])->findOrFail($encounter_id);
+        $encounter = \Modules\Appointment\Models\PatientEncounter::with(['user', 'doctor', 'clinic'])->findOrFail($encounter_id);
         $module_action = 'Create';
         return view('medicalcertificate::backend.medical-certificates.create-from-encounter', compact('encounter', 'module_action'));
     }
