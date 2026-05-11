@@ -199,6 +199,21 @@ class BackendController extends Controller
             ? \Modules\Pharma\Models\Medicine::where('expiry_date', '>=', Carbon::today())->count() 
             : 0;
 
+        // Lab statistics
+        $total_labs = \Modules\Laboratory\Models\Lab::count();
+        $total_lab_tests = \Modules\Laboratory\Models\LabTest::count();
+        $total_referrals = \Modules\PatientReferral\Models\PatientReferral::count();
+
+        // For clinic admin (vendor), limit stats to their clinic
+        if (auth()->user()->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', auth()->id())->pluck('id');
+            $total_labs = \Modules\Laboratory\Models\Lab::whereIn('clinic_id', $userClinicIds)->count();
+            $total_lab_tests = \Modules\Laboratory\Models\LabTest::whereIn('lab_id', function($query) use ($userClinicIds) {
+                $query->select('id')->from('labs')->whereIn('clinic_id', $userClinicIds);
+            })->count();
+            $total_referrals = \Modules\PatientReferral\Models\PatientReferral::whereIn('clinic_id', $userClinicIds)->count();
+        }
+
 
         $date_range = '';
         $setting = Setting::where('name', 'date_formate')->first();
@@ -245,6 +260,9 @@ class BackendController extends Controller
             'admin_earning' => $admin_earning ?? 0,
             'doctor_earning' => $doctor_earning ?? 0,
             'clinic_earning' => $clinic_earning ?? 0,
+            'total_labs' => $total_labs ?? 0,
+            'total_lab_tests' => $total_lab_tests ?? 0,
+            'total_referrals' => $total_referrals ?? 0,
         ];
 
 

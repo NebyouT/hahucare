@@ -51,9 +51,16 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">{{ __('Price') }}<span class="text-danger">*</span></label>
-                                <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price') }}" required>
-                                @error('price')
+                                <label class="form-label">Lab</label>
+                                <select name="lab_id" class="form-control select2">
+                                    <option value="">Select Lab</option>
+                                    @foreach($labs as $lab)
+                                        <option value="{{ $lab->id }}" {{ old('lab_id') == $lab->id ? 'selected' : '' }}>
+                                            {{ $lab->name }} ({{ $lab->lab_code }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('lab_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -61,13 +68,23 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <label class="form-label">{{ __('Price') }}<span class="text-danger">*</span></label>
+                                <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price') }}" required>
+                                @error('price')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">{{ __('Discount Price') }}</label>
                                 <input type="number" step="0.01" name="discount_price" class="form-control" value="{{ old('discount_price') }}">
                                 @error('discount_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                        </div>
 
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">{{ __('Discount Type') }}</label>
                                 <select name="discount_type" class="form-control">

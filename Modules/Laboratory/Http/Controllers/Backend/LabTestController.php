@@ -63,7 +63,8 @@ class LabTestController extends Controller
     public function create()
     {
         $categories = LabTestCategory::where('is_active', true)->orderBy('name')->get();
-        return view('laboratory::lab-tests.create', compact('categories'));
+        $labs = \Modules\Laboratory\Models\Lab::where('is_active', true)->orderBy('name')->get();
+        return view('laboratory::lab-tests.create', compact('categories', 'labs'));
     }
 
     public function store(Request $request)
@@ -73,6 +74,7 @@ class LabTestController extends Controller
             'test_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:lab_test_categories,id',
+            'lab_id' => 'nullable|exists:labs,id',
             'price' => 'required|numeric|min:0',
             'discount_price' => 'nullable|numeric|min:0',
             'discount_type' => 'nullable|string',

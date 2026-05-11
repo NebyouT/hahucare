@@ -410,6 +410,66 @@
                             </div>
                         </div>
 
+                        <!-- Total Labs Card -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
+                                <a href="{{ route('backend.labs.index') }}" class="stretched-link"></a>
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start gap-3">
+                                        <div>
+                                            <h6 class="text-heading text-uppercase">{{ __('dashboard.total_labs') }}
+                                            </h6>
+                                            <h2 class="mb-0 fw-bold">{{ $data['total_labs'] }}</h2>
+                                        </div>
+                                        <div class="card-icon bg-primary-subtle p-3 rounded-3">
+                                            <img src="{{ asset('img/dashboard/total_doctor.png') }}" alt="Labs"
+                                                class="img-fluid avatar-50 object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Lab Tests Card -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
+                                <a href="{{ route('backend.lab-tests.index') }}" class="stretched-link"></a>
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start gap-3">
+                                        <div>
+                                            <h6 class="text-heading text-uppercase">{{ __('dashboard.total_lab_tests') }}
+                                            </h6>
+                                            <h2 class="mb-0 fw-bold">{{ $data['total_lab_tests'] }}</h2>
+                                        </div>
+                                        <div class="card-icon bg-primary-subtle p-3 rounded-3">
+                                            <img src="{{ asset('img/dashboard/services.png') }}" alt="Lab Tests"
+                                                class="img-fluid avatar-50 object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Referrals Card -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
+                                <a href="{{ route('backend.patientreferral.index') }}" class="stretched-link"></a>
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start gap-3">
+                                        <div>
+                                            <h6 class="text-heading text-uppercase">{{ __('dashboard.total_referrals') }}
+                                            </h6>
+                                            <h2 class="mb-0 fw-bold">{{ $data['total_referrals'] }}</h2>
+                                        </div>
+                                        <div class="card-icon bg-primary-subtle p-3 rounded-3">
+                                            <img src="{{ asset('img/dashboard/users.png') }}" alt="Referrals"
+                                                class="img-fluid avatar-50 object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
