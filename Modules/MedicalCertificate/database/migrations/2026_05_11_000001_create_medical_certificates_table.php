@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('medical_certificates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('doctor_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('encounter_id')->nullable()->constrained('encounters')->onDelete('cascade');
-            $table->foreignId('clinic_id')->nullable()->constrained('clinics')->onDelete('cascade');
+            $table->foreignId('patient_id')->nullable();
+            $table->foreignId('doctor_id')->nullable();
+            $table->foreignId('encounter_id')->nullable();
+            $table->foreignId('clinic_id')->nullable();
             
             $table->string('certificate_number')->unique();
             $table->string('certificate_type')->default('medical_leave'); // medical_leave, fitness, recovery, other
@@ -34,9 +34,9 @@ return new class extends Migration
             $table->boolean('is_printed')->default(false);
             $table->timestamp('printed_at')->nullable();
             
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
             
             $table->softDeletes();
             $table->timestamps();
