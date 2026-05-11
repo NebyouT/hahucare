@@ -130,7 +130,7 @@
 
         $('#patient_id').select2({
             ajax: {
-                url: "{{ route('backend.customers.index_list') }}",
+                url: "{{ url('app/customers/index_list') }}",
                 dataType: 'json',
                 delay: 250,
                 data: function(params) {
