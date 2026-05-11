@@ -56,7 +56,7 @@ class MedicalCertificate extends BaseModel
 
     public function encounter()
     {
-        return $this->belongsTo(\Modules\Appointment\Models\Encounter::class, 'encounter_id');
+        return $this->belongsTo(\Modules\Appointment\Models\PatientEncounter::class, 'encounter_id');
     }
 
     public function clinic()
