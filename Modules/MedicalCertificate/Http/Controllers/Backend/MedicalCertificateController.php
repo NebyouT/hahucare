@@ -204,7 +204,7 @@ class MedicalCertificateController extends Controller
 
     public function createFromEncounter($encounter_id)
     {
-        $encounter = \Modules\Appointment\Models\Encounter::with(['patient', 'doctor', 'clinic'])->findOrFail($encounter_id);
+        $encounter = \Modules\Appointment\Models\PatientEncounter::with(['patient', 'doctor', 'clinic'])->findOrFail($encounter_id);
         $module_action = 'Create';
         return view('medicalcertificate::backend.medical-certificates.create-from-encounter', compact('encounter', 'module_action'));
     }
@@ -222,7 +222,7 @@ class MedicalCertificateController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $encounter = \Modules\Appointment\Models\Encounter::findOrFail($encounter_id);
+        $encounter = \Modules\Appointment\Models\PatientEncounter::findOrFail($encounter_id);
 
         $durationDays = Carbon::parse($request->start_date)->diffInDays(Carbon::parse($request->end_date)) + 1;
 
