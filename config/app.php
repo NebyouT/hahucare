@@ -196,6 +196,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Modules\Frontend\Providers\ModuleServiceProvider::class,
+        Modules\MedicalCertificate\Providers\MedicalCertificateServiceProvider::class,
         // Modules\Pharma\Providers\PharmaServiceProvider::class, // Commented out - Pharma module not found
 Modules\PatientReferral\Providers\PatientReferralServiceProvider::class,
         /*

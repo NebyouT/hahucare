@@ -131,19 +131,39 @@
 
                     </div>
                     @if ($data['status'] == 1)
-                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#generate_invoice">
-                            <div class="d-inline-flex align-items-center gap-1">
-                                <i class="ph ph-plus"></i>
-                                {{ __('appointment.close_encounter') }} & {{ __('appointment.check_out') }}
-                            </div>
-                        </button>
-                    @else
-                        <a href="{{ url('app/billing-record/encounter_billing_detail') }}?id={{ $data['id'] }}">
-                            <button class="btn btn-primary">
-                                <i class="ph ph-file-text me-1"></i>
-                                {{ __('appointment.billing_details') }}
+                        <div class="d-flex gap-2">
+                            @can('add_medical_certificate')
+                            <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-primary">
+                                <div class="d-inline-flex align-items-center gap-1">
+                                    <i class="ph ph-file-medical"></i>
+                                    {{ __('medicalcertificate.create_medical_certificate') }}
+                                </div>
+                            </a>
+                            @endcan
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#generate_invoice">
+                                <div class="d-inline-flex align-items-center gap-1">
+                                    <i class="ph ph-plus"></i>
+                                    {{ __('appointment.close_encounter') }} & {{ __('appointment.check_out') }}
+                                </div>
                             </button>
-                        </a>
+                        </div>
+                    @else
+                        <div class="d-flex gap-2">
+                            @can('add_medical_certificate')
+                            <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-primary">
+                                <div class="d-inline-flex align-items-center gap-1">
+                                    <i class="ph ph-file-medical"></i>
+                                    {{ __('medicalcertificate.create_medical_certificate') }}
+                                </div>
+                            </a>
+                            @endcan
+                            <a href="{{ url('app/billing-record/encounter_billing_detail') }}?id={{ $data['id'] }}">
+                                <button class="btn btn-primary">
+                                    <i class="ph ph-file-text me-1"></i>
+                                    {{ __('appointment.billing_details') }}
+                                </button>
+                            </a>
+                        </div>
                     @endif
                 </nav>
 

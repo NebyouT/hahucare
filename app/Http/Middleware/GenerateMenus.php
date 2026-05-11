@@ -874,6 +874,18 @@ class GenerateMenus
                 }
             }
 
+            // Medical Certificate menu - for admin, demo_admin, and doctor
+            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'doctor']) && auth()->user()->can('view_medical_certificate')) || auth()->user()->hasRole('doctor')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-file-medical',
+                    'title' => __('sidebar.medical_certificates'),
+                    'route' => 'backend.medical-certificates.index',
+                    'active' => ['app/medical-certificates'],
+                    'permission' => ['view_medical_certificate'],
+                    'order' => 0,
+                ]);
+            }
+
             if(!auth()->user()->hasRole('pharma') && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',

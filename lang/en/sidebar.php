@@ -135,6 +135,8 @@ return [
     'lab_equipment' => 'Lab Equipment',
     'labs' => 'Labs',
 
+    'medical_certificates' => 'Medical Certificates',
+
     'id' =>'Id',
     'appoitment_id' =>'Appointment Id',
 

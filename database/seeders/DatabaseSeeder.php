@@ -47,8 +47,9 @@ class DatabaseSeeder extends Seeder
         $this->call(\Modules\Earning\database\seeders\EarningDatabaseSeeder::class);
         $this->call(\Modules\Wallet\database\seeders\WalletDatabaseSeeder::class);
         $this->call(\Modules\FAQ\database\seeders\FAQDatabaseSeeder::class);
-        $this->call(FAQPermissionSeeder::class);
         $this->call(PatientReferralPermissionSeeder::class);
+        $this->call(LaboratoryPermissionSeeder::class);
+        $this->call(MedicalCertificatePermissionSeeder::class);
         $this->call(\Modules\Blog\database\seeders\BlogsDatabaseSeeder::class);
         $this->call(\Modules\Blog\database\seeders\BlogPermissionSeeder::class);
         $this->call(\Modules\FrontendSetting\database\seeders\FrontendSettingDatabaseSeeder::class);
