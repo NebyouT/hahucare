@@ -132,14 +132,6 @@
                     </div>
                     @if ($data['status'] == 1)
                         <div class="d-flex gap-2">
-                            @can('add_medical_certificate')
-                            <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-primary">
-                                <div class="d-inline-flex align-items-center gap-1">
-                                    <i class="ph ph-file-medical"></i>
-                                    {{ __('medicalcertificate.create_medical_certificate') }}
-                                </div>
-                            </a>
-                            @endcan
                             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#generate_invoice">
                                 <div class="d-inline-flex align-items-center gap-1">
                                     <i class="ph ph-plus"></i>
@@ -149,14 +141,6 @@
                         </div>
                     @else
                         <div class="d-flex gap-2">
-                            @can('add_medical_certificate')
-                            <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-primary">
-                                <div class="d-inline-flex align-items-center gap-1">
-                                    <i class="ph ph-file-medical"></i>
-                                    {{ __('medicalcertificate.create_medical_certificate') }}
-                                </div>
-                            </a>
-                            @endcan
                             <a href="{{ url('app/billing-record/encounter_billing_detail') }}?id={{ $data['id'] }}">
                                 <button class="btn btn-primary">
                                     <i class="ph ph-file-text me-1"></i>
@@ -350,6 +334,29 @@
                                     <div class="card-body bg-body" style="padding: 1px">
                                         <div id="referral_table">
                                             @include('patientreferral::backend.patient_encounter.component.referral_table', ['data' => $data])
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Medical Certificates Section -->
+                                <div class="mb-4">
+                                    <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
+                                        <h5 class="card-title">{{ __('medicalcertificate.medical_certificates') }}</h5>
+                                        @if ($data['status'] == 1)
+                                            @can('add_medical_certificate')
+                                            <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-sm btn-primary">
+                                                <div class="d-inline-flex align-items-center gap-1">
+                                                    <i class="ph ph-plus"></i>
+                                                    {{ __('medicalcertificate.create_medical_certificate') }}
+                                                </div>
+                                            </a>
+                                            @endcan
+                                        @endif
+                                    </div>
+
+                                    <div class="card-body bg-body" style="padding: 1px">
+                                        <div id="medical_certificate_table">
+                                            @include('medicalcertificate::backend.patient_encounter.component.medical_certificate_table', ['data' => $data])
                                         </div>
                                     </div>
                                 </div>

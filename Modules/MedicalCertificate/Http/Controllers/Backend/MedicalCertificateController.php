@@ -202,6 +202,14 @@ class MedicalCertificateController extends Controller
         return $pdf->download('medical_certificate_' . $medicalCertificate->certificate_number . '.pdf');
     }
 
+    public function download($id)
+    {
+        $medicalCertificate = MedicalCertificate::with(['patient', 'doctor', 'encounter', 'clinic'])->findOrFail($id);
+
+        $pdf = \PDF::loadView('medicalcertificate::backend.medical-certificates.print', compact('medicalCertificate'));
+        return $pdf->download('medical_certificate_' . $medicalCertificate->certificate_number . '.pdf');
+    }
+
     public function createFromEncounter($encounter_id)
     {
         $encounter = \Modules\Appointment\Models\PatientEncounter::with(['user', 'doctor', 'clinic'])->findOrFail($encounter_id);

@@ -14,6 +14,7 @@ Route::middleware(['auth', 'auth_check'])->group(function () {
         Route::put('{id}', [MedicalCertificateController::class, 'update'])->name('update');
         Route::delete('{id}', [MedicalCertificateController::class, 'destroy'])->name('destroy');
         Route::get('{id}/print', [MedicalCertificateController::class, 'print'])->name('print');
+        Route::get('{id}/download', [MedicalCertificateController::class, 'download'])->name('download');
         Route::get('create-from-encounter/{encounter_id}', [MedicalCertificateController::class, 'createFromEncounter'])->name('create-from-encounter');
         Route::post('store-from-encounter/{encounter_id}', [MedicalCertificateController::class, 'storeFromEncounter'])->name('store-from-encounter');
     });
