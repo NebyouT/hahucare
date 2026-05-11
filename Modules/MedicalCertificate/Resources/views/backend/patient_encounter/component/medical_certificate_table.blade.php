@@ -1,73 +1,81 @@
-<table class="table table-bordered table-striped mb-0">
-    <thead>
-        <tr>
-            <th>{{ __('messages.id') }}</th>
-            <th>{{ __('medicalcertificate.certificate_number') }}</th>
-            <th>{{ __('medicalcertificate.type') }}</th>
-            <th>{{ __('medicalcertificate.issue_date') }}</th>
-            <th>{{ __('medicalcertificate.duration') }}</th>
-            <th>{{ __('messages.status') }}</th>
-            <th>{{ __('messages.action') }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        @php
-            $medicalCertificates = \Modules\MedicalCertificate\Models\MedicalCertificate::where('encounter_id', $data->id)
-                ->with(['patient', 'doctor'])
-                ->orderBy('created_at', 'desc')
-                ->get();
-        @endphp
-        @if($medicalCertificates->count() > 0)
-            @foreach($medicalCertificates as $certificate)
+{{-- Medical Certificates table shown inside the Patient Encounter page --}}
+<div class="table-responsive rounded mb-0">
+    <table class="table table-sm align-middle m-0" id="medical_certificate_table">
+        <thead class="table-light">
             <tr>
-                <td>{{ $certificate->id }}</td>
-                <td>{{ $certificate->certificate_number }}</td>
-                <td>{{ ucfirst(str_replace('_', ' ', $certificate->certificate_type)) }}</td>
-                <td>{{ $certificate->issue_date ? $certificate->issue_date->format('Y-m-d') : 'N/A' }}</td>
-                <td>{{ $certificate->duration_days }} {{ __('messages.days') }}</td>
-                <td>
-                    @switch($certificate->status)
-                        @case('draft')
-                            <span class="badge badge-secondary">{{ ucfirst($certificate->status) }}</span>
-                            @break
-                        @case('active')
-                            <span class="badge badge-success">{{ ucfirst($certificate->status) }}</span>
-                            @break
-                        @case('expired')
-                            <span class="badge badge-warning">{{ ucfirst($certificate->status) }}</span>
-                            @break
-                        @case('printed')
-                            <span class="badge badge-info">{{ ucfirst($certificate->status) }}</span>
-                            @break
-                        @default
-                            <span class="badge badge-secondary">{{ ucfirst($certificate->status) }}</span>
-                    @endswitch
-                </td>
-                <td>
-                    <div class="d-flex gap-1">
-                        @can('print_medical_certificate')
-                        <a href="{{ route('backend.medical-certificates.print', $certificate->id) }}" class="btn btn-sm btn-primary" target="_blank">
-                            <i class="fas fa-print"></i>
-                        </a>
-                        @endcan
-                        @can('print_medical_certificate')
-                        <a href="{{ route('backend.medical-certificates.print', $certificate->id) }}" class="btn btn-sm btn-success" target="_blank">
-                            <i class="fas fa-download"></i>
-                        </a>
-                        @endcan
-                        @can('edit_medical_certificate')
-                        <a href="{{ route('backend.medical-certificates.edit', $certificate->id) }}" class="btn btn-sm btn-warning">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        @endcan
-                    </div>
-                </td>
+                <th>#</th>
+                <th>Certificate #</th>
+                <th>Type</th>
+                <th>Issue Date</th>
+                <th>Duration</th>
+                <th>Status</th>
+                @if (($data['status'] ?? 0) == 1)
+                    <th class="text-end">Action</th>
+                @endif
             </tr>
-            @endforeach
-        @else
-            <tr>
-                <td colspan="7" class="text-center">{{ __('messages.no_data_available') }}</td>
-            </tr>
-        @endif
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @php
+                $medicalCertificates = \Modules\MedicalCertificate\Models\MedicalCertificate::where('encounter_id', $data->id)
+                    ->with(['user', 'doctor'])
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            @endphp
+            @forelse ($medicalCertificates as $certificate)
+                @php
+                    $statusColor = match($certificate->status ?? 'draft') {
+                        'active'   => 'success',
+                        'expired'  => 'warning',
+                        'printed'  => 'info',
+                        default    => 'secondary',
+                    };
+                @endphp
+                <tr>
+                    <td><span class="fw-semibold text-primary">#{{ $certificate->id }}</span></td>
+                    <td><span class="fw-semibold">{{ $certificate->certificate_number ?? '—' }}</span></td>
+                    <td>
+                        <span class="badge bg-light text-dark border">
+                            {{ ucfirst(str_replace('_', ' ', $certificate->certificate_type ?? 'N/A')) }}
+                        </span>
+                    </td>
+                    <td class="text-nowrap small text-muted">
+                        {{ $certificate->issue_date ? \Carbon\Carbon::parse($certificate->issue_date)->format('d M Y') : '—' }}
+                    </td>
+                    <td class="text-nowrap small">
+                        {{ $certificate->duration_days ?? 0 }} days
+                    </td>
+                    <td>
+                        <span class="badge bg-{{ $statusColor }}">{{ ucfirst($certificate->status ?? 'draft') }}</span>
+                    </td>
+                    @if (($data['status'] ?? 0) == 1)
+                        <td class="text-end">
+                            <div class="d-flex gap-1 justify-content-end">
+                                @can('print_medical_certificate')
+                                <a href="{{ route('backend.medical-certificates.print', $certificate->id) }}" class="btn btn-sm btn-outline-primary py-0 px-1" target="_blank" title="Print">
+                                    <i class="ph ph-printer"></i>
+                                </a>
+                                @endcan
+                                @can('print_medical_certificate')
+                                <a href="{{ route('backend.medical-certificates.print', $certificate->id) }}" class="btn btn-sm btn-outline-success py-0 px-1" target="_blank" title="Download">
+                                    <i class="ph ph-download-simple"></i>
+                                </a>
+                                @endcan
+                                @can('edit_medical_certificate')
+                                <a href="{{ route('backend.medical-certificates.edit', $certificate->id) }}" class="btn btn-sm btn-outline-warning py-0 px-1" title="Edit">
+                                    <i class="ph ph-pencil-simple"></i>
+                                </a>
+                                @endcan
+                            </div>
+                        </td>
+                    @endif
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-3">
+                        <i class="ph ph-file-text me-1"></i> No medical certificates yet.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
