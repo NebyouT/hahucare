@@ -26,7 +26,15 @@ class LabTestController extends Controller
 
     public function index_data(Request $request)
     {
-        $query = LabTest::with('category');
+        $query = LabTest::with('category', 'lab');
+
+        // For lab technicians, filter by their lab
+        if (auth()->user()->hasRole('lab_technician')) {
+            $userLabId = \Modules\Laboratory\Models\Lab::where('user_id', auth()->id())->value('id');
+            if ($userLabId) {
+                $query->where('lab_id', $userLabId);
+            }
+        }
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -74,7 +82,7 @@ class LabTestController extends Controller
             'test_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:lab_test_categories,id',
-            'lab_id' => 'nullable|exists:labs,id',
+            'lab_id' => 'required|exists:labs,id',
             'price' => 'required|numeric|min:0',
             'discount_price' => 'nullable|numeric|min:0',
             'discount_type' => 'nullable|string',

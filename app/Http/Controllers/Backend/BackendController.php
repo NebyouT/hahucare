@@ -40,6 +40,11 @@ class BackendController extends Controller
         if (auth()->user()->hasRole('employee')) {
             return redirect(RouteServiceProvider::EMPLOYEE_LOGIN_REDIRECT);
         }
+
+        // For lab technicians, redirect to their specific dashboard
+        if (auth()->user()->hasRole('lab_technician')) {
+            return $this->labTechnicianDashboard($request);
+        }
         $current_user = setNamePrefix(User::find(auth()->user()->id));
         $today = Carbon::today();
         $action = $request->action ?? 'reset';
@@ -765,6 +770,50 @@ class BackendController extends Controller
 
         return view('backend.dashboard.vendor', compact('data', 'date_range', 'current_user'));
     }
+
+    public function labTechnicianDashboard(Request $request)
+    {
+        $current_user = setNamePrefix(User::find(auth()->user()->id));
+        $today = Carbon::today();
+
+        // Get the lab associated with this lab technician
+        $lab = \Modules\Laboratory\Models\Lab::where('user_id', auth()->id())->first();
+
+        if (!$lab) {
+            return view('backend.dashboard.lab-technician', compact('current_user'));
+        }
+
+        // Get lab orders for this lab
+        $labOrders = \Modules\Laboratory\Models\LabOrder::where('lab_id', $lab->id);
+        $total_lab_orders = $labOrders->count();
+
+        // Get lab tests for this lab
+        $total_lab_tests = \Modules\Laboratory\Models\LabTest::where('lab_id', $lab->id)->count();
+
+        // Get lab results for this lab
+        $total_lab_results = \Modules\Laboratory\Models\LabResult::whereHas('labTest', function($query) use ($lab) {
+            $query->where('lab_id', $lab->id);
+        })->count();
+
+        // Get pending orders
+        $pending_orders = $labOrders->where('status', 'pending')->count();
+
+        // Get completed orders
+        $completed_orders = $labOrders->where('status', 'completed')->count();
+
+        $data = [
+            'total_lab_orders' => $total_lab_orders ?? 0,
+            'total_lab_tests' => $total_lab_tests ?? 0,
+            'total_lab_results' => $total_lab_results ?? 0,
+            'pending_orders' => $pending_orders ?? 0,
+            'completed_orders' => $completed_orders ?? 0,
+            'lab_name' => $lab->name ?? 'N/A',
+            'lab_code' => $lab->lab_code ?? 'N/A',
+        ];
+
+        return view('backend.dashboard.lab-technician', compact('data', 'current_user'));
+    }
+
     public function vendorDateRange($daterange)
     {
         $current_user = setNamePrefix(User::find(auth()->user()->id));

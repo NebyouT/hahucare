@@ -66,4 +66,11 @@ return [
     'doctor_earning' => 'Doctor Earning',
     'clinic_earning' => 'Clinic Earning',
     'total_active_vendors' => 'Total Active Clinic Admins',
+    'total_labs' => 'Total Labs',
+    'total_lab_tests' => 'Total Lab Tests',
+    'total_referrals' => 'Total Referrals',
+    'total_lab_orders' => 'Total Lab Orders',
+    'total_lab_results' => 'Total Lab Results',
+    'pending_orders' => 'Pending Orders',
+    'completed_orders' => 'Completed Orders',
 ];
