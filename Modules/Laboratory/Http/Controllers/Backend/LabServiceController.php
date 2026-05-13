@@ -28,6 +28,12 @@ class LabServiceController extends Controller
                 $userLab = Lab::where('user_id', auth()->id())->first();
                 $serviceCount = $userLab ? LabService::where('lab_id', $userLab->id)->count() : 0;
                 $allServices = $userLab ? LabService::where('lab_id', $userLab->id)->with(['category', 'lab'])->get() : [];
+            } elseif (auth()->user()->hasRole('vendor')) {
+                // For vendors (clinic admins), only show services from their clinics' labs
+                $userClinicIds = \Modules\Clinic\Models\Clinics::where('vendor_id', auth()->id())->pluck('id');
+                $userLabIds = Lab::whereIn('clinic_id', $userClinicIds)->pluck('id');
+                $serviceCount = LabService::whereIn('lab_id', $userLabIds)->count();
+                $allServices = LabService::whereIn('lab_id', $userLabIds)->with(['category', 'lab'])->get();
             } else {
                 // Admin and other roles see all services
                 $serviceCount = LabService::count();
@@ -61,6 +67,11 @@ class LabServiceController extends Controller
                     'data' => []
                 ]);
             }
+        } elseif (auth()->user()->hasRole('vendor')) {
+            // For vendors (clinic admins), only show services from their clinics' labs
+            $userClinicIds = \Modules\Clinic\Models\Clinics::where('vendor_id', auth()->id())->pluck('id');
+            $userLabIds = Lab::whereIn('clinic_id', $userClinicIds)->pluck('id');
+            $query->whereIn('lab_id', $userLabIds);
         }
 
         if ($request->has('search') && $request->search['value']) {

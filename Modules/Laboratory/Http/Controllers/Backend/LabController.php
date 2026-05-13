@@ -31,6 +31,14 @@ class LabController extends Controller
                 $allLabs = $lab ? [$lab] : [];
                 $labCount = $lab ? 1 : 0;
                 $sampleLabs = $allLabs;
+            } elseif (auth()->user()->hasRole('vendor')) {
+                // For vendors (clinic admins), only show labs belonging to their clinics
+                $userClinicIds = Clinics::where('vendor_id', auth()->id())->pluck('id');
+                $allLabs = Lab::whereIn('clinic_id', $userClinicIds)->with(['user', 'clinic'])->get();
+                $labCount = $allLabs->count();
+                $sampleLabs = $allLabs->take(3)->map(function($lab) {
+                    return collect($lab)->only(['id', 'name', 'lab_code', 'email']);
+                });
             } else {
                 // Admin and other roles see all labs
                 $labCount = Lab::count();
