@@ -127,10 +127,9 @@
                     {{-- Right: action --}}
                     @if (!$isCompleted)
                         <div class="col-auto d-flex align-items-center p-3 border-start">
-                            <button type="button" class="btn btn-primary btn-sm"
+                            <button type="button" class="btn btn-primary btn-sm upload-result-btn"
                                 data-order-id="{{ $order->id }}"
                                 data-order-number="{{ $order->order_number }}"
-                                onclick="openResultModal(this.getAttribute('data-order-id'), this.getAttribute('data-order-number'))"
                                 title="Upload result for this order">
                                 <i class="ph ph-upload-simple me-1"></i> Add Result
                             </button>
@@ -236,41 +235,14 @@ function openResultModal(orderId, orderNumber) {
 }
 
 $(document).ready(function () {
-    // Drop zone click → open file picker
-    $('#drop_zone').on('click', function () { $('#result_files').click(); });
-
-    // Drag-over styling
-    $('#drop_zone').on('dragover', function (e) {
+    // Use event delegation for upload buttons
+    $(document).on('click', '.upload-result-btn', function(e) {
         e.preventDefault();
-        $(this).addClass('border-primary bg-primary-subtle');
-    }).on('dragleave drop', function (e) {
-        e.preventDefault();
-        $(this).removeClass('border-primary bg-primary-subtle');
-        if (e.type === 'drop') {
-            handleFiles(e.originalEvent.dataTransfer.files);
-        }
+        e.stopPropagation();
+        const orderId = $(this).data('order-id');
+        const orderNumber = $(this).data('order-number');
+        openResultModal(orderId, orderNumber);
     });
-
-    // File input change
-    $('#result_files').on('change', function () {
-        handleFiles(this.files);
-    });
-
-    function handleFiles(files) {
-        const preview = $('#file_preview');
-        preview.empty();
-        Array.from(files).forEach(function (f) {
-            const icon = f.type.includes('pdf') ? 'ph-file-pdf' :
-                         f.type.includes('image') ? 'ph-image' : 'ph-file-doc';
-            preview.append(`
-                <div class="d-flex align-items-center gap-1 border rounded px-2 py-1 small">
-                    <i class="ph ${icon} text-primary"></i>
-                    <span>${f.name}</span>
-                    <span class="text-muted">(${(f.size/1024).toFixed(0)} KB)</span>
-                </div>`);
-        });
-        // Don't modify the input files - just show preview
-    }
 
     // Form submit via AJAX
     $('#result-form').on('submit', function (e) {

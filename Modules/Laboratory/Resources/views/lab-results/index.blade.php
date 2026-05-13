@@ -168,10 +168,9 @@
                             <i class="fas fa-eye"></i>
                         </a>
                         @if($order->status !== 'completed')
-                            <button type="button" class="btn btn-sm btn-primary"
+                            <button type="button" class="btn btn-sm btn-primary upload-result-btn"
                                 data-order-id="{{ $order->id }}"
                                 data-order-number="{{ $order->order_number }}"
-                                onclick="openResultModal(this.getAttribute('data-order-id'), this.getAttribute('data-order-number'))"
                                 title="Upload result">
                                 <i class="fas fa-upload"></i>
                             </button>
@@ -259,42 +258,14 @@ function openResultModal(orderId, orderNumber) {
 }
 
 $(document).ready(function () {
-    // Drop zone click → open file picker
-    $('#drop_zone').on('click', function () { $('#result_files').click(); });
-
-    // Drag-over styling
-    $('#drop_zone').on('dragover', function (e) {
+    // Use event delegation for upload buttons
+    $(document).on('click', '.upload-result-btn', function(e) {
         e.preventDefault();
-        $(this).addClass('border-primary bg-primary-subtle');
-    }).on('dragleave drop', function (e) {
-        e.preventDefault();
-        $(this).removeClass('border-primary bg-primary-subtle');
-        if (e.type === 'drop') {
-            // Handle dropped files
-            const files = e.originalEvent.dataTransfer.files;
-            const input = $('#result_files')[0];
-            input.files = files;
-            handleFiles(files);
-        }
+        e.stopPropagation();
+        const orderId = $(this).data('order-id');
+        const orderNumber = $(this).data('order-number');
+        openResultModal(orderId, orderNumber);
     });
-
-    // File input change - simple preview without modifying files
-    $('#result_files').on('change', function () {
-        handleFiles(this.files);
-    });
-
-    function handleFiles(files) {
-        const preview = $('#file_preview');
-        preview.empty();
-        Array.from(files).forEach(function (f) {
-            const icon = f.type.includes('pdf') ? 'fa-file-pdf' : f.type.includes('image') ? 'fa-image' : 'fa-file-alt';
-            preview.append(`<div class="d-flex align-items-center gap-1 border rounded px-2 py-1 small">
-                <i class="fas ${icon} text-primary"></i>
-                <span>${f.name}</span>
-                <span class="text-muted">(${(f.size/1024).toFixed(0)} KB)</span>
-            </div>`);
-        });
-    }
 
     $('#result-form').on('submit', function (e) {
         e.preventDefault();
