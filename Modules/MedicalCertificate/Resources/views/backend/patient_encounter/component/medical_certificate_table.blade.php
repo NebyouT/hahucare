@@ -17,7 +17,7 @@
         <tbody>
             @php
                 $medicalCertificates = \Modules\MedicalCertificate\Models\MedicalCertificate::where('encounter_id', $data->id)
-                    ->with(['user', 'doctor'])
+                    ->with(['patient', 'doctor'])
                     ->orderBy('created_at', 'desc')
                     ->get();
             @endphp
