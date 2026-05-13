@@ -769,8 +769,8 @@ class GenerateMenus
                 ]);
             }
 
-            // Laboratory menu - for admin, demo_admin, and lab_technician
-            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'lab_technician']) && auth()->user()->can('view_labs')) || auth()->user()->hasRole('lab_technician')) {
+            // Laboratory menu - for admin, demo_admin, vendor, and lab_technician
+            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'vendor', 'lab_technician']) && auth()->user()->can('view_labs')) || auth()->user()->hasRole('lab_technician')) {
                 $laboratory = $this->parentMenu($menu, [
                     'icon' => 'ph ph-flask',
                     'title' => __('sidebar.laboratory'),
