@@ -251,7 +251,11 @@ $(document).ready(function () {
 
     // File input change
     $('#result_files').on('change', function () {
+        // Prevent recursive calls
+        if ($(this).data('processing')) return;
+        $(this).data('processing', true);
         handleFiles(this.files);
+        $(this).data('processing', false);
     });
 
     function handleFiles(files) {
@@ -269,8 +273,10 @@ $(document).ready(function () {
                     <span class="text-muted">(${(f.size/1024).toFixed(0)} KB)</span>
                 </div>`);
         });
-        // Assign files back to input
-        $('#result_files')[0].files = dt.files;
+        // Don't trigger change event when setting files programmatically
+        const input = $('#result_files')[0];
+        input.value = ''; // Clear first
+        input.files = dt.files;
     }
 
     // Form submit via AJAX

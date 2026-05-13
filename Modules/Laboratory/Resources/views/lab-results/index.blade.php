@@ -268,7 +268,13 @@ $(document).ready(function () {
         if (e.type === 'drop') handleFiles(e.originalEvent.dataTransfer.files);
     });
 
-    $('#result_files').on('change', function () { handleFiles(this.files); });
+    $('#result_files').on('change', function () {
+        // Prevent recursive calls
+        if ($(this).data('processing')) return;
+        $(this).data('processing', true);
+        handleFiles(this.files);
+        $(this).data('processing', false);
+    });
 
     function handleFiles(files) {
         const preview = $('#file_preview');
@@ -283,7 +289,10 @@ $(document).ready(function () {
                 <span class="text-muted">(${(f.size/1024).toFixed(0)} KB)</span>
             </div>`);
         });
-        $('#result_files')[0].files = dt.files;
+        // Don't trigger change event when setting files programmatically
+        const input = $('#result_files')[0];
+        input.value = ''; // Clear first
+        input.files = dt.files;
     }
 
     $('#result-form').on('submit', function (e) {
