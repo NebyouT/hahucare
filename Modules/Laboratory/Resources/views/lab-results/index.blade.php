@@ -219,13 +219,8 @@
                             Result File(s) <span class="text-danger">*</span>
                             <span class="text-muted fw-normal small">— PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, JPG, PNG, GIF, TXT, RTF (max 10 MB each)</span>
                         </label>
-                        <div id="drop_zone" class="border border-2 rounded p-4 text-center text-muted"
-                             style="cursor:pointer; border-style:dashed !important;">
-                            <i class="fas fa-cloud-upload-alt" style="font-size:2rem;"></i>
-                            <p class="mb-1 mt-1">Drag & drop files here, or <span class="text-primary">browse</span></p>
-                            <input type="file" id="result_files" name="result_files[]"
-                                   accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.txt,.rtf" multiple class="d-none">
-                        </div>
+                        <input type="file" id="result_files" name="result_files[]"
+                               accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.txt,.rtf" multiple class="form-control">
                         <div id="file_preview" class="mt-2 d-flex flex-wrap gap-2"></div>
                     </div>
                     <div class="mb-1">
@@ -250,53 +245,71 @@
 @push('after-scripts')
 <script>
 function openResultModal(orderId, orderNumber) {
-    $('#rm_order_number').text('#' + orderNumber);
-    $('#result-form').attr('action', '/app/lab-orders/store-result/' + orderId);
-    $('#result-form')[0].reset();
-    $('#file_preview').empty();
-    $('#resultModal').modal('show');
+    document.getElementById('rm_order_number').textContent = '#' + orderNumber;
+    document.getElementById('result-form').action = '/app/lab-orders/store-result/' + orderId;
+    document.getElementById('result-form').reset();
+    document.getElementById('file_preview').innerHTML = '';
+    new bootstrap.Modal(document.getElementById('resultModal')).show();
 }
 
-$(document).ready(function () {
-    // Use event delegation for upload buttons
-    $(document).on('click', '.upload-result-btn', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const orderId = $(this).data('order-id');
-        const orderNumber = $(this).data('order-number');
-        openResultModal(orderId, orderNumber);
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle upload button clicks
+    document.querySelectorAll('.upload-result-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const orderId = this.getAttribute('data-order-id');
+            const orderNumber = this.getAttribute('data-order-number');
+            openResultModal(orderId, orderNumber);
+        });
     });
 
-    $('#result-form').on('submit', function (e) {
+    // Handle file input change - show preview
+    document.getElementById('result_files').addEventListener('change', function(e) {
+        const preview = document.getElementById('file_preview');
+        preview.innerHTML = '';
+        Array.from(this.files).forEach(function(file) {
+            const div = document.createElement('div');
+            div.className = 'd-flex align-items-center gap-1 border rounded px-2 py-1 small';
+            div.innerHTML = '<i class="fas fa-file text-primary"></i><span>' + file.name + '</span><span class="text-muted">(' + Math.round(file.size/1024) + ' KB)</span>';
+            preview.appendChild(div);
+        });
+    });
+
+    // Handle form submission
+    document.getElementById('result-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        if (!$('#result_files')[0].files.length) {
+        const fileInput = document.getElementById('result_files');
+        if (!fileInput.files.length) {
             alert('Please attach at least one result file.');
             return;
         }
-        const btn = $('#rm_submit_btn');
-        btn.prop('disabled', true);
-        $('#rm_spinner').show();
-        $.ajax({
-            url: $(this).attr('action'),
-            type: 'POST',
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            success: function () {
-                $('#resultModal').modal('hide');
-                window.location.reload();
-            },
-            error: function (xhr) {
-                const msg = xhr.responseJSON?.errors
-                    ? Object.values(xhr.responseJSON.errors).flat().join('\n')
-                    : (xhr.responseJSON?.message || 'Upload failed.');
-                alert(msg);
-            },
-            complete: function () {
-                btn.prop('disabled', false);
-                $('#rm_spinner').hide();
+
+        const btn = document.getElementById('rm_submit_btn');
+        btn.disabled = true;
+        document.getElementById('rm_spinner').style.display = 'inline-block';
+
+        const formData = new FormData(this);
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json'
             }
+        })
+        .then(response => response.json())
+        .then(data => {
+            bootstrap.Modal.getInstance(document.getElementById('resultModal')).hide();
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Upload failed. Please try again.');
+        })
+        .finally(() => {
+            btn.disabled = false;
+            document.getElementById('rm_spinner').style.display = 'none';
         });
     });
 });
