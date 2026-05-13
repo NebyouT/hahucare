@@ -96,7 +96,13 @@ class LabController extends Controller
 
     public function create()
     {
-        $clinics = Clinics::where('status', 1)->orderBy('name')->get();
+        // For vendors (clinic admins), only show their own clinics
+        if (auth()->user()->hasRole('vendor')) {
+            $clinics = Clinics::where('vendor_id', auth()->id())->where('status', 1)->orderBy('name')->get();
+        } else {
+            // Admin and other roles see all clinics
+            $clinics = Clinics::where('status', 1)->orderBy('name')->get();
+        }
         return view('laboratory::labs.create', compact('clinics'));
     }
 
@@ -174,7 +180,13 @@ class LabController extends Controller
     public function edit($id)
     {
         $lab = Lab::findOrFail($id);
-        $clinics = Clinics::where('status', 1)->orderBy('name')->get();
+        // For vendors (clinic admins), only show their own clinics
+        if (auth()->user()->hasRole('vendor')) {
+            $clinics = Clinics::where('vendor_id', auth()->id())->where('status', 1)->orderBy('name')->get();
+        } else {
+            // Admin and other roles see all clinics
+            $clinics = Clinics::where('status', 1)->orderBy('name')->get();
+        }
         return view('laboratory::labs.edit', compact('lab', 'clinics'));
     }
 
