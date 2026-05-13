@@ -128,7 +128,9 @@
                     @if (!$isCompleted)
                         <div class="col-auto d-flex align-items-center p-3 border-start">
                             <button type="button" class="btn btn-primary btn-sm"
-                                onclick="openResultModal({{ $order->id }}, '{{ addslashes($order->order_number) }}')"
+                                data-order-id="{{ $order->id }}"
+                                data-order-number="{{ $order->order_number }}"
+                                onclick="openResultModal(this.getAttribute('data-order-id'), this.getAttribute('data-order-number'))"
                                 title="Upload result for this order">
                                 <i class="ph ph-upload-simple me-1"></i> Add Result
                             </button>
@@ -251,19 +253,13 @@ $(document).ready(function () {
 
     // File input change
     $('#result_files').on('change', function () {
-        // Prevent recursive calls
-        if ($(this).data('processing')) return;
-        $(this).data('processing', true);
         handleFiles(this.files);
-        $(this).data('processing', false);
     });
 
     function handleFiles(files) {
         const preview = $('#file_preview');
         preview.empty();
-        const dt = new DataTransfer();
         Array.from(files).forEach(function (f) {
-            dt.items.add(f);
             const icon = f.type.includes('pdf') ? 'ph-file-pdf' :
                          f.type.includes('image') ? 'ph-image' : 'ph-file-doc';
             preview.append(`
@@ -273,10 +269,7 @@ $(document).ready(function () {
                     <span class="text-muted">(${(f.size/1024).toFixed(0)} KB)</span>
                 </div>`);
         });
-        // Don't trigger change event when setting files programmatically
-        const input = $('#result_files')[0];
-        input.value = ''; // Clear first
-        input.files = dt.files;
+        // Don't modify the input files - just show preview
     }
 
     // Form submit via AJAX

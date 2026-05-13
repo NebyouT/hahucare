@@ -169,7 +169,9 @@
                         </a>
                         @if($order->status !== 'completed')
                             <button type="button" class="btn btn-sm btn-primary"
-                                onclick="openResultModal({{ $order->id }}, '{{ addslashes($order->order_number) }}')"
+                                data-order-id="{{ $order->id }}"
+                                data-order-number="{{ $order->order_number }}"
+                                onclick="openResultModal(this.getAttribute('data-order-id'), this.getAttribute('data-order-number'))"
                                 title="Upload result">
                                 <i class="fas fa-upload"></i>
                             </button>
@@ -257,31 +259,34 @@ function openResultModal(orderId, orderNumber) {
 }
 
 $(document).ready(function () {
+    // Drop zone click → open file picker
     $('#drop_zone').on('click', function () { $('#result_files').click(); });
 
+    // Drag-over styling
     $('#drop_zone').on('dragover', function (e) {
         e.preventDefault();
         $(this).addClass('border-primary bg-primary-subtle');
     }).on('dragleave drop', function (e) {
         e.preventDefault();
         $(this).removeClass('border-primary bg-primary-subtle');
-        if (e.type === 'drop') handleFiles(e.originalEvent.dataTransfer.files);
+        if (e.type === 'drop') {
+            // Handle dropped files
+            const files = e.originalEvent.dataTransfer.files;
+            const input = $('#result_files')[0];
+            input.files = files;
+            handleFiles(files);
+        }
     });
 
+    // File input change - simple preview without modifying files
     $('#result_files').on('change', function () {
-        // Prevent recursive calls
-        if ($(this).data('processing')) return;
-        $(this).data('processing', true);
         handleFiles(this.files);
-        $(this).data('processing', false);
     });
 
     function handleFiles(files) {
         const preview = $('#file_preview');
         preview.empty();
-        const dt = new DataTransfer();
         Array.from(files).forEach(function (f) {
-            dt.items.add(f);
             const icon = f.type.includes('pdf') ? 'fa-file-pdf' : f.type.includes('image') ? 'fa-image' : 'fa-file-alt';
             preview.append(`<div class="d-flex align-items-center gap-1 border rounded px-2 py-1 small">
                 <i class="fas ${icon} text-primary"></i>
@@ -289,10 +294,6 @@ $(document).ready(function () {
                 <span class="text-muted">(${(f.size/1024).toFixed(0)} KB)</span>
             </div>`);
         });
-        // Don't trigger change event when setting files programmatically
-        const input = $('#result_files')[0];
-        input.value = ''; // Clear first
-        input.files = dt.files;
     }
 
     $('#result-form').on('submit', function (e) {
