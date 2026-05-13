@@ -280,7 +280,7 @@ class LabResultController extends Controller
     public function uploadAttachment(Request $request, $id)
     {
         $request->validate([
-            'attachment' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'attachment' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,txt,rtf|max:10240',
             'description' => 'nullable|string|max:255',
         ]);
 

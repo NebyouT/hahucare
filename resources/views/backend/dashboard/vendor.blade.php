@@ -101,6 +101,32 @@
                         </a>
                     </div>
                     <div class="col-sm-6 col-lg-4">
+                        <a href="{{ route('backend.labs.index') }}" class="text-secondary">
+                            <div class="card dashboard-cards appointments">
+                                <div class="card-body">
+                                    <p class="mb-0">{{__('dashboard.total_labs')}}</p>
+                                    <div class="d-flex align-items-center justify-content-between gap-3 mt-5">
+                                        <h2 class="mb-0">{{$data['total_labs'] ?? 0}}</h2>
+                                        <img src="{{ asset('img/dashboard/total_doctor.png') }}" alt="image">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <a href="{{ route('backend.lab-services.index') }}" class="text-secondary">
+                            <div class="card dashboard-cards appointments">
+                                <div class="card-body">
+                                    <p class="mb-0">{{__('dashboard.total_lab_services')}}</p>
+                                    <div class="d-flex align-items-center justify-content-between gap-3 mt-5">
+                                        <h2 class="mb-0">{{$data['total_lab_services'] ?? 0}}</h2>
+                                        <img src="{{ asset('img/dashboard/services.png') }}" alt="image">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
                         <a href="{{ route('backend.customers.index') }}" class="text-secondary">
                             <div class="card dashboard-cards appointments">
                                 <div class="card-body">

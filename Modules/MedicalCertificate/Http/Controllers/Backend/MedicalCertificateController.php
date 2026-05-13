@@ -254,9 +254,7 @@ class MedicalCertificateController extends Controller
             'created_by' => auth()->id(),
         ]);
 
-        return response()->json([
-            'message' => __('messages.save_form', ['form' => __('medicalcertificate.medical_certificate')]),
-            'status' => true,
-        ]);
+        return redirect()->route('backend.encounter.encounter-detail-page', $encounter_id)
+            ->with('success', __('messages.save_form', ['form' => __('medicalcertificate.medical_certificate')]));
     }
 }
