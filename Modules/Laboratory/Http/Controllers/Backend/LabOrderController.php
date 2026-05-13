@@ -527,7 +527,7 @@ class LabOrderController extends Controller
     {
         $request->validate([
             'result_files'    => 'required|array|min:1',
-            'result_files.*'  => 'file|mimes:pdf,jpg,jpeg,png,docx,doc|max:10240',
+            'result_files.*'  => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,txt,rtf|max:10240',
             'technician_note' => 'nullable|string|max:2000',
         ]);
 

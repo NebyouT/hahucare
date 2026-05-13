@@ -216,14 +216,14 @@
                     <div class="mb-3">
                         <label class="form-label fw-semibold">
                             Result File(s) <span class="text-danger">*</span>
-                            <span class="text-muted fw-normal small">— PDF, JPG, PNG, DOCX (max 10 MB each)</span>
+                            <span class="text-muted fw-normal small">— PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, JPG, PNG, GIF, TXT, RTF (max 10 MB each)</span>
                         </label>
                         <div id="drop_zone" class="border border-2 rounded p-4 text-center text-muted"
                              style="cursor:pointer; border-style:dashed !important;">
                             <i class="fas fa-cloud-upload-alt" style="font-size:2rem;"></i>
                             <p class="mb-1 mt-1">Drag & drop files here, or <span class="text-primary">browse</span></p>
                             <input type="file" id="result_files" name="result_files[]"
-                                   accept=".pdf,.jpg,.jpeg,.png,.docx,.doc" multiple class="d-none">
+                                   accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.txt,.rtf" multiple class="d-none">
                         </div>
                         <div id="file_preview" class="mt-2 d-flex flex-wrap gap-2"></div>
                     </div>
