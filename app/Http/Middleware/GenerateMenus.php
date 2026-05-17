@@ -771,8 +771,8 @@ class GenerateMenus
                 ]);
             }
 
-            // Laboratory menu - for admin, demo_admin, vendor, and lab_technician
-            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'vendor', 'lab_technician']) && auth()->user()->can('view_lab_orders')) || auth()->user()->hasRole('lab_technician')) {
+            // Laboratory menu - for admin, demo_admin, vendor, clinic_admin, and lab_technician
+            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'vendor', 'clinic_admin', 'lab_technician']) && auth()->user()->can('view_lab_orders')) || auth()->user()->hasRole('lab_technician')) {
                 $laboratory = $this->parentMenu($menu, [
                     'icon' => 'ph ph-flask',
                     'title' => __('sidebar.laboratory'),
@@ -876,8 +876,8 @@ class GenerateMenus
                 }
             }
 
-            // Medical Certificate menu - for admin, demo_admin, and doctor
-            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'doctor']) && auth()->user()->can('view_medical_certificate')) || auth()->user()->hasRole('doctor')) {
+            // Medical Certificate menu - for admin, demo_admin, doctor, and clinic_admin
+            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'doctor', 'clinic_admin']) && auth()->user()->can('view_medical_certificate')) || auth()->user()->hasRole('doctor')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-file-medical',
                     'title' => __('sidebar.medical_certificates'),
@@ -951,7 +951,7 @@ class GenerateMenus
 
 
 
-            if (multiVendor() == "1" && auth()->user()->hasRole(['admin', 'demo_admin'])) {
+            if (multiVendor() == "1" && auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin'])) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-user-circle-check',
                     'title' => __('sidebar.vendor_earning'),
@@ -1090,7 +1090,7 @@ class GenerateMenus
                     'order' => 0,
                 ]);
             }
-            if (multiVendor() == "1" && auth()->user()->hasRole(['admin', 'demo_admin'])) {
+            if (multiVendor() == "1" && auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin'])) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-airplay',
                     'title' => __('sidebar.system_service'),
@@ -1109,8 +1109,8 @@ class GenerateMenus
                 'order' => 0,
             ]);
 
-            // Settings menu - only for admin and demo_admin
-            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->user_type != 'pharma' && auth()->user()->can('view_setting')) {
+            // Settings menu - for admin, demo_admin, and clinic_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin']) && auth()->user()->user_type != 'pharma' && auth()->user()->can('view_setting')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-gear-six',
                     'title' => __('menu.settings'),
@@ -1121,8 +1121,8 @@ class GenerateMenus
                 ]);
             }
 
-            // Pages menu - only for admin and demo_admin
-            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_pages')) {
+            // Pages menu - for admin, demo_admin, and clinic_admin
+            if (auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin']) && auth()->user()->can('view_pages')) {
                 $this->mainRoute($menu, [
                     'icon' => ' ph ph-note',
                     'title' => __('page.title'),
@@ -1144,7 +1144,7 @@ class GenerateMenus
             ]);
 
             // --- CUSTOM FORMS ---
-            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')) {
+            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('clinic_admin')) {
                 $custom_form = $this->parentMenu($menu, [
                     'icon' => 'ph ph-table',
                     'title' => __('messages.customforms'),
@@ -1163,8 +1163,8 @@ class GenerateMenus
                 ]);
             }
 
-            // --- NOTIFICATION - only for admin and demo_admin ---
-            if (auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_notification')) {
+            // --- NOTIFICATION - for admin, demo_admin, and clinic_admin ---
+            if (auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin']) && auth()->user()->can('view_notification')) {
                 $notification = $this->parentMenu($menu, [
                     'icon' => 'ph ph-bell',
                     'title' => __('notification.title'),
@@ -1182,7 +1182,7 @@ class GenerateMenus
                     'permission' => ['notifications'],
                     'order' => 0,
                 ]);
-                if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')) {
+                if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('clinic_admin')) {
                     $this->childMain($notification, [
                         'icon' => 'ph ph-layout',
                         'title' => __('notification.template'),
@@ -1257,8 +1257,8 @@ class GenerateMenus
                 ]);
             }
 
-            // --- LOG/BACKUPS - only for admin and demo_admin ---
-            if(auth()->user()->hasRole(['admin', 'demo_admin']) && auth()->user()->can('view_backup')){
+            // --- LOG/BACKUPS - for admin, demo_admin, and clinic_admin ---
+            if(auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin']) && auth()->user()->can('view_backup')){
                 $location11 = $this->parentMenu($menu, [
                     'icon' => 'ph ph-note',
                     'title' => __('sidebar.log'),
@@ -1304,7 +1304,7 @@ class GenerateMenus
             $menu->filter(function ($item) {
                 if ($item->data('permission')) {
                     if (auth()->check()) {
-                        if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                        if (auth()->user()->hasRole(['admin', 'demo_admin', 'clinic_admin'])) {
                             return true;
                         }
                         try {
