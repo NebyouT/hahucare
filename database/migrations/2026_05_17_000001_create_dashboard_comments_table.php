@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dashboard_comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('clinic_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('clinic_id')->nullable()->constrained('clinic')->onDelete('cascade');
             $table->text('comment');
             $table->string('commentable_type')->nullable();
             $table->unsignedBigInteger('commentable_id')->nullable();
