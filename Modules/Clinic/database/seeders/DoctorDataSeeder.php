@@ -42,7 +42,7 @@ class DoctorDataSeeder extends Seeder
             [
                 'first_name' => 'Felix',
                 'last_name' => 'Harris',
-                'email' => 'doctor@kivicare.com',
+                'email' => 'doctor@hahucare.com',
                 'password' => Hash::make('12345678'),
                 'mobile' => '+91 4578952512',
                 'date_of_birth' => fake()->date,

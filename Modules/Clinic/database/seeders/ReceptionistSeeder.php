@@ -25,7 +25,7 @@ class ReceptionistSeeder extends Seeder
             [
                 'first_name' => 'Harvey',
                 'last_name' => 'Francis',
-                'email' => 'receptionist@kivicare.com',
+                'email' => 'receptionist@hahucare.com',
                 'password' => Hash::make('12345678'),
                 'mobile' => '+1 8874547968',
                 'date_of_birth' => fake()->date,

@@ -91,8 +91,8 @@
                     <select name="select" id="SelectUser" class="form-control selectpiker"
                         onchange="getSelectedOption()">
                         <option value="">{{ __('messages.lbl_select_role') }}</option>
-                        <option value="12345678,demo@kivicare.com">{{ __('messages.lbl_demo_admin') }}</option>
-                        <option value="12345678,doctor@kivicare.com">{{ __('messages.lbl_doctor') }}</option>
+                        <option value="12345678,demo@hahucare.com">{{ __('messages.lbl_demo_admin') }}</option>
+                        <option value="12345678,doctor@hahucare.com">{{ __('messages.lbl_doctor') }}</option>
                         @if (multiVendor() === '1')
                             <option value="12345678,vendor@kivicare.com">{{ __('messages.lbl_click_admin') }}</option>
                         @endif
