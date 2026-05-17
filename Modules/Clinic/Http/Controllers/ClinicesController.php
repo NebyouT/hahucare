@@ -48,10 +48,13 @@ class ClinicesController extends Controller
             'module_name' => $this->module_name,
         ]);
 
-        $this->middleware(['permission:view_clinics_center'])->only('index');
-        $this->middleware(['permission:edit_clinics_center'])->only('edit', 'update');
-        $this->middleware(['permission:add_clinics_center'])->only('store');
-        $this->middleware(['permission:delete_clinics_center'])->only('destroy');
+        // Excel-based permissions for Clinics
+        $this->middleware('permission:add_clinic', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_clinic_profile', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_clinic', ['only' => ['destroy']]);
+        $this->middleware('permission:change_clinic_status', ['only' => ['updateStatus']]);
+        $this->middleware('permission:edit_clinic_session', ['only' => ['editSession', 'updateSession']]);
+        $this->middleware('permission:export_clinic_list', ['only' => ['export']]);
     }
 
 

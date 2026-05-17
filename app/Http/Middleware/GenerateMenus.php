@@ -91,7 +91,7 @@ class GenerateMenus
                     'icon' => 'ph ph-sliders-horizontal',
                     'title' => __('sidebar.appointment'),
                     'route' => 'backend.appointments.index',
-                    'permission' => ['view_clinic_appointment_list'],
+                    'permission' => ['add_appointment', 'change_appointment_status', 'view_encounter_details', 'download_bill_pdf', 'delete_appointment', 'export_appointment_list', 'filter_appointments'],
                     'active' => ['app/appointments'],
                     'order' => 0,
                 ]);
@@ -103,6 +103,7 @@ class GenerateMenus
             'icon' => 'ph ph-bed',
             'title' =>  __('sidebar.bed_mannagement'),
             'nickname' => 'bed_mannagement',
+            'permission' => ['allocate_patient_bed', 'add_bed', 'view_bed_type', 'view_bed_status'],
             'order' => 0,
         ]);
 
@@ -112,7 +113,7 @@ class GenerateMenus
                 'title' => __('sidebar.bed_allocation'),
                 'route' => 'backend.bed-allocation.index',
                 'active' => ['app/bed-allocation'],
-                'permission' => ['view_allocations'],
+                'permission' => ['allocate_patient_bed'],
                 'order' => 0,
             ]);
             // All Bed - Visible to all users (doctors can view only, no create/edit)
@@ -121,7 +122,7 @@ class GenerateMenus
                 'title' => __('sidebar.all_bed'),
                 'route' => 'backend.bed-master.index',
                 'active' => ['app/bed-master'],
-                'permission' => ['view_bed_master'],
+                'permission' => ['add_bed'],
                 'order' => 0,
             ]);
 
@@ -140,6 +141,7 @@ class GenerateMenus
                 'title' => __('sidebar.bed_satus'),
                 'route' => 'backend.bed-status.index',
                 'active' => ['app/bed-status'],
+                'permission' => ['view_bed_status'],
                 'order' => 1,
             ]);
         } // End of Bed Management - close the if block for non-lab_technician users
@@ -173,7 +175,7 @@ class GenerateMenus
                     'icon' => 'ph ph-clock-counter-clockwise',
                     'title' =>  __('sidebar.encounter'),
                     'route' => 'backend.encounter.index',
-                    'permission' => ['view_encounter'],
+                    'permission' => ['add_encounter', 'close_checkout_encounter', 'delete_encounter', 'manage_encounter_templates'],
                     'nickname' => 'encounter',
                     'order' => 0,
                 ]);
@@ -182,7 +184,7 @@ class GenerateMenus
                     'title' => __('sidebar.encounter'),
                     'route' => 'backend.encounter.index',
                     'active' => 'app/encounter',
-                    'permission' => ['view_encounter'],
+                    'permission' => ['add_encounter', 'close_checkout_encounter', 'delete_encounter'],
                     'order' => 0,
                 ]);
 
@@ -191,7 +193,7 @@ class GenerateMenus
                     'title' => __('sidebar.encounter_template'),
                     'route' => 'backend.encounter-template.index',
                     'active' => 'app/encounter-template',
-                    'permission' => ['view_encounter_template'],
+                    'permission' => ['manage_encounter_templates'],
                     'order' => 0,
                 ]);
 
@@ -200,7 +202,7 @@ class GenerateMenus
                     'title' => __('sidebar.problems'),
                     'route' => 'backend.problems.index',
                     'active' => 'app/problems',
-                    'permission' => ['view_encounter'],
+                    'permission' => ['view_problem_list', 'edit_problem_list', 'export_problem_list'],
                     'order' => 0,
                 ]);
                 $this->childMain($encounter, [
@@ -208,7 +210,7 @@ class GenerateMenus
                     'title' => __('appointment.observation'),
                     'route' => 'backend.observation.index',
                     'active' => 'app/observation',
-                    'permission' => ['view_encounter'],
+                    'permission' => ['view_observation_list', 'edit_observation_list'],
                     'order' => 0,
                 ]);
             }
@@ -221,7 +223,7 @@ class GenerateMenus
                     'icon' => 'ph ph-stethoscope',
                     'title' => __('sidebar.doctor'),
                     'route' => 'backend.doctor.index',
-                    'permission' => ['view_doctors_session'],
+                    'permission' => ['add_doctor', 'edit_doctor_session', 'view_doctor_profile', 'change_doctor_password', 'edit_doctor_profile', 'delete_doctor'],
                     'nickname' => 'doctor',
                     'order' => 0,
                 ]);
@@ -230,7 +232,7 @@ class GenerateMenus
                     'title' => __('sidebar.doctor'),
                     'route' => 'backend.doctor.index',
                     'active' => 'app/doctor',
-                    'permission' => ['view_doctors'],
+                    'permission' => ['add_doctor', 'view_doctor_profile', 'edit_doctor_profile', 'delete_doctor'],
                     'order' => 0,
                 ]);
                 $this->childMain($doctor, [
@@ -238,7 +240,7 @@ class GenerateMenus
                     'title' => __('clinic.doctor_session'),
                     'route' => 'backend.doctor-session.index',
                     'active' => 'app/doctor-session',
-                    'permission' => ['view_doctors_session'],
+                    'permission' => ['edit_doctor_session'],
                     'order' => 0,
                 ]);
             }
@@ -248,7 +250,7 @@ class GenerateMenus
                 'title' => __('clinic.specialization'),
                 'route' => 'backend.specializations.index',
                 'active' => ['app/specializations'],
-                'permission' => ['view_specialization'],
+                'permission' => ['add_specialization', 'change_specialization_status', 'delete_specialization', 'export_specialization_list'],
                 'order' => 0,
             ]);
 
@@ -267,7 +269,7 @@ class GenerateMenus
                     'icon' => 'ph ph-hospital',
                     'title' => __('sidebar.clinic'),
                     'route' => 'backend.clinics.index',
-                    'permission' => ['view_clinics_center'],
+                    'permission' => ['change_clinic_status', 'add_clinic', 'edit_clinic_session', 'add_clinic_gallery', 'view_clinic_profile', 'edit_clinic_profile', 'delete_clinic', 'filter_clinic_list', 'export_clinic_list'],
                     'active' => ['app/clinics'],
                     'order' => 0,
                 ]);
@@ -276,7 +278,7 @@ class GenerateMenus
                 'icon' => 'ph ph-list-bullets',
                 'title' => __('sidebar.categories'),
                 'route' => 'backend.category.index',
-                'permission' => ['view_clinics_category'],
+                'permission' => ['add_categories', 'change_feature_status', 'change_active_status', 'edit_categories', 'delete_categories'],
                 'active' => ['app/category'],
                 'order' => 0,
             ]);
@@ -288,7 +290,7 @@ class GenerateMenus
                 'title' => __('sidebar.services'),
                 'route' => 'backend.services.index',
                 'active' => ['app/services'],
-                'permission' => ['view_clinics_service'],
+                'permission' => ['add_service', 'filter_service_list', 'assign_doctor_to_service', 'change_service_status', 'edit_service', 'delete_service', 'export_service_list'],
                 'order' => 0,
             ]);
 
@@ -453,7 +455,7 @@ class GenerateMenus
                 'title' =>  __('sidebar.patient'),
                 'route' => 'backend.customers.index',
                 'active' => ['app/customers'],
-                'permission' => 'view_customer',
+                'permission' => ['import_patient_list', 'add_patient', 'filter_patient_list', 'change_patient_status', 'view_patient_appointments', 'view_patient_info', 'add_related_patient', 'change_patient_password', 'edit_patient_profile', 'delete_patient', 'export_patient_list'],
                 'order' => 0,
             ]);
 
@@ -462,7 +464,7 @@ class GenerateMenus
                 'title' => __('sidebar.receptionist'),
                 'route' => 'backend.receptionist.index',
                 'active' => ['app/receptionist'],
-                'permission' => ['view_clinic_receptionist_list'],
+                'permission' => ['add_receptionist', 'change_receptionist_status', 'change_receptionist_password', 'edit_receptionist_profile', 'delete_receptionist', 'export_receptionist_list'],
                 'order' => 0,
             ]);
             if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
@@ -770,12 +772,12 @@ class GenerateMenus
             }
 
             // Laboratory menu - for admin, demo_admin, vendor, and lab_technician
-            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'vendor', 'lab_technician']) && auth()->user()->can('view_labs')) || auth()->user()->hasRole('lab_technician')) {
+            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'vendor', 'lab_technician']) && auth()->user()->can('view_lab_orders')) || auth()->user()->hasRole('lab_technician')) {
                 $laboratory = $this->parentMenu($menu, [
                     'icon' => 'ph ph-flask',
                     'title' => __('sidebar.laboratory'),
                     'nickname' => 'laboratory',
-                    'permission' => ['view_labs'],
+                    'permission' => ['add_laboratory', 'add_lab_technologist', 'add_lab_test', 'view_lab_orders'],
                     'order' => 0,
                 ]);
 
@@ -795,7 +797,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_services'),
                         'route' => 'backend.lab-services.index',
                         'active' => ['app/lab-services'],
-                        'permission' => ['view_lab_services'],
+                        'permission' => ['add_lab_test'],
                         'order' => 1,
                     ]);
 
@@ -804,7 +806,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_results'),
                         'route' => 'backend.lab-results.index',
                         'active' => ['app/lab-results'],
-                        'permission' => ['view_lab_results'],
+                        'permission' => ['view_lab_orders'],
                         'order' => 2,
                     ]);
 
@@ -813,7 +815,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_categories'),
                         'route' => 'backend.lab-categories.index',
                         'active' => ['app/lab-categories'],
-                        'permission' => ['view_lab_categories'],
+                        'permission' => ['add_lab_test'],
                         'order' => 3,
                     ]);
                 } else {
@@ -832,7 +834,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_services'),
                         'route' => 'backend.lab-services.index',
                         'active' => ['app/lab-services'],
-                        'permission' => ['view_lab_services'],
+                        'permission' => ['add_lab_test'],
                         'order' => 1,
                     ]);
 
@@ -841,7 +843,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_results'),
                         'route' => 'backend.lab-results.index',
                         'active' => ['app/lab-results'],
-                        'permission' => ['view_lab_results'],
+                        'permission' => ['view_lab_orders'],
                         'order' => 2,
                     ]);
 
@@ -850,7 +852,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_categories'),
                         'route' => 'backend.lab-categories.index',
                         'active' => ['app/lab-categories'],
-                        'permission' => ['view_lab_categories'],
+                        'permission' => ['add_lab_test'],
                         'order' => 3,
                     ]);
 
@@ -859,7 +861,7 @@ class GenerateMenus
                         'title' => __('sidebar.lab_equipment'),
                         'route' => 'backend.lab-equipment.index',
                         'active' => ['app/lab-equipment'],
-                        'permission' => ['view_lab_equipment'],
+                        'permission' => ['add_laboratory'],
                         'order' => 4,
                     ]);
 
@@ -868,7 +870,7 @@ class GenerateMenus
                         'title' => __('sidebar.labs'),
                         'route' => 'backend.labs.index',
                         'active' => ['app/labs'],
-                        'permission' => ['view_labs'],
+                        'permission' => ['add_laboratory', 'add_lab_technologist'],
                         'order' => 5,
                     ]);
                 }
@@ -882,6 +884,18 @@ class GenerateMenus
                     'route' => 'backend.medical-certificates.index',
                     'active' => ['app/medical-certificates'],
                     'permission' => ['view_medical_certificate'],
+                    'order' => 0,
+                ]);
+            }
+
+            // Dashboard Comments menu - for all roles with permission
+            if (auth()->user()->can('view_dashboard_comments')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-chat-circle-text',
+                    'title' => 'Dashboard Comments',
+                    'route' => 'backend.dashboard-comments.index',
+                    'active' => ['app/dashboard-comments'],
+                    'permission' => ['view_dashboard_comments'],
                     'order' => 0,
                 ]);
             }
@@ -902,7 +916,7 @@ class GenerateMenus
                     'icon' => 'ph ph-map-pin-line',
                     'title' => __('sidebar.location'),
                     'nickname' => 'location',
-                    'permission' => ['view_location'],
+                    'permission' => ['add_location', 'edit_location', 'change_location_status', 'delete_location', 'filter_locations', 'export_locations'],
                     'order' => 0,
                 ]);
 
@@ -911,7 +925,7 @@ class GenerateMenus
                     'route' => 'backend.city.index',
                     'active' => 'app/city',
                     'shortTitle' => 'CT',
-                    'permission' => ['view_city'],
+                    'permission' => ['add_location', 'edit_location', 'change_location_status', 'delete_location', 'filter_locations', 'export_locations'],
                     'order' => 0,
                 ]);
             }
@@ -921,7 +935,7 @@ class GenerateMenus
                 'title' => __('sidebar.doctor_earning'),
                 'route' => 'backend.earnings.index',
                 'active' => ['app/earnings'],
-                'permission' => ['view_doctor_earning'],
+                'permission' => ['view_doctor_earnings', 'payout_doctor_earnings'],
                 'order' => 0,
             ]);
             if (checkPlugin('pharma') == 'active' && auth()->user()->hasRole(['admin', 'demo_admin'])) {
@@ -930,7 +944,7 @@ class GenerateMenus
                     'title' => __('pharma::sidebar.pharma_earnings'),
                     'route' => 'backend.earning.index',
                     'active' => ['app/earning'],
-                    // 'permission' => ['view_pharma_earning'],
+                    'permission' => ['view_pharmacist_earnings', 'payout_pharmacist_earnings'],
                     'order' => 0,
                 ]);
             }
@@ -943,7 +957,7 @@ class GenerateMenus
                     'title' => __('sidebar.vendor_earning'),
                     'route' => 'backend.vendor-earnings.index',
                     'active' => ['app/vendor-earnings'],
-                    'permission' => ['view_vendor_earning'],
+                    'permission' => ['view_clinic_admin_earnings', 'payout_clinic_admin_earnings'],
                     'order' => 0,
                 ]);
             }
@@ -952,7 +966,7 @@ class GenerateMenus
 
             //Report
 
-            $permissionsToCheck = ['view_daily_bookings', 'view_overall_bookings', 'view_staff_payouts', 'view_staff_service', 'view_order_reports', 'view_commission_reports', 'view_appointment_overview', 'view_clinic_overview'];
+            $permissionsToCheck = ['appointment_overview', 'clinic_overview', 'requested_service_overview', 'doctor_payout_overview', 'pharmacy_payout_overview', 'clinic_admin_payout_overview'];
 
             if (collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission))) {
                 $this->staticMenu($menu, ['title' => __('sidebar.reports'), 'order' => 0]);
@@ -967,6 +981,7 @@ class GenerateMenus
                     'title' =>  __('appointment.revenue_breakdown'),
                     'route' => 'backend.reports.commission-revenue',
                     'active' => ['app/commission-revenue'],
+                    'permission' => ['appointment_overview', 'clinic_overview', 'requested_service_overview', 'doctor_payout_overview', 'pharmacy_payout_overview', 'clinic_admin_payout_overview'],
                     'order' => 0,
                 ]);
             }
@@ -979,6 +994,7 @@ class GenerateMenus
                     'title' =>  __('dashboard.lbl_title_appointment_overview'),
                     'route' => 'backend.reports.appointment-overview',
                     'active' => ['app/appointment-overview'],
+                    'permission' => ['appointment_overview'],
                     'order' => 0,
                 ]);
                 $this->mainRoute($menu, [
@@ -986,6 +1002,7 @@ class GenerateMenus
                     'title' =>  __('sidebar.clinic_overview'),
                     'route' => 'backend.reports.clinic-overview',
                     'active' => ['app/clinic-overview'],
+                    'permission' => ['clinic_overview'],
                     'order' => 0,
                 ]);
             }
@@ -1088,7 +1105,7 @@ class GenerateMenus
                 'title' => __('messages.incidence'),
                 'route' => 'backend.incidence.index',
                 'active' => 'app/incidence',
-                'permission' => ['view_incidence_report'],
+                'permission' => ['view_incident_reports', 'change_incident_status', 'reply_to_incidents'],
                 'order' => 0,
             ]);
 
@@ -1099,7 +1116,7 @@ class GenerateMenus
                     'title' => __('menu.settings'),
                     'route' => 'backend.settings',
                     'active' => 'app/settings',
-                    'permission' => ['view_setting'],
+                    'permission' => ['settings'],
                     'order' => 0,
                 ]);
             }
@@ -1111,7 +1128,7 @@ class GenerateMenus
                     'title' => __('page.title'),
                     'route' => ['backend.pages.index'],
                     'active' => ['app/pages'],
-                    'permission' => ['view_pages'],
+                    'permission' => ['pages'],
                     'order' => 0,
                 ]);
             }
@@ -1122,7 +1139,7 @@ class GenerateMenus
                 'title' => __('sidebar.app_banner'),
                 'route' => 'backend.app-banners.index',
                 'active' => 'app/app-banners',
-                'permission' => ['view_app_banner'],
+                'permission' => ['app_banners'],
                 'order' => 0,
             ]);
 
@@ -1132,7 +1149,7 @@ class GenerateMenus
                     'icon' => 'ph ph-table',
                     'title' => __('messages.customforms'),
                     'nickname' => 'custom_form',
-                    'permission' => ['view_notification'],
+                    'permission' => ['custom_forms'],
                     'order' => 0,
                 ]);
                 $this->childMain($custom_form, [
@@ -1141,7 +1158,7 @@ class GenerateMenus
                     'route' => 'backend.custom-form.index',
                     'shortTitle' => 'Li',
                     'active' => 'app/settings#/customform',
-                    'permission' => ['view_notification'],
+                    'permission' => ['custom_forms'],
                     'order' => 0,
                 ]);
             }
@@ -1152,7 +1169,7 @@ class GenerateMenus
                     'icon' => 'ph ph-bell',
                     'title' => __('notification.title'),
                     'nickname' => 'notifications',
-                    'permission' => ['view_notification'],
+                    'permission' => ['notifications'],
                     'order' => 0,
                 ]);
 
@@ -1162,7 +1179,7 @@ class GenerateMenus
                     'route' => 'backend.notifications.index',
                     'shortTitle' => 'Li',
                     'active' => 'app/notifications',
-                    'permission' => ['view_notification'],
+                    'permission' => ['notifications'],
                     'order' => 0,
                 ]);
                 if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')) {
@@ -1172,7 +1189,7 @@ class GenerateMenus
                         'route' => 'backend.notification-templates.index',
                         'shortTitle' => 'TE',
                         'active' => 'app/notification-templates*',
-                        'permission' => ['view_notification_template'],
+                        'permission' => ['notifications'],
                         'order' => 0,
                     ]);
                 }
@@ -1185,7 +1202,7 @@ class GenerateMenus
                     'title' =>  __('sidebar.frontend_setting'),
                     'route' => 'frontend_setting.index',
                     'active' => ['app/frontend_setting'],
-                    'permission' => 'view_customer',
+                    'permission' => ['frontend_settings'],
                     'order' => 0,
                 ]);
             }
@@ -1196,22 +1213,25 @@ class GenerateMenus
                     'icon' => 'ph ph-shield-check',
                     'title' => __('sidebar.access_control'),
                     'nickname' => 'access_control',
+                    'permission' => ['access_control'],
                     'order' => 10,
                 ]);
-                
+
                 $this->childMain($accessControl, [
                     'icon' => 'ph ph-gear-six',
                     'title' => __('sidebar.role_management'),
                     'route' => 'backend.role-management.index',
                     'active' => ['app/role-management'],
+                    'permission' => ['access_control'],
                     'order' => 0,
                 ]);
-                
+
                 $this->childMain($accessControl, [
                     'icon' => 'ph ph-devices',
                     'title' => __('sidebar.legacy_permissions'),
                     'route' => 'backend.permission-role.list',
                     'active' => ['app/permission-role'],
+                    'permission' => ['access_control'],
                     'order' => 1,
                 ]);
 
@@ -1220,6 +1240,7 @@ class GenerateMenus
                     'title' => 'Mobile Permissions',
                     'route' => 'backend.mobile-permissions.index',
                     'active' => ['app/mobile-permissions'],
+                    'permission' => ['access_control'],
                     'order' => 2,
                 ]);
             }
@@ -1230,7 +1251,7 @@ class GenerateMenus
                     'icon' => 'ph ph-note',
                     'title' => __('sidebar.log'),
                     'nickname' => 'log',
-                    'permission' => ['view_backup'],
+                    'permission' => ['database_file_backup', 'activity_logs'],
                     'order' => 0,
                 ]);
 
@@ -1240,7 +1261,7 @@ class GenerateMenus
                         'route' => 'backend.backups.index',
                         'active' => 'app/backups',
                         'shortTitle' => '',
-                        'permission' => ['view_backup'],
+                        'permission' => ['database_file_backup'],
                         'order' => 0,
                         'icon' => 'ph ph-note',
                     ]);
@@ -1249,7 +1270,7 @@ class GenerateMenus
                         'route' => 'backend.backups.logs',
                         'active' => 'app/backups/logs',
                         'shortTitle' => '',
-                        'permission' => ['view_backup'],
+                        'permission' => ['activity_logs'],
                         'order' => 0,
                         'icon' => 'ph ph-note',
                     ]);
@@ -1262,6 +1283,7 @@ class GenerateMenus
                     'title' => __('messages.faq_title'),
                     'route' => 'backend.faqs.index',
                     'active' => ['app/faqs'],
+                    'permission' => ['faq'],
                     'order' => 0,
                 ]);
             }

@@ -52,6 +52,14 @@ class PharmaController extends Controller
             'module_name' => $this->module_name,
             'edit_module_title' => $this->edit_module_title
         ]);
+
+        // Excel-based permissions for Pharma
+        $this->middleware('permission:add_pharmacist', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_pharmacist_profile', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_pharmacist', ['only' => ['destroy']]);
+        $this->middleware('permission:change_pharmacist_status', ['only' => ['updateStatus']]);
+        $this->middleware('permission:change_pharmacist_password', ['only' => ['changePassword']]);
+        $this->middleware('permission:export_pharmacist_list', ['only' => ['export']]);
     }
 
     public function pharmaDashboard()

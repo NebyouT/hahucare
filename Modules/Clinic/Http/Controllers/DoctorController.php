@@ -59,6 +59,13 @@ class DoctorController extends Controller
             'module_name' => $this->module_name,
             'module_path' => $this->module_path,
         ]);
+
+        // Excel-based permissions for Doctors
+        $this->middleware('permission:add_doctor', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_doctor_session', ['only' => ['editSession', 'updateSession']]);
+        $this->middleware('permission:edit_doctor_profile', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_doctor', ['only' => ['destroy']]);
+        $this->middleware('permission:change_doctor_password', ['only' => ['changePassword']]);
     }
     /**
      * Display a listing of the resource.

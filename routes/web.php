@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\BackupController;
+use App\Http\Controllers\Backend\DashboardCommentController;
 use App\Http\Controllers\Backend\IncidenceReportController;
 use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\SettingController;
@@ -190,6 +191,17 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
             Route::get('{id}/print', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'print'])->name('print');
             Route::get('create-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'createFromEncounter'])->name('create-from-encounter');
             Route::post('store-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'storeFromEncounter'])->name('store-from-encounter');
+        });
+
+        // Dashboard Comments routes
+        Route::prefix('dashboard-comments')->as('dashboard-comments.')->group(function () {
+            Route::get('/', [DashboardCommentController::class, 'index'])->name('index');
+            Route::post('store', [DashboardCommentController::class, 'store'])->name('store');
+            Route::get('{id}', [DashboardCommentController::class, 'show'])->name('show');
+            Route::put('{id}', [DashboardCommentController::class, 'update'])->name('update');
+            Route::delete('{id}', [DashboardCommentController::class, 'destroy'])->name('destroy');
+            Route::post('{id}/approve', [DashboardCommentController::class, 'approve'])->name('approve');
+            Route::post('{id}/unapprove', [DashboardCommentController::class, 'unapprove'])->name('unapprove');
         });
 
         /* Incidence Report */

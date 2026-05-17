@@ -16,10 +16,11 @@ class LabController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:view_labs', ['only' => ['index', 'index_data']]);
-        $this->middleware('permission:add_labs', ['only' => ['create', 'store']]);
-        $this->middleware('permission:edit_labs', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:delete_labs', ['only' => ['destroy']]);
+        // Excel-based permissions for Laboratory
+        $this->middleware('permission:add_laboratory', ['only' => ['create', 'store']]);
+        $this->middleware('permission:add_laboratory', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:add_laboratory', ['only' => ['destroy']]);
+        $this->middleware('permission:add_lab_technologist', ['only' => ['create', 'store']]);
     }
 
     public function index()

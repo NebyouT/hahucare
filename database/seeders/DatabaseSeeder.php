@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PatientReferralPermissionSeeder::class);
         $this->call(LaboratoryPermissionSeeder::class);
         $this->call(MedicalCertificatePermissionSeeder::class);
+        $this->call(DashboardPermissionSeeder::class);
         $this->call(\Modules\Blog\database\seeders\BlogsDatabaseSeeder::class);
         $this->call(\Modules\Blog\database\seeders\BlogPermissionSeeder::class);
         $this->call(\Modules\FrontendSetting\database\seeders\FrontendSettingDatabaseSeeder::class);

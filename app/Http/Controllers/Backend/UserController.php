@@ -41,6 +41,14 @@ class UserController extends Controller
             'module_icon' => $this->module_icon,
             'module_name' => $this->module_name,
         ]);
+
+        // Excel-based permissions for Patients (managed through User model)
+        $this->middleware('permission:add_patient', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_patient_profile', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_patient', ['only' => ['destroy']]);
+        $this->middleware('permission:change_patient_status', ['only' => ['updateStatus']]);
+        $this->middleware('permission:change_patient_password', ['only' => ['changePassword']]);
+        $this->middleware('permission:export_patient_list', ['only' => ['export']]);
     }
 
     /**
