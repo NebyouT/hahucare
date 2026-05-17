@@ -170,7 +170,7 @@ class GenerateMenus
                 ]);
             }
 
-            if (auth()->user()->hasRole(['admin', 'demo_admin',])) {
+            if (auth()->user()->hasRole(['admin', 'demo_admin', 'vendor'])) {
                 $encounter = $this->parentMenu($menu, [
                     'icon' => 'ph ph-clock-counter-clockwise',
                     'title' =>  __('sidebar.encounter'),
@@ -255,7 +255,7 @@ class GenerateMenus
             ]);
 
 
-            $permissionsToCheck = ['view_clinics_center', 'view_clinics_category', 'view_clinics_service', 'view_doctors', 'view_doctors_session', 'view_clinic_patient_list', 'view_patient_soap', 'view_clinic_appointment_list', 'view_encounter_template', 'view_encounter'];
+            $permissionsToCheck = ['view_clinics_category', 'view_clinics_service', 'view_doctors', 'view_doctors_session', 'view_clinic_patient_list', 'view_patient_soap', 'view_clinic_appointment_list', 'view_encounter_template', 'view_encounter', 'add_clinic', 'edit_clinic_session', 'add_clinic_gallery', 'view_clinic_profile', 'edit_clinic_profile', 'filter_clinic_list', 'export_clinic_list', 'change_clinic_status'];
 
             if (collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission))) {
 
