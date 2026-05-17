@@ -386,8 +386,7 @@ class ReceptionistController extends Controller
     {
         try {
             $data = User::role(['receptionist'])->findOrFail($id);
-            $existing = Receptionist::where('clinic_id', $request->clinic_id)->first();
-           
+
             $request_data = $request->except(['profile_image', 'password', '_token', '_method']);
 
             // if (isset($request_data['mobile'])) {

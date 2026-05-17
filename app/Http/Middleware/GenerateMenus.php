@@ -1207,6 +1207,18 @@ class GenerateMenus
                 ]);
             }
 
+            // --- TAX SETTINGS ---
+            if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-percent',
+                    'title' => __('menu.tax'),
+                    'route' => 'backend.tax.index',
+                    'active' => 'app/tax',
+                    'permission' => ['view_tax'],
+                    'order' => 0,
+                ]);
+            }
+
             // --- ACCESS CONTROL ---
             if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
                 $accessControl = $this->parentMenu($menu, [

@@ -209,8 +209,8 @@ class Clinics extends BaseModel
     }
     public function receptionist() {
 
-        return $this->hasOne( Receptionist::class, 'clinic_id');
-           
+        return $this->hasMany( Receptionist::class, 'clinic_id');
+
     }
 
     public function doctorsessions() {
