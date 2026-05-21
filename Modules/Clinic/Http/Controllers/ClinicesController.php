@@ -201,18 +201,18 @@ class ClinicesController extends Controller
             $query_data->whereIn('id', $clinicIds);
         }
         
-        // Exclude clinics already assigned to a receptionist, except the one currently assigned when editing
-        if ($request->boolean('exclude_assigned_receptionist')) {
-            $keepClinicId = $request->input('current_receptionist_clinic_id');
-            if (!empty($keepClinicId)) {
-                $query_data->where(function ($q) use ($keepClinicId) {
-                    $q->whereDoesntHave('receptionist')
-                      ->orWhere('id', $keepClinicId);
-                });
-            } else {
-                $query_data->whereDoesntHave('receptionist');
-            }
-        }
+        // Allow multiple receptionists per clinic - removed exclusion logic
+        // if ($request->boolean('exclude_assigned_receptionist')) {
+        //     $keepClinicId = $request->input('current_receptionist_clinic_id');
+        //     if (!empty($keepClinicId)) {
+        //         $query_data->where(function ($q) use ($keepClinicId) {
+        //             $q->whereDoesntHave('receptionist')
+        //               ->orWhere('id', $keepClinicId);
+        //         });
+        //     } else {
+        //         $query_data->whereDoesntHave('receptionist');
+        //     }
+        // }
         if ($request->has('clinicid')) {
 
             $query_data->where('id', $request->clinicid);
