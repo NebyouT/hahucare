@@ -298,16 +298,65 @@ class BackupController extends Controller
     public function activity_log_index_data(DataTables $datatable, Request $request)
     {
         $query = ActivityLog::query();
-        // Optionally add filters here if needed
+        
+        // Filter by event type if provided
+        if ($request->has('event_type') && $request->event_type != 'all') {
+            $query->where('event', $request->event_type);
+        }
+        
+        // Filter by causer role if provided
+        if ($request->has('causer_role') && $request->causer_role != 'all') {
+            $query->whereHas('causer', function ($q) use ($request) {
+                $q->role($request->causer_role);
+            });
+        }
+        
         return $datatable->eloquent($query)
             ->addColumn('created_at', function ($log) {
                 return $log->created_at ? formatDate($log->created_at)  : '';
             })
             ->addColumn('subject_type', function ($log) {
-                return $log->subject_type ?? '-';
+                return $log->subject_type ? class_basename($log->subject_type) : '-';
             })
             ->addColumn('description', function ($log) {
                 return $log->description ?? '-';
+            })
+            ->addColumn('event', function ($log) {
+                $event = $log->event ?? 'unknown';
+                $badgeClass = match($event) {
+                    'created' => 'bg-success',
+                    'updated' => 'bg-primary',
+                    'deleted' => 'bg-danger',
+                    default => 'bg-secondary'
+                };
+                return '<span class="badge ' . $badgeClass . '">' . ucfirst($event) . '</span>';
+            })
+            ->addColumn('causer', function ($log) {
+                if ($log->causer) {
+                    $roles = $log->causer->roles->pluck('name')->toArray();
+                    $roleLabels = [
+                        'admin' => 'Admin',
+                        'demo_admin' => 'Demo Admin',
+                        'vendor' => 'Clinic Admin',
+                        'doctor' => 'Doctor',
+                        'receptionist' => 'Receptionist',
+                        'user' => 'Patient',
+                        'pharmacist' => 'Pharmacist',
+                        'lab_technician' => 'Lab Technician'
+                    ];
+                    
+                    $roleBadges = '';
+                    foreach ($roles as $role) {
+                        $label = $roleLabels[$role] ?? ucfirst($role);
+                        $roleBadges .= '<span class="badge bg-info me-1">' . $label . '</span>';
+                    }
+                    
+                    return '<div class="d-flex flex-column">
+                        <span class="fw-medium">' . $log->causer->full_name ?? $log->causer->email . '</span>
+                        <div class="mt-1">' . $roleBadges . '</div>
+                    </div>';
+                }
+                return '<span class="text-muted">System</span>';
             })
             ->addColumn('action', function ($log) {
                 return '<a style="cursor:pointer" onclick="getHistory(' . $log->id . ')"><i class="ph ph-eye align-middle text-secondary" data-bs-toggle="tooltip" title="View"></i></a>';
@@ -324,7 +373,7 @@ class BackupController extends Controller
                 }
             })
 
-            ->rawColumns(['description', 'action'])
+            ->rawColumns(['description', 'action', 'event', 'causer'])
             ->toJson();
     }
 

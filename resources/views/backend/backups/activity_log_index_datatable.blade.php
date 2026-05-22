@@ -6,6 +6,47 @@
 
 @section('content')
     <div class="table-content mb-3">
+        <!-- Filter Tabs -->
+        <ul class="nav nav-tabs mb-3" id="activityLogTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" onclick="filterLogs('all', 'all')">
+                    All Logs
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="created-tab" data-bs-toggle="tab" data-bs-target="#created" type="button" role="tab" onclick="filterLogs('created', 'all')">
+                    <span class="badge bg-success me-1">Created</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="updated-tab" data-bs-toggle="tab" data-bs-target="#updated" type="button" role="tab" onclick="filterLogs('updated', 'all')">
+                    <span class="badge bg-primary me-1">Updated</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="deleted-tab" data-bs-toggle="tab" data-bs-target="#deleted" type="button" role="tab" onclick="filterLogs('deleted', 'all')">
+                    <span class="badge bg-danger me-1">Deleted</span>
+                </button>
+            </li>
+        </ul>
+
+        <!-- Role Filter Dropdown -->
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label class="form-label">Filter by Role:</label>
+                <select class="form-select" id="roleFilter" onchange="filterLogs('all', this.value)">
+                    <option value="all">All Roles</option>
+                    <option value="admin">Admin</option>
+                    <option value="demo_admin">Demo Admin</option>
+                    <option value="vendor">Clinic Admin</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="receptionist">Receptionist</option>
+                    <option value="user">Patient</option>
+                    <option value="pharmacist">Pharmacist</option>
+                    <option value="lab_technician">Lab Technician</option>
+                </select>
+            </div>
+        </div>
 
         <table id="datatable" class="table table-responsive"></table>
     </div>
@@ -31,29 +72,45 @@
     </div>
 @endsection
 
-@push('after-styles')
+@push('after-scripts')
     <link rel="stylesheet" href="{{ asset('vendor/datatable/datatables.min.css') }}">
 @endpush
 
 @push('after-scripts')
     <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
     <script type="text/javascript">
+        let currentEventType = 'all';
+        let currentCauserRole = 'all';
+        let datatableInstance = null;
+
         const columns = [{
                 data: 'created_at',
                 name: 'created_at',
                 title: '{{ __('messages.created_at') }}',
+                orderable: true,
+            },
+            {
+                data: 'event',
+                name: 'event',
+                title: 'Action',
+                orderable: true,
+            },
+            {
+                data: 'subject_type',
+                name: 'subject_type',
+                title: '{{ __('messages.subject_type') }}',
+                orderable: false,
+            },
+            {
+                data: 'causer',
+                name: 'causer',
+                title: 'Performed By',
                 orderable: false,
             },
             {
                 data: 'description',
                 name: 'description',
                 title: "{{ __('clinic.lbl_description') }}",
-                orderable: false,
-            },
-            {
-                data: 'subject_type',
-                name: 'subject_type',
-                title: '{{ __('messages.subject_type') }}',
                 orderable: false,
             },
             {
@@ -75,15 +132,39 @@
             ...columns,
             ...actionColumn
         ];
+
+        function filterLogs(eventType, causerRole) {
+            currentEventType = eventType;
+            currentCauserRole = causerRole;
+            
+            // Update active tab
+            document.querySelectorAll('#activityLogTabs .nav-link').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (eventType === 'all') {
+                document.getElementById('all-tab').classList.add('active');
+            } else {
+                document.getElementById(eventType + '-tab').classList.add('active');
+            }
+            
+            // Reload datatable with filters
+            if (datatableInstance) {
+                datatableInstance.ajax.reload();
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', (event) => {
-            initDatatable({
+            datatableInstance = initDatatable({
                 url: '{{ route('backend.backups.activity_log_index_data') }}',
                 finalColumns,
                 orderColumn: [
-                    [3, 'desc']
+                    [5, 'desc']
                 ],
                 advanceFilter: () => {
-                    return {};
+                    return {
+                        event_type: currentEventType,
+                        causer_role: currentCauserRole
+                    };
                 }
             });
         });
