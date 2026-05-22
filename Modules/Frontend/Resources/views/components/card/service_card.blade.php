@@ -1,4 +1,5 @@
 <div class="services-card p-3 rounded">
+    @if($service)
     <div class="position-relative">
         <a href="{{ route('service-details', ['id' => $service->id]) }}" class="services-img">
             <img src="{{ $service->file_url }}" alt="services-image" class="w-100 object-cover">
@@ -70,4 +71,9 @@
     <a href="{{ route('booking', ['id' => $service->id]) }}"
         class="btn btn-primary-subtle w-100">{{ __('frontend.book_now') }}
     </a>
+    @else
+    <div class="text-center py-5">
+        <p class="text-muted">{{ __('messages.service_not_available') }}</p>
+    </div>
+    @endif
 </div>

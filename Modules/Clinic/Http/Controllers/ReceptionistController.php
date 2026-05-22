@@ -280,6 +280,12 @@ class ReceptionistController extends Controller
                 ? ($request->filled('vendor_id') ? $request->vendor_id : auth()->user()->id)
                 : auth()->user()->id;
 
+            // Check if email already exists
+            $existingUser = User::where('email', $data['email'])->first();
+            if ($existingUser) {
+                throw new \Exception(__('messages.email_already_exists'));
+            }
+
             $data['email_verified_at'] = Carbon::now();
             $data['user_type'] = 'receptionist';
             $data['status'] = $request->has('status') ? 1 : 1;
