@@ -22,6 +22,8 @@ use Modules\Appointment\Models\Appointment;
 use Modules\Clinic\Models\Receptionist;
 use Modules\Clinic\Models\DoctorSession;
 use App\Models\Holiday;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 
 class Clinics extends BaseModel
@@ -29,7 +31,13 @@ class Clinics extends BaseModel
     use HasFactory;
     use CustomFieldsTrait;
     use HasSlug;
+    use LogsActivity;
     const CUSTOM_FIELD_MODEL = 'Modules\Clinic\Models\Clinics';
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['*']);
+    }
 
     /**
      * The attributes that are mass assignable.

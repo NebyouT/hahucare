@@ -35,6 +35,8 @@ use Modules\Clinic\Models\DoctorRating;
 use Modules\Clinic\Models\DoctorSession;
 use Illuminate\Support\Facades\DB;
 use App\Models\Traits\Auditable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
@@ -48,6 +50,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     use HasApiTokens;
     use CustomFieldsTrait;
     use Auditable;
+    use LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['*']);
+    }
 
     const CUSTOM_FIELD_MODEL = 'App\Models\User';
 

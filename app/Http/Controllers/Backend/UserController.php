@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class UserController extends Controller
 {
@@ -129,6 +130,12 @@ class UserController extends Controller
                 }
             })->active()->get();
         }
+
+        // Log read operation
+        activity()
+            ->causedBy(auth()->user())
+            ->withProperties(['role' => $role, 'term' => $term, 'count' => count($query_data)])
+            ->log('viewed user list');
 
         $data = [];
 

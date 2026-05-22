@@ -9,12 +9,20 @@ use App\Models\BaseModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Clinic\Models\Clinics;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 
 class Receptionist extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
+    use LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['*']);
+    }
 
     /**
      * The attributes that are mass assignable.

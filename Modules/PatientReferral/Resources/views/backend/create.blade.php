@@ -1,4 +1,4 @@
-// Modules/PatientReferral/Resources/views/backend/create.blade.php
+
 
 @extends('backend.layouts.app')
 @section('title', 'Add New Patient Referral')

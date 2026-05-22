@@ -17,6 +17,8 @@ use Modules\Clinic\Models\DoctorServiceMapping;
 use Modules\Clinic\Models\DoctorClinicMapping;
 use Modules\Commission\Models\EmployeeCommission;
 use Modules\Clinic\Models\Receptionist;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Doctor extends BaseModel
 {
@@ -24,6 +26,12 @@ class Doctor extends BaseModel
     use SoftDeletes;
     use HasSlug;
     use CustomFieldsTrait;
+    use LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['*']);
+    }
 
     /**
      * The attributes that are mass assignable.
