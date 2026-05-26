@@ -6,22 +6,26 @@
 <div class="table-content mb-5">
     <x-backend.section-header>
         <div class="d-flex flex-wrap gap-3">
-            @if(auth()->user()->can('delete_encounter') )
+            {{-- Edit observation list: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (Vitals Entry), Pharmacist (No), Lab Technologist (No) --}}
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
             <x-backend.quick-action url="{{ route('backend.observation.bulk_action') }}">
                 <div class="">
                     <select name="action_type" class="select2 form-select col-12" id="quick-action-type" style="width:100%">
                         <option value="">{{ __('messages.no_action') }}</option>
-                        @can('delete_encounter')
+                        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('doctor'))
                         <option value="delete">{{ __('messages.delete') }}</option>
-                        @endcan
+                        @endif
                     </select>
                 </div>
             </x-backend.quick-action>
             @endif
+            {{-- Export button: Admin (Full), Clinic Admin (Read Only), Doctor (Own Patients), Receptionist (Vitals Only), Pharmacist (Related Only), Lab Technologist (Related Only) --}}
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('pharmacist') || auth()->user()->hasRole('lab_technologist'))
             <div>
                 <button type="button" class="btn btn-primary" data-modal="export">
                 <i class="ph ph-export me-1"></i> {{ __('messages.export') }}
                 </button>
+            @endif
                 {{-- <button type="button" class="btn btn-secondary" data-modal="import">--}}
                 {{-- <i class="fa-solid fa-upload"></i> Import--}}
                 {{-- </button>--}}
@@ -84,7 +88,9 @@
 
 <script type="text/javascript" defer>
     const columns = [
-        @if(!auth()->user()->hasRole('receptionist'))
+        {{-- View observation list: Admin (Full), Clinic Admin (Read Only), Doctor (Own Patients), Receptionist (Vitals Only), Pharmacist (Related Only), Lab Technologist (Related Only) --}}
+        {{-- Checkbox column for bulk actions - Admin, Doctor, Receptionist (vitals entry) --}}
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
         {
             name: 'check',
             data: 'check',
@@ -115,7 +121,8 @@
 
 
     const actionColumn = [
-        @if(!auth()->user()->hasRole('receptionist'))
+        {{-- Edit observation list: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (Vitals Entry), Pharmacist (No), Lab Technologist (No) --}}
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
         {
             data: 'action',
             name: 'action',

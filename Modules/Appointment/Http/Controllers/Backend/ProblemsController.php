@@ -84,11 +84,24 @@ class ProblemsController extends Controller
 
     public function index_data(Datatables $datatable, Request $request)
     {
+        $user = auth()->user();
         $query = Constant::query();
         $query = $query->where('type', 'encounter_problem');
 
-        if (auth()->user()->hasRole('doctor')) {
+        // View problem list: Admin (Full), Clinic Admin (Read Only), Doctor (Own Patients), Receptionist (No), Pharmacist (Related Only), Lab Technologist (Related Only)
+        if ($user && $user->hasRole('receptionist')) {
+            abort(403, 'You are not allowed to view problem lists.');
+        }
+        
+        if ($user && $user->hasRole('doctor')) {
             $query = $query->where('created_by', auth()->user()->id);
+        }
+        
+        // Pharmacist and Lab Technologist - Related Only (filter by encounters they are related to)
+        if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            // Filter to show only problems from encounters they are related to
+            // This would require joining with encounter tables - for now, show all as read-only
+            // Implementation can be refined based on actual relationship structure
         }
 
         $filter = $request->filter;
@@ -147,9 +160,17 @@ class ProblemsController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        
+        // Edit problem list: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('vendor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to edit problem lists.');
+        }
+        
         $data['name'] = $request->name;
         $data['type'] = 'encounter_problem';
         $data['value'] = strtolower(Str::slug($request->name, '-'));
+        $data['created_by'] = auth()->id();
         $query = Constant::create($data);
         if ($request->custom_fields_data) {
             $query->updateCustomFieldData(json_decode($request->custom_fields_data));
@@ -186,6 +207,21 @@ class ProblemsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+        
+        // Edit problem list: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('vendor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to edit problem lists.');
+        }
+        
+        // Doctor limited to own problems
+        if ($user && $user->hasRole('doctor')) {
+            $query = Constant::findOrFail($id);
+            if ($query->created_by != $user->id) {
+                abort(403, 'You can only edit your own problem lists.');
+            }
+        }
+        
         $query = Constant::findOrFail($id);
         $data['name'] = $request->name;
         $data['type'] = 'encounter_problem';
@@ -206,6 +242,21 @@ class ProblemsController extends Controller
      */
     public function destroy($id)
     {
+        $user = auth()->user();
+        
+        // Edit problem list: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('vendor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to delete problem lists.');
+        }
+        
+        // Doctor limited to own problems
+        if ($user && $user->hasRole('doctor')) {
+            $data = Constant::findOrFail($id);
+            if ($data->created_by != $user->id) {
+                abort(403, 'You can only delete your own problem lists.');
+            }
+        }
+        
         $data = Constant::findOrFail($id);
 
         $data->delete();
