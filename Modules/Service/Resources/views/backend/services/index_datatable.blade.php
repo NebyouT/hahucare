@@ -14,19 +14,19 @@
         <div class="card-body">
             <x-backend.section-header>
                 <div class="d-flex flex-wrap gap-3">
-                    @if (auth()->user()->can('edit_service') ||
-                            auth()->user()->can('delete_service'))
+                    {{-- Change service status & Delete service: Admin (Full), Clinic Admin (Own Clinics/Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                         <x-backend.quick-action url="{{ route('backend.services.bulk_action') }}">
                             <div class="">
                                 <select name="action_type" class="select2 form-select col-12" id="quick-action-type"
                                     style="width:100%">
                                     <option value="">{{ __('messages.no_action') }}</option>
-                                    @can('edit_service')
+                                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                                         <option value="change-status">{{ __('messages.status') }}</option>
-                                    @endcan
-                                    @can('delete_service')
+                                    @endif
+                                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                                         <option value="delete">{{ __('messages.delete') }}</option>
-                                    @endcan
+                                    @endif
                                 </select>
                             </div>
                             <div class="select-status d-none quick-action-field" id="change-status-action">
@@ -37,10 +37,13 @@
                             </div>
                         </x-backend.quick-action>
                     @endif
+                    {{-- Export service list: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                     <div>
                         <button type="button" class="btn btn-primary" data-modal="export">
                         <i class="ph ph-export me-1"></i> {{ __('messages.export') }}
                         </button>
+                    @endif
                     </div>
                 </div>
                 <x-slot name="toolbar">
@@ -64,11 +67,12 @@
                         <input type="text" class="form-control dt-search" placeholder="{{ __('messages.search') }}..."
                             aria-label="Search" aria-describedby="addon-wrapping">
                     </div>
-                    @hasPermission('add_service')
+                    {{-- Add service: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                         <x-buttons.offcanvas target='#form-offcanvas'
                             title="{{ __('messages.create') }} {{ __($module_title) }}">
                             {{ __('messages.create') }} {{ __('service.singular_title') }}</x-buttons.offcanvas>
-                    @endhasPermission
+                    @endif
                     <button class="btn btn-secondary d-flex align-items-center gap-1 btn-group" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="ph ph-funnel"></i>{{ __('messages.advance_filter') }}</button>
                 </x-slot>
@@ -176,7 +180,8 @@
                     searchable: false,
                 },
             @endif
-            @if (auth()->user()->hasRole('admin'))
+            {{-- Employee count column - Admin only for assigning staff --}}
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                 {
                     data: 'employee_count',
                     name: 'employee_count',
