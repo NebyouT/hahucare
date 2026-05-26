@@ -187,20 +187,12 @@ public function create()
 {
     $user = auth()->user();
     
-    // Pharmacist and lab_technologist cannot allocate beds
-    if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+// Pharmacist and lab_technologist cannot allocate beds
+        if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
             abort(403, 'You are not allowed to allocate beds.');
-    }
-    
-    // Receptionist has limited access - only for their own clinic
-    if ($user && $user->hasRole('receptionist')) {
-        $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
-        if (!$receptionist || !$receptionist->clinic_id) {
-            abort(403, 'You are not assigned to any clinic.');
         }
-    }
-    
-    // Filter clinic admins and clinics based on user role
+
+        // Filter clinic admins and clinics based on user role
     if ($user && $user->hasRole('doctor')) {
         // Get clinic IDs where the doctor is mapped
         $doctorClinicIds = DoctorClinicMapping::where('doctor_id', $user->id)
@@ -374,34 +366,7 @@ public function create()
 
     public function store(BedAllocationRequest $request)
     {
-        $user = auth()->user();
-        
-        // Pharmacist and lab_technologist cannot allocate beds
-        if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
-            abort(403, 'You are not allowed to allocate beds.');
-        }
-        
-        // Receptionist limited to own clinic
-        if ($user && $user->hasRole('receptionist')) {
-            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
-            if (!$receptionist || !$receptionist->clinic_id) {
-                abort(403, 'You are not assigned to any clinic.');
-            }
-        }
-        
         $data = $request->validated();
-        
-        // Receptionist: ensure allocation is for their clinic
-        if ($user && $user->hasRole('receptionist')) {
-            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
-            if ($receptionist && $receptionist->clinic_id) {
-                $encounter = PatientEncounter::select('id', 'user_id', 'vendor_id', 'clinic_id')
-                    ->find($data['encounter_id']);
-                if ($encounter && $encounter->clinic_id != $receptionist->clinic_id) {
-                    abort(403, 'You can only allocate beds for your own clinic.');
-                }
-            }
-        }
 
         $encounter = PatientEncounter::select('id', 'user_id', 'vendor_id', 'clinic_id')
             ->find($data['encounter_id']);
@@ -592,21 +557,6 @@ public function create()
     // Edit allocation
     public function edit($id)
     {
-        $user = auth()->user();
-        
-        // Pharmacist and lab_technologist cannot edit bed allocations
-        if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
-            abort(403, 'You are not allowed to edit bed allocations.');
-        }
-        
-        // Receptionist limited to own clinic
-        if ($user && $user->hasRole('receptionist')) {
-            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
-            if (!$receptionist || !$receptionist->clinic_id) {
-                abort(403, 'You are not assigned to any clinic.');
-            }
-        }
-        
         try {
             $allocation = BedAllocation::SetRole(auth()->user())->with(['bedMaster', 'patientInfo', 'clinicAdmin'])->findOrFail($id);
 
@@ -686,21 +636,6 @@ public function create()
 // Update allocation
     public function update(BedAllocationRequest $request, $id)
     {
-        $user = auth()->user();
-        
-        // Pharmacist and lab_technologist cannot update bed allocations
-        if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
-            abort(403, 'You are not allowed to update bed allocations.');
-        }
-        
-        // Receptionist limited to own clinic
-        if ($user && $user->hasRole('receptionist')) {
-            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
-            if (!$receptionist || !$receptionist->clinic_id) {
-                abort(403, 'You are not assigned to any clinic.');
-            }
-        }
-        
         $data = $request->validated();
         $bedAllocation = BedAllocation::findOrFail($id);
 

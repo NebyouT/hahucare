@@ -8,25 +8,17 @@
     <div class="card-main mb-5">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-                @if (auth()->user()->can('delete_bed_type')) 
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                 <x-backend.quick-action url="{{ route('backend.' . $module_name . '.bulk_action') }}">
                     <div class="">
                         <select name="action_type" class="form-control select2 col-12" id="quick-action-type"
                             style="width:100%">
                             <option value="">{{ __('messages.no_action') }}</option>
-                            <!-- @can('edit_bed_type')
-                            <option value="change-status">{{ __('messages.lbl_status') }}</option>
-                            @endcan -->
-                            @can('delete_bed_type')
+                            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                             <option value="delete">{{ __('messages.delete') }}</option>
-                            @endcan
-                          
-                        </select>
-                    </div>
-                    <div class="select-status d-none quick-action-field" id="change-status-action">
-                        <select name="status" class="form-control select2" id="status" style="width:100%">
-                            <option value="1" selected>{{ __('messages.active') }}</option>
-                            <option value="0">{{ __('messages.inactive') }}</option>
+                            @elseif (auth()->user()->hasRole('vendor'))
+                            <option value="delete">{{ __('messages.delete') }}</option>
+                            @endif
                         </select>
                     </div>
                 </x-backend.quick-action>
@@ -52,12 +44,12 @@
                         aria-label="Search" aria-describedby="addon-wrapping">
                 </div>
 
-                @can('add_bed_type')
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                 <a href="{{ route('backend.' . $module_name . '.create') }}"
                     class="btn btn-primary d-flex align-items-center gap-1" id="add-post-button">
                     <i class="ph ph-plus-circle"></i>{{ __('messages.new') }}
                 </a>
-                @endcan
+                @endif
             </x-slot>
         </x-backend.section-header>
 

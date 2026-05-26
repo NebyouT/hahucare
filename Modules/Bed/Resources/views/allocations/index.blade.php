@@ -8,16 +8,17 @@
     <div class="card-main mb-5">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-                @if (auth()->user()->can('edit_allocations') ||
-                        auth()->user()->can('delete_allocations'))
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                     <x-backend.quick-action url="{{ route('backend.bed-allocation.bulk_action') }}">
                         <div class="">
                             <select name="action_type" class="form-control select2 col-12" id="quick-action-type"
                                 style="width:100%">
                                 <option value="">{{ __('messages.no_action') }}</option>
-                                @can('delete_allocations')
+                                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                                     <option value="delete">{{ __('messages.delete') }}</option>
-                                @endcan
+                                @elseif (auth()->user()->hasRole('vendor'))
+                                    <option value="delete">{{ __('messages.delete') }}</option>
+                                @endif
                             </select>
                         </div>
                     </x-backend.quick-action>
@@ -42,12 +43,12 @@
                         aria-label="Search" aria-describedby="addon-wrapping">
                 </div>
                 
-                @can('add_allocations') 
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
                 <a href="{{ route('backend.' . $module_name . '.create') }}"
                     class="btn btn-primary d-flex align-items-center gap-1">
                     <i class="ph ph-plus-circle"></i>{{ __('messages.new') }}
                 </a>
-                @endcan 
+                @endif 
             </x-slot>
         </x-backend.section-header>
 
