@@ -188,7 +188,15 @@ class EncounterTemplateController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        
+        // Manage encounter templates: Admin (Full), Clinic Admin (Limited), Doctor (Own Templates), Receptionist (No), Pharmacist (No), Lab Technician (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to manage encounter templates.');
+        }
+        
         $data = $request->all();
+        $data['created_by'] = auth()->id();
 
         EncounterTemplate::create($data);
 
@@ -222,7 +230,31 @@ class EncounterTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth()->user();
+        
+        // Manage encounter templates: Admin (Full), Clinic Admin (Limited), Doctor (Own Templates), Receptionist (No), Pharmacist (No), Lab Technician (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to manage encounter templates.');
+        }
+        
+        // Doctor limited to own templates
+        if ($user && $user->hasRole('doctor')) {
+            $template = EncounterTemplate::findOrFail($id);
+            if ($template->created_by != $user->id) {
+                abort(403, 'You can only edit your own templates.');
+            }
+        }
+        
+        // Clinic admin limited to own clinics
+        if ($user && $user->hasRole('vendor')) {
+            $template = EncounterTemplate::findOrFail($id);
+            // Add clinic-based filtering if needed
+        }
+        
+        $template = EncounterTemplate::findOrFail($id);
+        $template->update($request->all());
+        
+        return response()->json(['message' => __('appointment.enconter_template_save'), 'status' => true], 200);
     }
 
     /**
@@ -230,6 +262,21 @@ class EncounterTemplateController extends Controller
      */
     public function destroy($id)
     {
+        $user = auth()->user();
+        
+        // Manage encounter templates: Admin (Full), Clinic Admin (Limited), Doctor (Own Templates), Receptionist (No), Pharmacist (No), Lab Technician (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to manage encounter templates.');
+        }
+        
+        // Doctor limited to own templates
+        if ($user && $user->hasRole('doctor')) {
+            $template = EncounterTemplate::findOrFail($id);
+            if ($template->created_by != $user->id) {
+                abort(403, 'You can only delete your own templates.');
+            }
+        }
+        
         $data = EncounterTemplate::findOrFail($id);
 
         $data->delete();

@@ -9,12 +9,31 @@
         class='btn text-info p-0 fs-5' data-bs-toggle="tooltip" title="{{ __('appointment.patient_encounter') }}"><i
             class="icon ph ph-squares-four align-middle"></i></a>
 
-    @hasPermission('delete_encounter_template')
+    {{-- Delete encounter template: Admin (Full), Clinic Admin (Limited), Doctor (Own Templates), Receptionist (No), Pharmacist (No), Lab Technician (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
         <a href="{{ route('backend.encounter-template.destroy', $data->id) }}"
             id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
             data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"
             title="{{ __('messages.delete') }}"
             data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->name ?? __('Unknown'), 'module' => __('appointment.encounter_template')]) }}"><i
                 class="ph ph-trash"></i></a>
-    @endhasPermission
+    @elseif (auth()->user()->hasRole('vendor'))
+        {{-- Vendor limited to own clinics - add clinic check if needed --}}
+        <a href="{{ route('backend.encounter-template.destroy', $data->id) }}"
+            id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
+            data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"
+            title="{{ __('messages.delete') }}"
+            data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->name ?? __('Unknown'), 'module' => __('appointment.encounter_template')]) }}"><i
+                class="ph ph-trash"></i></a>
+    @elseif (auth()->user()->hasRole('doctor'))
+        {{-- Doctor limited to own templates --}}
+        @if ($data->created_by == auth()->id())
+            <a href="{{ route('backend.encounter-template.destroy', $data->id) }}"
+                id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
+                data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"
+                title="{{ __('messages.delete') }}"
+                data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->name ?? __('Unknown'), 'module' => __('appointment.encounter_template')]) }}"><i
+                    class="ph ph-trash"></i></a>
+        @endif
+    @endif
 </div>

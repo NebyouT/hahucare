@@ -1,7 +1,10 @@
 <div class="text-end d-flex gap-3 align-items-center">
-    <button type="button" class="btn text-success p-0 fs-5" data-crud-id="{{ $data->id }}"
-        title="{{ __('messages.edit') }} " data-bs-toggle="tooltip"> <i
+    {{-- Edit/Close encounter: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technician (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || (auth()->user()->hasRole('doctor') && $data->doctor_id == auth()->id()))
+        <button type="button" class="btn text-success p-0 fs-5" data-crud-id="{{ $data->id }}"
+            title="{{ __('messages.edit') }} " data-bs-toggle="tooltip"> <i
             class="ph ph-pencil-simple-line align-middle"></i></button>
+    @endif
     {{-- <button type='button' data-assign-module="{{$data->id}}" data-assign-target='#patient-encounter-offcanvas' data-assign-event='patient-dashboard' class='btn text-primary p-0 fs-5' data-bs-toggle='tooltip' title='Patient Encounter'><i class="icon ph ph-squares-four align-middle"></i></button> --}}
 
 
@@ -15,11 +18,14 @@
             class='btn text-info p-0 fs-5' data-bs-toggle="tooltip"
             title="{{ __('clinic.appointment_patient_records') }}"><i class="ph ph-notepad align-middle"></i></a>
     @endif
-    <a href="{{ route('backend.appointments.destroy', $data->id) }}" id="delete-{{ $module_name }}-{{ $data->id }}"
-        class="btn text-danger p-0 fs-5" data-type="ajax" data-method="DELETE" data-token="{{ csrf_token() }}"
-        data-bs-toggle="tooltip" title="{{ __('messages.delete') }}"
-        data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->user->full_name ?? default_user_name(), 'module' => __('appointment.patient_encounter')]) }}"><i
+    {{-- Delete encounter: Admin (Compliance Only), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technician (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
+        <a href="{{ route('backend.appointments.destroy', $data->id) }}" id="delete-{{ $module_name }}-{{ $data->id }}"
+            class="btn text-danger p-0 fs-5" data-type="ajax" data-method="DELETE" data-token="{{ csrf_token() }}"
+            data-bs-toggle="tooltip" title="{{ __('messages.delete') }}"
+            data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->user->full_name ?? default_user_name(), 'module' => __('appointment.patient_encounter')]) }}"><i
             class="ph ph-trash align-middle"></i></a>
+    @endif
 
 
     @if ($customform)

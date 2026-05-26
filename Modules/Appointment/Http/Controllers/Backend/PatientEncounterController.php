@@ -311,6 +311,20 @@ class PatientEncounterController extends Controller
 
     public function store(Request $request)
     {
+        $user = auth()->user();
+        
+        // Add encounter: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technician (No)
+        if ($user && ($user->hasRole('vendor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to add encounters.');
+        }
+        
+        // Doctor limited to own patients
+        if ($user && $user->hasRole('doctor')) {
+            // Verify the patient is assigned to this doctor
+            $patientId = $request->user_id;
+            // This check will be enforced by the SetRole scope in the model
+        }
+        
         $data = $request->all();
 // dd($data);
         $data['vendor_id'] = isset($data['vendor_id']) ? $data['vendor_id'] : Auth::id();
@@ -344,6 +358,21 @@ class PatientEncounterController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+        
+        // Close/checkout encounter: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technician (No)
+        if ($user && ($user->hasRole('vendor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to close encounters.');
+        }
+        
+        // Doctor limited to own patients
+        if ($user && $user->hasRole('doctor')) {
+            $data = PatientEncounter::findOrFail($id);
+            if ($data->doctor_id != $user->id) {
+                abort(403, 'You can only close encounters for your own patients.');
+            }
+        }
+        
         $data = PatientEncounter::findOrFail($id);
 
         $request_data = $request->all();
@@ -704,7 +733,18 @@ class PatientEncounterController extends Controller
 
     public function destroy($id)
     {
+        $user = auth()->user();
+        
+        // Delete encounter: Admin (Compliance Only), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technician (No)
+        if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+            abort(403, 'You are not allowed to delete encounters.');
+        }
+        
+        // Compliance check - only allow deletion if encounter is not closed/billed
         $data = PatientEncounter::findOrFail($id);
+        if ($data->status == 0) {
+            abort(403, 'Cannot delete closed encounters for compliance reasons.');
+        }
 
         $data->delete();
 

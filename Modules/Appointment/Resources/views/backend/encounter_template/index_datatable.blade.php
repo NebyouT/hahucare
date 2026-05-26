@@ -8,19 +8,18 @@
     <div class="table-content mb-5">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-                @if (auth()->user()->can('edit_' . $module_title) ||
-                        auth()->user()->can('delete_' . $module_title))
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor'))
                     <x-backend.quick-action url="{{ route('backend.encounter-template.bulk_action') }}">
                         <div class="">
                             <select name="action_type" class="select2 form-select col-12" id="quick-action-type"
                                 style="width:100%">
                                 <option value="">{{ __('messages.no_action') }}</option>
-                                @can('edit_Appointment')
+                                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor'))
                                     <option value="change-status">{{ __('messages.status') }}</option>
-                                @endcan
-                                @can('delete_Appointment')
+                                @endif
+                                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                                     <option value="delete">{{ __('messages.delete') }}</option>
-                                @endcan
+                                @endif
                             </select>
                         </div>
                         <div class="select-status d-none quick-action-field" id="change-status-action">
@@ -66,10 +65,10 @@
                 {{-- <button class="btn btn-secondary d-flex align-items-center gap-1 btn-group" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="ph ph-funnel"></i>{{__('messages.advance_filter')}}</button> --}}
 
 
-                @hasPermission('add_service')
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor'))
                     <x-buttons.offcanvas target='#form-offcanvas' title="{{ __('messages.create') }} {{ __($module_title) }}">
                         {{ __('messages.new') }}</x-buttons.offcanvas>
-                @endhasPermission
+                @endif
 
             </x-slot>
         </x-backend.section-header>
