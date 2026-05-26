@@ -45,6 +45,7 @@
 
                     <div class="row g-4 mb-5">
                         <!-- Appointment Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.appointments.index') }}" class="stretched-link"></a>
@@ -61,14 +62,13 @@
                                                 class="img-fluid avatar-50 object-contain">
                                         </div>
                                     </div>
-                                    {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">_</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Services Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.services.index') }}" class="stretched-link"></a>
@@ -85,12 +85,10 @@
                                                 class="img-fluid avatar-50 object-contain">
                                         </div>
                                     </div>
-                                    {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         @if (multiVendor() == '1' && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')))
                             <!-- Vendor Card -->
@@ -111,15 +109,13 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
                         @endif
 
                         <!-- Clinics Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('pharmacist') || auth()->user()->hasRole('lab_technician'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.clinics.index') }}" class="stretched-link"></a>
@@ -135,14 +131,13 @@
                                                 class="img-fluid avatar-50 object-contain">
                                         </div>
                                     </div>
-                                    {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Users Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.customers.index') }}" class="stretched-link"></a>
@@ -158,16 +153,15 @@
                                                 class="img-fluid avatar-50 object-contain">
                                         </div>
                                     </div>
-                                    {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
+                        @endif
 
 
                         @if (checkPlugin('pharma') == 'active')
                             {{-- total pharma  --}}
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                             <div class="col-sm-6 col-lg-4">
                                 <div
                                     class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -186,14 +180,13 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @elseif(multiVendor() == 0)
                             {{-- total receptionist  --}}
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                             <div class="col-sm-6 col-lg-4">
                                 <div
                                     class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -214,14 +207,13 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endif
                         {{-- total doctor --}}
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('pharmacist') || auth()->user()->hasRole('lab_technician'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.doctor.index') }}" class="stretched-link"></a>
@@ -237,16 +229,15 @@
                                                 class="img-fluid avatar-50 object-contain">
                                         </div>
                                     </div>
-                                    {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
+                        @endif
 
 
                         @if (checkPlugin('pharma') == 'active')
                             {{-- total medicine --}}
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('pharmacist'))
                             <div class="col-sm-6 col-lg-4">
                                 <div
                                     class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -265,14 +256,13 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                    </div> --}}
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @elseif(multiVendor() == 0)
                             {{-- admin earning  --}}
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                             <div class="col-sm-6 col-lg-4">
                                 <div
                                     class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -293,14 +283,13 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @elseif(multiVendor() == 1)
                             {{-- admin earning  --}}
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                             <div class="col-sm-6 col-lg-4">
                                 <div
                                     class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -321,16 +310,14 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endif
                         @if (checkPlugin('pharma') == 'active')
                             {{-- total supplier --}}
-                            @if (multiVendor() != 1)
+                            @if (multiVendor() != 1 && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')))
                                 <div class="col-sm-6 col-lg-4">
                                     <div
                                         class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -350,15 +337,13 @@
                                                         class="img-fluid avatar-50 object-contain">
                                                 </div>
                                             </div>
-                                            {{-- <div class="mt-3">
-                                                <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
                             @endif
                         @else
                             {{-- admin earning  --}}
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('doctor'))
                             <div class="col-sm-6 col-lg-4">
                                 <div
                                     class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
@@ -379,14 +364,13 @@
                                                     class="img-fluid avatar-50 object-contain">
                                             </div>
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="badge bg-primary bg-opacity-10 text-primary">View All</span>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endif
                         <!-- Revenue Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('pharmacist'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all mb-0">
                                 <div class="card-body p-4">
@@ -403,14 +387,13 @@
                                                 class="img-fluid avatar-50 object-contain">
                                         </div>
                                     </div>
-                                    {{-- <div class="mt-3">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary">Total Revenue</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Total Labs Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.labs.index') }}" class="stretched-link"></a>
@@ -429,8 +412,10 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Total Lab Services Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.lab-services.index') }}" class="stretched-link"></a>
@@ -449,8 +434,10 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Total Referrals Card -->
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
                         <div class="col-sm-6 col-lg-4">
                             <div class="card dashboard-card border-0 hover-shadow transition-all position-relative mb-0">
                                 <a href="{{ route('backend.patientreferral.index') }}" class="stretched-link"></a>
@@ -469,6 +456,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                     </div>
                 </div>

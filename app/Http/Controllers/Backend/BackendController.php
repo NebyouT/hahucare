@@ -44,8 +44,29 @@ class BackendController extends Controller
         $current_user = setNamePrefix(User::find(auth()->user()->id));
         $today = Carbon::today();
         $action = $request->action ?? 'reset';
+        $user = auth()->user();
 
+        // Role-based filtering
         $appointment = Appointment::CheckMultivendor();
+        
+        // Filter appointments based on role
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $appointment->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $appointment->where('doctor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $appointment->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $appointment->whereHas('encounter', function($q) use ($lab) {
+                    $q->where('lab_id', $lab->id);
+                });
+            }
+        }
+        
         $totalappointment = $appointment->count();
         $patientcount = $appointment->with(['user'])->get();
         $childAge = 25;
@@ -65,10 +86,24 @@ class BackendController extends Controller
                 $adultPatientCount++;
             }
         }
-        $paymenthistory = Appointment::CheckMultivendor()->with(['user', 'clinicservice', 'doctor', 'cliniccenter', 'appointmenttransaction'])
-            ->orderByDesc('updated_at')
-            ->take(5)
-            ->get();
+        $paymenthistory = Appointment::CheckMultivendor()->with(['user', 'clinicservice', 'doctor', 'cliniccenter', 'appointmenttransaction']);
+        
+        // Role-based filtering for payment history
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $paymenthistory->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $paymenthistory->where('doctor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $paymenthistory->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('pharmacist')) {
+            $paymenthistory->whereHas('encounter', function($q) use ($user) {
+                $q->where('pharma_id', $user->id);
+            });
+        }
+        
+        $paymenthistory = $paymenthistory->orderByDesc('updated_at')->take(5)->get();
 
         // $paymenthistory = Appointment::CheckMultivendor()->with(['user', 'clinicservice', 'doctor', 'cliniccenter', 'appointmenttransaction'])->whereHas('appointmenttransaction', function ($query) {
         //     $query->where('payment_status', 1);
@@ -79,22 +114,73 @@ class BackendController extends Controller
 
 
 
-        $upcomingappointments = Appointment::CheckMultivendor()->with(['user', 'clinicservice', 'doctor', 'cliniccenter'])
-            ->where('start_date_time', '>', now())
+        $upcomingappointments = Appointment::CheckMultivendor()->with(['user', 'clinicservice', 'doctor', 'cliniccenter']);
+        
+        // Role-based filtering for upcoming appointments
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $upcomingappointments->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $upcomingappointments->where('doctor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $upcomingappointments->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $upcomingappointments->whereHas('encounter', function($q) use ($lab) {
+                    $q->where('lab_id', $lab->id);
+                });
+            }
+        }
+        
+        $upcomingappointments = $upcomingappointments->where('start_date_time', '>', now())
             ->where('status', 'confirmed')
             ->orderByDesc('updated_at')
             ->take(5)
             ->get();
 
-        $appointmenttransaction = Appointment::CheckMultivendor()->with(['appointmenttransaction'])
-            ->whereHas('appointmenttransaction', function ($query) {
+        $appointmenttransaction = Appointment::CheckMultivendor()->with(['appointmenttransaction']);
+        
+        // Role-based filtering for revenue calculation
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $appointmenttransaction->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $appointmenttransaction->where('doctor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $appointmenttransaction->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('pharmacist')) {
+            $appointmenttransaction->whereHas('encounter', function($q) use ($user) {
+                $q->where('pharma_id', $user->id);
+            });
+        }
+        
+        $appointmenttransaction = $appointmenttransaction->whereHas('appointmenttransaction', function ($query) {
                 $query->where('payment_status', 1);
             })
             ->take(5)
             ->get();
 
-        $total_amt = Appointment::CheckMultivendor()->with(['appointmenttransaction'])
-            ->where('status', 'checkout')
+        $total_amt = Appointment::CheckMultivendor()->with(['appointmenttransaction']);
+        
+        // Role-based filtering for total revenue
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $total_amt->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $total_amt->where('doctor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $total_amt->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('pharmacist')) {
+            $total_amt->whereHas('encounter', function($q) use ($user) {
+                $q->where('pharma_id', $user->id);
+            });
+        }
+        
+        $total_amt = $total_amt->where('status', 'checkout')
             ->whereHas('appointmenttransaction', function ($query) {
                 $query->where('payment_status', 1);
             })
@@ -110,6 +196,24 @@ class BackendController extends Controller
 
         $appointmentQuery = Appointment::CheckMultivendor()
             ->whereNull('deleted_at');
+        
+        // Role-based filtering for appointment chart
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $appointmentQuery->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $appointmentQuery->where('doctor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $appointmentQuery->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $appointmentQuery->whereHas('encounter', function($q) use ($lab) {
+                    $q->where('lab_id', $lab->id);
+                });
+            }
+        }
 
         switch ($filter) {
             case 'year':
@@ -177,7 +281,26 @@ class BackendController extends Controller
         $total_clinicservice = $clinicservice->count();
 
         $clinicsQuery = Clinics::query();
-        if (multiVendor() == "0") {
+        
+        // Role-based filtering for clinics
+        if ($user->hasRole('vendor')) {
+            $clinicsQuery->where('vendor_id', $user->id);
+        } elseif ($user->hasRole('doctor')) {
+            $clinicIds = DoctorClinicMapping::where('doctor_id', $user->id)->pluck('clinic_id');
+            $clinicsQuery->whereIn('id', $clinicIds);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $clinicsQuery->whereIn('id', $clinicIds);
+        } elseif ($user->hasRole('pharmacist')) {
+            $clinicsQuery->where('id', $user->clinic_id);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $clinicsQuery->where('id', $lab->clinic_id);
+            }
+        }
+        
+        if (multiVendor() == "0" && ($user->hasRole('admin') || $user->hasRole('demo_admin'))) {
             $clinicsQuery = $clinicsQuery->whereHas('vendor', function ($q) {
                 $q->whereIn('user_type', ['admin', 'demo_admin']);
             });
@@ -187,7 +310,24 @@ class BackendController extends Controller
         $total_pharma = User::where('user_type', 'pharma')->whereNull('deleted_at')->count();
 
         $doctorQuery = Doctor::query()->where('status', 1);
-        if (multiVendor() == "0") {
+        
+        // Role-based filtering for doctors
+        if ($user->hasRole('vendor')) {
+            $doctorQuery->where('vendor_id', $user->id);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $doctorIds = DoctorClinicMapping::whereIn('clinic_id', $clinicIds)->pluck('doctor_id');
+            $doctorQuery->whereIn('id', $doctorIds);
+        } elseif ($user->hasRole('pharmacist')) {
+            $doctorQuery->where('clinic_id', $user->clinic_id);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $doctorQuery->where('clinic_id', $lab->clinic_id);
+            }
+        }
+        
+        if (multiVendor() == "0" && ($user->hasRole('admin') || $user->hasRole('demo_admin'))) {
             $doctorQuery->whereHas('vendor', function ($q) {
                 $q->whereIn('user_type', ['admin', 'demo_admin']);
             });
@@ -196,24 +336,64 @@ class BackendController extends Controller
         $total_supplier = checkPlugin('pharma') == 'active'  
             ? \Modules\Pharma\Models\Supplier::whereNull('deleted_at')->count() 
             : 0;
+        
+        // Role-based filtering for medicines
+        $medicineQuery = \Modules\Pharma\Models\Medicine::where('expiry_date', '>=', Carbon::today());
+        if ($user->hasRole('pharmacist')) {
+            $medicineQuery->where('pharma_id', $user->id);
+        } elseif ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $medicineQuery->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('lab_technician')) {
+            $medicineQuery->where('id', 0); // No access
+        }
         $total_medicine = checkPlugin('pharma') == 'active' 
-            ? \Modules\Pharma\Models\Medicine::where('expiry_date', '>=', Carbon::today())->count() 
+            ? $medicineQuery->count() 
             : 0;
 
         // Lab statistics
-        $total_labs = \Modules\Laboratory\Models\Lab::count();
-        $total_lab_services = \Modules\Laboratory\Models\LabService::count();
-        $total_referrals = \Modules\PatientReferral\Models\PatientReferral::count();
-
-        // For clinic admin (vendor), limit stats to their clinic
-        if (auth()->user()->hasRole('vendor')) {
-            $userClinicIds = Clinics::where('vendor_id', auth()->id())->pluck('id');
-            $total_labs = \Modules\Laboratory\Models\Lab::whereIn('clinic_id', $userClinicIds)->count();
-            $total_lab_services = \Modules\Laboratory\Models\LabService::whereIn('lab_id', function($query) use ($userClinicIds) {
+        $labQuery = \Modules\Laboratory\Models\Lab::query();
+        $labServiceQuery = \Modules\Laboratory\Models\LabService::query();
+        $referralQuery = \Modules\PatientReferral\Models\PatientReferral::query();
+        
+        // Role-based filtering for labs
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $labQuery->whereIn('clinic_id', $userClinicIds);
+            $labServiceQuery->whereIn('lab_id', function($query) use ($userClinicIds) {
                 $query->select('id')->from('labs')->whereIn('clinic_id', $userClinicIds);
-            })->count();
-            $total_referrals = \Modules\PatientReferral\Models\PatientReferral::whereIn('clinic_id', $userClinicIds)->count();
+            });
+            $referralQuery->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $clinicIds = DoctorClinicMapping::where('doctor_id', $user->id)->pluck('clinic_id');
+            $labQuery->whereIn('clinic_id', $clinicIds);
+            $labServiceQuery->whereIn('lab_id', function($query) use ($clinicIds) {
+                $query->select('id')->from('labs')->whereIn('clinic_id', $clinicIds);
+            });
+            $referralQuery->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $labQuery->whereIn('clinic_id', $clinicIds);
+            $labServiceQuery->whereIn('lab_id', function($query) use ($clinicIds) {
+                $query->select('id')->from('labs')->whereIn('clinic_id', $clinicIds);
+            });
+            $referralQuery->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $labQuery->where('id', $lab->id);
+                $labServiceQuery->where('lab_id', $lab->id);
+                $referralQuery->where('clinic_id', $lab->clinic_id);
+            }
+        } elseif ($user->hasRole('pharmacist')) {
+            $labQuery->where('id', 0); // No access
+            $labServiceQuery->where('id', 0); // No access
+            $referralQuery->where('id', 0); // No access
         }
+        
+        $total_labs = $labQuery->count();
+        $total_lab_services = $labServiceQuery->count();
+        $total_referrals = $referralQuery->count();
 
 
         $date_range = '';
