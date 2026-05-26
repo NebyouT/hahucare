@@ -17,8 +17,9 @@
 
 
 
+    {{-- Prescription view: Pharmacist (Prescription Related), Doctor (Own Patients), Admin (Full) --}}
     @if ($data->patientEncounter && $data->patientEncounter->prescriptions->isNotEmpty())
-        @if (Auth::user()->user_type !== 'doctor')
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('pharmacist') || (auth()->user()->hasRole('doctor') && $data->doctor_id == auth()->id()))
             @if(checkPlugin('pharma') == 'active' && Route::has('backend.appointments.show-medicine-info'))
                 <a href="{{ route('backend.appointments.show-medicine-info', ['id' => $data->patientEncounter->id]) }}"
                     class='btn text-success p-0 fs-5' data-bs-toggle="tooltip" title="{{ __('appointment.prescription') }}">
@@ -27,12 +28,15 @@
             @endif
         @endif
     @endif
+    {{-- Encounter details: Admin (Full), Vendor (Read Only), Doctor (Own Patients), Receptionist (Limited), Pharmacist (Prescription Related), Lab Technician (Lab Related) --}}
     @if (!in_array($data->status, ['pending', 'confirm', 'cancel']) && $data->status !== null)
         @if ($data->patientEncounter != null)
-            <a href="{{ route('backend.encounter.encounter-detail-page', ['id' => $data->patientEncounter->id]) }}"
-                data-type="ajax" class='btn text-info p-0 fs-5' data-bs-toggle="tooltip"
-                title="{{ __('appointment.patient_encounter') }}"><i
-                    class="icon ph ph-squares-four align-middle"></i></a>
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || (auth()->user()->hasRole('doctor') && $data->doctor_id == auth()->id()) || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('pharmacist') || auth()->user()->hasRole('lab_technician'))
+                <a href="{{ route('backend.encounter.encounter-detail-page', ['id' => $data->patientEncounter->id]) }}"
+                    data-type="ajax" class='btn text-info p-0 fs-5' data-bs-toggle="tooltip"
+                    title="{{ __('appointment.patient_encounter') }}"><i
+                        class="icon ph ph-squares-four align-middle"></i></a>
+            @endif
         @endif
     @endif
 
@@ -64,14 +68,27 @@
 
     <!-- <button type='button' data-assign-module="{{ $data->id }}" data-assign-target='#appointment-offcanvas' data-assign-event='appointment-details' class='btn text-primary p-0 fs-5' data-bs-toggle='tooltip' title='Clinic Session'><i class="fa-solid fa-eye"></i></a> -->
     </button>
+    {{-- Bill PDF download: Admin (Full), Vendor (Own Clinics), Doctor (Own Patients), Receptionist (Own Clinic), Pharmacist (Pharmacy Bills), Lab Technician (Lab Bills) --}}
     @if ($pay_status == 1 && $data->status == 'checkout')
-        <a href="{{ route('backend.appointments.invoice_detail', ['id' => $data->id]) }}" data-type="ajax"
-            class='btn text-info p-0 fs-5' data-bs-toggle="tooltip" title="{{ __('clinic.invoice_detail') }}">
-            <i class="ph ph-file-pdf"></i>
-        </a>
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || (auth()->user()->hasRole('doctor') && $data->doctor_id == auth()->id()) || auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('pharmacist') || auth()->user()->hasRole('lab_technician'))
+            <a href="{{ route('backend.appointments.invoice_detail', ['id' => $data->id]) }}" data-type="ajax"
+                class='btn text-info p-0 fs-5' data-bs-toggle="tooltip" title="{{ __('clinic.invoice_detail') }}">
+                <i class="ph ph-file-pdf"></i>
+            </a>
+        @endif
     @endif
-    @unless (auth()->user()->hasRole('doctor'))
-        @hasPermission('delete_clinic_appointment_list')
+    {{-- Delete appointment: Admin (Full), Vendor (Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technician (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
+        <a href="{{ route('backend.appointment.destroy', $data->id) }}"
+            id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
+            data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"
+            title="{{ __('messages.delete') }}"
+            data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->user->full_name ?? default_user_name(), 'module' => __('appointment.singular_title')]) }}">
+            <i class="ph ph-trash"></i>
+        </a>
+    @elseif (auth()->user()->hasRole('vendor'))
+        {{-- Vendor has limited delete - only for their own clinics --}}
+        @if ($data->cliniccenter && $data->cliniccenter->vendor_id == auth()->id())
             <a href="{{ route('backend.appointment.destroy', $data->id) }}"
                 id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
                 data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"
@@ -79,8 +96,8 @@
                 data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->user->full_name ?? default_user_name(), 'module' => __('appointment.singular_title')]) }}">
                 <i class="ph ph-trash"></i>
             </a>
-        @endhasPermission
-    @endunless
+        @endif
+    @endif
 
 
     @if ($customform)

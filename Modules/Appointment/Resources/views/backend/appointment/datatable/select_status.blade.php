@@ -1,14 +1,22 @@
 @if (!in_array($data->status, ['completed', 'check_in', 'checkout', 'cancelled']))
-    <select name="branch_for" class="form-select form-select-sm change-select select2"
-        data-placeholder="{{ __('messages.select_status') }}" data-token="{{ csrf_token() }}"
-        data-id="{{ $data->id }}" data-charge="{{ $data->getCancellationCharges() ?? 0 }}" style="width: 100%;">
-        <option value=""></option>
-        @foreach ($status as $value)
-            <option value="{{ $value->name }}" {{ $data->status == $value->name ? 'selected' : '' }}>
-                {{ __('appointment.' . $value->name) }}
-            </option>
-        @endforeach
-    </select>
+    {{-- Change appointment status: Admin (Full), Vendor (Own Clinics), Doctor (Own Appointments), Receptionist (Own Clinic), Pharmacist (No), Lab Technician (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || (auth()->user()->hasRole('vendor') && $data->cliniccenter && $data->cliniccenter->vendor_id == auth()->id()) || (auth()->user()->hasRole('doctor') && $data->doctor_id == auth()->id()) || (auth()->user()->hasRole('receptionist') && $data->cliniccenter && $data->cliniccenter->id == optional(\Modules\Clinic\Models\Receptionist::where('receptionist_id', auth()->id())->first()->clinic_id))
+        <select name="branch_for" class="form-select form-select-sm change-select select2"
+            data-placeholder="{{ __('messages.select_status') }}" data-token="{{ csrf_token() }}"
+            data-id="{{ $data->id }}" data-charge="{{ $data->getCancellationCharges() ?? 0 }}" style="width: 100%;">
+            <option value=""></option>
+            @foreach ($status as $value)
+                <option value="{{ $value->name }}" {{ $data->status == $value->name ? 'selected' : '' }}>
+                    {{ __('appointment.' . $value->name) }}
+                </option>
+            @endforeach
+        </select>
+    @else
+        {{-- Read-only status display for roles without permission --}}
+        <span class="badge bg-secondary-subtle text-capitalize p-2">
+            {{ __('appointment.' . $data->status) }}
+        </span>
+    @endif
 @elseif($data->status == 'cancelled')
     <span class="badge bg-danger-subtle text-capitalize p-2">
         {{ __('appointment.cancelled') }}

@@ -8,25 +8,30 @@
         <div class="table-content mb-5">
             <x-backend.section-header>
                 <div class="d-flex flex-wrap gap-3">
-                    @if (auth()->user()->can('delete_clinic_appointment_list'))
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                         <x-backend.quick-action url="{{ route('backend.appointments.bulk_action') }}">
                             <div class="">
                                 <select name="action_type" class="select2 form-select col-12" id="quick-action-type"
                                     style="width:100%">
                                     <option value="">{{ __('messages.no_action') }}</option>
 
-                                    @can('delete_clinic_appointment_list')
+                                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                                         <option value="delete">{{ __('messages.delete') }}</option>
-                                    @endcan
+                                    @elseif (auth()->user()->hasRole('vendor'))
+                                        <option value="delete">{{ __('messages.delete') }}</option>
+                                    @endif
                                 </select>
                             </div>
 
                         </x-backend.quick-action>
                     @endif
-                    <div>
-                        <button type="button" class="btn btn-primary" data-modal="export">
-                            <i class="ph ph-export me-1"></i>{{ __('messages.export') }}
-                        </button>
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
+                        <div>
+                            <button type="button" class="btn btn-primary" data-modal="export">
+                                <i class="ph ph-export me-1"></i>{{ __('messages.export') }}
+                            </button>
+                        </div>
+                    @endif
                         {{-- <button type="button" class="btn btn-primary" data-modal="import">
                             <i class="ph ph-export me-1"></i>{{ __('messages.import') }}
                         </button> --}}
@@ -73,7 +78,7 @@
                             {{ __('messages.new') }} </x-buttons.offcanvas>
                     @endhasPermission --}}
 
-                    @hasPermission('add_clinic_appointment_list')
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('receptionist'))
                         {{-- Button to open offcanvas --}}
                         <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas"
                             data-bs-target="#form-offcanvas" aria-controls="form-offcanvas">
@@ -168,7 +173,7 @@
             </div>
 
 
-            @unless (auth()->user()->hasRole('doctor'))
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('receptionist'))
                 <div class="form-group datatable-filter">
                     <label class="form-label" for="doctor_id">{{ __('clinic.doctor_title') }}</label>
                     <select name="doctor_id" id="doctor_id" class="select2 form-select" data-filter="select">
@@ -178,7 +183,7 @@
                         @endforeach
                     </select>
                 </div>
-            @endunless
+            @endif
             <button type="reset" class="btn btn-danger" id="reset-filter">{{ __('appointment.reset') }}</button>
         </x-backend.advance-filter>
     @endsection

@@ -58,11 +58,13 @@ class ClinicAppointmentController extends Controller
             'module_name' => $this->module_name,
         ]);
 
-        // Permission middleware based on Excel permissions
+        // Permission middleware based on role-based permissions
         $this->middleware('permission:add_appointment', ['only' => ['create', 'store']]);
         $this->middleware('permission:change_appointment_status', ['only' => ['updateStatus']]);
         $this->middleware('permission:delete_appointment', ['only' => ['destroy']]);
         $this->middleware('permission:export_appointment_list', ['only' => ['export']]);
+        $this->middleware('permission:view_encounter_details', ['only' => ['clinicAppointmentDetail']]);
+        $this->middleware('permission:download_bill_pdf', ['only' => ['invoice_detail']]);
     }
 
     /**
