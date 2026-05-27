@@ -707,7 +707,14 @@
                                                         <b>{{ optional($appointment->clinicservice)->name ?? '-' }}</b>
                                                     </a>
                                                     <div class="mt-2">
-                                                        {{ optional($appointment->clinicservice)->description ?? ' ' }}
+                                                        @php
+                                                            $desc = optional($appointment->clinicservice)->description ?? '';
+                                                        @endphp
+                                                        <span class="appointment-desc-short">{{ Str::limit($desc, 250) }}</span>
+                                                        @if (strlen($desc) > 250)
+                                                            <span class="appointment-desc-full d-none">{{ $desc }}</span>
+                                                            <a href="javascript:void(0)" class="text-primary small read-more-btn" onclick="toggleAppointmentDesc(this)">{{ __('frontend.read_more') }}...</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -1607,6 +1614,22 @@
                     });
             });
         });
+
+        // Toggle appointment description read more
+        function toggleAppointmentDesc(btn) {
+            const parent = btn.parentElement;
+            const shortText = parent.querySelector('.appointment-desc-short');
+            const fullText = parent.querySelector('.appointment-desc-full');
+            if (fullText.classList.contains('d-none')) {
+                shortText.classList.add('d-none');
+                fullText.classList.remove('d-none');
+                btn.textContent = '{{ __("frontend.show_less") }}';
+            } else {
+                shortText.classList.remove('d-none');
+                fullText.classList.add('d-none');
+                btn.textContent = '{{ __("frontend.read_more") }}...';
+            }
+        }
 
         // Toggle tax breakdown function
         function toggleTaxBreakdown() {

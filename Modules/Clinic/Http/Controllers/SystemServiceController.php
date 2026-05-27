@@ -362,10 +362,20 @@ class SystemServiceController extends Controller
         $clinic_services = ClinicsService::where('system_service_id', $id)->get();
         if($clinic_services){
             foreach($clinic_services as $clinic_service){
-                $clinic_service->update([
+                $updateData = [
                     'type' => $data->type,
-                    'is_video_consultancy' => $data->is_video_consultancy
-                ]);
+                    'is_video_consultancy' => $data->is_video_consultancy,
+                ];
+                if ($request->has('description')) {
+                    $updateData['description'] = $request->description;
+                }
+                if ($request->has('service_includes')) {
+                    $updateData['service_includes'] = $request->service_includes;
+                }
+                if ($request->has('service_excludes')) {
+                    $updateData['service_excludes'] = $request->service_excludes;
+                }
+                $clinic_service->update($updateData);
             }
         }
 

@@ -213,6 +213,8 @@ return[
     'no_services_message' => 'This doctor currently has no services available for booking.',
     'cancel_reason'=>'Cancel Resaon',
     'off' => 'off',
+    'read_more' => 'more',
+    'show_less' => 'Show less',
     
 
 ];

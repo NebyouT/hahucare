@@ -71,6 +71,8 @@ class ServiceDetailsResource extends JsonResource
             'is_video_consultancy' => $this->is_video_consultancy,
             'type'=>$this->type,
             'service_image' => $this->file_url,
+            'service_includes' => $this->service_includes ?? [],
+            'service_excludes' => $this->service_excludes ?? [],
             'assign_doctor'=>DoctorServiceMappingResource::collection($doctor_service),
             'clinics' => ClinicsResource::collection($clinics),
             'created_by' => $this->created_by,

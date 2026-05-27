@@ -77,6 +77,8 @@ class ServiceResource extends JsonResource
             'type'=>$this->type,
             'vendor_name'=>optional($this->vendor)->full_name,
             'service_image' => $this->file_url,
+            'service_includes' => $this->service_includes ?? [],
+            'service_excludes' => $this->service_excludes ?? [],
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
             'deleted_by' => $this->deleted_by,

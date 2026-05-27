@@ -14,7 +14,41 @@
                             <div class="my-5">
                                 <h5 class="mb-3">{{ __('frontend.about_service') }}
                                 </h5>
-                                <p>{{ $service->description }}</p>
+                                <div class="service-description-wrapper">
+                                    <p class="service-description-short">{{ Str::limit($service->description, 250) }}</p>
+                                    @if (strlen($service->description) > 250)
+                                        <p class="service-description-full d-none">{{ $service->description }}</p>
+                                        <a href="javascript:void(0)" class="text-primary fw-bold read-more-btn" onclick="toggleDescription(this)">{{ __('frontend.read_more') }}...</a>
+                                    @endif
+                                </div>
+
+                                @if (!empty($service->service_includes) && count($service->service_includes) > 0)
+                                    <div class="mt-4">
+                                        <h6 class="fw-bold mb-2">{{ __('service.service_includes') }}</h6>
+                                        <ul class="list-unstyled service-checklist">
+                                            @foreach ($service->service_includes as $item)
+                                                <li class="mb-1 d-flex align-items-start gap-2">
+                                                    <i class="ph ph-check-circle text-success mt-1"></i>
+                                                    <span>{{ $item }}</span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                @if (!empty($service->service_excludes) && count($service->service_excludes) > 0)
+                                    <div class="mt-3">
+                                        <h6 class="fw-bold mb-2">{{ __('service.service_excludes') }}</h6>
+                                        <ul class="list-unstyled service-checklist">
+                                            @foreach ($service->service_excludes as $item)
+                                                <li class="mb-1 d-flex align-items-start gap-2">
+                                                    <i class="ph ph-x-circle text-danger mt-1"></i>
+                                                    <span>{{ $item }}</span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="d-flex align-items-center justify-content-between gap-5 flex-wrap mt-5 mb-3">
@@ -96,6 +130,21 @@
 
 @push('after-scripts')
     <script>
+        function toggleDescription(btn) {
+            const wrapper = btn.closest('.service-description-wrapper');
+            const shortText = wrapper.querySelector('.service-description-short');
+            const fullText = wrapper.querySelector('.service-description-full');
+            if (fullText.classList.contains('d-none')) {
+                shortText.classList.add('d-none');
+                fullText.classList.remove('d-none');
+                btn.textContent = '{{ __("frontend.show_less") }}';
+            } else {
+                shortText.classList.remove('d-none');
+                fullText.classList.add('d-none');
+                btn.textContent = '{{ __("frontend.read_more") }}...';
+            }
+        }
+
         let clinicId = null;
         const bookNowButton = document.getElementById('book-now-button');
         $(document).ready(function() {

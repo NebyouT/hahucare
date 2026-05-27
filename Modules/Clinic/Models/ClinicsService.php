@@ -35,7 +35,7 @@ class ClinicsService extends BaseModel
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['system_service_id', 'name', 'description', 'type', 'is_video_consultancy', 'charges', 'category_id', 'subcategory_id', 'vendor_id', 'duration_min', 'time_slot', 'discount', 'discount_value', 'discount_type', 'status', 'service_type', 'is_enable_advance_payment', 'advance_payment_amount', 'is_inclusive_tax', 'inclusive_tax', 'inclusive_tax_price'];
+    protected $fillable = ['system_service_id', 'name', 'description', 'service_includes', 'service_excludes', 'type', 'is_video_consultancy', 'charges', 'category_id', 'subcategory_id', 'vendor_id', 'duration_min', 'time_slot', 'discount', 'discount_value', 'discount_type', 'status', 'service_type', 'is_enable_advance_payment', 'advance_payment_amount', 'is_inclusive_tax', 'inclusive_tax', 'inclusive_tax_price'];
 
     protected $appends = ['file_url'];
 
@@ -48,6 +48,8 @@ class ClinicsService extends BaseModel
         'sub_category_id' => 'integer',
         'status' => 'integer',
         'discount' => 'integer',
+        'service_includes' => 'array',
+        'service_excludes' => 'array',
     ];
 
     const CUSTOM_FIELD_MODEL = 'Modules\Clinic\Models\ClinicsService';

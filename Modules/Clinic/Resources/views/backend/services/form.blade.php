@@ -161,10 +161,40 @@
             <div class="mb-3">
                 <label for="description" class="form-label">{{ __('clinic.lbl_description') }}</label>
                 <div class="form-floating">
-                    <textarea class="form-control" placeholder="{{ __('clinic.description') }}" id="description" name="description" style="height: 100px" maxlength="250"></textarea>
+                    <textarea class="form-control" placeholder="{{ __('clinic.description') }}" id="description" name="description" style="height: 100px"></textarea>
                 </div>
                 <div class="d-flex justify-content-between mt-1">
-                    <small class="text-muted" id="service-description-counter">0/250</small>
+                    <small class="text-muted" id="service-description-counter">0</small>
+                </div>
+                <div class="validation-error text-danger mt-1 small d-none"></div>
+            </div>
+        </div>
+
+        <!-- Service Includes -->
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label class="form-label fw-bold">{{ __('service.service_includes') }}</label>
+                <div id="includes-list" class="mb-2">
+                    <div class="input-group mb-2 includes-item">
+                        <input type="text" class="form-control" name="service_includes[]" placeholder="{{ __('service.add_include_item') }}">
+                        <button type="button" class="btn btn-outline-success add-includes-row"><i class="ph ph-plus"></i></button>
+                        <button type="button" class="btn btn-outline-danger remove-includes-row d-none"><i class="ph ph-minus"></i></button>
+                    </div>
+                </div>
+                <div class="validation-error text-danger mt-1 small d-none"></div>
+            </div>
+        </div>
+
+        <!-- Service Excludes -->
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label class="form-label fw-bold">{{ __('service.service_excludes') }}</label>
+                <div id="excludes-list" class="mb-2">
+                    <div class="input-group mb-2 excludes-item">
+                        <input type="text" class="form-control" name="service_excludes[]" placeholder="{{ __('service.add_exclude_item') }}">
+                        <button type="button" class="btn btn-outline-success add-excludes-row"><i class="ph ph-plus"></i></button>
+                        <button type="button" class="btn btn-outline-danger remove-excludes-row d-none"><i class="ph ph-minus"></i></button>
+                    </div>
                 </div>
                 <div class="validation-error text-danger mt-1 small d-none"></div>
             </div>
@@ -300,6 +330,7 @@ class ServiceFormHandler {
         this.initSelect2();
         this.bindEvents();
         this.loadInitialData();
+        this.initDynamicLists();
         // Safety cleanup on load (in case of stuck backdrops from previous navigation)
         this.cleanBackdropsAndOverlays();
         this.forceClearThirdPartyLoaders();
@@ -740,8 +771,111 @@ class ServiceFormHandler {
         const counter = document.getElementById('service-description-counter');
         if (textarea && counter) {
             const length = textarea.value.length;
-            counter.textContent = `${length}/250`;
-            counter.classList.toggle('text-danger', length > 250);
+            counter.textContent = `${length}`;
+        }
+    }
+
+    // ---------- Dynamic List Helpers (Includes / Excludes) ----------
+
+    initDynamicLists() {
+        this.bindDynamicListEvents('#includes-list', '.add-includes-row', '.remove-includes-row', '.includes-item');
+        this.bindDynamicListEvents('#excludes-list', '.add-excludes-row', '.remove-excludes-row', '.excludes-item');
+    }
+
+    bindDynamicListEvents(listSelector, addBtnSel, removeBtnSel, itemSel) {
+        const $list = document.querySelector(listSelector);
+        if (!$list) return;
+
+        // Delegate events for add/remove buttons
+        $list.addEventListener('click', (e) => {
+            const addBtn = e.target.closest(addBtnSel);
+            const removeBtn = e.target.closest(removeBtnSel);
+            if (addBtn) {
+                e.preventDefault();
+                this.addDynamicRow(listSelector, itemSel, addBtnSel, removeBtnSel);
+            } else if (removeBtn) {
+                e.preventDefault();
+                this.removeDynamicRow(e.target.closest(itemSel), listSelector, addBtnSel, removeBtnSel);
+            }
+        });
+    }
+
+    addDynamicRow(listSelector, itemSel, addBtnSel, removeBtnSel) {
+        const $list = document.querySelector(listSelector);
+        const template = $list.querySelector(itemSel);
+        const clone = template.cloneNode(true);
+        const input = clone.querySelector('input');
+        if (input) input.value = '';
+
+        // Reset remove button visibility on clone
+        const removeBtn = clone.querySelector(removeBtnSel);
+        if (removeBtn) removeBtn.classList.remove('d-none');
+
+        $list.appendChild(clone);
+        this.toggleRemoveButtons(listSelector, itemSel, removeBtnSel);
+    }
+
+    removeDynamicRow(row, listSelector, addBtnSel, removeBtnSel) {
+        if (!row) return;
+        const $list = document.querySelector(listSelector);
+        const items = $list.querySelectorAll(itemSel);
+        if (items.length <= 1) {
+            // Clear the input instead of removing the last row
+            const input = row.querySelector('input');
+            if (input) input.value = '';
+            return;
+        }
+        row.remove();
+        this.toggleRemoveButtons(listSelector, itemSel, removeBtnSel);
+    }
+
+    toggleRemoveButtons(listSelector, itemSel, removeBtnSel) {
+        const $list = document.querySelector(listSelector);
+        const items = $list.querySelectorAll(itemSel);
+        items.forEach((item, index) => {
+            const removeBtn = item.querySelector(removeBtnSel);
+            if (removeBtn) {
+                removeBtn.classList.toggle('d-none', items.length <= 1);
+            }
+        });
+    }
+
+    getDynamicListValues(listSelector) {
+        const $list = document.querySelector(listSelector);
+        if (!$list) return [];
+        const inputs = $list.querySelectorAll('input');
+        const values = [];
+        inputs.forEach(input => {
+            const val = input.value.trim();
+            if (val) values.push(val);
+        });
+        return values;
+    }
+
+    setDynamicListValues(listSelector, itemSel, values) {
+        const $list = document.querySelector(listSelector);
+        if (!$list) return;
+        const items = $list.querySelectorAll(itemSel);
+        // Remove all existing rows except the first
+        items.forEach((item, index) => {
+            if (index > 0) item.remove();
+        });
+        // Set the first row's value
+        const firstInput = $list.querySelector(`${itemSel} input`);
+        if (firstInput) firstInput.value = '';
+
+        // Add rows for each value
+        if (values && values.length > 0) {
+            values.forEach((val, index) => {
+                if (index === 0 && firstInput) {
+                    firstInput.value = val;
+                    return;
+                }
+                this.addDynamicRow(listSelector, itemSel, '.add-includes-row, .add-excludes-row', '.remove-includes-row, .remove-excludes-row');
+                const allInputs = $list.querySelectorAll(`${itemSel} input`);
+                const lastInput = allInputs[allInputs.length - 1];
+                if (lastInput) lastInput.value = val;
+            });
         }
     }
 
@@ -788,6 +922,12 @@ class ServiceFormHandler {
 
     prepareFormData() {
         const formData = new FormData(document.getElementById('serviceForm'));
+
+        // Handle includes/excludes as JSON arrays
+        const includes = this.getDynamicListValues('#includes-list');
+        const excludes = this.getDynamicListValues('#excludes-list');
+        formData.set('service_includes', JSON.stringify(includes));
+        formData.set('service_excludes', JSON.stringify(excludes));
         
         // Handle toggles
         if (!$('#discountToggle').is(':checked')) {
@@ -919,7 +1059,11 @@ class ServiceFormHandler {
         this.clearAllErrors();
         
         // Reset description counter
-        $('#service-description-counter').text('0/250').removeClass('text-danger');
+        $('#service-description-counter').text('0').removeClass('text-danger');
+
+        // Reset includes/excludes lists
+        this.setDynamicListValues('#includes-list', '.includes-item', []);
+        this.setDynamicListValues('#excludes-list', '.excludes-item', []);
         
         // Reset mode and title
         $('#saveServiceBtn').data('mode', 'create').data('id', '');
@@ -1176,6 +1320,21 @@ class ServiceFormHandler {
                 }, 150);
             }
 
+            // Set includes/excludes lists
+            let includes = data.service_includes;
+            if (typeof includes === 'string') {
+                try { includes = JSON.parse(includes); } catch(e) { includes = []; }
+            }
+            if (!Array.isArray(includes)) includes = [];
+            this.setDynamicListValues('#includes-list', '.includes-item', includes);
+
+            let excludes = data.service_excludes;
+            if (typeof excludes === 'string') {
+                try { excludes = JSON.parse(excludes); } catch(e) { excludes = []; }
+            }
+            if (!Array.isArray(excludes)) excludes = [];
+            this.setDynamicListValues('#excludes-list', '.excludes-item', excludes);
+
             this.updateDescriptionCounter();
         } finally {
             // Re-enable events after a short delay
@@ -1189,6 +1348,7 @@ class ServiceFormHandler {
     handleOffcanvasShow() {
         this.initSelect2();
         this.initializeTimeSlots();
+        this.initDynamicLists();
     }
 
     handleOffcanvasHide() {

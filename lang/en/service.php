@@ -92,5 +92,9 @@ return [
     'type_system_service' => 'System Service',
     'type_category' => 'Category',
     'request_service' => 'Request Service',
+    'service_includes' => 'SERVICE INCLUDES:',
+    'service_excludes' => 'SERVICE EXCLUDES:',
+    'add_include_item' => 'Add an included service item',
+    'add_exclude_item' => 'Add an excluded service item',
     
 ];
