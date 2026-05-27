@@ -6,7 +6,8 @@
 <div class="table-content mb-5">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-            @unless(auth()->user()->hasRole('doctor'))
+                {{-- Export doctor session list: Admin (Full), Clinic Admin (Own Clinics), Doctor (Own Sessions), Receptionist (Limited), Pharmacist (No), Lab Technologist (No) --}}
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('receptionist') || (auth()->user()->hasRole('doctor')))
                 <div>
                     <button type="button" class="btn btn-primary" data-modal="export">
                     <i class="ph ph-export me-1"></i> {{ __('messages.export') }}
@@ -15,19 +16,18 @@
       {{--            <i class="ph ph-export me-1"></i> Import--}}
       {{--          </button>--}}
                   </div>
-                  @endunless
+                @endif
             </div>
             <x-slot name="toolbar">
-
-                
-            @unless(auth()->user()->hasRole('doctor'))
+                {{-- Search bar - Pharmacist and Lab Technologist cannot view sessions --}}
+                @if (!auth()->user()->hasRole('pharmacist') && !auth()->user()->hasRole('lab_technologist'))
                 <div class="input-group flex-nowrap border rounded">
                     <span class="input-group-text" id="addon-wrapping"><i
                             class="fa-solid fa-magnifying-glass"></i></span>
                     <input type="text" class="form-control dt-search" placeholder="{{ __('messages.search') }}..." aria-label="Search"
                         aria-describedby="addon-wrapping">
                 </div>
-                @endunless
+                @endif
                 <!-- @hasPermission('add_doctors_session')
                 <x-buttons.offcanvas target='#form-offcanvas' title="{{ __('Create') }} {{ __($create_title) }}" class=" d-flex align-items-center gap-1">{{ __('messages.new') }}</x-buttons.offcanvas>
                 @endhasPermission -->
@@ -60,16 +60,8 @@
 
 <script type="text/javascript" defer>
    const columns = [
-        @unless(auth()->user()->hasRole('doctor'))
-            // {
-            //     name: 'check',
-            //     data: 'check',
-            //     title: '<input type="checkbox" class="form-check-input" name="select_all_table" id="select-all-table" onclick="selectAllTable(this)">',
-            //     width: '0%',
-            //     exportable: false,
-            //     orderable: false,
-            //     searchable: false,
-            // },
+        {{-- Doctor column - Admin, Vendor, Receptionist only (Doctor sees own sessions only) --}}
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('receptionist'))
             {
                 data: 'updated_at',
                 name: 'updated_at',
@@ -83,8 +75,9 @@
                 orderable: true,
                 searchable: true,
             },
-        @endunless
-        @unless(auth()->user()->hasRole('receptionist'))
+        @endif
+        {{-- Clinic column - Admin, Vendor, Doctor only --}}
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || auth()->user()->hasRole('doctor'))
             {
                 data: 'clinic_id',
                 name: 'clinic_id',
@@ -92,7 +85,7 @@
                 orderable: false,
                 searchable: true,
             },
-            @endunless
+        @endif
             {
                 data: 'day',
                 name: 'day',

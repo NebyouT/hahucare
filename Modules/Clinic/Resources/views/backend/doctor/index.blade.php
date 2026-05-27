@@ -8,18 +8,19 @@
     <div class="table-content mb-5">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-                @if (auth()->user()->can('edit_doctors') || auth()->user()->can('delete_doctors'))
+                {{-- Change doctor status & Delete doctor: Admin (Full), Clinic Admin (Own Clinics/Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                     <x-backend.quick-action url='{{ route("backend.$module_name.bulk_action") }}'>
                         <div class="">
                             <select name="action_type" class="form-control select2 col-12" id="quick-action-type"
                                 style="width:100%">
                                 <option value="">{{ __('messages.no_action') }}</option>
-                                @hasPermission('edit_doctors')
+                                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                                     <option value="change-status">{{ __('messages.status') }}</option>
-                                @endhasPermission
-                                @hasPermission('delete_doctors')
+                                @endif
+                                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                                     <option value="delete">{{ __('messages.delete') }}</option>
-                                @endhasPermission
+                                @endif
                             </select>
                         </div>
                         <div class="select-status d-none quick-action-field" id="change-status-action">
@@ -31,10 +32,13 @@
                         </div>
                     </x-backend.quick-action>
                 @endif
+                {{-- Export doctor list: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                 <div>
                     <button type="button" class="btn btn-primary" data-modal="export">
                         <i class="ph ph-export me-1"></i> {{ __('messages.export') }}
                     </button>
+                @endif
                     {{--          <button type="button" class="btn btn-secondary" data-modal="import"> --}}
                     {{--            <i class="ph ph-upload me-1"></i> Import --}}
                     {{--          </button> --}}
@@ -60,13 +64,14 @@
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-                    @hasPermission('add_doctors')
+                    {{-- Add doctor: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                         <button type="button" class="btn btn-primary d-flex align-items-center gap-1"
                             data-bs-toggle="offcanvas" data-bs-target="#form-offcanvas" data-mode="create"
                             title="{{ __('messages.create') }} {{ __($create_title) }}">
                             <i class="ph ph-plus-circle"></i>{{ __('messages.new') }}
                         </button>
-                    @endhasPermission
+                    @endif
                 </div>
     </div>
     </x-slot>
@@ -269,8 +274,8 @@
 
 
 
-            @if (auth()->user()->can('edit_doctors'))
-
+            {{-- Status column - Admin, Vendor only for changing status --}}
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
                 {
                     data: 'status',
                     name: 'status',

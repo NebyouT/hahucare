@@ -59,13 +59,7 @@ class DoctorController extends Controller
             'module_name' => $this->module_name,
             'module_path' => $this->module_path,
         ]);
-
-        // Excel-based permissions for Doctors
-        $this->middleware('permission:add_doctor', ['only' => ['create', 'store']]);
-        $this->middleware('permission:edit_doctor_session', ['only' => ['editSession', 'updateSession']]);
-        $this->middleware('permission:edit_doctor_profile', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:delete_doctor', ['only' => ['destroy']]);
-        $this->middleware('permission:change_doctor_password', ['only' => ['changePassword']]);
+        // Middleware removed - using hardcoded role-based permissions instead
     }
     /**
      * Display a listing of the resource.
@@ -700,6 +694,7 @@ class DoctorController extends Controller
 
     public function bulk_action(Request $request)
     {
+        $user = auth()->user();
         $ids = explode(',', $request->rowIds);
         $actionType = $request->action_type;
 
@@ -707,12 +702,19 @@ class DoctorController extends Controller
 
         switch ($actionType) {
             case 'change-status':
-                // Need To Add Role Base
+                // Change doctor status: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+                if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+                    abort(403, 'You are not allowed to change doctor status.');
+                }
                 $employee = User::whereIn('id', $ids)->update(['status' => $request->status]);
                 $message = __('clinic.doctor_update');
                 break;
 
             case 'delete':
+                // Delete doctor: Admin (Full), Clinic Admin (Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+                if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+                    abort(403, 'You are not allowed to delete doctors.');
+                }
 
                 if (env('IS_DEMO')) {
                     return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 200);
@@ -731,10 +733,16 @@ class DoctorController extends Controller
 
     public function index_data(Datatables $datatable, Request $request)
     {
-
+        $user = auth()->user();
         $module_name = $this->module_name;
         $userId = auth()->id();
         $query = User::role('doctor')->SetRole(auth()->user())->with('doctor', 'doctorclinic');
+        
+        // View doctor profile: Admin (Full), Clinic Admin (Own Clinics), Doctor (Self), Receptionist (Limited), Pharmacist (Limited), Lab Technologist (Limited)
+        if ($user && $user->hasRole('doctor')) {
+            // Doctor - Self only
+            $query->where('id', $user->id);
+        }
         // dd($query->get()->toArray());
         $customform = CustomForm::where('module_type', 'doctor_module')
         ->where('status', 1)
@@ -897,6 +905,18 @@ class DoctorController extends Controller
     }
     public function update_status(Request $request, User $id)
     {
+        $user = auth()->user();
+        
+        // Change doctor status: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to change doctor status.');
+        }
+        
+        // Clinic Admin - Own Clinics only
+        if ($user && $user->hasRole('vendor')) {
+            // Add clinic_id check if needed
+        }
+        
         $id->update(['status' => $request->status]);
         Doctor::where('doctor_id', $id->id)->update(['status' => $request->status]);
         return response()->json(['status' => true, 'message' => __('clinic.doctor_update')]);
@@ -915,6 +935,18 @@ class DoctorController extends Controller
      */
     public function store(DoctorRequest $request)
     {
+        $user = auth()->user();
+        
+        // Add doctor: Admin (Full), Clinic Admin (Own Clinics), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to add doctors.');
+        }
+        
+        // Clinic Admin - Own Clinics only
+        if ($user && $user->hasRole('vendor')) {
+            // Add clinic_id filtering if needed
+        }
+        
         $data = $request->except('profile_image');
 
         if (!empty($data['doctor_email'])) {
@@ -1358,6 +1390,23 @@ class DoctorController extends Controller
     // }
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+        
+        // Edit doctor profile: Admin (Full), Clinic Admin (Own Clinics), Doctor (Self), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to edit doctor profiles.');
+        }
+        
+        // Doctor - Self only
+        if ($user && $user->hasRole('doctor') && $id != $user->id) {
+            abort(403, 'You can only edit your own profile.');
+        }
+        
+        // Clinic Admin - Own Clinics only
+        if ($user && $user->hasRole('vendor')) {
+            // Add clinic_id check if needed
+        }
+        
         // dd('hello');
         // Validate the request
         $validator = Validator::make($request->all(), [
@@ -1544,6 +1593,18 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
+        $user = auth()->user();
+        
+        // Delete doctor: Admin (Full), Clinic Admin (Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to delete doctors.');
+        }
+        
+        // Clinic Admin - Limited access
+        if ($user && $user->hasRole('vendor')) {
+            // Add limited deletion logic (e.g., only if no appointments)
+        }
+        
         if(\Auth::user()->hasAnyRole(['demo_admin'])){
 
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 200);

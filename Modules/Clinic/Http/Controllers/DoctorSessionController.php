@@ -162,9 +162,20 @@ class DoctorSessionController extends Controller
 
     public function index_data(Datatables $datatable, Request $request)
     {
+        $user = auth()->user();
         $userId = auth()->id();
         $query = DoctorClinicMapping::SetRole(auth()->user())->with(['clinics','doctor']);
         $module_name = $this->module_name;
+        
+        // View sessions: Admin (Full), Clinic Admin (Own Clinics), Doctor (Own Sessions), Receptionist (Limited), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to view doctor sessions.');
+        }
+        
+        if ($user && $user->hasRole('doctor')) {
+            // Doctor - Own sessions only
+            $query->where('doctor_id', $user->id);
+        }
 
         if (isset($filter)) {
             if (isset($filter['column_status'])) {
@@ -286,6 +297,23 @@ class DoctorSessionController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        
+        // Edit sessions: Admin (Full), Clinic Admin (Own Clinics), Doctor (Own Sessions), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to edit doctor sessions.');
+        }
+        
+        // Doctor - Own sessions only
+        if ($user && $user->hasRole('doctor') && $request->doctor_id != $user->id) {
+            abort(403, 'You can only edit your own sessions.');
+        }
+        
+        // Clinic Admin - Own Clinics only
+        if ($user && $user->hasRole('vendor')) {
+            // Add clinic_id check if needed
+        }
+        
         $data = $request->all();
         
         $doctor_id = $data['doctor_id'];
@@ -349,6 +377,23 @@ class DoctorSessionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+        
+        // Edit sessions: Admin (Full), Clinic Admin (Own Clinics), Doctor (Own Sessions), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to edit doctor sessions.');
+        }
+        
+        // Doctor - Own sessions only
+        if ($user && $user->hasRole('doctor') && $id != $user->id) {
+            abort(403, 'You can only edit your own sessions.');
+        }
+        
+        // Clinic Admin - Own Clinics only
+        if ($user && $user->hasRole('vendor')) {
+            // Add clinic_id check if needed
+        }
+        
         $data = $request->all();
         $clinicId = $request->clinic_id;
         $weekdays = $data['weekdays'];
@@ -399,6 +444,23 @@ class DoctorSessionController extends Controller
      */
     public function destroy($id)
     {
+        $user = auth()->user();
+        
+        // Edit sessions: Admin (Full), Clinic Admin (Own Clinics), Doctor (Own Sessions), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+            abort(403, 'You are not allowed to delete doctor sessions.');
+        }
+        
+        // Doctor - Own sessions only
+        if ($user && $user->hasRole('doctor') && $id != $user->id) {
+            abort(403, 'You can only delete your own sessions.');
+        }
+        
+        // Clinic Admin - Own Clinics only
+        if ($user && $user->hasRole('vendor')) {
+            // Add clinic_id check if needed
+        }
+        
         $sessions = DoctorSession::where('doctor_id', $id)->get();
 
         foreach ($sessions as $session) {

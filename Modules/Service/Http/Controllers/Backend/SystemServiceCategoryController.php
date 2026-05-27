@@ -108,6 +108,7 @@ class SystemServiceCategoryController extends Controller
 
     public function bulk_action(Request $request)
     {
+        $user = auth()->user();
         $ids = explode(',', $request->rowIds);
 
         $actionType = $request->action_type;
@@ -116,11 +117,20 @@ class SystemServiceCategoryController extends Controller
 
         switch ($actionType) {
             case 'change-status':
+                // Change specialization status: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+                if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+                    abort(403, 'You are not allowed to change specialization status.');
+                }
                 $branches = SystemServiceCategory::whereIn('id', $ids)->update(['status' => $request->status]);
                 $message = __('messages.bulk_specialization_update');
                 break;
 
             case 'delete':
+                // Delete specialization: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+                if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+                    abort(403, 'You are not allowed to delete specializations.');
+                }
+
                 if (env('IS_DEMO')) {
                     return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 200);
                 }
@@ -139,6 +149,13 @@ class SystemServiceCategoryController extends Controller
 
     public function update_status(Request $request, $id)
     {
+        $user = auth()->user();
+        
+        // Change specialization status: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+            abort(403, 'You are not allowed to change specialization status.');
+        }
+        
         $query =  SystemServiceCategory::where('id', $id);
         $query->update(['status' => $request->status]);
 
@@ -345,6 +362,13 @@ class SystemServiceCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        
+        // Add specialization: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+            abort(403, 'You are not allowed to add specializations.');
+        }
+        
         $data = $request->except('file_url','custom_fields_data');
         $data['name'] = $request->name;
 
@@ -407,6 +431,13 @@ class SystemServiceCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+        
+        // Edit specialization: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+            abort(403, 'You are not allowed to edit specializations.');
+        }
+        
         $query = SystemServiceCategory::findOrFail($id);
 
         $data = $request->except('file_url');
@@ -430,6 +461,13 @@ class SystemServiceCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $user = auth()->user();
+        
+        // Delete specialization: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && (!$user->hasRole('admin') && !$user->hasRole('demo_admin'))) {
+            abort(403, 'You are not allowed to delete specializations.');
+        }
+        
         if (env('IS_DEMO')) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 200);
         }

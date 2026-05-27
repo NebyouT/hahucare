@@ -1,10 +1,14 @@
 <div class="d-flex gap-3 align-items-center">
+    {{-- Edit doctor session: Admin (Full), Clinic Admin (Own Clinics), Doctor (Own Sessions), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || (auth()->user()->hasRole('doctor') && $data->id == auth()->id()))
     <button type="button" data-assign-module="{{ $data->id }}" data-assign-target="#session-form-offcanvas"
         data-assign-event="employee_assign" class="btn text-success p-0 fs-6" data-bs-toggle="tooltip"
         title="{{ __('messages.session') }}">
         <i class="ph ph-clock-user"></i>
     </button>
+    @endif
 
+    {{-- View doctor profile: Admin (Full), Clinic Admin (Own Clinics), Doctor (Self), Receptionist (Limited), Pharmacist (Limited), Lab Technologist (Limited) --}}
     <button type="button" class="btn text-danger p-0 fs-6" data-bs-toggle="offcanvas"
         data-bs-target="#doctor-details-form-offcanvas" data-doctor-id="{{ $data->id }}"
         data-url="{{ route('backend.doctor.doctor.detail', ['id' => $data->id]) }}" title="{{ __('clinic.view') }}"
@@ -36,22 +40,25 @@
                 .catch(() => alert('{{ __('clinic.failed_to_load_doctor_details') }}'));
         }
     </script>
-    @unless (auth()->user()->hasRole('receptionist'))
+    {{-- Change doctor password: Admin (Full), Clinic Admin (Own Clinics), Doctor (Self), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || (auth()->user()->hasRole('doctor') && $data->id == auth()->id()))
         <button type="button" class="btn p-0 fs-6 text-info" data-bs-toggle="offcanvas"
             data-bs-target="#doctor_change_password" data-doctor-id="{{ $data->id }}"
             title="{{ __('employee.change_password') }}">
             <i class="ph ph-key align-middle"></i>
         </button>
-    @endunless
+    @endif
 
-    @hasPermission('edit_doctors')
+    {{-- Edit doctor profile: Admin (Full), Clinic Admin (Own Clinics), Doctor (Self), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor') || (auth()->user()->hasRole('doctor') && $data->id == auth()->id()))
         <button type="button" class="btn text-success p-0 fs-5" data-id="{{ $data->id }}" data-mode="edit"
             data-bs-toggle="offcanvas" data-bs-target="#form-offcanvas" title="{{ __('clinic.edit_doctor') }}">
             <i class="ph ph-pencil-simple-line align-middle"></i>
         </button>
-    @endhasPermission
+    @endif
 
-    @hasPermission('delete_doctors')
+    {{-- Delete doctor: Admin (Full), Clinic Admin (Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
         <a href="{{ route("backend.$module_name.destroy", $data->id) }}"
             id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
             data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"
@@ -59,7 +66,7 @@
             data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->full_name ?? __('Unknown'), 'module' => __('appointment.lbl_doctor')]) }}">
             <i class="ph ph-trash align-middle"></i>
         </a>
-    @endhasPermission
+    @endif
 
     @if ($customform)
         @foreach ($customform as $form)

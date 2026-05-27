@@ -12,6 +12,8 @@
     <div class="table-content mb-3">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
+                {{-- Change specialization status & Delete specialization: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
               <x-backend.quick-action url='{{route("backend.specializations.bulk_action")}}'>
 
                 <div class="">
@@ -29,12 +31,16 @@
                     </select>
                 </div>
               </x-backend.quick-action>
+                @endif
+                {{-- Export specialization list: Admin (Full), Clinic Admin (Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor'))
               <div>
                 <button type="button" class="btn btn-primary" data-modal="export">
                 <i class="ph ph-export me-1"></i> {{ __('messages.export') }}
                 </button>
 
               </div>
+                @endif
 
             </div>
             <x-slot name="toolbar">
@@ -54,9 +60,10 @@
 
                 </div>
                 <button class="btn btn-secondary d-flex align-items-center gap-1 btn-group" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="ph ph-funnel"></i>{{__('messages.advance_filter')}}</button>
-                @hasPermission('add_specialization')
+                {{-- Add specialization: Admin (Full), Clinic Admin (No), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin'))
                 <x-buttons.offcanvas target='#system-service-category-form-offcanvas' title="{{ __('Create') }} {{ __($module_title) }}">{{ __('messages.new') }}</x-buttons.offcanvas>
-                @endhasPermission
+                @endif
             </x-slot>
 
         </x-backend.section-header>
