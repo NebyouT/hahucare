@@ -22,11 +22,15 @@
                                     @endif
                                 </div>
 
-                                @if (!empty($service->service_includes) && count($service->service_includes) > 0)
+                                @php
+                                    $includes = is_array($service->service_includes) ? $service->service_includes : (json_decode($service->service_includes, true) ?? []);
+                                    $excludes = is_array($service->service_excludes) ? $service->service_excludes : (json_decode($service->service_excludes, true) ?? []);
+                                @endphp
+                                @if (!empty($includes))
                                     <div class="mt-4">
                                         <h6 class="fw-bold mb-2">{{ __('service.service_includes') }}</h6>
                                         <ul class="list-unstyled service-checklist">
-                                            @foreach ($service->service_includes as $item)
+                                            @foreach ($includes as $item)
                                                 <li class="mb-1 d-flex align-items-start gap-2">
                                                     <i class="ph ph-check-circle text-success mt-1"></i>
                                                     <span>{{ $item }}</span>
@@ -36,11 +40,11 @@
                                     </div>
                                 @endif
 
-                                @if (!empty($service->service_excludes) && count($service->service_excludes) > 0)
+                                @if (!empty($excludes))
                                     <div class="mt-3">
                                         <h6 class="fw-bold mb-2">{{ __('service.service_excludes') }}</h6>
                                         <ul class="list-unstyled service-checklist">
-                                            @foreach ($service->service_excludes as $item)
+                                            @foreach ($excludes as $item)
                                                 <li class="mb-1 d-flex align-items-start gap-2">
                                                     <i class="ph ph-x-circle text-danger mt-1"></i>
                                                     <span>{{ $item }}</span>
