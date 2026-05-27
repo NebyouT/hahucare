@@ -18,7 +18,10 @@
                                     <p class="service-description-short">{{ Str::limit($service->description, 250) }}</p>
                                     @if (strlen($service->description) > 250)
                                         <p class="service-description-full d-none">{{ $service->description }}</p>
-                                        <a href="javascript:void(0)" class="text-primary fw-bold read-more-btn" onclick="toggleDescription(this)">{{ __('frontend.read_more') }}...</a>
+                                        <a href="javascript:void(0)" class="text-primary fw-bold read-more-btn d-inline-flex align-items-center gap-1" onclick="toggleDescription(this)">
+                                            <span class="read-more-text">{{ __('frontend.read_more') }}...</span>
+                                            <i class="ph ph-caret-down read-more-icon fs-5"></i>
+                                        </a>
                                     @endif
                                 </div>
 
@@ -138,14 +141,18 @@
             const wrapper = btn.closest('.service-description-wrapper');
             const shortText = wrapper.querySelector('.service-description-short');
             const fullText = wrapper.querySelector('.service-description-full');
+            const textSpan = btn.querySelector('.read-more-text');
+            const icon = btn.querySelector('.read-more-icon');
             if (fullText.classList.contains('d-none')) {
                 shortText.classList.add('d-none');
                 fullText.classList.remove('d-none');
-                btn.textContent = '{{ __("frontend.show_less") }}';
+                if (textSpan) textSpan.textContent = '{{ __("frontend.show_less") }}';
+                if (icon) icon.classList.replace('ph-caret-down', 'ph-caret-up');
             } else {
                 shortText.classList.remove('d-none');
                 fullText.classList.add('d-none');
-                btn.textContent = '{{ __("frontend.read_more") }}...';
+                if (textSpan) textSpan.textContent = '{{ __("frontend.read_more") }}...';
+                if (icon) icon.classList.replace('ph-caret-up', 'ph-caret-down');
             }
         }
 

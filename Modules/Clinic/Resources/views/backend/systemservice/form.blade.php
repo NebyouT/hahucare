@@ -100,13 +100,12 @@
                     name="description" 
                     class="form-control" 
                     rows="3" 
-                    maxlength="250"
                     placeholder="{{ __('service.lbl_description') }}"
                     id="description-input"
                 >{{ old('description', $service->description ?? '') }}</textarea>
                 <div class="d-flex justify-content-between mt-1">
                     
-                    <small class="text-muted" id="description-counter">0/250</small>
+                    <small class="text-muted" id="description-counter">0</small>
                 </div>
                 <div class="invalid-feedback d-none" id="error-description"></div>
             </div>
@@ -242,11 +241,6 @@ function validateSystemServiceForm(form) {
     if (!category) {
         errors.category_id = ["{{ __('validation.required', ['attribute' => __('service.lbl_category_id')]) }}"];
     }
-    // Description character limit validation
-    const description = form.querySelector('[name="description"]').value.trim();
-    if (description && description.length > 250) {
-        errors.description = ["Description must not exceed 250 characters."];
-    }
     // Price validation removed since price field is commented out in the form
     // const price = form.querySelector('[name="price"]').value.trim();
     // if (!price) {
@@ -290,14 +284,7 @@ function updateDescriptionCounter() {
     const counter = document.getElementById('description-counter');
     if (descriptionInput && counter) {
         const length = descriptionInput.value.length;
-        counter.textContent = `${length}/250`;
-        if (length > 250) {
-            counter.classList.add('text-danger');
-            counter.classList.remove('text-muted');
-        } else {
-            counter.classList.remove('text-danger');
-            counter.classList.add('text-muted');
-        }
+        counter.textContent = `${length}`;
     }
 }
 
