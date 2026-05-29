@@ -433,6 +433,7 @@
                             </div> --}}
 
                             </div>
+                            @endunless
 
                             @if (count($data['customform']) > 0)
                                 @unless (auth()->user()->hasRole('receptionist'))
