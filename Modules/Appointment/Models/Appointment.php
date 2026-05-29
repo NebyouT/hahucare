@@ -193,8 +193,11 @@ class Appointment extends BaseModel
 
         if (auth()->user()->hasRole('receptionist')) {
 
-
             $Receptionist = Receptionist::where('receptionist_id', $user_id)->first();
+
+            if (!$Receptionist) {
+                return $query->whereRaw('1 = 0');
+            }
 
             $vendorId = $Receptionist->vendor_id;
             $clinic_id = $Receptionist->clinic_id;
@@ -212,7 +215,6 @@ class Appointment extends BaseModel
                 $query = $query->where('clinic_id', $clinic_id);
 
             }
-            // $query=$query->where('clinic_id',$clinic_id);
 
             return $query;
 

@@ -141,6 +141,10 @@ class Doctor extends BaseModel
 
             $Receptionist=Receptionist::where('receptionist_id',$user_id)->first();
 
+            if (!$Receptionist) {
+                return $query->whereRaw('1 = 0');
+            }
+
             $vendorId=$Receptionist->vendor_id;
             $clinic_id=$Receptionist->clinic_id;
 
@@ -155,11 +159,8 @@ class Doctor extends BaseModel
                   $query->with('doctorclinic')->whereHas('doctorclinic', function ($query) use ($clinic_id) {
                       $query->where('clinic_id', $clinic_id);
                    });
-              
+
                }
-            // $query = $query->with('doctorService')->whereHas('doctorService', function ($query) use ($clinic_id) {
-            //             $query->where('clinic_id', $clinic_id);
-            //          });
                return $query;
         }
 

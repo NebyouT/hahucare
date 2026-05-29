@@ -190,6 +190,10 @@ class ClinicsService extends BaseModel
 
             $Receptionist = Receptionist::where('receptionist_id', $user_id)->first();
 
+            if (!$Receptionist) {
+                return $query->whereRaw('1 = 0');
+            }
+
             $vendorId = $Receptionist->vendor_id;
 
             if (multiVendor() == "0") {
