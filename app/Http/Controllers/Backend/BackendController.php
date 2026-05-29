@@ -1600,9 +1600,9 @@ class BackendController extends Controller
             }
 
             for ($month = 1; $month <= 12; $month++) {
-                $amount = $monthlyTotals->first(function ($item) use ($month, $currentYear) {
+                $amount = optional($monthlyTotals->first(function ($item) use ($month, $currentYear) {
                     return $item->month == $month && $item->year == $currentYear;
-                })->total_amount ?? 0;
+                }))->total_amount ?? 0;
                 $chartData[] = round($amount, 2);
             }
 
@@ -1657,7 +1657,7 @@ class BackendController extends Controller
             }
 
             for ($i = $firstWeek; $i <= $firstWeek + 4; $i++) {
-                $amount = $monthlyWeekTotals->firstWhere('week', $i)->total_amount ?? 0;
+                $amount = optional($monthlyWeekTotals->firstWhere('week', $i))->total_amount ?? 0;
                 $chartData[] = round($amount, 2);
             }
 
@@ -1681,7 +1681,7 @@ class BackendController extends Controller
                 ->join('appointment_transactions', 'appointments.id', '=', 'appointment_transactions.appointment_id') // Join with transaction table
                 ->leftJoin('patient_encounters', 'appointments.id', '=', 'patient_encounters.appointment_id') // Join with encounters
                 ->leftJoin('billing_record', 'patient_encounters.id', '=', 'billing_record.encounter_id') // Join with billing records
-                ->selectRaw('DAY(appointments.start_date_time) as day, COALESCE(SUM(COALESCE(NULLIF(billing_record.final_total_amount, 0), appointment_transactions.total_amount)), 0) as total_amount') // Use billing amount if exists
+                ->selectRaw('DATE(appointments.start_date_time) as date, COALESCE(SUM(COALESCE(NULLIF(billing_record.final_total_amount, 0), appointment_transactions.total_amount)), 0) as total_amount') // Use billing amount if exists
                 ->where('appointments.status', 'checkout')
                 ->where(function($query) {
                     $query->where('appointment_transactions.payment_status', 1)
@@ -1689,9 +1689,9 @@ class BackendController extends Controller
                 })
                 ->whereYear('appointments.start_date_time', $currentYear)
                 ->whereMonth('appointments.start_date_time', $currentMonth)
-                ->whereBetween('appointments.start_date_time', [$currentWeekStartDate, $currentWeekStartDate->copy()->addDays(6)])
-                ->groupBy(DB::raw('DAY(appointments.start_date_time)'))
-                ->orderBy(DB::raw('DAY(appointments.start_date_time)'))
+                ->whereBetween('appointments.start_date_time', [$weekStart, $weekEnd])
+                ->groupBy(DB::raw('DATE(appointments.start_date_time)'))
+                ->orderBy(DB::raw('DATE(appointments.start_date_time)'))
                 ->get();
 
             if ($user->hasRole('vendor')) {
@@ -1702,15 +1702,15 @@ class BackendController extends Controller
                     ->where('appointments.status', 'checkout')
                     ->whereYear('appointments.start_date_time', $currentYear)
                     ->whereMonth('appointments.start_date_time', $currentMonth)
-                    ->whereBetween('appointments.start_date_time', [$currentWeekStartDate, $currentWeekStartDate->copy()->addDays(6)])
-                    ->groupBy(DB::raw('DAY(appointments.start_date_time)'))
-                    ->orderBy(DB::raw('DAY(appointments.start_date_time)'))
+                    ->whereBetween('appointments.start_date_time', [$weekStart, $weekEnd])
+                    ->groupBy(DB::raw('DATE(appointments.start_date_time)'))
+                    ->orderBy(DB::raw('DATE(appointments.start_date_time)'))
                     ->get();
             }
 
             for ($day = $weekStart->copy(); $day->lte($weekEnd); $day->addDay()) {
                 $formattedDate = $day->toDateString();
-                $amount = $weeklyDayTotals->firstWhere('date', $formattedDate)->total_amount ?? 0;
+                $amount = optional($weeklyDayTotals->firstWhere('date', $formattedDate))->total_amount ?? 0;
                 $chartData[] = round($amount, 2);
             }
 
@@ -1765,7 +1765,7 @@ class BackendController extends Controller
             if (auth()->user()->hasRole('vendor')) {
                 if ($daysDifference <= 7) {
                     // For ranges <= 7 days, show daily data
-                    $monthlyTotals = CommissionEarning::where('employee_id', $userid)
+                    $monthlyTotals = CommissionEarning::where('employee_id', $userId)
                         ->where('commission_status', '!=', 'pending')
                         ->join('appointments', 'commission_earnings.commissionable_id', '=', 'appointments.id')
                         ->selectRaw('DATE(appointments.start_date_time) as date, SUM(commission_earnings.commission_amount) as total_amount')
@@ -1775,7 +1775,7 @@ class BackendController extends Controller
                         ->get();
                 } else {
                     // For longer ranges, show monthly data
-                    $monthlyTotals = CommissionEarning::where('employee_id', $userid)
+                    $monthlyTotals = CommissionEarning::where('employee_id', $userId)
                         ->where('commission_status', '!=', 'pending')
                         ->join('appointments', 'commission_earnings.commissionable_id', '=', 'appointments.id')
                         ->selectRaw('YEAR(appointments.start_date_time) as year, MONTH(appointments.start_date_time) as month, SUM(commission_earnings.commission_amount) as total_amount')
@@ -1833,8 +1833,8 @@ class BackendController extends Controller
                 }
             }
 
-            if (!$user->hasRole('vendor') && $now->between($start, $end)) {
-                $chartData[count($chartData) - 1] += $getPharmaCommission($start, $end);
+            if (!$user->hasRole('vendor') && $now->between($startDate, $endDate)) {
+                $chartData[count($chartData) - 1] += $getPharmaCommission($startDate, $endDate);
             }
 
         }
