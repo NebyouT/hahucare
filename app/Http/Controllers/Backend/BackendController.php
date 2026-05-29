@@ -668,6 +668,59 @@ class BackendController extends Controller
         $total_pharma = User::where('user_type', 'pharma')->whereNull('deleted_at')->where('created_at', '>=', $startDate)
         ->where('created_at', '<=', $endDate)
         ->where('status', 1)->count();
+
+        $receptionistQuery = User::where('user_type','receptionist')->where('status',1)
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate);
+        $totalreceptionist = (clone $receptionistQuery)->whereNotNull('email_verified_at')->count();
+
+        // Lab statistics
+        $labQuery = \Modules\Laboratory\Models\Lab::query();
+        $labServiceQuery = \Modules\Laboratory\Models\LabService::query();
+        $referralQuery = \Modules\PatientReferral\Models\PatientReferral::query();
+
+        $user = auth()->user();
+        if ($user->hasRole('vendor')) {
+            $userClinicIds = Clinics::where('vendor_id', $user->id)->pluck('id');
+            $labQuery->whereIn('clinic_id', $userClinicIds);
+            $labServiceQuery->whereIn('lab_id', function($query) use ($userClinicIds) {
+                $query->select('id')->from('labs')->whereIn('clinic_id', $userClinicIds);
+            });
+            $referralQuery->whereIn('clinic_id', $userClinicIds);
+        } elseif ($user->hasRole('doctor')) {
+            $clinicIds = DoctorClinicMapping::where('doctor_id', $user->id)->pluck('clinic_id');
+            $labQuery->whereIn('clinic_id', $clinicIds);
+            $labServiceQuery->whereIn('lab_id', function($query) use ($clinicIds) {
+                $query->select('id')->from('labs')->whereIn('clinic_id', $clinicIds);
+            });
+            $referralQuery->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('receptionist')) {
+            $clinicIds = Receptionist::where('receptionist_id', $user->id)->pluck('clinic_id');
+            $labQuery->whereIn('clinic_id', $clinicIds);
+            $labServiceQuery->whereIn('lab_id', function($query) use ($clinicIds) {
+                $query->select('id')->from('labs')->whereIn('clinic_id', $clinicIds);
+            });
+            $referralQuery->whereIn('clinic_id', $clinicIds);
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = \Modules\Laboratory\Models\Lab::where('user_id', $user->id)->first();
+            if ($lab) {
+                $labQuery->where('id', $lab->id);
+                $labServiceQuery->where('lab_id', $lab->id);
+                $referralQuery->where('clinic_id', $lab->clinic_id);
+            }
+        } elseif ($user->hasRole('pharmacist')) {
+            $labQuery->where('id', 0);
+            $labServiceQuery->where('id', 0);
+            $referralQuery->where('id', 0);
+        }
+
+        $total_labs = $labQuery->count();
+        $total_lab_services = $labServiceQuery->count();
+        $total_referrals = $referralQuery->count();
+
+        $admin_earning = CommissionEarning::where(['commissionable_type' => 'Modules\Appointment\Models\Appointment', 'user_type' => 'admin'])->whereIn('commission_status', ['paid','unpaid'])->sum('commission_amount') ?? 0;
+        $doctor_earning = CommissionEarning::where(['commissionable_type' => 'Modules\Appointment\Models\Appointment', 'user_type' => 'doctor'])->whereIn('commission_status', ['paid','unpaid'])->sum('commission_amount') ?? 0;
+        $clinic_earning = CommissionEarning::where(['commissionable_type' => 'Modules\Appointment\Models\Appointment', 'user_type' => 'vendor'])->whereIn('commission_status', ['paid','unpaid'])->sum('commission_amount') ?? 0;
         $doctorQuery = Doctor::query()
             ->where('status', 1)
             ->whereBetween('created_at', [$startDate, $endDate]);
@@ -736,10 +789,18 @@ class BackendController extends Controller
             'total_clinics' => $total_clinics ?? 0,
             'dateformate' => $dateformate,
             'timeformate' => $timeformate,
+            'timeZone' => $timeZone,
             'total_pharma' => $total_pharma,
             'total_doctor' => $total_doctor,
             'total_supplier' => $total_supplier,
             'total_medicine' => $total_medicine,
+            'total_receptionist' => $totalreceptionist,
+            'admin_earning' => $admin_earning ?? 0,
+            'doctor_earning' => $doctor_earning ?? 0,
+            'clinic_earning' => $clinic_earning ?? 0,
+            'total_labs' => $total_labs ?? 0,
+            'total_lab_services' => $total_lab_services ?? 0,
+            'total_referrals' => $total_referrals ?? 0,
         ];
 
 

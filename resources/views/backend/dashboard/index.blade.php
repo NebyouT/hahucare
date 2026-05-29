@@ -402,7 +402,7 @@
                                         <div>
                                             <h6 class="text-heading text-uppercase">{{ __('dashboard.total_labs') }}
                                             </h6>
-                                            <h2 class="mb-0 fw-bold">{{ $data['total_labs'] }}</h2>
+                                            <h2 class="mb-0 fw-bold">{{ $data['total_labs'] ?? 0 }}</h2>
                                         </div>
                                         <div class="card-icon bg-primary-subtle p-3 rounded-3">
                                             <img src="{{ asset('img/dashboard/total_doctor.png') }}" alt="Labs"
