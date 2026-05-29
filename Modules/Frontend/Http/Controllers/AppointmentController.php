@@ -878,8 +878,8 @@ class AppointmentController extends Controller
             'clinic_name' => $data->clinic_name,
             'clinic_id' => $clinic_data->id,
             'vendor_id' => $clinic_data->vendor_id,
-            'receptionist_id' => $clinic_data->receptionist->receptionist_id ?? $receptionist->receptionist_id ?? null,
-            'receptionist_name' => isset($receptionist) ? $receptionist->users->first_name.' '.$receptionist->users->last_name : 'unknown',
+            'receptionist_id' => optional($clinic_data->receptionist->first())->receptionist_id ?? optional($receptionist)->receptionist_id ?? null,
+            'receptionist_name' => optional($receptionist)?->users?->first_name . ' ' . optional($receptionist)?->users?->last_name ?? 'unknown',
         ];
         $this->sendNotificationOnBookingUpdate('new_appointment', $notification_data);
 
