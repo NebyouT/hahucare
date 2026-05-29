@@ -90,6 +90,7 @@
             </div>
 
             @if ($data['status'] == 1)
+                @unless (auth()->user()->hasRole('receptionist'))
                 <div class="card shadow-sm custom-select-input overflow-hidden">
                     <div class="card-body p-3">
                         <h6 class="mb-2 text-primary">{{ __('appointment.select_encounter_templates') }}</h6>
@@ -102,6 +103,7 @@
                         </select>
                     </div>
                 </div>
+                @endunless
             @endif
 
         </div>
@@ -116,21 +118,26 @@
                             type="button" role="tab" aria-controls="nav-home"
                             aria-selected="true">{{ __('appointment.clinic_details') }}
                         </button>
+                        @unless (auth()->user()->hasRole('receptionist'))
                         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
                             type="button" role="tab" aria-controls="nav-profile"
                             aria-selected="false">{{ __('appointment.soap') }}</button>
                         <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                             type="button" role="tab" aria-controls="nav-contact"
                             aria-selected="false">{{ __('appointment.body_chart') }}</button>
+                        @endunless
 
                         @if (count($data['customform']) > 0)
+                            @unless (auth()->user()->hasRole('receptionist'))
                             <button class="nav-link" id="nav-custom-form-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-custom-form" type="button" role="tab"
                                 aria-controls="nav-custom-form" aria-selected="false">Custom Form</button>
+                            @endunless
                         @endif
 
                     </div>
                     @if ($data['status'] == 1)
+                        @unless (auth()->user()->hasRole('receptionist'))
                         <div class="d-flex gap-2">
                             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#generate_invoice">
                                 <div class="d-inline-flex align-items-center gap-1">
@@ -139,6 +146,7 @@
                                 </div>
                             </button>
                         </div>
+                        @endunless
                     @else
                         <div class="d-flex gap-2">
                             <a href="{{ url('app/billing-record/encounter_billing_detail') }}?id={{ $data['id'] }}">
@@ -193,6 +201,7 @@
                                     <div class="card-header px-0 mb-3 d-flex justify-content-between flex-wrap gap-3">
                                         <h5 class="card-title">{{ __('appointment.medical_report') }}</h5>
                                         @if ($data['status'] == 1)
+                                            @unless (auth()->user()->hasRole('receptionist'))
                                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#addMedicalreport">
                                                 <div class="d-inline-flex align-items-center gap-1">
@@ -200,6 +209,7 @@
                                                     {{ __('appointment.add_medical_report') }}
                                                 </div>
                                             </button>
+                                            @endunless
                                         @endif
                                     </div>
 
@@ -217,6 +227,7 @@
                                     <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
                                         <h5 class="card-title">{{ __('appointment.prescription') }}</h5>
                                         <div>
+                                            @unless (auth()->user()->hasRole('receptionist'))
                                             <div class="d-flex align-items-center flex-wrap gap-3">
                                                 @if ($data['status'] == 1)
                                                     @if (checkPlugin('pharma') == 'active')
@@ -247,6 +258,7 @@
                                                     @endif
                                                 @endif
                                             </div>
+                                        @endunless
                                         </div>
                                     </div>
 
@@ -272,6 +284,7 @@
                                     <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
                                         <h5 class="card-title">{{ __('laboratory.lab_orders') }}</h5>
                                         @if ($data['status'] == 1)
+                                            @unless (auth()->user()->hasRole('receptionist'))
                                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#addLabOrder">
                                                 <div class="d-inline-flex align-items-center gap-1">
@@ -279,6 +292,7 @@
                                                     {{ __('laboratory.add_lab_order') }}
                                                 </div>
                                             </button>
+                                            @endunless
                                         @endif
                                     </div>
 
@@ -321,6 +335,7 @@
                                     <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
                                         <h5 class="card-title">Patient Referrals</h5>
                                         @if ($data['status'] == 1)
+                                            @unless (auth()->user()->hasRole('receptionist'))
                                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#addReferral">
                                                 <div class="d-inline-flex align-items-center gap-1">
@@ -328,6 +343,7 @@
                                                     {{ __('Add Referral') }}
                                                 </div>
                                             </button>
+                                            @endunless
                                         @endif
                                     </div>
 
@@ -369,11 +385,12 @@
                                     <div>
                                         <textarea class="form-control h-auto bg-body" rows="3"
                                             placeholder="{{ __('appointment.enter_other_details') }}" name="other_details" id="other_details"
-                                            style="min-height: max-content">{{ old('other_details', $data['EncounterOtherDetails']['other_details'] ?? '') }}</textarea>
+                                            style="min-height: max-content" @if(auth()->user()->hasRole('receptionist')) readonly @endif>{{ old('other_details', $data['EncounterOtherDetails']['other_details'] ?? '') }}</textarea>
                                     </div>
                                 </div>
 
                                 @if ($data['status'] == 1)
+                                    @unless (auth()->user()->hasRole('receptionist'))
                                     <div class="offcanvas-footer border-top pt-4" id="save_button">
                                         <div class="d-grid d-sm-flex justify-content-sm-end gap-3">
                                             <button class="btn btn-secondary" type="submit">
@@ -381,9 +398,11 @@
                                             </button>
                                         </div>
                                     </div>
+                                    @endunless
                                 @endif
                             </div>
 
+                            @unless (auth()->user()->hasRole('receptionist'))
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                 aria-labelledby="nav-profile-tab" tabindex="0">
                                 <div id="soap">
@@ -416,6 +435,7 @@
                             </div>
 
                             @if (count($data['customform']) > 0)
+                                @unless (auth()->user()->hasRole('receptionist'))
                                 <div class="tab-pane fade" id="nav-custom-form" role="tabpanel"
                                     aria-labelledby="nav-custom-form-tab" tabindex="0">
                                     <div id="custom_form">
@@ -430,11 +450,13 @@
                                     </div>
 
                                 </div>
+                                @endunless
                             @endif
                         </div>
                     </div>
                 </div>
 
+                @unless (auth()->user()->hasRole('receptionist'))
                 @if (checkPlugin('pharma') == 'active')
                     @include('appointment::backend.patient_encounter.component.prescription', [
                         'data' => $data,
@@ -465,6 +487,7 @@
                 @include('appointment::backend.patient_encounter.component.medical_report', [
                     'data' => $data,
                 ])
+                @endunless
                 @include('appointment::backend.patient_encounter.component.billing_details', [
                     'data' => $data,
                     'bedAllocations' => $bedAllocations ?? [],

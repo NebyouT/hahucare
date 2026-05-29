@@ -8,6 +8,7 @@
             <b>{{ __('appointment.note_encounter_observation') }}</b>
         </p>
         @if ($data['status'] == 1)
+            @unless (auth()->user()->hasRole('receptionist'))
             <select id="observations" name="observation_id" class="form-select select2 observation "
                 placeholder="{{ __('appointment.select_observation') }}" data-filter="select">
                 <option value="">{{ __('appointment.select_observation') }}</option>
@@ -16,6 +17,7 @@
                     </option>
                 @endforeach
             </select>
+            @endunless
         @endif
     </div>
 
@@ -27,10 +29,12 @@
                         <div class="d-flex align-items-start justify-content-between gap-1">
                             <span>{{ $index + 1 }}. {{ $observation['title'] }}</span>
                             @if ($data['status'] == 1)
+                                @unless (auth()->user()->hasRole('receptionist'))
                                 <button class="btn p-0 text-danger"
                                     onclick="removeobservation({{ $observation['id'] }})">
                                     <i class="ph ph-x-circle"></i>
                                 </button>
+                                @endunless
                             @endif
                         </div>
                     </li>
@@ -49,6 +53,7 @@
 
 @push('after-scripts')
     <script>
+        var isReceptionist = @json(auth()->user()->hasRole('receptionist'));
         $(document).ready(function() {
 
             $('#observations').select2({
@@ -127,14 +132,13 @@
             var observationlistHtml = '';
             if (medicalHistory && medicalHistory.length > 0) {
                 medicalHistory.forEach(function(observation, index) {
+                    var deleteBtn = isReceptionist ? '' :
+                        `<button class="btn p-0 text-danger" onclick="removeobservation(${observation.id})"><i class="ph ph-x-circle"></i></button>`;
                     observationlistHtml += `
                         <li class="mb-3">
                             <div class="d-flex align-items-start justify-content-between gap-1">
                                 <span>${index + 1}. ${observation.title}</span>
-                                <button class="btn p-0 text-danger"
-                                    onclick="removeobservation(${observation.id})">
-                                    <i class="ph ph-x-circle"></i>
-                                </button>
+                                ${deleteBtn}
                             </div>
                         </li>`;
                 });

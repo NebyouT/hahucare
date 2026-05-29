@@ -9,6 +9,7 @@
             <b>{{ __('appointment.note_encounter_problem') }}</b>
         </p>
         @if ($data['status'] == 1)
+            @unless (auth()->user()->hasRole('receptionist'))
             <select id="problem" name="problem_id" class="form-control select2"
                 placeholder="{{ __('appointment.select_problems') }}" data-filter="select">
                 <option value="">{{ __('appointment.select_problems') }}</option>
@@ -16,6 +17,7 @@
                     <option value="{{ $problem->name }}">{{ $problem->name }}</option>
                 @endforeach
             </select>
+            @endunless
         @endif
     </div>
 
@@ -27,9 +29,11 @@
                         <div class="d-flex align-items-start justify-content-between gap-1">
                             <span>{{ $index + 1 }}. {{ $problem['title'] }}</span>
                             @if ($data['status'] == 1)
+                                @unless (auth()->user()->hasRole('receptionist'))
                                 <button class="btn p-0 text-danger" onclick="removeProblemData({{ $problem['id'] }})">
                                     <i class="ph ph-x-circle"></i>
                                 </button>
+                                @endunless
                             @endif
                         </div>
                     </li>
@@ -46,6 +50,7 @@
 
 @push('after-scripts')
     <script>
+        var isReceptionist = @json(auth()->user()->hasRole('receptionist'));
         $(document).ready(function() {
             $('#problem').select2({
                 placeholder: '{{ __('appointment.select_problems') }}',
@@ -155,14 +160,13 @@
             var listHtml = '';
             if (medicalHistory && medicalHistory.length > 0) {
                 medicalHistory.forEach(function(problem, index) {
+                    var deleteBtn = isReceptionist ? '' :
+                        `<button class="btn p-0 text-danger" onclick="removeProblemData(${problem.id})"><i class="ph ph-x-circle"></i></button>`;
                     listHtml += `
                         <li class="mb-3">
                             <div class="d-flex align-items-start justify-content-between gap-1">
                                 <span>${index + 1}. ${problem.title}</span>
-                                <button class="btn p-0 text-danger"
-                                    onclick="removeProblemData(${problem.id})">
-                                    <i class="ph ph-x-circle"></i>
-                                </button>
+                                ${deleteBtn}
                             </div>
                         </li>`;
                 });
