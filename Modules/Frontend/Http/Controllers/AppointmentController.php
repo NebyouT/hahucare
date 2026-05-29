@@ -895,7 +895,6 @@ class AppointmentController extends Controller
             'cash'      => 'CashPayment',
             'Wallet'    => 'WalletPayment',
             'chapa'     => 'ChapaPaymentProxy',
-            'starpay'   => 'StarPayPaymentProxy',
             // 'Stripe'      => 'StripePayment',
             // 'Razor Pay'   => 'RazorpayPayment',
             // 'Paystack'    => 'PaystackPayment',
@@ -1031,18 +1030,11 @@ class AppointmentController extends Controller
             ->ChapaPayment($request, $paymentData, $price);
     }
 
-    //starpay payment proxy — delegates to StarPayController
-    public function StarPayPaymentProxy(Request $request, $paymentData, $price)
-    {
-        return app(\Modules\Frontend\Http\Controllers\StarPayController::class)
-            ->starPayPayment($request, $paymentData, $price);
-    }
-
     //cash payment
     public function CashPayment(Request $request, $paymentData, $price)
     {
         $paymentData['transaction_type'] = 'cash';
-        $paymentData['payment_status'] = 0;
+        $paymentData['payment_status'] = 1;
         $paymentData['external_transaction_id'] = null;
         $paymentData['tax_percentage'] = $this->calculateTaxAmounts(null, $price);
         $this->savePayment($paymentData);
@@ -1055,6 +1047,7 @@ class AppointmentController extends Controller
     public function WalletPayment(Request $request, $paymentData, $price)
     {
         $paymentData['transaction_type'] = 'Wallet';
+        $paymentData['payment_status'] = 1;
         $paymentData['external_transaction_id'] = null;
         $paymentData['tax_percentage'] = $this->calculateTaxAmounts(null, $price);
         $this->savePayment($paymentData);
@@ -1799,7 +1792,7 @@ class AppointmentController extends Controller
         $data['tip_amount'] = $data['tip'] ?? 0;
         $appointment = Appointment::findOrFail($data['id']);
         $serviceDetails = ClinicsService::where('id', $appointment->service_id)->with('vendor')->first();
-        $vendor = $serviceDetails->vendor ?? null;
+        $vendor = optional($serviceDetails)->vendor ?? null;
         $serviceData = $this->getServiceAmount($appointment->service_id, $appointment->doctor_id, $appointment->clinic_id);
         $tax = $data['tax_percentage'] ?? Tax::active()->whereNull('module_type')->orWhere('module_type', 'services')->where('tax_type', 'exclusive')->where('status', 1)->get();
 
