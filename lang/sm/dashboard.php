@@ -66,4 +66,7 @@ return [
     'doctor_earning' => 'Dakhliga Dhaqtarka',
     'clinic_earning' => 'Kasbashada Rugta',
     'total_active_vendors' => 'Wadarta guud ee maamulayaasha rugaha caafimaadka firfircoon',
+    'total_labs' => 'Wadarta Shaybaadhka',
+    'total_lab_services' => 'Wadarta Adeegyada Shaybaadhka',
+    'total_referrals' => 'Wadarta Tixraacyada',
 ];

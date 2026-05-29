@@ -66,4 +66,7 @@ return [
     'doctor_earning' => 'ዶክተር ገቢ',
     'clinic_earning' => 'የክሊኒክ ገቢ',
     'total_active_vendors' => 'ጠቅላላ ንቁ ክሊኒክ አስተዳዳሪዎች',
+    'total_labs' => 'ጠቅላላ ላቦራቶሪዎች',
+    'total_lab_services' => 'ጠቅላላ የላብራቶሪ አገልግሎቶች',
+    'total_referrals' => 'ጠቅላላ ሪፈራሎች',
 ];

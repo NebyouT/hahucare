@@ -67,6 +67,8 @@ return [
     'total_supplier' => 'Total des fournisseurs',
 
     'total_active_vendors' => 'Total des administrateurs de clinique actifs',
-
+    'total_labs' => 'Total des laboratoires',
+    'total_lab_services' => 'Total des services de laboratoire',
+    'total_referrals' => 'Total des références',
 
 ];

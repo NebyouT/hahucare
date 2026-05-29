@@ -67,6 +67,7 @@ return [
     'clinic_earning' => 'Clinic Earning',
     'total_active_vendors' => 'Total Active Clinic Admins',
     'total_labs' => 'Total Labs',
+    'total_lab_services' => 'Total Lab Services',
     'total_lab_tests' => 'Total Lab Tests',
     'total_referrals' => 'Total Referrals',
     'total_lab_orders' => 'Total Lab Orders',

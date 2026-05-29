@@ -55,5 +55,8 @@ return [
     'total_supplier' => 'Gesamtanzahl Lieferanten',
 
     'total_active_vendors' => 'Insgesamt aktive Klinikadministratoren',
+    'total_labs' => 'Gesamtlabore',
+    'total_lab_services' => 'Gesamtlaborleistungen',
+    'total_referrals' => 'Gesamtüberweisungen',
 
 ];

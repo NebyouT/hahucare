@@ -63,4 +63,7 @@ return [
     'total_doctors' => 'إجمالي الأطباء',
     'total_supplier' => 'إجمالي الموردين',
     'total_active_vendors' => 'إجمالي مسؤولي العيادات النشطين',
+    'total_labs' => 'إجمالي المختبرات',
+    'total_lab_services' => 'إجمالي خدمات المختبر',
+    'total_referrals' => 'إجمالي الإحالات',
 ];
