@@ -530,9 +530,9 @@ class GenerateMenus
                 // Service - read-only for pharma
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-wrench',
-                    'title' => __('sidebar.service'),
-                    'route' => 'backend.clinicservice.index',
-                    'active' => ['app/clinicservice'],
+                    'title' => __('sidebar.services'),
+                    'route' => 'backend.services.index',
+                    'active' => ['app/services'],
                     'permission' => '',
                     'order' => 0,
                 ]);
