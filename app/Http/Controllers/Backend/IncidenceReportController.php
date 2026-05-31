@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use Modules\Appointment\Trait\AppointmentTrait;
 use Modules\Clinic\Models\Receptionist;
 use Modules\Clinic\Models\DoctorClinicMapping;
+use Modules\Laboratory\Models\Lab;
 use Spatie\Activitylog\Models\Activity;
 
 class IncidenceReportController extends Controller
@@ -86,6 +87,14 @@ class IncidenceReportController extends Controller
                   ->orWhere('clinic_id', $receptionist?->clinic_id);
         }
 
+        // Lab technician: only see incidents from their clinic
+        if ($user->hasRole('lab_technician')) {
+            $lab = Lab::where('user_id', $user->id)->first();
+            if ($lab && $lab->clinic_id) {
+                $query->where('clinic_id', $lab->clinic_id);
+            }
+        }
+
         $appointment_status = [__('messages.lbl_open') => '1', __('messages.lbl_closed') => '2', __('messages.lbl_reject') => '3'];
 
         $datatable = $datatable->eloquent($query)
@@ -116,8 +125,8 @@ class IncidenceReportController extends Controller
             })
             ->editColumn('status', function ($data) use ($appointment_status) {
                 if ($data->incident_type == 1) {
-                    // Receptionist cannot change status — show read-only badge
-                    if (auth()->user()->hasRole('receptionist')) {
+                    // Receptionist and lab_technician cannot change status — show read-only badge
+                    if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
                         return '<span class="badge bg-warning">' . __('messages.lbl_open') . '</span>';
                     }
                     return view('backend.incidence.datatable.select_column', compact('data', 'appointment_status'));
@@ -156,8 +165,8 @@ class IncidenceReportController extends Controller
 
     public function updateStatus($id, Request $request)
     {
-        // Receptionist cannot change status
-        if (auth()->user()->hasRole('receptionist')) {
+        // Receptionist and lab_technician cannot change status
+        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
             return response()->json(['message' => 'You are not authorized to change status.', 'status' => false], 403);
         }
 
@@ -173,8 +182,8 @@ class IncidenceReportController extends Controller
 
     public function bulk_action(Request $request)
     {
-        // Receptionist cannot bulk action
-        if (auth()->user()->hasRole('receptionist')) {
+        // Receptionist and lab_technician cannot bulk action
+        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
             return response()->json(['message' => 'You are not authorized.', 'status' => false], 403);
         }
 
@@ -192,6 +201,12 @@ class IncidenceReportController extends Controller
 
     public function reply(Request $request)
     {
+        // Receptionist and lab_technician cannot reply
+        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
+            flash('<i class="fas fa-times"></i> You are not authorized.')->error()->important();
+            return redirect()->route('backend.incidence.index');
+        }
+
         $id = $request->incidence_id;
         $Reply = $request->Reply;
         $message = __('messages.bulk_update');
@@ -267,6 +282,9 @@ class IncidenceReportController extends Controller
         if ($user->hasRole('receptionist')) {
             $receptionist = Receptionist::where('receptionist_id', $user->id)->first();
             $clinicId = $receptionist?->clinic_id;
+        } elseif ($user->hasRole('lab_technician')) {
+            $lab = Lab::where('user_id', $user->id)->first();
+            $clinicId = $lab?->clinic_id;
         }
 
         $incidence = Incidence::create([

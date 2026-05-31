@@ -6,7 +6,7 @@
 <div class="table-content mb-3">
     <x-backend.section-header>
         <div class="d-flex flex-wrap gap-3">
-            @unless(auth()->user()->hasRole('receptionist'))
+            @unless(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician'))
             <x-backend.quick-action url="{{ route('backend.incidence.bulk_action') }}">
                 <div class="">
                     <select name="action_type" class="select2 form-select col-12" id="quick-action-type"
@@ -47,7 +47,7 @@
                     aria-describedby="addon-wrapping">
             </div>
 
-            @if(auth()->user()->hasRole('receptionist'))
+            @if(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician'))
             <a href="{{ route('backend.incidence.create') }}" class="btn btn-primary">
                 {{ __('messages.create') }} {{ __('messages.incidence') }}
             </a>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                @if($data->incident_type==1)
+                @if($data->incident_type==1 && !auth()->user()->hasRole('receptionist') && !auth()->user()->hasRole('lab_technician'))
                 <div class="d-flex align-items-center justify-content-end">
                     <x-buttons.create title="">
                         {{__('messages.lbl_reply')}}
@@ -168,7 +168,9 @@
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 
 <script type="text/javascript" defer>
-   const columns = [{
+   const columns = [
+    @if (!auth()->user()->hasRole('lab_technician'))
+    {
                 name: 'check',
                 data: 'check',
                 title: '<input type="checkbox" class="form-check-input" name="select_all_table" id="select-all-table" onclick="selectAllTable(this)">',
@@ -177,6 +179,7 @@
                 orderable: false,
                 searchable: false,
             },
+    @endif
 
               {
         data: 'image',
