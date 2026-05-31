@@ -116,11 +116,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <label for="referred_to">Referred To (Doctor)</label>
                                 <select name="referred_to" id="referred_to" class="form-control @error('referred_to') is-invalid @enderror" required>
                                     <option value="">Select Doctor</option>
-                                    @foreach($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}" {{ old('referred_to') == $doctor->id ? 'selected' : '' }}>
-                                            Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }}
-                                        </option>
-                                    @endforeach
+                                    @if(isset($referredToDoctors))
+                                        @foreach($referredToDoctors as $doctor)
+                                            <option value="{{ $doctor->id }}" {{ old('referred_to') == $doctor->id ? 'selected' : '' }}>
+                                                Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }}
+                                            </option>
+                                        @endforeach
+                                    @else
+                                        @foreach($doctors as $doctor)
+                                            <option value="{{ $doctor->id }}" {{ old('referred_to') == $doctor->id ? 'selected' : '' }}>
+                                                Dr. {{ $doctor->full_name ?? $doctor->first_name . ' ' . $doctor->last_name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                                 @error('referred_to')
                                     <span class="invalid-feedback">{{ $message }}</span>

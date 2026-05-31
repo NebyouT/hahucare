@@ -84,24 +84,20 @@ class PatientReferralController extends Controller
      */
     public function create()
     {
-        // Check if user is authenticated
         if (!Auth::check()) {
             abort(401, 'Please login to access this page.');
         }
-        
-        $user = Auth::user();
-        
-        if ($user->user_type === 'doctor') {
-            // For doctors: get all patients, but only themselves as referred_by
-            $patients = \App\Models\User::where('user_type', 'user')
-                ->where('status', 1)
-                ->select('id', 'first_name', 'last_name', 'email')
-                ->get();
 
+        $user = Auth::user();
+        $patients = \App\Models\User::where('user_type', 'user')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        if ($user->user_type === 'doctor') {
             // Only the logged-in doctor can be selected as referred_by
-            $doctors = collect([$user]); // Collection with only the current doctor
-            
-            // For referred_to, show all doctors except themselves
+            $doctors = collect([$user]);
+
             $referredToDoctors = \App\Models\User::where('user_type', 'doctor')
                 ->where('status', 1)
                 ->where('id', '!=', $user->id)
@@ -109,20 +105,40 @@ class PatientReferralController extends Controller
                 ->get();
 
             return view('patientreferral::backend.create', compact('patients', 'doctors', 'referredToDoctors'));
-        } else {
-            // For admins and other roles: show all patients and doctors
-            $patients = \App\Models\User::where('user_type', 'user')
-                ->where('status', 1)
-                ->select('id', 'first_name', 'last_name', 'email')
-                ->get();
+        }
+
+        if ($user->hasRole('receptionist')) {
+            // Receptionist: only doctors from their clinic can be selected as referred_by
+            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
+            $clinicDoctorIds = [];
+            if ($receptionist) {
+                $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+                    ->pluck('doctor_id')
+                    ->toArray();
+            }
 
             $doctors = \App\Models\User::where('user_type', 'doctor')
                 ->where('status', 1)
+                ->whereIn('id', $clinicDoctorIds)
                 ->select('id', 'first_name', 'last_name', 'email')
                 ->get();
 
-            return view('patientreferral::backend.create', compact('patients', 'doctors'));
+            // For referred_to, show all doctors
+            $referredToDoctors = \App\Models\User::where('user_type', 'doctor')
+                ->where('status', 1)
+                ->select('id', 'first_name', 'last_name', 'email')
+                ->get();
+
+            return view('patientreferral::backend.create', compact('patients', 'doctors', 'referredToDoctors'));
         }
+
+        // For admins and other roles: show all patients and doctors
+        $doctors = \App\Models\User::where('user_type', 'doctor')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        return view('patientreferral::backend.create', compact('patients', 'doctors'));
     }
 
     /**
@@ -133,18 +149,33 @@ class PatientReferralController extends Controller
         if (!Auth::check()) {
             abort(401, 'Please login to access this page.');
         }
+
+        $user = Auth::user();
         
         $patients = \App\Models\User::where('user_type', 'user')
             ->where('status', 1)
             ->select('id', 'first_name', 'last_name', 'email')
             ->get();
 
-        $doctors = \App\Models\User::where('user_type', 'doctor')
+        $allDoctors = \App\Models\User::where('user_type', 'doctor')
             ->where('status', 1)
             ->select('id', 'first_name', 'last_name', 'email')
             ->get();
 
-        return view('patientreferral::backend.create_advanced', compact('patients', 'doctors'));
+        if ($user->hasRole('receptionist')) {
+            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
+            $clinicDoctorIds = [];
+            if ($receptionist) {
+                $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+                    ->pluck('doctor_id')
+                    ->toArray();
+            }
+            $doctors = $allDoctors->whereIn('id', $clinicDoctorIds);
+        } else {
+            $doctors = $allDoctors;
+        }
+
+        return view('patientreferral::backend.create_advanced', compact('patients', 'doctors', 'allDoctors'));
     }
 
     /**
@@ -299,16 +330,13 @@ class PatientReferralController extends Controller
         }
         
         if ($user->user_type === 'doctor') {
-            // For doctors: get all patients, but only themselves as referred_by
             $patients = \App\Models\User::where('user_type', 'user')
                 ->where('status', 1)
                 ->select('id', 'first_name', 'last_name', 'email')
                 ->get();
 
-            // Only the logged-in doctor can be selected as referred_by
             $doctors = collect([$user]);
             
-            // For referred_to, show all doctors except themselves
             $referredToDoctors = \App\Models\User::where('user_type', 'doctor')
                 ->where('status', 1)
                 ->where('id', '!=', $user->id)
@@ -316,20 +344,32 @@ class PatientReferralController extends Controller
                 ->get();
 
             return view('patientreferral::backend.edit', compact('patientReferral', 'patients', 'doctors', 'referredToDoctors'));
-        } else {
-            // For admins and other roles: show all patients and doctors
-            $patients = \App\Models\User::where('user_type', 'user')
-                ->where('status', 1)
-                ->select('id', 'first_name', 'last_name', 'email')
-                ->get();
-
-            $doctors = \App\Models\User::where('user_type', 'doctor')
-                ->where('status', 1)
-                ->select('id', 'first_name', 'last_name', 'email')
-                ->get();
-
-            return view('patientreferral::backend.edit', compact('patientReferral', 'patients', 'doctors'));
         }
+
+        $patients = \App\Models\User::where('user_type', 'user')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        $allDoctors = \App\Models\User::where('user_type', 'doctor')
+            ->where('status', 1)
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
+
+        if ($user->hasRole('receptionist')) {
+            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
+            $clinicDoctorIds = [];
+            if ($receptionist) {
+                $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+                    ->pluck('doctor_id')
+                    ->toArray();
+            }
+            $doctors = $allDoctors->whereIn('id', $clinicDoctorIds);
+        } else {
+            $doctors = $allDoctors;
+        }
+
+        return view('patientreferral::backend.edit', compact('patientReferral', 'patients', 'doctors', 'allDoctors'));
     }
 
     /**
@@ -340,7 +380,8 @@ class PatientReferralController extends Controller
         if (!Auth::check()) {
             abort(401, 'Please login to access this page.');
         }
-        
+
+        $user = Auth::user();
         $referral = PatientReferral::findOrFail($id);
         
         $patients = \App\Models\User::where('user_type', 'user')
@@ -348,12 +389,25 @@ class PatientReferralController extends Controller
             ->select('id', 'first_name', 'last_name', 'email')
             ->get();
 
-        $doctors = \App\Models\User::where('user_type', 'doctor')
+        $allDoctors = \App\Models\User::where('user_type', 'doctor')
             ->where('status', 1)
             ->select('id', 'first_name', 'last_name', 'email')
             ->get();
 
-        return view('patientreferral::backend.edit_advanced', compact('referral', 'patients', 'doctors'));
+        if ($user->hasRole('receptionist')) {
+            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
+            $clinicDoctorIds = [];
+            if ($receptionist) {
+                $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+                    ->pluck('doctor_id')
+                    ->toArray();
+            }
+            $doctors = $allDoctors->whereIn('id', $clinicDoctorIds);
+        } else {
+            $doctors = $allDoctors;
+        }
+
+        return view('patientreferral::backend.edit_advanced', compact('referral', 'patients', 'doctors', 'allDoctors'));
     }
 
     /**

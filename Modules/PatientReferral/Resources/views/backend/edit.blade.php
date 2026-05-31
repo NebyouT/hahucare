@@ -70,7 +70,7 @@
                                                 </option>
                                             @endforeach
                                         @else
-                                            @foreach($doctors as $doctor)
+                                            @foreach(($allDoctors ?? $doctors) as $doctor)
                                                 <option value="{{ $doctor->id }}" {{ $patientReferral->referred_to == $doctor->id ? 'selected' : '' }}>
                                                     Dr. {{ $doctor->first_name }} {{ $doctor->last_name }}
                                                 </option>

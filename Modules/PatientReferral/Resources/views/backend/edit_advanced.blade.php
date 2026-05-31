@@ -102,7 +102,7 @@
                                     <label for="referred_to">Referred To (Doctor) <span class="text-danger">*</span></label>
                                     <select class="form-control select2" name="referred_to" id="referred_to" required>
                                         <option value="">Select Doctor</option>
-                                        @foreach($doctors as $doctor)
+                                        @foreach(($allDoctors ?? $doctors) as $doctor)
                                             <option value="{{ $doctor->id }}" {{ $referral->referred_to == $doctor->id ? 'selected' : '' }}>{{ $doctor->first_name }} {{ $doctor->last_name }}</option>
                                         @endforeach
                                     </select>
