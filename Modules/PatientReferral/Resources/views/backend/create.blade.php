@@ -5,36 +5,61 @@
 @push('after-scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Select2 for searchable dropdowns
+    $('#patient_id').select2({
+        placeholder: 'Search and Select Patient',
+        allowClear: true,
+        width: '100%'
+    });
+    $('#referred_by').select2({
+        placeholder: 'Search and Select Doctor',
+        allowClear: true,
+        width: '100%'
+    });
+    $('#referred_to').select2({
+        placeholder: 'Search and Select Doctor',
+        allowClear: true,
+        width: '100%'
+    });
+
     const referredBySelect = document.getElementById('referred_by');
     const referredToSelect = document.getElementById('referred_to');
     
-    // Store original options
-    const originalReferredToOptions = Array.from(referredToSelect.options).slice(1); // Skip first empty option
-    
     function updateReferredToOptions() {
         const selectedReferredBy = referredBySelect.value;
+        const currentReferredTo = referredToSelect.value;
         
         // Clear current options (keep the first empty option)
         referredToSelect.innerHTML = '<option value="">Select Doctor</option>';
         
-        // Add back all options except the selected one
-        originalReferredToOptions.forEach(option => {
-            if (option.value !== selectedReferredBy) {
-                referredToSelect.appendChild(option.cloneNode(true));
+        // Get original options from jQuery data
+        const allOptions = @json($doctors->map(function($d) { return ['id' => $d->id, 'name' => 'Dr. ' . ($d->full_name ?? $d->first_name . ' ' . $d->last_name)]; }));
+        const referredToOptions = @json(isset($referredToDoctors) ? $referredToDoctors->map(function($d) { return ['id' => $d->id, 'name' => 'Dr. ' . ($d->full_name ?? $d->first_name . ' ' . $d->last_name)]; }) : $doctors->map(function($d) { return ['id' => $d->id, 'name' => 'Dr. ' . ($d->full_name ?? $d->first_name . ' ' . $d->last_name)]; }));
+        
+        const options = referredToOptions.length ? referredToOptions : allOptions;
+        
+        options.forEach(function(opt) {
+            if (opt.id != selectedReferredBy) {
+                const option = document.createElement('option');
+                option.value = opt.id;
+                option.text = opt.name;
+                if (opt.id == currentReferredTo) {
+                    option.selected = true;
+                }
+                referredToSelect.appendChild(option);
             }
         });
         
-        // If current selected value is the same as referred_by, clear it
-        if (referredToSelect.value === selectedReferredBy) {
-            referredToSelect.value = '';
-        }
+        // Reinitialize Select2
+        $('#referred_to').select2({
+            placeholder: 'Search and Select Doctor',
+            allowClear: true,
+            width: '100%'
+        });
     }
     
     // Update referred_to options when referred_by changes
-    referredBySelect.addEventListener('change', updateReferredToOptions);
-    
-    // Initialize on page load
-    updateReferredToOptions();
+    $('#referred_by').on('change', updateReferredToOptions);
 });
 </script>
 @endpush
@@ -104,18 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 form-group mb-3">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
-                                    <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="accepted" {{ old('status') == 'accepted' ? 'selected' : '' }}>Accepted</option>
-                                    <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                </select>
-                                @error('status')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-
                             <div class="col-md-6 form-group mb-3">
                                 <label for="referral_date">Referral Date</label>
                                 <input type="date" name="referral_date" id="referral_date" 

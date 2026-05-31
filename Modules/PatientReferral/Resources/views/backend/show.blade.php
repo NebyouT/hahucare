@@ -89,7 +89,8 @@
                             <h5>Actions</h5>
                             <div class="btn-group">
                                 @if((auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id && $referral->status === 'pending') || 
-                                   (in_array(auth()->user()->user_type, ['admin', 'demo_admin']) && $referral->status === 'pending'))
+                                   (in_array(auth()->user()->user_type, ['admin', 'demo_admin']) && $referral->status === 'pending') ||
+                                   (auth()->user()->hasRole('receptionist') && $referral->status === 'pending' && in_array($referral->referred_to, $clinicDoctorIds ?? [])))
                                     <form action="{{ route('backend.patientreferral.accept', $referral) }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to accept this referral and create an appointment?')">

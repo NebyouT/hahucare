@@ -153,4 +153,25 @@
         </div>
     </div>
 </div>
+@push('after-scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    $('#patient_id').select2({
+        placeholder: 'Search and Select Patient',
+        allowClear: true,
+        width: '100%'
+    });
+    $('#referred_by').select2({
+        placeholder: 'Search and Select Doctor',
+        allowClear: true,
+        width: '100%'
+    });
+    $('#referred_to').select2({
+        placeholder: 'Search and Select Doctor',
+        allowClear: true,
+        width: '100%'
+    });
+});
+</script>
+@endpush
 @endsection
