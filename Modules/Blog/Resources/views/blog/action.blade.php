@@ -4,11 +4,11 @@
 {{-- {{ html()->form('DELETE', route('backend.blog.destroy', $blog->id))->attribute('data--submit', 'blog'.$blog->id)->open()}} --}}
 <div class="d-flex justify-content-end align-items-center">
     @if(!$blog->trashed()) 
-        @if(auth()->user()->can('edit_blogs'))
+        @if(auth()->user()->can('edit_blogs') && !auth()->user()->hasRole('vendor'))
         <a class="btn text-primary p-0 fs-5" href="{{ route('backend.blog.create',['id' => $blog->id]) }}" title="{{ __('messages.edit') }} "data-bs-toggle="tooltip"><i class="ph ph-pencil-simple-line"></i></a>
         @endif 
 
-        @if(auth()->user()->can('delete_blogs'))
+        @if(auth()->user()->can('delete_blogs') && !auth()->user()->hasRole('vendor'))
         <a href="{{ route('backend.blog.destroy', $blog->id) }}" 
                id="delete-blog-{{ $blog->id }}" class="btn text-danger p-0 fs-5" 
                data-type="ajax" data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"

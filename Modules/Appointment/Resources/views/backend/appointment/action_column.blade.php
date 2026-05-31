@@ -2,7 +2,9 @@
     <!-- <a href="{{ route('backend.patient-record', ['id' => $data->id]) }}" data-type="ajax"  class='btn text-info p-0 fs-4'  data-bs-toggle="tooltip" title="{{ __('clinic.appointment_patient_records') }}"><i class="ph ph-plus"></i></a> -->
     <a href="{{ route('backend.appointments.view') }}" class="btn btn-icon text-danger p-0 fs-4" data-bs-placement="top"
         data-bs-toggle="tooltip" title="{{ __('messages.view') }}"><i class="ph ph-eye"></i></a>
+    @unless(auth()->user()->hasRole('vendor'))
     <a href="{{ route('backend.appointments.destroy', $data->id) }}" id="delete-{{ $module_name }}-{{ $data->id }}"
         class="btn text-danger p-0 fs-4" data-type="ajax" data-method="DELETE" data-token="{{ csrf_token() }}"
         data-bs-toggle="tooltip" title="{{ __('messages.delete') }}"> <i class="ph ph-trash"></i></a>
+    @endunless
 </div>

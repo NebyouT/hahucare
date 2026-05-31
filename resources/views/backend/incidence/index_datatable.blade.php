@@ -47,7 +47,7 @@
                     aria-describedby="addon-wrapping">
             </div>
 
-            @if(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor'))
+            @if(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor') || auth()->user()->hasRole('vendor'))
             <a href="{{ route('backend.incidence.create') }}" class="btn btn-primary">
                 {{ __('messages.create') }} {{ __('messages.incidence') }}
             </a>

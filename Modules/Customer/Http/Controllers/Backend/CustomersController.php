@@ -58,7 +58,7 @@ class CustomersController extends Controller
 
     public function bulk_action(Request $request)
     {
-        if (auth()->user()->hasRole('doctor')) {
+        if (auth()->user()->hasRole('doctor') || auth()->user()->hasRole('vendor')) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
         $ids = explode(',', $request->rowIds);
@@ -173,7 +173,7 @@ class CustomersController extends Controller
 
     public function update_status(Request $request, User $id)
     {
-        if (auth()->user()->hasRole('doctor')) {
+        if (auth()->user()->hasRole('doctor') || auth()->user()->hasRole('vendor')) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
         $id->update(['status' => $request->status]);
@@ -307,7 +307,7 @@ class CustomersController extends Controller
 
             ->editColumn('status', function ($row) {
                 $user = auth()->user();
-                if ($user->hasRole('doctor')) {
+                if ($user->hasRole('doctor') || $user->hasRole('vendor')) {
                     $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
                     $label = $row->status ? __('messages.active') : __('messages.inactive');
                     return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
@@ -487,6 +487,9 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
+        if (auth()->user()->hasRole('vendor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         if (env('IS_DEMO')) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 200);
         }

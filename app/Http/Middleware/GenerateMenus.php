@@ -245,14 +245,16 @@ class GenerateMenus
                 ]);
             }
 
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-calendar-heart',
-                'title' => __('clinic.specialization'),
-                'route' => 'backend.specializations.index',
-                'active' => ['app/specializations'],
-                'permission' => ['add_specialization', 'change_specialization_status', 'delete_specialization', 'export_specialization_list'],
-                'order' => 0,
-            ]);
+            if (!auth()->user()->hasRole('vendor')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-calendar-heart',
+                    'title' => __('clinic.specialization'),
+                    'route' => 'backend.specializations.index',
+                    'active' => ['app/specializations'],
+                    'permission' => ['add_specialization', 'change_specialization_status', 'delete_specialization', 'export_specialization_list'],
+                    'order' => 0,
+                ]);
+            }
 
 
             $permissionsToCheck = ['view_clinics_category', 'view_clinics_service', 'view_doctors', 'view_doctors_session', 'view_clinic_patient_list', 'view_patient_soap', 'view_clinic_appointment_list', 'view_encounter_template', 'view_encounter', 'add_clinic', 'edit_clinic_session', 'add_clinic_gallery', 'view_clinic_profile', 'edit_clinic_profile', 'filter_clinic_list', 'export_clinic_list', 'change_clinic_status'];
@@ -274,14 +276,16 @@ class GenerateMenus
                     'order' => 0,
                 ]);
             }
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-list-bullets',
-                'title' => __('sidebar.categories'),
-                'route' => 'backend.category.index',
-                'permission' => ['add_categories', 'change_feature_status', 'change_active_status', 'edit_categories', 'delete_categories'],
-                'active' => ['app/category'],
-                'order' => 0,
-            ]);
+            if (!auth()->user()->hasRole('vendor')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-list-bullets',
+                    'title' => __('sidebar.categories'),
+                    'route' => 'backend.category.index',
+                    'permission' => ['add_categories', 'change_feature_status', 'change_active_status', 'edit_categories', 'delete_categories'],
+                    'active' => ['app/category'],
+                    'order' => 0,
+                ]);
+            }
 
 
 
@@ -926,7 +930,7 @@ class GenerateMenus
                 ]);
             }
 
-            if(!auth()->user()->hasRole(['pharma', 'receptionist', 'lab_technician', 'doctor']) && auth()->user()->can('view_blogs')){
+            if(!auth()->user()->hasRole(['pharma', 'receptionist', 'lab_technician', 'doctor', 'vendor']) && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',
                     'title' => __('sidebar.blog'),
@@ -1173,17 +1177,19 @@ class GenerateMenus
             }
 
             // --- APP BANNER ---
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-exam',
-                'title' => __('sidebar.app_banner'),
-                'route' => 'backend.app-banners.index',
-                'active' => 'app/app-banners',
-                'permission' => ['app_banners'],
-                'order' => 0,
-            ]);
+            if (!auth()->user()->hasRole('vendor')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-exam',
+                    'title' => __('sidebar.app_banner'),
+                    'route' => 'backend.app-banners.index',
+                    'active' => 'app/app-banners',
+                    'permission' => ['app_banners'],
+                    'order' => 0,
+                ]);
+            }
 
             // --- CUSTOM FORMS ---
-            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin') || auth()->user()->hasRole('vendor')) {
+            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('demo_admin')) {
                 $custom_form = $this->parentMenu($menu, [
                     'icon' => 'ph ph-table',
                     'title' => __('messages.customforms'),

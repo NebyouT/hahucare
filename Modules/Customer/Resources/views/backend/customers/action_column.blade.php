@@ -23,7 +23,9 @@
         <button type="button" class="btn text-success p-0 fs-5" data-crud-id="{{$data->id}}" title="{{ __('messages.edit') }} " data-bs-toggle="tooltip"> <i class="ph ph-pencil-simple-line"></i></button>
     @endhasPermission
     @hasPermission('delete_customer')
+    @unless(auth()->user()->hasRole('vendor'))
         <a href="{{route("backend.$module_name.destroy", $data->id)}}" id="delete-{{$module_name}}-{{$data->id}}" class="btn text-danger p-0 fs-5" data-type="ajax" data-method="DELETE" data-token="{{csrf_token()}}" data-bs-toggle="tooltip" title="{{__('messages.delete')}}" data-confirm="{{ __('messages.are_you_sure?', ['form' => ($data->full_name) ?? __('Unknown'), 'module' => __('clinic.patient')])  }}">  <i class="ph ph-trash"></i></a>
+    @endunless
     @endhasPermission
 
     @if($customform)

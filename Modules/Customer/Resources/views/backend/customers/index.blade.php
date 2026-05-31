@@ -12,7 +12,7 @@
 <div class="table-content mb-5">
     <x-backend.section-header>
       <div class="d-flex flex-wrap gap-3">
-        @if(auth()->user()->can('edit_customer') || auth()->user()->can('delete_customer'))
+        @if((auth()->user()->can('edit_customer') || auth()->user()->can('delete_customer')) && !auth()->user()->hasRole('vendor'))
         <x-backend.quick-action url='{{route("backend.$module_name.bulk_action")}}'>
           <div class="">
             <select name="action_type" class="select2 form-select col-12" id="quick-action-type" style="width:100%">

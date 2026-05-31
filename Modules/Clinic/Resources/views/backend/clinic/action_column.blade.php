@@ -23,10 +23,12 @@
                 class="ph ph-pencil-simple-line align-middle"></i></button>
     @endhasPermission
     @hasPermission('delete_clinics_center')
+    @unless(auth()->user()->hasRole('vendor'))
         <a href="{{ route('backend.clinics.destroy', $data->id) }}" id="delete-{{ $module_name }}-{{ $data->id }}"
             class="btn text-danger p-0 fs-5" data-type="ajax" data-method="DELETE" data-token="{{ csrf_token() }}"
             data-bs-toggle="tooltip" title="{{ __('messages.delete') }}"
             data-confirm="{{ __('messages.are_you_sure?', ['form' => $data->name ?? __('Unknown'), 'module' => __('clinic.lbl_clinic')]) }}">
             <i class="ph ph-trash align-middle"></i></a>
+    @endunless
     @endhasPermission
 </div>

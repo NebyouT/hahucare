@@ -110,12 +110,14 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     @endif
+                                    @unless(auth()->user()->hasRole('vendor'))
                                     <button class="btn btn-sm btn-outline-danger delete-order-btn"
                                         data-id="{{ $order->id }}"
                                         data-url="{{ route('backend.lab-orders.destroy', $order->id) }}"
                                         title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    @endunless
                                 </td>
                             </tr>
                         @empty

@@ -9,7 +9,7 @@
             auth()->user()->can('edit_prescription')) &&
             $data->billingrecord->payment_status == 1)
     @endif
-    @if ((auth()->user()->hasRole(['admin', 'demo_admin']) || auth()->user()->can('delete_prescription')) && !auth()->user()->hasRole('pharma'))
+    @if ((auth()->user()->hasRole(['admin', 'demo_admin']) || auth()->user()->can('delete_prescription')) && !auth()->user()->hasRole('pharma') && !auth()->user()->hasRole('vendor'))
         <a href="{{ route('backend.prescription.destroy', $data->id) }}"
             id="delete-{{ $module_name }}-{{ $data->id }}" class="btn text-danger p-0 fs-5" data-type="ajax"
             data-method="DELETE" data-token="{{ csrf_token() }}" data-bs-toggle="tooltip"

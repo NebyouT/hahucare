@@ -121,6 +121,11 @@ class SystemServiceController extends Controller
                 return view('clinic::backend.systemservice.action_column', compact('module_name', 'data'));
             })
             ->editColumn('status', function ($row) {
+                if (auth()->user()->hasRole('vendor')) {
+                    $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
+                    $label = $row->status ? __('messages.active') : __('messages.inactive');
+                    return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
+                }
                 $checked = '';
                 if ($row->status) {
                     $checked = 'checked="checked"';
@@ -132,9 +137,10 @@ class SystemServiceController extends Controller
                 ';
             })
             ->editColumn('featured', function ($row) {
-                $checked = '';
-                if ($row->featured) {
-                    $checked = 'checked="checked"';
+                if (auth()->user()->hasRole('vendor')) {
+                    $badge = $row->featured ? 'bg-success-subtle' : 'bg-danger-subtle';
+                    $label = $row->featured ? __('messages.yes') : __('messages.no');
+                    return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
                 }
                 return '
                     <div class="form-check form-switch ">
@@ -184,6 +190,9 @@ class SystemServiceController extends Controller
 
     public function bulk_action(Request $request)
     {
+        if (auth()->user()->hasRole('vendor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $ids = explode(',', $request->rowIds);
 
         $actionType = $request->action_type;
@@ -230,6 +239,9 @@ class SystemServiceController extends Controller
 
     public function update_status(Request $request, SystemService $id)
     {
+        if (auth()->user()->hasRole('vendor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $id->update(['status' => $request->status]);
 
         return response()->json(['status' => true, 'message' => __('clinic.systemservice_status')]);
@@ -237,7 +249,9 @@ class SystemServiceController extends Controller
 
     public function update_featured(Request $request, SystemService $id)
     {
-
+        if (auth()->user()->hasRole('vendor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $id->update(['featured' => $request->featured]);
 
         if($request->featured==1){

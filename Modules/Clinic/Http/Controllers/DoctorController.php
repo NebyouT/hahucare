@@ -1581,6 +1581,13 @@ class DoctorController extends Controller
             }
         }
 
+        activity()
+            ->performedOn($data)
+            ->causedBy(auth()->user())
+            ->withProperties(['attributes' => $data->toArray()])
+            ->event('updated')
+            ->log('doctor_updated');
+
         return response()->json([
             'status'  => true,
             'message' => __('messages.update_form', ['form' => __('clinic.doctor_title')])
@@ -1595,8 +1602,8 @@ class DoctorController extends Controller
     {
         $user = auth()->user();
         
-        // Delete doctor: Admin (Full), Clinic Admin (Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
-        if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+        // Delete doctor: Admin (Full), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No)
+        if ($user && ($user->hasRole('doctor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist') || $user->hasRole('vendor'))) {
             abort(403, 'You are not allowed to delete doctors.');
         }
         

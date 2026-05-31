@@ -561,6 +561,13 @@ class ClinicesController extends Controller
             }
         }
 
+        activity()
+            ->performedOn($data)
+            ->causedBy(auth()->user())
+            ->withProperties(['attributes' => $data->toArray()])
+            ->event('updated')
+            ->log('clinic_updated');
+
         $message = __('messages.update_form', ['form' => __('clinic.singular_title')]);
 
       if ($request->is('api/*')) {

@@ -57,10 +57,12 @@
                                                     <a href="{{ route('backend.labs.edit', $lab->id) }}" class="btn btn-sm btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
+                                                    @unless(auth()->user()->hasRole('vendor'))
                                                     <button type="button" class="btn btn-sm btn-danger delete-btn" 
                                                             data-url="{{ route('backend.labs.destroy', $lab->id) }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
+                                                    @endunless
                                                 </div>
                                             </td>
                                         </tr>
