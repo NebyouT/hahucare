@@ -205,7 +205,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
         });
 
         /* Incidence Report */
-        Route::group(['prefix' => 'incidence', 'as' => 'incidence.', 'middleware' => ['check_admin_role']], function () {
+        Route::group(['prefix' => 'incidence', 'as' => 'incidence.'], function () {
             Route::get('/', [IncidenceReportController::class, 'index'])->name('index');
 
             Route::get("index_list", [IncidenceReportController::class, 'index_list'])->name("index_list");

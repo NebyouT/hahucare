@@ -459,14 +459,16 @@ class GenerateMenus
                 'order' => 0,
             ]);
 
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-user-circle-gear',
-                'title' => __('sidebar.receptionist'),
-                'route' => 'backend.receptionist.index',
-                'active' => ['app/receptionist'],
-                'permission' => ['add_receptionist', 'change_receptionist_status', 'change_receptionist_password', 'edit_receptionist_profile', 'delete_receptionist', 'export_receptionist_list'],
-                'order' => 0,
-            ]);
+            if (!auth()->user()->hasRole('receptionist')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-user-circle-gear',
+                    'title' => __('sidebar.receptionist'),
+                    'route' => 'backend.receptionist.index',
+                    'active' => ['app/receptionist'],
+                    'permission' => ['add_receptionist', 'change_receptionist_status', 'change_receptionist_password', 'edit_receptionist_profile', 'delete_receptionist', 'export_receptionist_list'],
+                    'order' => 0,
+                ]);
+            }
             if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
                 // $this->mainRoute($menu, [
                 //     'icon' => 'ph ph-user-square',
@@ -753,13 +755,15 @@ class GenerateMenus
                         'order' => 0,
                     ]);
 
-                    $this->childMain($patientReferal, [
-                        'icon' => 'ph ph-file-plus',
-                        'title' => 'Add Advanced Referral',
-                        'route' => 'backend.patientreferral.create-advanced',
-                        'active' => ['app/patientreferral/create-advanced'],
-                        'order' => 1,
-                    ]);
+                    if (!auth()->user()->hasRole('receptionist')) {
+                        $this->childMain($patientReferal, [
+                            'icon' => 'ph ph-file-plus',
+                            'title' => 'Add Advanced Referral',
+                            'route' => 'backend.patientreferral.create-advanced',
+                            'active' => ['app/patientreferral/create-advanced'],
+                            'order' => 1,
+                        ]);
+                    }
                 }
 
                 $this->childMain($patientReferal, [
@@ -900,7 +904,7 @@ class GenerateMenus
                 ]);
             }
 
-            if(!auth()->user()->hasRole('pharma') && auth()->user()->can('view_blogs')){
+            if(!auth()->user()->hasRole('pharma') && !auth()->user()->hasRole('receptionist') && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',
                     'title' => __('sidebar.blog'),
@@ -1008,7 +1012,7 @@ class GenerateMenus
             }
 
 
-            if (multiVendor() == "1") {
+            if (multiVendor() == "1" && !auth()->user()->hasRole('receptionist')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-share',
                     'title' =>  __('sidebar.request_service'),
@@ -1100,14 +1104,16 @@ class GenerateMenus
                     'order' => 0,
                 ]);
             }
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-map-pin-plus',
-                'title' => __('messages.incidence'),
-                'route' => 'backend.incidence.index',
-                'active' => 'app/incidence',
-                'permission' => ['view_incident_reports', 'change_incident_status', 'reply_to_incidents'],
-                'order' => 0,
-            ]);
+            if (auth()->user()->can('view_incident_reports')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-map-pin-plus',
+                    'title' => __('messages.incidence'),
+                    'route' => 'backend.incidence.index',
+                    'active' => 'app/incidence',
+                    'permission' => ['view_incident_reports'],
+                    'order' => 0,
+                ]);
+            }
 
             // Settings menu - for admin, demo_admin, and vendor
             if (auth()->user()->hasRole(['admin', 'demo_admin', 'vendor']) && auth()->user()->user_type != 'pharma' && auth()->user()->can('view_setting')) {
