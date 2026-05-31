@@ -447,6 +447,9 @@ class EarningsController extends Controller
      */
     public function edit($id, Request $request)
     {
+        if (auth()->user()->hasRole('doctor')) {
+            return redirect()->back()->with('error', __('messages.permission_denied'));
+        }
         $commissionType = $request->commission_type;
         $userType = ($commissionType == 'doctor_commission') ? 'doctor' : 'vendor';
     

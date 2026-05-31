@@ -145,6 +145,9 @@ class RequestServicesController extends Controller
 
     public function update_status(Request $request, RequestService $id)
     {
+        if (auth()->user()->hasRole('doctor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $id->update(['status' => $request->status]);
 
         return response()->json(['status' => true, 'message' =>  __('service.request_service_status')]);
@@ -236,6 +239,9 @@ class RequestServicesController extends Controller
      */
     public function destroy($id)
     {
+        if (auth()->user()->hasRole('doctor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $data = RequestService::with('vendor')->findOrFail($id);
         if ($data !== null) {
             $data->is_status = 'rejected';

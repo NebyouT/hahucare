@@ -8,14 +8,6 @@
     <div class="row justify-content-center">
         <div class="col-lg-10 col-xl-8">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Create Advanced Referral</h3>
-                    <div class="card-tools">
-                        <a href="{{ route('backend.patientreferral.index') }}" class="btn btn-secondary btn-sm">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </a>
-                    </div>
-                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('backend.patientreferral.store-advanced') }}">
                         @csrf
@@ -254,6 +246,15 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <!-- Header placed below form -->
+                <div class="card-footer">
+                    <h3 class="card-title">Create Advanced Referral</h3>
+                    <div class="card-tools float-end">
+                        <a href="{{ route('backend.patientreferral.index') }}" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -58,6 +58,9 @@ class CustomersController extends Controller
 
     public function bulk_action(Request $request)
     {
+        if (auth()->user()->hasRole('doctor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $ids = explode(',', $request->rowIds);
 
         $actionType = $request->action_type;
@@ -170,6 +173,9 @@ class CustomersController extends Controller
 
     public function update_status(Request $request, User $id)
     {
+        if (auth()->user()->hasRole('doctor')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $id->update(['status' => $request->status]);
 
         return response()->json(['status' => true, 'message' => __('service_providers.status_update')]);
@@ -300,6 +306,12 @@ class CustomersController extends Controller
             })
 
             ->editColumn('status', function ($row) {
+                $user = auth()->user();
+                if ($user->hasRole('doctor')) {
+                    $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
+                    $label = $row->status ? __('messages.active') : __('messages.inactive');
+                    return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
+                }
                 $checked = '';
                 if ($row->status) {
                     $checked = 'checked="checked"';

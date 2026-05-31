@@ -46,7 +46,7 @@
                                         <th>Referred By</th>
                                         <th>Referred To</th>
                                         <th>Reason</th>
-                                        <th>Type</th>
+                                        <th>Mode of Referral</th>
                                         <th>Status</th>
                                         <th>Date</th>
                                         <th>Actions</th>
@@ -85,10 +85,10 @@
                                         <td>{{ $referral->referral_date ? $referral->referral_date->format('Y-m-d') : 'N/A' }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary">View</a>
+                                                <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i> View</a>
 
+                                                {{-- In Referral: Accept / Reject --}}
                                                 @if($referral->status === 'pending')
-                                                    {{-- Accept button for authorized roles --}}
                                                     @if((auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id) || 
                                                        (in_array(auth()->user()->user_type, ['admin', 'demo_admin'])) ||
                                                        (auth()->user()->hasRole('receptionist') && in_array($referral->referred_to, $clinicDoctorIds)))
@@ -98,12 +98,6 @@
                                                                 <i class="fas fa-check"></i> Accept
                                                             </button>
                                                         </form>
-                                                    @endif
-
-                                                    {{-- Reject button for authorized roles --}}
-                                                    @if((auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id) || 
-                                                       (in_array(auth()->user()->user_type, ['admin', 'demo_admin'])) ||
-                                                       (auth()->user()->hasRole('receptionist') && in_array($referral->referred_to, $clinicDoctorIds)))
                                                         <form action="{{ route('backend.patientreferral.reject', $referral) }}" method="POST" style="display: inline;">
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to reject this referral?')">
@@ -115,22 +109,6 @@
 
                                                 @if($referral->referral_type === 'advanced')
                                                     <a href="{{ route('backend.patientreferral.pdf', $referral) }}" class="btn btn-sm btn-secondary" target="_blank">PDF</a>
-                                                @endif
-
-                                                @if(auth()->user()->user_type !== 'doctor' || $referral->referred_to !== auth()->user()->id)
-                                                    @if($referral->referral_type === 'advanced')
-                                                        <a href="{{ route('backend.patientreferral.edit-advanced', $referral) }}" class="btn btn-sm btn-info">Edit</a>
-                                                    @else
-                                                        <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-sm btn-info">Edit</a>
-                                                    @endif
-                                                @endif
-
-                                                @if(auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id)
-                                                    <form action="{{ route('backend.patientreferral.destroy', $referral) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this referral?')">Delete</button>
-                                                    </form>
                                                 @endif
                                             </div>
                                         </td>
@@ -167,7 +145,7 @@
                                         <th>Referred By</th>
                                         <th>Referred To</th>
                                         <th>Reason</th>
-                                        <th>Type</th>
+                                        <th>Mode of Referral</th>
                                         <th>Status</th>
                                         <th>Date</th>
                                         <th>Actions</th>
@@ -206,26 +184,22 @@
                                         <td>{{ $referral->referral_date ? $referral->referral_date->format('Y-m-d') : 'N/A' }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary">View</a>
+                                                <a href="{{ route('backend.patientreferral.show', $referral) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i> View</a>
+
+                                                {{-- Out Referral: Change / Re-refer --}}
+                                                @if(auth()->user()->user_type !== 'doctor' || $referral->referred_by === auth()->user()->id)
+                                                    @if($referral->referral_type === 'advanced')
+                                                        <a href="{{ route('backend.patientreferral.edit-advanced', $referral) }}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i> Change</a>
+                                                    @else
+                                                        <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i> Change</a>
+                                                    @endif
+
+                                                    {{-- Re-refer: create new referral from this one --}}
+                                                    <a href="{{ route('backend.patientreferral.create') }}?rerfer={{ $referral->id }}" class="btn btn-sm btn-warning"><i class="fas fa-redo"></i> Re-refer</a>
+                                                @endif
 
                                                 @if($referral->referral_type === 'advanced')
                                                     <a href="{{ route('backend.patientreferral.pdf', $referral) }}" class="btn btn-sm btn-secondary" target="_blank">PDF</a>
-                                                @endif
-
-                                                @if(auth()->user()->user_type !== 'doctor' || $referral->referred_to !== auth()->user()->id)
-                                                    @if($referral->referral_type === 'advanced')
-                                                        <a href="{{ route('backend.patientreferral.edit-advanced', $referral) }}" class="btn btn-sm btn-info">Edit</a>
-                                                    @else
-                                                        <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-sm btn-info">Edit</a>
-                                                    @endif
-                                                @endif
-
-                                                @if(auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id)
-                                                    <form action="{{ route('backend.patientreferral.destroy', $referral) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this referral?')">Delete</button>
-                                                    </form>
                                                 @endif
                                             </div>
                                         </td>

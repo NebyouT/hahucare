@@ -914,8 +914,8 @@ class GenerateMenus
                 ]);
             }
 
-            // Dashboard Comments menu - for all roles with permission (except lab_technician)
-            if (!auth()->user()->hasRole('lab_technician') && auth()->user()->can('view_dashboard_comments')) {
+            // Dashboard Comments menu - hidden from lab_technician and doctor (they use Incidence Report)
+            if (!auth()->user()->hasRole(['lab_technician', 'doctor']) && auth()->user()->can('view_dashboard_comments')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-chat-circle-text',
                     'title' => 'Dashboard Comments',
@@ -926,7 +926,7 @@ class GenerateMenus
                 ]);
             }
 
-            if(!auth()->user()->hasRole('pharma') && !auth()->user()->hasRole('receptionist') && !auth()->user()->hasRole('lab_technician') && auth()->user()->can('view_blogs')){
+            if(!auth()->user()->hasRole(['pharma', 'receptionist', 'lab_technician', 'doctor']) && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',
                     'title' => __('sidebar.blog'),
