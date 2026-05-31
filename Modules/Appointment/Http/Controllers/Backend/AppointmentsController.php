@@ -543,12 +543,25 @@ class AppointmentsController extends Controller
 
         $appointment_status = Appointment::where('id', $id)->first();
 
+        $oldPaymentStatus = optional(AppointmentTransaction::where('appointment_id', $id)->first())->payment_status;
+
         AppointmentTransaction::where('appointment_id', $id)->update(['payment_status' => $request->value]);
 
         if ($status == 1) {
 
             CommissionEarning::where('commissionable_id', $id)->update(['commission_status' => 'unpaid']);
         }
+
+        activity()
+            ->performedOn($appointment_status)
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'attributes' => ['payment_status' => $request->value],
+                'old' => ['payment_status' => $oldPaymentStatus],
+            ])
+            ->event('updated')
+            ->log('payment_status_changed');
+
         $message = __('appointment.payment_status_update');
 
         return response()->json(['message' => $message, 'status' => true]);

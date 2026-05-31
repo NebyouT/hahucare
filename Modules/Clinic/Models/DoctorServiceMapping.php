@@ -11,12 +11,20 @@ use Modules\Clinic\Models\Clinics;
 use App\Models\BaseModel;
 use Modules\Clinic\Models\ClinicsService;
 use Modules\Clinic\Models\ClinicServiceMapping;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 
 class DoctorServiceMapping extends BaseModel
 {
     use HasFactory;
     use CustomFieldsTrait;
+    use LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['*']);
+    }
 
     /**
      * The attributes that are mass assignable.

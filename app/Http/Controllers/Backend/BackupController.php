@@ -18,6 +18,8 @@ use Modules\Clinic\Models\Clinics;
 use Modules\Clinic\Models\ClinicsService;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\DB;
 
 class BackupController extends Controller
 {
@@ -289,7 +291,13 @@ class BackupController extends Controller
     public function activityLogIndex()
     {
         $module_title = __('messages.activity_log');
-        return view('backend.backups.activity_log_index_datatable', compact('module_title'));
+        $isDataLog = request()->routeIs('backend.data-log.*');
+        $dataUrl = $isDataLog ? route('backend.data-log.index_data') : route('backend.backups.activity_log_index_data');
+        $viewUrl = $isDataLog ? 'backend.data-log.view' : 'backend.backups.logs.view';
+        $rollbackUrl = $isDataLog ? 'backend.data-log.rollback' : 'backend.backups.rollback';
+        return view('backend.backups.activity_log_index_datatable', compact(
+            'module_title', 'isDataLog', 'dataUrl', 'viewUrl', 'rollbackUrl'
+        ));
     }
 
     /**
@@ -359,7 +367,14 @@ class BackupController extends Controller
                 return '<span class="text-muted">System</span>';
             })
             ->addColumn('action', function ($log) {
-                return '<a style="cursor:pointer" onclick="getHistory(' . $log->id . ')"><i class="ph ph-eye align-middle text-secondary" data-bs-toggle="tooltip" title="View"></i></a>';
+                $actions = '<a style="cursor:pointer" onclick="getHistory(' . $log->id . ')"><i class="ph ph-eye align-middle text-secondary me-2" data-bs-toggle="tooltip" title="View"></i></a>';
+                if (auth()->user()->hasRole(['admin', 'demo_admin'])) {
+                    $props = $log->properties;
+                    if (isset($props['old']) && !empty((array)$props['old'])) {
+                        $actions .= '<a style="cursor:pointer" onclick="confirmRollback(' . $log->id . ')" class="text-warning"><i class="ph ph-arrow-counter-clockwise" data-bs-toggle="tooltip" title="Rollback"></i></a>';
+                    }
+                }
+                return $actions;
             })
             ->editColumn('updated_at', function ($data) {
 
@@ -431,6 +446,69 @@ class BackupController extends Controller
      * @param  int  $id
      * @return Response
      */
+    /**
+     * Rollback a specific activity log entry.
+     * Restores the old property values from the activity log.
+     * Only super admin can rollback.
+     */
+    public function rollback($id)
+    {
+        if (!auth()->user()->hasRole(['admin', 'demo_admin'])) {
+            return response()->json(['message' => 'Unauthorized. Only super admin can rollback.', 'status' => false], 403);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $activity = Activity::findOrFail($id);
+            $properties = $activity->properties;
+
+            if (!isset($properties['old']) || empty($properties['old'])) {
+                return response()->json(['message' => 'No old data available to rollback.', 'status' => false], 400);
+            }
+
+            $subjectType = $activity->subject_type;
+            $subjectId = $activity->subject_id;
+
+            if (!$subjectType || !$subjectId) {
+                return response()->json(['message' => 'No subject associated with this activity log.', 'status' => false], 400);
+            }
+
+            $model = $subjectType::find($subjectId);
+            if (!$model) {
+                return response()->json(['message' => 'The subject record no longer exists.', 'status' => false], 404);
+            }
+
+            $oldData = (array) $properties['old'];
+            $fillable = $model->getFillable();
+
+            $restorable = array_intersect_key($oldData, array_flip($fillable));
+            if (empty($restorable)) {
+                return response()->json(['message' => 'No rollback-able fields found.', 'status' => false], 400);
+            }
+
+            $model->update($restorable);
+
+            activity()
+                ->performedOn($model)
+                ->causedBy(auth()->user())
+                ->withProperties([
+                    'attributes' => $model->toArray(),
+                    'old' => $oldData,
+                    'rollback_from_activity' => $activity->id,
+                ])
+                ->event('rollback')
+                ->log('rollback_' . $activity->event);
+
+            DB::commit();
+
+            return response()->json(['message' => 'Rollback completed successfully.', 'status' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Rollback failed: ' . $e->getMessage(), 'status' => false], 500);
+        }
+    }
+
     public function activityLogView($id)
     {
 

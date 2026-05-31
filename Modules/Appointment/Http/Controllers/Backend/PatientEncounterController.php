@@ -376,8 +376,21 @@ class PatientEncounterController extends Controller
         $data = PatientEncounter::findOrFail($id);
 
         $request_data = $request->all();
+        $oldStatus = $data->status;
 
         $data->update($request_data);
+
+        if (isset($request_data['status']) && $request_data['status'] != $oldStatus) {
+            activity()
+                ->performedOn($data)
+                ->causedBy(auth()->user())
+                ->withProperties([
+                    'attributes' => $data->toArray(),
+                    'old' => ['status' => $oldStatus],
+                ])
+                ->event('updated')
+                ->log('encounter_status_changed');
+        }
 
         $message = __('messages.update_form', ['form' => __('appointment.patient_encounter')]);
 

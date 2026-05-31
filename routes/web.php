@@ -193,6 +193,14 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
             Route::post('store-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'storeFromEncounter'])->name('store-from-encounter');
         });
 
+        // Data Activity Log routes (accessible to all authenticated users)
+        Route::prefix('data-log')->as('data-log.')->group(function () {
+            Route::get('/', [BackupController::class, 'activityLogIndex'])->name('index');
+            Route::get('index_data', [BackupController::class, 'activity_log_index_data'])->name('index_data');
+            Route::get('view/{id}', [BackupController::class, 'activityLogView'])->name('view');
+            Route::post('rollback/{id}', [BackupController::class, 'rollback'])->name('rollback');
+        });
+
         // Dashboard Comments routes
         Route::prefix('dashboard-comments')->as('dashboard-comments.')->group(function () {
             Route::get('/', [DashboardCommentController::class, 'index'])->name('index');
@@ -216,6 +224,9 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
             Route::post('bulk-action', [IncidenceReportController::class, 'bulk_action'])->name('bulk_action');
 
             Route::post('/update-status/{id}', [IncidenceReportController::class, 'updateStatus'])->name('updateStatus');
+
+            Route::get('/create', [IncidenceReportController::class, 'create'])->name('create');
+            Route::post('/store', [IncidenceReportController::class, 'store'])->name('store');
         });
 
         /*
@@ -239,6 +250,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
             Route::get('/logs', [BackupController::class, 'activityLogIndex'])->name('logs');
             Route::get('/logs/view/{id}', [BackupController::class, 'activityLogView'])->name('logs.view');
             Route::get('activity_log_index_data', [BackupController::class, 'activity_log_index_data'])->name('activity_log_index_data');
+            Route::post('/rollback/{id}', [BackupController::class, 'rollback'])->name('rollback');
         });
 
         Route::get('commission-revenue', [ReportsController::class, 'commission_revenue'])->name('reports.commission-revenue');

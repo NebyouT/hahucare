@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -18,7 +17,9 @@ use Modules\NotificationTemplate\Models\NotificationTemplate;
 use App\Mail\ReplyIncidenceMail;
 use Illuminate\Support\Facades\Mail;
 use Modules\Appointment\Trait\AppointmentTrait;
-
+use Modules\Clinic\Models\Receptionist;
+use Modules\Clinic\Models\DoctorClinicMapping;
+use Spatie\Activitylog\Models\Activity;
 
 class IncidenceReportController extends Controller
 {
@@ -27,12 +28,8 @@ class IncidenceReportController extends Controller
 
     public function __construct()
     {
-        // Page Title
         $this->module_title = 'frontend.incidence';
-        // module name
         $this->module_name = 'incidence';
-
-        // module icon
         $this->module_icon = 'fa-solid fa-clipboard-list';
 
         view()->share([
@@ -42,70 +39,59 @@ class IncidenceReportController extends Controller
         ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    public function index(Request $request)
+    {
+        $filter = ['status' => $request->status];
+        $module_action = '';
+        $columns = CustomFieldGroup::columnJsonValues(new Appointment());
+        $customefield = CustomField::exportCustomFields(new Appointment());
+        $export_import = true;
+        $export_columns = [['value' => 'name', 'text' => ' Name']];
+        $export_url = route('backend.incidence.export');
+        $data = Incidence::first();
 
-   public function index(Request $request)
-{
-    $filter = [
-        'status' => $request->status,
-    ];
-
-    $module_action = '';
-    $columns = CustomFieldGroup::columnJsonValues(new Appointment());
-    $customefield = CustomField::exportCustomFields(new Appointment());
-
-    $export_import = true;
-    $export_columns = [
-        [
-            'value' => 'name',
-            'text' => ' Name',
-        ]
-    ];
-    $export_url = route('backend.incidence.export');
-
-    $data = Incidence::first(); 
-    return view('backend.incidence.index_datatable', compact(
-        'module_action',
-        'filter',
-        'columns',
-        'customefield',
-        'export_import',
-        'export_columns',
-        'export_url',
-        'data'
-    ));
-}
-
-
-
+        return view('backend.incidence.index_datatable', compact(
+            'module_action', 'filter', 'columns', 'customefield',
+            'export_import', 'export_columns', 'export_url', 'data'
+        ));
+    }
 
     public function index_data(Datatables $datatable, Request $request)
     {
-
+        $user = auth()->user();
         $query = Incidence::query();
 
         $filter = $request->filter;
-
         if (isset($filter) && isset($filter['column_status'])) {
-
             $query->where('incident_type', $filter['column_status']);
         }
 
+        // Receptionist: only see incidents from their clinic
+        if ($user->hasRole('receptionist')) {
+            $receptionist = Receptionist::where('receptionist_id', $user->id)->first();
+            $clinicDoctorIds = [];
+            if ($receptionist) {
+                $clinicDoctorIds = DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+                    ->pluck('doctor_id')
+                    ->toArray();
+            }
+            // Show incidents created by anyone in the same clinic (doctors, receptionists, etc.)
+            $clinicUserIds = User::where(function ($q) use ($receptionist, $clinicDoctorIds) {
+                $q->whereIn('id', $clinicDoctorIds)
+                  ->orWhereHas('receptionist', function ($r) use ($receptionist) {
+                      $r->where('clinic_id', $receptionist->clinic_id);
+                  });
+            })->pluck('id')->toArray();
+            $query->whereIn('created_by', $clinicUserIds)
+                  ->orWhere('clinic_id', $receptionist?->clinic_id);
+        }
 
-        $appointment_status =  [__('messages.lbl_open') => '1', __('messages.lbl_closed') => '2', __('messages.lbl_reject') => '3'];
-
-        // Remove the default orderBy as it conflicts with DataTable sorting
-        // $query->orderBy('created_at', 'desc');
+        $appointment_status = [__('messages.lbl_open') => '1', __('messages.lbl_closed') => '2', __('messages.lbl_reject') => '3'];
 
         $datatable = $datatable->eloquent($query)
             ->addColumn('check', function ($data) {
-                return '<input type="checkbox" class="form-check-input select-table-row"  id="datatable-row-' . $data->id . '"  name="datatable_ids[]" value="' . $data->id . '" onclick="dataTableRowCheck(' . $data->id . ')">';
+                return '<input type="checkbox" class="form-check-input select-table-row" id="datatable-row-' . $data->id . '" name="datatable_ids[]" value="' . $data->id . '" onclick="dataTableRowCheck(' . $data->id . ')">';
             })
-
             ->editColumn('image', function ($data) {
                 return '<img src="' . $data->file_url . '" class="avatar avatar-50 rounded-pill me-3" style="cursor:pointer;" onclick="setPreview(\'' . addslashes($data->file_url) . '\')">';
             })
@@ -129,18 +115,19 @@ class IncidenceReportController extends Controller
                 return view('backend.incidence.datatable.action_column', compact('data'));
             })
             ->editColumn('status', function ($data) use ($appointment_status) {
-
-
                 if ($data->incident_type == 1) {
+                    // Receptionist cannot change status — show read-only badge
+                    if (auth()->user()->hasRole('receptionist')) {
+                        return '<span class="badge bg-warning">' . __('messages.lbl_open') . '</span>';
+                    }
                     return view('backend.incidence.datatable.select_column', compact('data', 'appointment_status'));
                 } elseif ($data->incident_type == 2) {
-                    $status = '<span class="badge bg-success">' . __('messages.lbl_closed') . '</span>';
+                    return '<span class="badge bg-success">' . __('messages.lbl_closed') . '</span>';
                 } elseif ($data->incident_type == 3) {
-                    $status = '<span class="badge bg-danger">' . __('messages.lbl_reject') . '</span>';
+                    return '<span class="badge bg-danger">' . __('messages.lbl_reject') . '</span>';
                 } else {
-                    $status = '<span class="badge bg-secondary">' . __('messages.unknown') . '</span>';
+                    return '<span class="badge bg-secondary">' . __('messages.unknown') . '</span>';
                 }
-                return $status;
             })
             ->editColumn('incident_date', function ($data) {
                 $setting = Setting::where('name', 'date_formate')->first();
@@ -148,9 +135,7 @@ class IncidenceReportController extends Controller
                 return $data->incident_date ? Carbon::parse($data->incident_date)->format($dateformate) : '';
             })
             ->editColumn('updated_at', function ($data) {
-
                 $diff = Carbon::now()->diffInHours($data->updated_at);
-
                 if ($diff < 25) {
                     return $data->updated_at->diffForHumans();
                 } else {
@@ -158,43 +143,50 @@ class IncidenceReportController extends Controller
                 }
             })
             ->editColumn('description', function ($data) {
-                $maxLength = 50; 
+                $maxLength = 50;
                 $description = $data->description ?? '';
                 $fullDescription = is_array($description) ? e(json_encode($description)) : e($description);
                 $shortDescription = Str::limit($fullDescription, $maxLength);
-
                 return '<span title="' . $fullDescription . '">' . $shortDescription . '</span>';
             })
-            ->rawColumns(['status', 'check', 'action', 'image','description'])
+            ->rawColumns(['status', 'check', 'action', 'image', 'description'])
             ->orderColumns(['id'], '-:column $1');
         return $datatable->toJson();
     }
 
     public function updateStatus($id, Request $request)
     {
+        // Receptionist cannot change status
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => 'You are not authorized to change status.', 'status' => false], 403);
+        }
+
         $status = $request->value;
         $data = Incidence::find($id)->update(['incident_type' => $status]);
         if ($data) {
             $message = __('appointment.status_update');
             return response()->json(['message' => $message, 'status' => true]);
         } else {
-            return response()->json(['message' => 'Somthing went wrong', 'status' => false]);
+            return response()->json(['message' => 'Something went wrong', 'status' => false]);
         }
     }
 
     public function bulk_action(Request $request)
     {
+        // Receptionist cannot bulk action
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => 'You are not authorized.', 'status' => false], 403);
+        }
+
         $ids = explode(',', $request->rowIds);
         $status = $request->status;
-
-
         $message = __('messages.bulk_update');
         $data = Incidence::whereIn('id', $ids)->update(['incident_type' => $status]);
         if ($data) {
             $message = __('appointment.status_update');
             return response()->json(['status' => true, 'message' => $message]);
         } else {
-            return response()->json(['message' => 'Somthing went wrong', 'status' => false]);
+            return response()->json(['message' => 'Something went wrong', 'status' => false]);
         }
     }
 
@@ -202,12 +194,9 @@ class IncidenceReportController extends Controller
     {
         $id = $request->incidence_id;
         $Reply = $request->Reply;
-
         $message = __('messages.bulk_update');
         $data = Incidence::where('id', $id)->update(['reply' => $Reply]);
-
         $incidence_data = Incidence::where('id', $id)->first();
-
         self::sendNotificationOnIncidence($incidence_data);
 
         if ($data) {
@@ -216,7 +205,7 @@ class IncidenceReportController extends Controller
             return redirect()->route('backend.incidence.index')->with('success', $message);
         } else {
             $message = __('appointment.reply_fail');
-            flash('<i class="fas fa-check"></i> Somthing went wrong')->error()->important();
+            flash('<i class="fas fa-check"></i> Something went wrong')->error()->important();
             return redirect()->route('backend.incidence.index')->with('error', $message);
         }
     }
@@ -224,7 +213,6 @@ class IncidenceReportController extends Controller
     public function sendNotificationOnIncidence($data)
     {
         $createdBy = User::selectRaw('CONCAT(first_name," ",last_name) as name')->where('id', $data->created_by)->pluck('name')->first();
-
         $notification_data = [
             'id' => $data->id,
             'user_id' => $data->created_by,
@@ -233,37 +221,75 @@ class IncidenceReportController extends Controller
             'reply' => $data->reply,
             'user_name' => $createdBy
         ];
-
         $template = NotificationTemplate::where('type', 'incidence_reply')->with('defaultNotificationTemplateMap')->firstOrFail();
-
         $mail_template = $template->defaultNotificationTemplateMap->mail_template_detail ?? '<p>Incidence report reply from Admin.</p><p>Your reply: [[ reply ]]</p>';
-
-        // Replace [[ reply ]] and other keys in the template with values from $notification_data
         $bodyData = $mail_template;
         foreach ($notification_data as $key => $value) {
             $bodyData = str_replace('[[ ' . $key . ' ]]', $value, $bodyData);
-            $bodyData = str_replace('[[ ' . $key . ' ]]', $value, $bodyData); // handle both with and without space
         }
-
         try {
             Mail::to($data->email)->send(new ReplyIncidenceMail($bodyData));
         } catch (\Exception $e) {
             \Log::error('Mail not sent: ' . $e->getMessage());
         }
-
         $this->sendNotificationOnIncidenceCreate('incidence_reply', $notification_data);
     }
 
     public function getReply($id)
     {
         $incidence = Incidence::find($id);
-
-        if (! $incidence) {
+        if (!$incidence) {
             return response()->json(['reply' => null]);
         }
+        return response()->json(['reply' => $incidence->reply]);
+    }
 
-        return response()->json([
-            'reply' => $incidence->reply,
+    public function create()
+    {
+        return view('backend.incidence.create');
+    }
+
+    /**
+     * Store a newly created incidence (for receptionist).
+     */
+    public function store(Request $request)
+    {
+        $user = auth()->user();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'phone' => 'nullable|string',
+            'email' => 'nullable|email',
+            'incident_date' => 'nullable|date',
         ]);
+
+        $clinicId = null;
+        if ($user->hasRole('receptionist')) {
+            $receptionist = Receptionist::where('receptionist_id', $user->id)->first();
+            $clinicId = $receptionist?->clinic_id;
+        }
+
+        $incidence = Incidence::create([
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'incident_date' => $request->incident_date ?? now(),
+            'incident_type' => 1,
+            'status' => 1,
+            'created_by' => $user->id,
+            'clinic_id' => $clinicId,
+        ]);
+
+        activity()
+            ->performedOn($incidence)
+            ->causedBy($user)
+            ->withProperties(['attributes' => $incidence->toArray()])
+            ->event('created')
+            ->log('incidence_created');
+
+        return redirect()->route('backend.incidence.index')
+            ->with('success', 'Incidence report created successfully.');
     }
 }

@@ -6,6 +6,7 @@
 <div class="table-content mb-3">
     <x-backend.section-header>
         <div class="d-flex flex-wrap gap-3">
+            @unless(auth()->user()->hasRole('receptionist'))
             <x-backend.quick-action url="{{ route('backend.incidence.bulk_action') }}">
                 <div class="">
                     <select name="action_type" class="select2 form-select col-12" id="quick-action-type"
@@ -23,6 +24,7 @@
                     </select>
                 </div>
             </x-backend.quick-action>
+            @endunless
         </div>
         <x-slot name="toolbar">
 
@@ -45,8 +47,11 @@
                     aria-describedby="addon-wrapping">
             </div>
 
-                    <!-- <x-buttons.offcanvas target='#form-offcanvas' title="{{ __('messages.create') }} {{ __($module_title) }}">
-                    {{ __('messages.create') }} {{ __($module_title) }} </x-buttons.offcanvas> -->
+            @if(auth()->user()->hasRole('receptionist'))
+            <a href="{{ route('backend.incidence.create') }}" class="btn btn-primary">
+                {{ __('messages.create') }} {{ __('messages.incidence') }}
+            </a>
+            @endif
 
         </x-slot>
     </x-backend.section-header>

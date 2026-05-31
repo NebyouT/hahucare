@@ -1115,6 +1115,15 @@ class GenerateMenus
                 ]);
             }
 
+            // Data Activity Log - visible to all authenticated roles
+            $this->mainRoute($menu, [
+                'icon' => 'ph ph-activity',
+                'title' => 'Data Log',
+                'route' => 'backend.data-log.index',
+                'active' => ['app/data-log'],
+                'order' => 0,
+            ]);
+
             // Settings menu - for admin, demo_admin, and vendor
             if (auth()->user()->hasRole(['admin', 'demo_admin', 'vendor']) && auth()->user()->user_type != 'pharma' && auth()->user()->can('view_setting')) {
                 $this->mainRoute($menu, [

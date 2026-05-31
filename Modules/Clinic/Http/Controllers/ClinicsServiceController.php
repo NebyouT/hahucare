@@ -1238,6 +1238,16 @@ class ClinicsServiceController extends Controller
             );
         }
 
+        activity()
+            ->performedOn($service)
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'attributes' => $request->doctors,
+                'old' => ['previous_mappings' => 'replaced'],
+            ])
+            ->event('updated')
+            ->log('doctor_service_assignments_updated');
+
         return response()->json(['status' => true, 'message' => __('clinic.doctor_service_update')]);
     }
 

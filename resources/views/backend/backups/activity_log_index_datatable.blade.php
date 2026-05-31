@@ -155,7 +155,7 @@
 
         document.addEventListener('DOMContentLoaded', (event) => {
             datatableInstance = initDatatable({
-                url: '{{ route('backend.backups.activity_log_index_data') }}',
+                url: '{{ $dataUrl }}',
                 finalColumns,
                 orderColumn: [
                     [5, 'desc']
@@ -172,7 +172,7 @@
     <script>
         function getHistory(id) {
             if (id != "") {
-                var url = "{{ route('backend.backups.logs.view', ':id') }}";
+                var url = "{{ route($viewUrl, ':id') }}";
                 url = url.replace(':id', id);
 
                 $.ajax({
@@ -190,6 +190,49 @@
                     }
                 });
             }
+        }
+
+        function confirmRollback(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This will revert the changes made in this action. Proceed?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, rollback!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = "{{ route($rollbackUrl, ':id') }}";
+                    url = url.replace(':id', id);
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            if (response.status) {
+                                Swal.fire('Rolled back!', response.message, 'success');
+                                if (window.LaravelDataTables && window.LaravelDataTables['datatable']) {
+                                    window.LaravelDataTables['datatable'].ajax.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            } else {
+                                Swal.fire('Error', response.message, 'error');
+                            }
+                        },
+                        error: function(xhr) {
+                            var msg = 'Something went wrong.';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                msg = xhr.responseJSON.message;
+                            }
+                            Swal.fire('Error', msg, 'error');
+                        }
+                    });
+                }
+            });
         }
     </script>
 @endpush
