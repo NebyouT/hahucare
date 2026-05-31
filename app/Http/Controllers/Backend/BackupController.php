@@ -534,14 +534,15 @@ class BackupController extends Controller
             $html .= '<h5>' . __('messages.new_data') . ' </h5> <hr>';
             if (!empty($newData)) {
                 foreach ($newData as $key => $value) {
+                    $displayValue = is_scalar($value) ? $value : (is_array($value) ? json_encode($value) : (is_object($value) ? json_encode($value) : '-'));
                     if ($key == 'user_id' || $key == 'doctor_id' || $key == 'patient_id' || $key == 'otherpatient_id' || $key == 'created_by' || $key == 'updated_by' || $key == 'deleted_by') {
-                        $user = User::find($value);
+                        $user = is_scalar($value) ? User::find($value) : null;
                         $html .= '<p> <span class="h6 m-0">' . ucwords(str_replace('_', ' ', $key)) . '</span> : ' . ($user ? $user->first_name . ' ' . $user->last_name : '-') . '</p>';
                     } elseif ($key == 'reason') {
 
                         $key = 'Cancellation Reason';
 
-                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . ($value) . '</p>';
+                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . e($displayValue) . '</p>';
                     } elseif ($key == 'clinic_id') {
                         $clinic = Clinics::find($value);
                         $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . ($clinic ? $clinic->name : '-') . '</p>';
@@ -549,7 +550,7 @@ class BackupController extends Controller
                         $service = ClinicsService::find($value);
                         $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . ($service ? $service->name : '-') . '</p>';
                     } elseif ($key == 'created_at' || $key == 'updated_at'  || $key == 'start_date_time') {
-                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . formatDate($value) . '</p>';
+                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . ($value ? formatDate($value) : '-') . '</p>';
                     } elseif ($key == 'appointment_time') {
                         $setting = Setting::where('name', 'time_formate')->first();
                         $timeformate = $setting ? $setting->val : 'h:i A';
@@ -561,9 +562,9 @@ class BackupController extends Controller
                         $formattedDate = $value ? Carbon::parse($value)->format($dateformate) : '';
                         $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . $formattedDate . '</p>';
                     } elseif ($key == 'start_video_link' || $key == 'tax_percentage' || $key == 'inclusive_tax') {
-                        $html .= '<p class="text-break"> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . $value . '</p>';
+                        $html .= '<p class="text-break"> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . e($displayValue) . '</p>';
                     } else {
-                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . $value . '</p>';
+                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . e($displayValue) . '</p>';
                     }
                 }
             }
@@ -572,8 +573,9 @@ class BackupController extends Controller
             $html .= '<h5>' . __('messages.old_data') . ' </h5> <hr>';
             if (!empty($oldData)) {
                 foreach ($oldData as $key => $value) {
+                    $displayValue = is_scalar($value) ? $value : (is_array($value) ? json_encode($value) : (is_object($value) ? json_encode($value) : '-'));
                     if ($key == 'user_id' || $key == 'doctor_id' || $key == 'patient_id' || $key == 'otherpatient_id' || $key == 'created_by' || $key == 'updated_by' || $key == 'deleted_by') {
-                        $user = User::find($value);
+                        $user = is_scalar($value) ? User::find($value) : null;
                         $html .= '<p> <span class="h6 m-0">' . ucwords(str_replace('_', ' ', $key)) . '</span> : ' . ($user ? $user->first_name . ' ' . $user->last_name : '-') . '</p>';
                     } elseif ($key == 'clinic_id') {
                         $clinic = Clinics::find($value);
@@ -582,7 +584,7 @@ class BackupController extends Controller
                         $service = ClinicsService::find($value);
                         $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . ($service ? $service->name : '-') . '</p>';
                     } elseif ($key == 'created_at' || $key == 'updated_at' || $key == 'start_date_time') {
-                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . formatDate($value) . '</p>';
+                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . ($value ? formatDate($value) : '-') . '</p>';
                     } elseif ($key == 'appointment_time') {
                         $setting = Setting::where('name', 'time_formate')->first();
                         $timeformate = $setting ? $setting->val : 'h:i A';
@@ -594,9 +596,9 @@ class BackupController extends Controller
                         $formattedDate = $value ? Carbon::parse($value)->format($dateformate) : '';
                         $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . $formattedDate . '</p>';
                     } elseif ($key == 'start_video_link' || $key == 'tax_percentage') {
-                        $html .= '<p class="text-break"> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . $value . '</p>';
+                        $html .= '<p class="text-break"> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . e($displayValue) . '</p>';
                     } else {
-                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . $value . '</p>';
+                        $html .= '<p> <span class="h6 m-0"> ' . ucwords(str_replace('_', ' ', $key)) . ' </span> : ' . e($displayValue) . '</p>';
                     }
                 }
             }
