@@ -450,14 +450,16 @@ class GenerateMenus
             }
 
 
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-users',
-                'title' =>  __('sidebar.patient'),
-                'route' => 'backend.customers.index',
-                'active' => ['app/customers'],
-                'permission' => ['import_patient_list', 'add_patient', 'filter_patient_list', 'change_patient_status', 'view_patient_appointments', 'view_patient_info', 'add_related_patient', 'change_patient_password', 'edit_patient_profile', 'delete_patient', 'export_patient_list'],
-                'order' => 0,
-            ]);
+            if (!auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-users',
+                    'title' =>  __('sidebar.patient'),
+                    'route' => 'backend.customers.index',
+                    'active' => ['app/customers'],
+                    'permission' => ['import_patient_list', 'add_patient', 'filter_patient_list', 'change_patient_status', 'view_patient_appointments', 'view_patient_info', 'add_related_patient', 'change_patient_password', 'edit_patient_profile', 'delete_patient', 'export_patient_list'],
+                    'order' => 0,
+                ]);
+            }
 
             if (!auth()->user()->hasRole('receptionist')) {
                 $this->mainRoute($menu, [
@@ -892,8 +894,8 @@ class GenerateMenus
                 ]);
             }
 
-            // Dashboard Comments menu - for all roles with permission
-            if (auth()->user()->can('view_dashboard_comments')) {
+            // Dashboard Comments menu - for all roles with permission (except lab_technician)
+            if (!auth()->user()->hasRole('lab_technician') && auth()->user()->can('view_dashboard_comments')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-chat-circle-text',
                     'title' => 'Dashboard Comments',
@@ -904,7 +906,7 @@ class GenerateMenus
                 ]);
             }
 
-            if(!auth()->user()->hasRole('pharma') && !auth()->user()->hasRole('receptionist') && auth()->user()->can('view_blogs')){
+            if(!auth()->user()->hasRole('pharma') && !auth()->user()->hasRole('receptionist') && !auth()->user()->hasRole('lab_technician') && auth()->user()->can('view_blogs')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-pencil-simple',
                     'title' => __('sidebar.blog'),

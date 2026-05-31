@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="table-content mb-5">
+    <div class="table-content mb-3">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
                 {{-- Change doctor status & Delete doctor: Admin (Full), Clinic Admin (Own Clinics/Limited), Doctor (No), Receptionist (No), Pharmacist (No), Lab Technologist (No) --}}
@@ -38,11 +38,8 @@
                     <button type="button" class="btn btn-primary" data-modal="export">
                         <i class="ph ph-export me-1"></i> {{ __('messages.export') }}
                     </button>
-                @endif
-                    {{--          <button type="button" class="btn btn-secondary" data-modal="import"> --}}
-                    {{--            <i class="ph ph-upload me-1"></i> Import --}}
-                    {{--          </button> --}}
                 </div>
+                @endif
             </div>
             <x-slot name="toolbar">
                 <div>
@@ -73,7 +70,6 @@
                         </button>
                     @endif
                 </div>
-    </div>
     </x-slot>
     </x-backend.section-header>
 

@@ -30,7 +30,7 @@
     <div class="table-content mb-5">
         <x-backend.section-header>
             <div class="d-flex flex-wrap gap-3">
-                @if (auth()->user()->can('edit_clinics_service') || auth()->user()->can('delete_clinics_service'))
+                @if (!auth()->user()->hasRole('lab_technician') && (auth()->user()->can('edit_clinics_service') || auth()->user()->can('delete_clinics_service')))
                     <x-backend.quick-action url="{{ route('backend.services.bulk_action') }}">
                         <div class="">
                             <select name="action_type" class="select2 form-select col-12" id="quick-action-type"

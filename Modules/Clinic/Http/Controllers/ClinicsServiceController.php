@@ -505,7 +505,7 @@ class ClinicsServiceController extends Controller
 
     public function bulk_action(Request $request)
     {
-        if (auth()->user()->hasRole('receptionist')) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 
@@ -541,7 +541,7 @@ class ClinicsServiceController extends Controller
 
     public function update_status(Request $request, ClinicsService $id)
     {
-        if (auth()->user()->hasRole('receptionist')) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 
@@ -640,7 +640,7 @@ class ClinicsServiceController extends Controller
             })
             ->editColumn('status', function ($row) {
                 $user = auth()->user();
-                if ($user->hasRole('receptionist')) {
+                if ($user->hasRole(['receptionist', 'lab_technician'])) {
                     $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
                     $label = $row->status ? __('messages.active') : __('messages.inactive');
                     return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
@@ -685,6 +685,8 @@ class ClinicsServiceController extends Controller
                 if ($user->hasRole('doctor')) {
                     $data->doctor_service_count = $data->doctor_service->where('doctor_id', $user->id)->count();
                     return "<button type='button' data-assign-module='" . $data->id . "' data-assign-target='#service-doctor-assign-form' data-assign-event='doctor_assign' class='btn btn-sm p-0 text-primary' data-bs-toggle='tooltip' title='Assign Doctor To Service'><span class='bg-primary-subtle rounded tbl-badge'><b>$data->doctor_service_count</b></button></span>";
+                } elseif ($user->hasRole(['receptionist', 'lab_technician'])) {
+                    return "<span class='bg-primary-subtle rounded tbl-badge'><b>$data->doctor_service_count</b></span>";
                 } else {
                     return "<span class='bg-primary-subtle rounded tbl-badge'><b>$data->doctor_service_count</b> <button type='button' data-assign-module='" . $data->id . "' data-assign-target='#service-doctor-assign-form' data-assign-event='doctor_assign' class='btn btn-sm p-0 text-primary' data-bs-toggle='tooltip' title='Assign Doctor To Service'><i class='ph ph-plus'></i></button></span>";
                 }
@@ -1204,6 +1206,10 @@ class ClinicsServiceController extends Controller
     }
     public function assign_doctor_update($id, Request $request)
     {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
+
         $service = ClinicsService::findOrFail($id);
         DoctorServiceMapping::where('service_id', $id)->where('clinic_id', $request->clinic_id)->forceDelete();
 
