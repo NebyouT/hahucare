@@ -505,6 +505,10 @@ class ClinicsServiceController extends Controller
 
     public function bulk_action(Request $request)
     {
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
+
         $ids = explode(',', $request->rowIds);
 
         $actionType = $request->action_type;
@@ -537,6 +541,10 @@ class ClinicsServiceController extends Controller
 
     public function update_status(Request $request, ClinicsService $id)
     {
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
+
         $id->update(['status' => $request->status]);
 
         return response()->json(['status' => true, 'message' => __('clinic.clinicservice_status')]);
@@ -631,6 +639,13 @@ class ClinicsServiceController extends Controller
                 return $data->duration_min . ' Min';
             })
             ->editColumn('status', function ($row) {
+                $user = auth()->user();
+                if ($user->hasRole('receptionist')) {
+                    $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
+                    $label = $row->status ? __('messages.active') : __('messages.inactive');
+                    return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
+                }
+
                 $checked = '';
                 if ($row->status) {
                     $checked = 'checked="checked"';
@@ -803,7 +818,10 @@ class ClinicsServiceController extends Controller
     // }
     public function store(ClinicsServiceRequest $request)
     {
-        // dd($request->all());
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
+
         $data = $request->except('file_url');
 
         // Normalize type/service_type
@@ -943,6 +961,10 @@ class ClinicsServiceController extends Controller
      */
     public function update(ClinicsServiceRequest $request, $id)
     {
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
+
         // Debug: Log the incoming request data
         \Log::info('Service Update Request', [
             'id' => $id,
@@ -1093,6 +1115,9 @@ class ClinicsServiceController extends Controller
      */
     public function destroy($id)
     {
+        if (auth()->user()->hasRole('receptionist')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
 
         if(\Auth::user()->hasAnyRole(['demo_admin'])){
 
