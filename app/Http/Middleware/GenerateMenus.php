@@ -876,8 +876,8 @@ class GenerateMenus
                 }
             }
 
-            // Medical Certificate menu - for admin, demo_admin, doctor, and vendor
-            if ((auth()->user()->hasRole(['admin', 'demo_admin', 'doctor', 'vendor']) && auth()->user()->can('view_medical_certificate')) || auth()->user()->hasRole('doctor')) {
+            // Medical Certificate menu - for admin, demo_admin, doctor, and vendor (NOT receptionist)
+            if (!auth()->user()->hasRole('receptionist') && ((auth()->user()->hasRole(['admin', 'demo_admin', 'doctor', 'vendor']) && auth()->user()->can('view_medical_certificate')) || auth()->user()->hasRole('doctor'))) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-file-medical',
                     'title' => __('sidebar.medical_certificates'),

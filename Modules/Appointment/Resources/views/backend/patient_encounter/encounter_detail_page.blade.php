@@ -137,7 +137,6 @@
 
                     </div>
                     @if ($data['status'] == 1)
-                        @unless (auth()->user()->hasRole('receptionist'))
                         <div class="d-flex gap-2">
                             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#generate_invoice">
                                 <div class="d-inline-flex align-items-center gap-1">
@@ -146,7 +145,6 @@
                                 </div>
                             </button>
                         </div>
-                        @endunless
                     @else
                         <div class="d-flex gap-2">
                             <a href="{{ url('app/billing-record/encounter_billing_detail') }}?id={{ $data['id'] }}">
@@ -360,12 +358,14 @@
                                         <h5 class="card-title">{{ __('medicalcertificate.medical_certificates') }}</h5>
                                         @if ($data['status'] == 1)
                                             @can('add_medical_certificate')
+                                            @unless (auth()->user()->hasRole('receptionist'))
                                             <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-sm btn-primary">
                                                 <div class="d-inline-flex align-items-center gap-1">
                                                     <i class="ph ph-plus"></i>
                                                     {{ __('medicalcertificate.create_medical_certificate') }}
                                                 </div>
                                             </a>
+                                            @endunless
                                             @endcan
                                         @endif
                                     </div>

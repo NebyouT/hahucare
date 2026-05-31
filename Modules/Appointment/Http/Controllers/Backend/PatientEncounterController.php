@@ -360,8 +360,8 @@ class PatientEncounterController extends Controller
     {
         $user = auth()->user();
         
-        // Close/checkout encounter: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Receptionist (No), Pharmacist (No), Lab Technician (No)
-        if ($user && ($user->hasRole('vendor') || $user->hasRole('receptionist') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
+        // Close/checkout encounter: Admin (Full), Clinic Admin (No), Doctor (Own Patients), Pharmacist (No), Lab Technician (No)
+        if ($user && ($user->hasRole('vendor') || $user->hasRole('pharmacist') || $user->hasRole('lab_technologist'))) {
             abort(403, 'You are not allowed to close encounters.');
         }
         
