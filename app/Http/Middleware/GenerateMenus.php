@@ -445,7 +445,7 @@ class GenerateMenus
 
             $permissionsToCheck = ['view_customer', 'view_clinic_receptionist_list', 'view_vendor_list'];
 
-            if (collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission))) {
+            if (!auth()->user()->hasRole('pharma') && collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission))) {
                 $this->staticMenu($menu, ['title' => __('sidebar.user'), 'order' => 0]);
             }
 
@@ -508,14 +508,34 @@ class GenerateMenus
                 // dd(checkPlugin('pharma'));
                 if(checkPlugin('pharma') == 'active'){
                     $this->mainRoute($menu, [
-                        'icon' => 'ph ph-calendar-minus',
-                        'title' => __('sidebar.prescription'),
-                        'route' => 'backend.prescription.index',
-                        'active' => ['app/prescription'],
-                        'permission' => 'view_prescription',
+                        'icon' => 'ph ph-handshake',
+                        'title' => __('sidebar.suppliers'),
+                        'route' => 'backend.suppliers.index',
+                        'active' => ['app/suppliers'],
+                        'permission' => 'view_suppliers',
                         'order' => 0,
                     ]);
                 }
+
+                // Clinic - read-only for pharma
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-buildings',
+                    'title' => __('sidebar.clinic'),
+                    'route' => 'backend.clinics.index',
+                    'active' => ['app/clinics'],
+                    'permission' => '',
+                    'order' => 0,
+                ]);
+
+                // Service - read-only for pharma
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-wrench',
+                    'title' => __('sidebar.service'),
+                    'route' => 'backend.clinicservice.index',
+                    'active' => ['app/clinicservice'],
+                    'permission' => '',
+                    'order' => 0,
+                ]);
 
                 $permissionsToCheck = ['view_medicine', 'add_medicine', 'edit_medicine', 'delete_medicine'];
 
@@ -738,7 +758,7 @@ class GenerateMenus
                 }
             }
 
-            if (auth()->user()->can('view_patient_referral')) {
+            if (!auth()->user()->hasRole('pharma') && auth()->user()->can('view_patient_referral')) {
                 $this->staticMenu($menu, ['title' => 'Patient Referral', 'order' => 0]);
 
                 $patientReferal = $this->parentMenu($menu, [

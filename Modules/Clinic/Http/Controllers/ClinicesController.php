@@ -306,7 +306,7 @@ class ClinicesController extends Controller
             })
             ->editColumn('status', function ($data) {
                 $user = auth()->user();
-                if ($user->hasRole(['receptionist', 'lab_technician'])) {
+                if ($user->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
                     $badge = $data->status ? 'bg-success-subtle' : 'bg-danger-subtle';
                     $label = $data->status ? __('messages.active') : __('messages.inactive');
                     return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
@@ -357,7 +357,7 @@ class ClinicesController extends Controller
 
     public function update_status(Request $request, Clinics $id)
     {
-        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 
@@ -589,7 +589,7 @@ class ClinicesController extends Controller
 
     public function bulk_action(Request $request)
     {
-        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 

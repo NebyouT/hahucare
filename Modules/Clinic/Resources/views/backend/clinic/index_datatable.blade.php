@@ -14,7 +14,7 @@
                     $permissionsToCheck = ['edit_clinics_center', 'delete_clinics_service'];
                 @endphp
 
-                @if (!auth()->user()->hasRole('lab_technician') && collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission)))
+                @if (!auth()->user()->hasRole(['lab_technician', 'pharma']) && collect($permissionsToCheck)->contains(fn($permission) => auth()->user()->can($permission)))
                     <x-backend.quick-action url="{{ route('backend.clinics.bulk_action') }}">
                         <div class="">
                             <select name="action_type" class="select2 form-select col-12" id="quick-action-type"

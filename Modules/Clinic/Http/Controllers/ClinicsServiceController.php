@@ -505,7 +505,7 @@ class ClinicsServiceController extends Controller
 
     public function bulk_action(Request $request)
     {
-        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 
@@ -541,7 +541,7 @@ class ClinicsServiceController extends Controller
 
     public function update_status(Request $request, ClinicsService $id)
     {
-        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 
@@ -640,7 +640,7 @@ class ClinicsServiceController extends Controller
             })
             ->editColumn('status', function ($row) {
                 $user = auth()->user();
-                if ($user->hasRole(['receptionist', 'lab_technician'])) {
+                if ($user->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
                     $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
                     $label = $row->status ? __('messages.active') : __('messages.inactive');
                     return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
@@ -652,40 +652,16 @@ class ClinicsServiceController extends Controller
                 }
 
                 return '
-                    <div class="form-check form-switch ">
-                        <input type="checkbox" data-url="' . route('backend.services.update_status', $row->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input"  id="datatable-row-' . $row->id . '"  name="status" value="' . $row->id . '" ' . $checked . '>
+                    <div class="form-check form-switch">
+                        <input type="checkbox" data-url="' . route('backend.clinicservice.update_status', $row->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input" id="datatable-row-' . $row->id . '" name="status" value="' . $row->id . '" ' . $checked . '>
                     </div>
                 ';
-            })
-
-            ->editColumn('category_id', function ($data) {
-                $category = isset($data->category->name) ? $data->category->name : '-';
-                if (isset($data->sub_category->name)) {
-                    $category = $category . ' > ' . $data->sub_category->name;
-                }
-
-                return $category;
-            })
-            ->editColumn('vendor_id', function ($data) {
-                $vendor = optional($data->vendor)->full_name;
-                return $vendor;
-            })
-            ->filterColumn('category', function ($query, $keyword) {
-                $query->whereHas('category', function ($q) use ($keyword) {
-                    $q->where('name', 'LIKE', '%' . $keyword . '%');
-                });
-            })
-            ->filterColumn('vendor_id', function ($query, $keyword) {
-                $query->whereHas('vendor', function ($q) use ($keyword) {
-                    $q->where('first_name', 'LIKE', '%' . $keyword . '%')
-                      ->orWhere('last_name', 'LIKE', '%' . $keyword . '%');
-                });
             })
             ->editColumn('doctor', function ($data) use ($user) {
                 if ($user->hasRole('doctor')) {
                     $data->doctor_service_count = $data->doctor_service->where('doctor_id', $user->id)->count();
                     return "<button type='button' data-assign-module='" . $data->id . "' data-assign-target='#service-doctor-assign-form' data-assign-event='doctor_assign' class='btn btn-sm p-0 text-primary' data-bs-toggle='tooltip' title='Assign Doctor To Service'><span class='bg-primary-subtle rounded tbl-badge'><b>$data->doctor_service_count</b></button></span>";
-                } elseif ($user->hasRole(['receptionist', 'lab_technician'])) {
+                } elseif ($user->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
                     return "<span class='bg-primary-subtle rounded tbl-badge'><b>$data->doctor_service_count</b></span>";
                 } else {
                     return "<span class='bg-primary-subtle rounded tbl-badge'><b>$data->doctor_service_count</b> <button type='button' data-assign-module='" . $data->id . "' data-assign-target='#service-doctor-assign-form' data-assign-event='doctor_assign' class='btn btn-sm p-0 text-primary' data-bs-toggle='tooltip' title='Assign Doctor To Service'><i class='ph ph-plus'></i></button></span>";
@@ -1206,7 +1182,7 @@ class ClinicsServiceController extends Controller
     }
     public function assign_doctor_update($id, Request $request)
     {
-        if (auth()->user()->hasRole(['receptionist', 'lab_technician'])) {
+        if (auth()->user()->hasRole(['receptionist', 'lab_technician', 'pharma'])) {
             return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
         }
 

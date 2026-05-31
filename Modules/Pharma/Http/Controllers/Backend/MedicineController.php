@@ -487,7 +487,15 @@ class MedicineController extends Controller
             'pharma_id'        => $pharmaId,
         ];
         $medicine = Medicine::findOrFail($id);
+        $oldData = $medicine->toArray();
         $medicine->update($data);
+
+        activity()
+            ->performedOn($medicine)
+            ->causedBy(auth()->user())
+            ->withProperties(['old' => $oldData, 'attributes' => $medicine->toArray()])
+            ->event('updated')
+            ->log('medicine_updated');
         sendNotification([
             'notification_type' => 'add_medicine',
             'medicine_name' => $request->name,

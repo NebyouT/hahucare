@@ -177,6 +177,12 @@ class SupplierController extends Controller
             })
 
             ->editColumn('status', function ($row) {
+                $user = auth()->user();
+                if ($user->hasRole('pharma')) {
+                    $badge = $row->status ? 'bg-success-subtle' : 'bg-danger-subtle';
+                    $label = $row->status ? __('messages.active') : __('messages.inactive');
+                    return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
+                }
                 $checked = $row->status ? 'checked="checked"' : '';
                 return '
                 <div class="form-check form-switch">
@@ -343,6 +349,9 @@ class SupplierController extends Controller
 
     public function bulk_action(Request $request)
     {
+        if (auth()->user()->hasRole('pharma')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $ids = explode(',', $request->rowIds);
 
         $actionType = $request->action_type;
@@ -370,6 +379,9 @@ class SupplierController extends Controller
     }
     public function update_status(Request $request, Supplier $id)
     {
+        if (auth()->user()->hasRole('pharma')) {
+            return response()->json(['message' => __('messages.permission_denied'), 'status' => false], 403);
+        }
         $id->update(['status' => $request->status]);
 
         return response()->json(['status' => true, 'message' => __('pharma::messages.status_update_message')]);
