@@ -98,6 +98,19 @@
                                         </button>
                                     </form>
                                 @endif
+
+                                @if($referral->status === 'pending')
+                                    @if((auth()->user()->user_type === 'doctor' && $referral->referred_to === auth()->user()->id) || 
+                                       (in_array(auth()->user()->user_type, ['admin', 'demo_admin'])) ||
+                                       (auth()->user()->hasRole('receptionist') && in_array($referral->referred_to, $clinicDoctorIds ?? [])))
+                                        <form action="{{ route('backend.patientreferral.reject', $referral) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to reject this referral?')">
+                                                <i class="fas fa-times"></i> Reject Referral
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endif
                                 
                                 @if(auth()->user()->user_type !== 'doctor' || $referral->referred_to !== auth()->user()->id)
                                     <a href="{{ route('backend.patientreferral.edit', $referral) }}" class="btn btn-info">

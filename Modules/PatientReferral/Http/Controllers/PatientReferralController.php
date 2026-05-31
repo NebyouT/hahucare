@@ -17,53 +17,65 @@ class PatientReferralController extends Controller
      */
     public function index()
     {
-        // Check if user is authenticated
         if (!Auth::check()) {
             abort(401, 'Please login to access this page.');
         }
-        
+
         $user = Auth::user();
         $clinicDoctorIds = [];
-        
-        if ($user->user_type === 'doctor') {
-            // Doctor: in = referred_to me, out = referred_by me
-            $inReferrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
-                ->where('referred_to', $user->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
-                
-            $outReferrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
-                ->where('referred_by', $user->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
-        } elseif ($user->hasRole('receptionist')) {
-            // Receptionist: get doctors in their clinic
-            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
-            if ($receptionist) {
-                $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+        $clinicId = null;
+
+        if (in_array($user->user_type, ['doctor', 'receptionist']) || $user->hasRole('doctor') || $user->hasRole('receptionist')) {
+            // Get the user's clinic ID and all doctors in that clinic
+            if ($user->hasRole('receptionist')) {
+                $record = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
+                if ($record) {
+                    $clinicId = $record->clinic_id;
+                }
+            } else {
+                // Doctor or other clinic-based role
+                $mapping = \Modules\Clinic\Models\DoctorClinicMapping::where('doctor_id', $user->id)->first();
+                if ($mapping) {
+                    $clinicId = $mapping->clinic_id;
+                }
+            }
+
+            if ($clinicId) {
+                $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $clinicId)
                     ->pluck('doctor_id')
                     ->toArray();
             }
-            
-            $inReferrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
-                ->whereIn('referred_to', $clinicDoctorIds)
+
+            // Only show referrals where at least one doctor (referred_by or referred_to) is in this clinic
+            $allClinicReferrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
+                ->where(function ($q) use ($clinicDoctorIds) {
+                    $q->whereIn('referred_by', $clinicDoctorIds)
+                      ->orWhereIn('referred_to', $clinicDoctorIds);
+                })
                 ->orderBy('created_at', 'desc')
                 ->get();
-                
-            $outReferrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
-                ->whereIn('referred_by', $clinicDoctorIds)
-                ->orderBy('created_at', 'desc')
-                ->get();
+
+            // In Referral: referred_to doctor is in our clinic (incoming / internal)
+            $inReferrals = $allClinicReferrals->filter(function ($r) use ($clinicDoctorIds) {
+                return in_array($r->referred_to, $clinicDoctorIds);
+            });
+
+            // Out Referral: referred_by is in our clinic AND referred_to is NOT in our clinic
+            $outReferrals = $allClinicReferrals->filter(function ($r) use ($clinicDoctorIds) {
+                return in_array($r->referred_by, $clinicDoctorIds) && !in_array($r->referred_to, $clinicDoctorIds);
+            });
+
+            // Items where both are in the same clinic go ONLY to In Referral (already handled above)
         } else {
-            // Admin and other roles: show all
+            // Admin / demo_admin: show all referrals, no clinic filter
             $allReferrals = PatientReferral::with(['patient', 'referredByDoctor', 'referredToDoctor'])
                 ->orderBy('created_at', 'desc')
                 ->get();
-                
+
             $inReferrals = $allReferrals;
             $outReferrals = $allReferrals;
         }
-        
+
         return view('patientreferral::backend.index', compact('inReferrals', 'outReferrals', 'clinicDoctorIds'));
     }
 
@@ -508,6 +520,48 @@ class PatientReferralController extends Controller
         // Redirect to appointment booking page for this referral
         return redirect()->route('backend.patientreferral.book', $referral->id)
             ->with('success', 'Referral accepted. Please complete the appointment booking.');
+    }
+
+    /**
+     * Reject a referral.
+     */
+    public function rejectReferral($id): RedirectResponse
+    {
+        if (!Auth::check()) {
+            abort(401, 'Please login to access this page.');
+        }
+
+        $user = Auth::user();
+        $referral = PatientReferral::findOrFail($id);
+
+        // Only in-referral pending referrals can be rejected by authorized users
+        if ($user->user_type === 'doctor' && $referral->referred_to !== $user->id) {
+            abort(403, 'You are not authorized to reject this referral.');
+        }
+
+        if ($user->hasRole('receptionist')) {
+            $receptionist = \Modules\Clinic\Models\Receptionist::where('receptionist_id', $user->id)->first();
+            if (!$receptionist) {
+                abort(403, 'You are not associated with any clinic.');
+            }
+            $clinicDoctorIds = \Modules\Clinic\Models\DoctorClinicMapping::where('clinic_id', $receptionist->clinic_id)
+                ->pluck('doctor_id')
+                ->toArray();
+            if (!in_array($referral->referred_to, $clinicDoctorIds)) {
+                abort(403, 'You are not authorized to reject this referral.');
+            }
+        }
+
+        if ($referral->status !== 'pending') {
+            return redirect()->route('backend.patientreferral.index')
+                ->with('info', 'This referral has already been processed.');
+        }
+
+        $referral->status = 'rejected';
+        $referral->save();
+
+        return redirect()->route('backend.patientreferral.index')
+            ->with('success', 'Referral rejected successfully.');
     }
 
     /**

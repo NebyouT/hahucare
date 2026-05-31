@@ -66,6 +66,10 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth', 'a
     Route::post('patientreferral/{id}/accept', [PatientReferralController::class, 'acceptReferral'])
         ->name('patientreferral.accept')
         ->middleware('permission:edit_patient_referral');
+
+    Route::post('patientreferral/{id}/reject', [PatientReferralController::class, 'rejectReferral'])
+        ->name('patientreferral.reject')
+        ->middleware('permission:edit_patient_referral');
         
     Route::get('patientreferral/{id}/book', [PatientReferralController::class, 'bookAppointment'])
         ->name('patientreferral.book')
