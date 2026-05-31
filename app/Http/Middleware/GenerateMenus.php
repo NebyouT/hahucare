@@ -1137,8 +1137,8 @@ class GenerateMenus
                 ]);
             }
 
-            // Data Activity Log - visible to all roles except lab_technician
-            if (!auth()->user()->hasRole('lab_technician')) {
+            // Data Activity Log - visible to all roles except lab_technician and doctor
+            if (!auth()->user()->hasRole('lab_technician') && !auth()->user()->hasRole('doctor')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-activity',
                     'title' => 'Data Log',

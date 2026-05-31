@@ -653,7 +653,7 @@ class ClinicsServiceController extends Controller
 
                 return '
                     <div class="form-check form-switch">
-                        <input type="checkbox" data-url="' . route('backend.clinicservice.update_status', $row->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input" id="datatable-row-' . $row->id . '" name="status" value="' . $row->id . '" ' . $checked . '>
+                        <input type="checkbox" data-url="' . route('backend.services.update_status', $row->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input" id="datatable-row-' . $row->id . '" name="status" value="' . $row->id . '" ' . $checked . '>
                     </div>
                 ';
             })

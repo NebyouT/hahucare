@@ -95,6 +95,14 @@ class IncidenceReportController extends Controller
             }
         }
 
+        // Doctor: only see incidents from their clinic
+        if ($user->hasRole('doctor')) {
+            $mapping = DoctorClinicMapping::where('doctor_id', $user->id)->first();
+            if ($mapping && $mapping->clinic_id) {
+                $query->where('clinic_id', $mapping->clinic_id);
+            }
+        }
+
         $appointment_status = [__('messages.lbl_open') => '1', __('messages.lbl_closed') => '2', __('messages.lbl_reject') => '3'];
 
         $datatable = $datatable->eloquent($query)
@@ -125,8 +133,8 @@ class IncidenceReportController extends Controller
             })
             ->editColumn('status', function ($data) use ($appointment_status) {
                 if ($data->incident_type == 1) {
-                    // Receptionist and lab_technician cannot change status — show read-only badge
-                    if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
+                    // Receptionist, lab_technician, and doctor cannot change status — show read-only badge
+                    if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor')) {
                         return '<span class="badge bg-warning">' . __('messages.lbl_open') . '</span>';
                     }
                     return view('backend.incidence.datatable.select_column', compact('data', 'appointment_status'));
@@ -165,8 +173,8 @@ class IncidenceReportController extends Controller
 
     public function updateStatus($id, Request $request)
     {
-        // Receptionist and lab_technician cannot change status
-        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
+        // Receptionist, lab_technician, and doctor cannot change status
+        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor')) {
             return response()->json(['message' => 'You are not authorized to change status.', 'status' => false], 403);
         }
 
@@ -182,8 +190,8 @@ class IncidenceReportController extends Controller
 
     public function bulk_action(Request $request)
     {
-        // Receptionist and lab_technician cannot bulk action
-        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
+        // Receptionist, lab_technician, and doctor cannot bulk action
+        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor')) {
             return response()->json(['message' => 'You are not authorized.', 'status' => false], 403);
         }
 
@@ -201,8 +209,8 @@ class IncidenceReportController extends Controller
 
     public function reply(Request $request)
     {
-        // Receptionist and lab_technician cannot reply
-        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician')) {
+        // Receptionist, lab_technician, and doctor cannot reply
+        if (auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor')) {
             flash('<i class="fas fa-times"></i> You are not authorized.')->error()->important();
             return redirect()->route('backend.incidence.index');
         }
@@ -285,6 +293,9 @@ class IncidenceReportController extends Controller
         } elseif ($user->hasRole('lab_technician')) {
             $lab = Lab::where('user_id', $user->id)->first();
             $clinicId = $lab?->clinic_id;
+        } elseif ($user->hasRole('doctor')) {
+            $mapping = DoctorClinicMapping::where('doctor_id', $user->id)->first();
+            $clinicId = $mapping?->clinic_id;
         }
 
         $incidence = Incidence::create([

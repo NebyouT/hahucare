@@ -6,7 +6,7 @@
 <div class="table-content mb-3">
     <x-backend.section-header>
         <div class="d-flex flex-wrap gap-3">
-            @unless(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician'))
+            @unless(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor'))
             <x-backend.quick-action url="{{ route('backend.incidence.bulk_action') }}">
                 <div class="">
                     <select name="action_type" class="select2 form-select col-12" id="quick-action-type"
@@ -47,7 +47,7 @@
                     aria-describedby="addon-wrapping">
             </div>
 
-            @if(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician'))
+            @if(auth()->user()->hasRole('receptionist') || auth()->user()->hasRole('lab_technician') || auth()->user()->hasRole('doctor'))
             <a href="{{ route('backend.incidence.create') }}" class="btn btn-primary">
                 {{ __('messages.create') }} {{ __('messages.incidence') }}
             </a>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                @if($data->incident_type==1 && !auth()->user()->hasRole('receptionist') && !auth()->user()->hasRole('lab_technician'))
+                @if($data->incident_type==1 && !auth()->user()->hasRole('receptionist') && !auth()->user()->hasRole('lab_technician') && !auth()->user()->hasRole('doctor'))
                 <div class="d-flex align-items-center justify-content-end">
                     <x-buttons.create title="">
                         {{__('messages.lbl_reply')}}
@@ -169,7 +169,7 @@
 
 <script type="text/javascript" defer>
    const columns = [
-    @if (!auth()->user()->hasRole('lab_technician'))
+    @if (!auth()->user()->hasRole('lab_technician') && !auth()->user()->hasRole('doctor'))
     {
                 name: 'check',
                 data: 'check',
