@@ -142,6 +142,10 @@ class SystemServiceController extends Controller
                     $label = $row->featured ? __('messages.yes') : __('messages.no');
                     return '<span class="badge ' . $badge . ' p-2">' . $label . '</span>';
                 }
+                $checked = '';
+                if ($row->featured) {
+                    $checked = 'checked="checked"';
+                }
                 return '
                     <div class="form-check form-switch ">
                         <input type="checkbox" data-url="' . route('backend.system-service.update_featured', $row->id) . '" data-token="' . csrf_token() . '" class="switch-status-featured form-check-input"  id="datatable-row-' . $row->id . '"  name="featured" value="' . $row->id . '" ' . $checked . '>
