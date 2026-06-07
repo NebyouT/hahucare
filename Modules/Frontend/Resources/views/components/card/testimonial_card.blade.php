@@ -15,7 +15,7 @@
         @if(!empty($rating->review_msg))
         "{{ $rating->review_msg }}" 
         @endif
-        <a href="{{ route('doctor-details', ['id' => optional($rating->doctor->doctor)->id]) }}">
+        <a href="{{ $rating->doctor ? route('doctor-details', ['id' => optional($rating->doctor->doctor)->id]) : '#' }}">
             {{ '@' . optional($rating->doctor)->first_name . ' ' . optional($rating->doctor)->last_name }}
         </a>
     </p>
