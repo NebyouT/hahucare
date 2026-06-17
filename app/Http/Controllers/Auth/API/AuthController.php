@@ -723,7 +723,14 @@ class AuthController extends Controller
         $request->validate(['mobile' => 'required|string']);
 
         $phone = AfroMessageService::normalizeForStorage($request->mobile);
-        $user = User::where('mobile', $phone)->first();
+
+        // Search by mobile number or auto-generated email (phone@gmail.com)
+        $cleanDigits = preg_replace('/[^0-9]/', '', $phone);
+        $autoEmail = $cleanDigits . '@gmail.com';
+
+        $user = User::where('mobile', $phone)
+            ->orWhere('email', $autoEmail)
+            ->first();
 
         if ($user) {
             return response()->json([
@@ -859,7 +866,15 @@ class AuthController extends Controller
         $request->validate(['mobile' => 'required|string']);
 
         $phone = AfroMessageService::normalizeForStorage($request->mobile);
-        $user = User::withTrashed()->where('mobile', $phone)->first();
+
+        // Search by mobile or auto-generated email
+        $cleanDigits = preg_replace('/[^0-9]/', '', $phone);
+        $autoEmail = $cleanDigits . '@gmail.com';
+
+        $user = User::withTrashed()
+            ->where('mobile', $phone)
+            ->orWhere('email', $autoEmail)
+            ->first();
 
         if (!$user) {
             return response()->json([
@@ -909,7 +924,6 @@ class AuthController extends Controller
             'mobile' => 'required|string',
             'first_name' => 'required|string|max:191',
             'last_name' => 'required|string|max:191',
-            'email' => 'nullable|email|max:191|unique:users,email',
             'gender' => 'nullable|string|in:male,female,other',
             'date_of_birth' => 'nullable|date',
             'address' => 'nullable|string|max:500',
@@ -917,8 +931,14 @@ class AuthController extends Controller
 
         $phone = AfroMessageService::normalizeForStorage($request->mobile);
 
-        // Check if already registered
-        $existingUser = User::where('mobile', $phone)->first();
+        // Auto-generate email from phone: cleaned_digits@gmail.com
+        $cleanDigits = preg_replace('/[^0-9]/', '', $phone);
+        $autoEmail = $cleanDigits . '@gmail.com';
+
+        // Check if already registered by phone or auto-generated email
+        $existingUser = User::where('mobile', $phone)
+            ->orWhere('email', $autoEmail)
+            ->first();
         if ($existingUser) {
             return response()->json([
                 'status' => false,
@@ -926,28 +946,12 @@ class AuthController extends Controller
             ], 409);
         }
 
-        // Generate email if not provided
-        $email = $request->email;
-        if (empty($email)) {
-            $phoneForEmail = preg_replace('/[^0-9]/', '', $phone);
-            if (str_starts_with($phoneForEmail, '251')) {
-                $phoneForEmail = '0' . substr($phoneForEmail, 3);
-            }
-            $email = $phoneForEmail . '@hahucare.com';
-        }
-
-        // Ensure unique email
-        $existingByEmail = User::where('email', $email)->first();
-        if ($existingByEmail) {
-            $email = preg_replace('/@/', '_' . Str::random(4) . '@', $email);
-        }
-
         // Create user
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'name' => $request->first_name . ' ' . $request->last_name,
-            'email' => $email,
+            'email' => $autoEmail,
             'mobile' => $phone,
             'gender' => $request->gender,
             'address' => $request->address,
