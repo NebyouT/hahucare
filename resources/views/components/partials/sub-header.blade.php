@@ -29,59 +29,6 @@
                                 {{ __(isset($isEdit) && $isEdit == true ? $edit_module_title ?? $module_title : $module_title ?? '') }}</li>
                         </ol>
                     </nav>
-                    <div>
-                        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('vendor'))
-                            <!-- <a href="javascript:void(0)" class="btn btn-secondary d-flex align-items-center gap-2"
-                                create-title="{{ __('messages.create') }} {{ __('messages.appointment') }}"
-                                id="appointment-button"><i class="ph ph-plus-circle align-middle"></i>
-                                {{ __('messages.appointment') }}</a> -->
-                                  <!-- In sub-header.blade.php -->
-                                {{-- <a href="javascript:void(0)"
-                                    class="btn btn-secondary d-flex align-items-center gap-2"
-                                    data-bs-toggle="offcanvas"
-                                    data-bs-target="#global-appointment">
-                                    <i class="ph ph-plus-circle align-middle"></i> {{ __('messages.appointment') }}
-                                </a> --}}
-                                <a href="javascript:void(0)"
-                                    class="btn btn-secondary d-flex align-items-center gap-2"
-                                    id="global-appointment-trigger"
-                                    onclick="openGlobalAppointment()">
-                                    <i class="ph ph-plus-circle align-middle"></i> {{ __('messages.appointment') }}
-                                </a>
-                                
-                                <script>
-                                function openGlobalAppointment() {
-                                    console.log('Opening global appointment offcanvas');
-                                    // Target the Blade template offcanvas
-                                    var offcanvasElement = document.getElementById('global-appointment-offcanvas');
-                                    if (offcanvasElement) {
-                                        if (typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
-                                            try {
-                                                // Try to get existing instance or create new one
-                                                var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasElement, {
-                                                    backdrop: true,
-                                                    keyboard: true
-                                                });
-                                                offcanvas.show();
-                                            } catch (error) {
-                                                console.error('Bootstrap offcanvas error:', error);
-                                                // Fallback: manual show
-                                                $(offcanvasElement).addClass('show');
-                                                $('body').addClass('offcanvas-open');
-                                            }
-                                        } else {
-                                            // Bootstrap not available, use jQuery fallback
-                                            $(offcanvasElement).addClass('show');
-                                            $('body').addClass('offcanvas-open');
-                                        }
-                                    } else {
-                                        console.error('Global appointment offcanvas element not found');
-                                    }
-                                }
-                                </script>
-
-                    </div>
-                    @endif
                 </div>
             </div>
         </div>
