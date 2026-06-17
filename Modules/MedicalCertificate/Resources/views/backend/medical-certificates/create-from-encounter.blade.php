@@ -87,7 +87,7 @@
     </div>
 </div>
 
-@push('scripts')
+@push('after-scripts')
 <script>
     $(document).ready(function() {
         $('#medical-certificate-form').on('submit', function(e) {

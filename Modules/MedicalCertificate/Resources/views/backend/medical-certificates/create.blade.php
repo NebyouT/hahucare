@@ -101,7 +101,7 @@
     </div>
 </div>
 
-@push('scripts')
+@push('after-scripts')
 <script>
     $(document).ready(function() {
         $('.select2').select2({

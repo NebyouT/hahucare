@@ -199,34 +199,38 @@
     <!-- /Sidebar -->
     <div class="main-content wrapper">
 
-        <div class="position-relative
+        <div id="content-page">
+
+            <div class="position-relative
 {{ !isset($isBanner) ? 'iq-banner' : '' }} default">
-            <!-- Header -->
-            @include('backend.includes.header')
-            <!-- /Header -->
-            @if (!isset($isBanner))
-                <!-- Header Banner Start-->
+                <!-- Header -->
+                @include('backend.includes.header')
+                <!-- /Header -->
+                @if (!isset($isBanner))
+                    <!-- Header Banner Start-->
 
-                @include('components.partials.sub-header')
+                    @include('components.partials.sub-header')
 
-                <!-- Header Banner End-->
-            @endif
-        </div>
+                    <!-- Header Banner End-->
+                @endif
+            </div>
 
-        <div class="conatiner-fluid content-inner pb-0" id="page_layout">
-            <!-- Main content block -->
-            @yield('content')
-            <!-- / Main content block -->
-            @if (isset($export_import) && $export_import)
-                <div data-render="import-export">
-                    <export-modal export-doctor-id="{{ $export_doctor_id ?? '' }}" export-url="{{ $export_url }}"
-                        :module-column-prop="{{ json_encode($export_columns) }}"
-                        module-name="{{ $module_name }}"></export-modal>
-                    <import-modal import-url="{{ $import_url ?? '' }}" module-name="{{ $module_name ?? '' }}"
-                        :module-column-prop="{{ json_encode($import_columns ?? []) }}">
-                    </import-modal>
-                </div>
-            @endif
+            <div class="container-fluid content-inner pb-0" id="page_layout">
+                <!-- Main content block -->
+                @yield('content')
+                <!-- / Main content block -->
+                @if (isset($export_import) && $export_import)
+                    <div data-render="import-export">
+                        <export-modal export-doctor-id="{{ $export_doctor_id ?? '' }}" export-url="{{ $export_url }}"
+                            :module-column-prop="{{ json_encode($export_columns) }}"
+                            module-name="{{ $module_name }}"></export-modal>
+                        <import-modal import-url="{{ $import_url ?? '' }}" module-name="{{ $module_name ?? '' }}"
+                            :module-column-prop="{{ json_encode($import_columns ?? []) }}">
+                        </import-modal>
+                    </div>
+                @endif
+            </div>
+
         </div>
 
         <!-- Footer block -->

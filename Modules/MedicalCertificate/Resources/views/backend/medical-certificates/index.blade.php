@@ -39,7 +39,7 @@
     </div>
 </div>
 
-@push('scripts')
+@push('after-scripts')
 <script>
     $(document).ready(function() {
         var table = $('#medical-certificates-table').DataTable({
