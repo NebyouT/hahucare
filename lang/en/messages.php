@@ -3,6 +3,7 @@
 return [
 
     'Welcome to' => 'Welcome to :name Admin Dashboard.',
+    'id' => 'Id',
     'yes' => 'Yes',
     'no' => 'No',
     'list' => 'List',

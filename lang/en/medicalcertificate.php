@@ -16,6 +16,7 @@ return [
     'issue_date' => 'Issue Date',
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
+    'duration' => 'Duration',
     'duration_days' => 'Duration (Days)',
     'diagnosis' => 'Diagnosis',
     'reason' => 'Reason',

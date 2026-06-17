@@ -179,18 +179,20 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'auth_check']], functi
         });
 
         // Medical Certificate routes
+        // IMPORTANT: Literal route segments must come BEFORE the {id} wildcard route
         Route::prefix('medical-certificates')->as('medical-certificates.')->group(function () {
             Route::get('/', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'index'])->name('index');
             Route::get('index_data', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'index_data'])->name('index_data');
             Route::get('create', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'create'])->name('create');
             Route::post('store', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'store'])->name('store');
+            Route::get('create-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'createFromEncounter'])->name('create-from-encounter');
+            Route::post('store-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'storeFromEncounter'])->name('store-from-encounter');
             Route::get('{id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'show'])->name('show');
             Route::get('{id}/edit', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'edit'])->name('edit');
             Route::put('{id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'update'])->name('update');
             Route::delete('{id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'destroy'])->name('destroy');
             Route::get('{id}/print', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'print'])->name('print');
-            Route::get('create-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'createFromEncounter'])->name('create-from-encounter');
-            Route::post('store-from-encounter/{encounter_id}', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'storeFromEncounter'])->name('store-from-encounter');
+            Route::get('{id}/download', [Modules\MedicalCertificate\Http\Controllers\Backend\MedicalCertificateController::class, 'download'])->name('download');
         });
 
         // Data Activity Log routes (accessible to all authenticated users)
