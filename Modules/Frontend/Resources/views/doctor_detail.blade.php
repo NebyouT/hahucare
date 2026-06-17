@@ -65,17 +65,17 @@
                             <div class="mt-4">
                                 @php
                                     $socialMediaPlatforms = [
-                                        optional($doctor->user->profile)->facebook_link,
-                                        optional($doctor->user->profile)->twitter_link,
-                                        optional($doctor->user->profile)->instagram_link,
-                                        optional($doctor->user->profile)->dribbble_link,
+                                        $doctor->user?->profile?->facebook_link,
+                                        $doctor->user?->profile?->twitter_link,
+                                        $doctor->user?->profile?->instagram_link,
+                                        $doctor->user?->profile?->dribbble_link,
                                     ];
                                 @endphp
                                  @if (array_filter($socialMediaPlatforms))
                                 <div class="d-flex flex-wrap align-items-center gap-3">
                                     <span class="doctor-social-media">Social media: </span>
                                     <div class="d-flex flex-wrap align-items-center gap-3">
-                                        @if(optional($doctor->user->profile)->twitter_link)
+                                        @if($doctor->user?->profile?->twitter_link)
                                         <a href="{{ $doctor->user->profile->twitter_link }}" target="_blank" class="social-media-icon">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@
                                             </svg>
                                         </a>
                                         @endif
-                                        @if(optional($doctor->user->profile)->dribbble_link)
+                                        @if($doctor->user?->profile?->dribbble_link)
                                         <a href="{{ $doctor->user->profile->dribbble_link }}" target="_blank" class="social-media-icon">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
