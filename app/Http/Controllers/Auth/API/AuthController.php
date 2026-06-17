@@ -9,18 +9,21 @@ use App\Http\Resources\LoginResource;
 use App\Http\Resources\RegisterResource;
 use App\Http\Resources\SocialLoginResource;
 use App\Mail\sendLoginOtp;
+use App\Models\OtpVerification;
 use App\Models\User;
+use App\Models\UserProfile;
+use App\Services\AfroMessageService;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Artisan;
-use Modules\Commission\Models\EmployeeCommission;
-use Modules\Commission\Models\Commission;
-use App\Models\UserProfile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Modules\Clinic\Models\Doctor;
+use Modules\Commission\Models\EmployeeCommission;
+use Modules\Commission\Models\Commission;
 
 class AuthController extends Controller
 {
@@ -710,5 +713,278 @@ class AuthController extends Controller
         }
 
         return response()->json(['status' => 'success'], 200);
+    }
+
+    /**
+     * Check if user exists by phone number
+     */
+    public function checkUserByPhone(Request $request)
+    {
+        $request->validate(['mobile' => 'required|string']);
+
+        $phone = AfroMessageService::normalizeForStorage($request->mobile);
+        $user = User::where('mobile', $phone)->first();
+
+        if ($user) {
+            return response()->json([
+                'status' => true,
+                'user_exists' => true,
+                'message' => __('User found'),
+                'user_data' => [
+                    'id' => $user->id,
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'email' => $user->email,
+                    'mobile' => $user->mobile,
+                    'gender' => $user->gender,
+                    'profile_image' => $user->profile_image,
+                ],
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'user_exists' => false,
+            'message' => __('User not found'),
+            'user_data' => null,
+        ]);
+    }
+
+    /**
+     * Send OTP to phone number via SMS
+     */
+    public function sendPhoneOtp(Request $request)
+    {
+        $request->validate(['mobile' => 'required|string|min:9|max:15']);
+
+        $phone = AfroMessageService::normalizeForStorage($request->mobile);
+
+        // Rate limiting - check last OTP sent within 1 minute
+        $existingOtp = OtpVerification::where('phone', $phone)
+            ->where('created_at', '>', now()->subMinutes(1))
+            ->first();
+
+        if ($existingOtp) {
+            return response()->json([
+                'status' => false,
+                'message' => __('Please wait 1 minute before requesting a new OTP.'),
+            ], 429);
+        }
+
+        // Generate 6-digit OTP
+        $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+
+        // Delete old OTPs for this phone
+        OtpVerification::where('phone', $phone)->delete();
+
+        // Create new OTP record
+        OtpVerification::create([
+            'phone' => $phone,
+            'otp' => Hash::make($otp),
+            'expires_at' => now()->addMinutes(5),
+        ]);
+
+        // Send OTP via AfroMessage
+        $smsService = app(AfroMessageService::class);
+        $result = $smsService->sendOtp($phone, $otp);
+
+        if (!$result['success']) {
+            return response()->json([
+                'status' => false,
+                'message' => __('Failed to send OTP. Please try again.'),
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => __('OTP sent successfully to your phone.'),
+        ]);
+    }
+
+    /**
+     * Verify OTP entered by user
+     */
+    public function verifyPhoneOtp(Request $request)
+    {
+        $request->validate([
+            'mobile' => 'required|string',
+            'otp' => 'required|string|size:6',
+        ]);
+
+        $phone = AfroMessageService::normalizeForStorage($request->mobile);
+
+        // Find valid OTP record
+        $otpRecord = OtpVerification::validForPhone($phone)->first();
+
+        if (!$otpRecord) {
+            return response()->json([
+                'status' => false,
+                'message' => __('OTP expired or invalid. Please request a new one.'),
+            ], 400);
+        }
+
+        // Check max attempts
+        if ($otpRecord->maxAttemptsReached()) {
+            $otpRecord->delete();
+            return response()->json([
+                'status' => false,
+                'message' => __('Too many failed attempts. Please request a new OTP.'),
+            ], 429);
+        }
+
+        // Verify OTP
+        if (!Hash::check($request->otp, $otpRecord->otp)) {
+            $otpRecord->incrementAttempts();
+            return response()->json([
+                'status' => false,
+                'message' => __('Invalid OTP. Please try again.'),
+                'attempts_remaining' => 5 - $otpRecord->attempts,
+            ], 400);
+        }
+
+        // Mark as verified
+        $otpRecord->markAsVerified();
+
+        return response()->json([
+            'status' => true,
+            'message' => __('OTP verified successfully.'),
+        ]);
+    }
+
+    /**
+     * Login existing user with phone number (after OTP verification)
+     */
+    public function phoneLogin(Request $request)
+    {
+        $request->validate(['mobile' => 'required|string']);
+
+        $phone = AfroMessageService::normalizeForStorage($request->mobile);
+        $user = User::withTrashed()->where('mobile', $phone)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => __('No account found with this phone number.'),
+            ], 404);
+        }
+
+        if (!empty($user->deleted_at)) {
+            return response()->json([
+                'status' => false,
+                'is_deleted' => true,
+                'message' => __('This account has been deleted.'),
+            ], 400);
+        }
+
+        if ($user->is_banned == 1 || $user->status == 0) {
+            return response()->json([
+                'status' => false,
+                'message' => __('Your account has been suspended.'),
+            ], 403);
+        }
+
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+
+        $user->player_id = $request->input('player_id');
+        $user->save();
+
+        $user['api_token'] = $user->createToken(setting('app_name'))->plainTextToken;
+        $loginResource = new LoginResource($user);
+        $message = __('messages.user_login');
+
+        // Clean up OTP records
+        OtpVerification::where('phone', $phone)->delete();
+
+        return $this->sendResponse($loginResource, $message);
+    }
+
+    /**
+     * Register new user with phone number (after OTP verification)
+     */
+    public function phoneRegister(Request $request)
+    {
+        $request->validate([
+            'mobile' => 'required|string',
+            'first_name' => 'required|string|max:191',
+            'last_name' => 'required|string|max:191',
+            'email' => 'nullable|email|max:191|unique:users,email',
+            'gender' => 'nullable|string|in:male,female,other',
+            'date_of_birth' => 'nullable|date',
+            'address' => 'nullable|string|max:500',
+        ]);
+
+        $phone = AfroMessageService::normalizeForStorage($request->mobile);
+
+        // Check if already registered
+        $existingUser = User::where('mobile', $phone)->first();
+        if ($existingUser) {
+            return response()->json([
+                'status' => false,
+                'message' => __('A user with this phone number already exists.'),
+            ], 409);
+        }
+
+        // Generate email if not provided
+        $email = $request->email;
+        if (empty($email)) {
+            $phoneForEmail = preg_replace('/[^0-9]/', '', $phone);
+            if (str_starts_with($phoneForEmail, '251')) {
+                $phoneForEmail = '0' . substr($phoneForEmail, 3);
+            }
+            $email = $phoneForEmail . '@hahucare.com';
+        }
+
+        // Ensure unique email
+        $existingByEmail = User::where('email', $email)->first();
+        if ($existingByEmail) {
+            $email = preg_replace('/@/', '_' . Str::random(4) . '@', $email);
+        }
+
+        // Create user
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'email' => $email,
+            'mobile' => $phone,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'password' => Hash::make(Str::random(32)),
+            'user_type' => 'user',
+            'status' => 1,
+            'email_verified_at' => now(),
+            'login_type' => 'phone',
+        ]);
+
+        // Assign user role
+        $user->assignRole('user');
+
+        // Create wallet
+        if (class_exists('Modules\Wallet\Models\Wallet')) {
+            \Modules\Wallet\Models\Wallet::create([
+                'title' => $user->first_name . ' ' . $user->last_name,
+                'user_id' => $user->id,
+                'amount' => 0,
+            ]);
+        }
+
+        // Generate 2FA QR code
+        $user->qr_image = $this->multiFactorAuth($user);
+        $user->save();
+
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+
+        $user['api_token'] = $user->createToken(setting('app_name'))->plainTextToken;
+        $userResource = new RegisterResource($user);
+        $message = __('messages.register_successfull');
+
+        // Clean up OTP records
+        OtpVerification::where('phone', $phone)->delete();
+
+        return $this->sendResponse($userResource, $message);
     }
 }

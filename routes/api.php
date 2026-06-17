@@ -42,6 +42,13 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::post('check-contact', [AuthController::class, 'checkContact']);
 Route::post('check-email', [AuthController::class, 'checkEmail']);
+
+// Phone OTP Auth
+Route::post('check-user-by-phone', [AuthController::class, 'checkUserByPhone']);
+Route::post('send-phone-otp', [AuthController::class, 'sendPhoneOtp']);
+Route::post('verify-phone-otp', [AuthController::class, 'verifyPhoneOtp']);
+Route::post('phone-login', [AuthController::class, 'phoneLogin']);
+Route::post('phone-register', [AuthController::class, 'phoneRegister']);
 Route::post('/store-access-token', [SettingController::class, 'storeToken']);
 Route::post('/token-revoke', [SettingController::class, 'revokeToken']);
 
