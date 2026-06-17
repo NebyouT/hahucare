@@ -353,21 +353,9 @@
                                 </div>
 
                                 <!-- Medical Certificates Section -->
-                                <div class="mb-4">
-                                    <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0 mb-3">
+                                <div class="card mb-4">
+                                    <div class="card-header d-flex justify-content-between flex-wrap gap-3 px-0">
                                         <h5 class="card-title">{{ __('medicalcertificate.medical_certificates') }}</h5>
-                                        @if ($data['status'] == 1)
-                                            @can('add_medical_certificate')
-                                            @unless (auth()->user()->hasRole('receptionist'))
-                                            <a href="{{ route('backend.medical-certificates.create-from-encounter', $data->id) }}" class="btn btn-sm btn-primary">
-                                                <div class="d-inline-flex align-items-center gap-1">
-                                                    <i class="ph ph-plus"></i>
-                                                    {{ __('medicalcertificate.create_medical_certificate') }}
-                                                </div>
-                                            </a>
-                                            @endunless
-                                            @endcan
-                                        @endif
                                     </div>
 
                                     <div class="card-body bg-body" style="padding: 1px">
