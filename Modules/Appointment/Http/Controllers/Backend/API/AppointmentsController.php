@@ -401,7 +401,7 @@ class AppointmentsController extends Controller
             'clinic_name' => $clinic_data->name,
             'clinic_id' => $clinic_data->id,
             'vendor_id' => $clinic_data->vendor_id,
-            'receptionist_id' => $clinic_data->receptionist->receptionist_id ?? $receptionist->receptionist_id ?? null,
+            'receptionist_id' => $receptionist->receptionist_id ?? null,
             'receptionist_name' => isset($receptionist) ? $receptionist->users->first_name.' '.$receptionist->users->last_name : 'unknown',
         ];
         $this->sendNotificationOnBookingUpdate('reschedule_appointment', $notification_data);

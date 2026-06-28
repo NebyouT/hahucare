@@ -454,7 +454,7 @@ class AppointmentsController extends Controller
             'clinic_name' => $appointment->clinic_name,
             'clinic_id' => $clinic_data->id,
             'vendor_id' => $clinic_data->vendor_id,
-            'receptionist_id' => $clinic_data->receptionist->receptionist_id ?? $receptionist->receptionist_id ?? null,
+            'receptionist_id' => $receptionist->receptionist_id ?? null,
             'receptionist_name' => isset($receptionist) ? $receptionist->users->first_name.' '.$receptionist->users->last_name : 'unknown',
             'clinic_address' => $clinic_data->address ?? '',
         ];
@@ -766,11 +766,11 @@ class AppointmentsController extends Controller
             'clinic_id' => $appointment->clinic_id,
             'clinic_name' => $clinic_data->name ?? '--',
             'vendor_id' => $clinic_data->vendor_id,
-            'receptionist_id' => $clinic_data->receptionist->receptionist_id ?? $receptionist->receptionist_id ?? null,
+            'receptionist_id' => $receptionist->receptionist_id ?? null,
             'receptionist_name' => isset($receptionist) ? $receptionist->users->first_name.' '.$receptionist->users->last_name : 'unknown',
             'updated_by_role' => auth()->user()->user_type ?? '',
             'vendor_id' => $clinic_data->vendor_id,
-            'receptionist_id' => $clinic_data->receptionist->receptionist_id ?? $receptionist->receptionist_id ?? null,
+            'receptionist_id' => $receptionist->receptionist_id ?? null,
             'receptionist_name' => isset($receptionist) ? $receptionist->users->first_name.' '.$receptionist->users->last_name : 'unknown',
         ];
         $this->sendNotificationOnBookingUpdate($notify_type, $notification_data);
