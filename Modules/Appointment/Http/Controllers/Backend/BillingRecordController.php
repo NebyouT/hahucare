@@ -1240,7 +1240,7 @@ class BillingRecordController extends Controller
             $totalInclusiveTax = 0;
             $serviceDiscountAmount = 0;
             
-            foreach ($data->billingItem as $item) {
+            foreach ($dataModel->billingItem as $item) {
                 $quantity = $item->quantity ?? 1;
                 $unitPrice = $item->service_amount ?? 0;
                 $inclusiveTax = $item->inclusive_tax_amount ?? 0;
@@ -1319,7 +1319,7 @@ class BillingRecordController extends Controller
 
             // Get tax_data from billing record if available
             // getBookingTaxamount handles JSON decoding internally, so pass it as-is
-            $taxData = $data->tax_data ?? null;
+            $taxData = $dataModel->tax_data ?? null;
 
             // Tax calculation logic:
             // - If there's NO overall discount, calculate tax on BASE service amount (ignoring service-level discounts)
@@ -1328,13 +1328,13 @@ class BillingRecordController extends Controller
             
             // Check if there's an overall discount
             $overallDiscountAmount = 0;
-            if (isset($data->final_discount) && $data->final_discount == 1 && isset($data->final_discount_value) && $data->final_discount_value > 0) {
-                $overallDiscountType = $data->final_discount_type ?? 'percentage';
+            if (isset($dataModel->final_discount) && $dataModel->final_discount == 1 && isset($dataModel->final_discount_value) && $dataModel->final_discount_value > 0) {
+                $overallDiscountType = $dataModel->final_discount_type ?? 'percentage';
                 if ($overallDiscountType == 'fixed') {
-                    $overallDiscountAmount = $data->final_discount_value;
+                    $overallDiscountAmount = $dataModel->final_discount_value;
                 } else {
                     // Percentage discount on base service amount (not on amount after service discount)
-                    $overallDiscountAmount = ($servicePrice * $data->final_discount_value) / 100;
+                    $overallDiscountAmount = ($servicePrice * $dataModel->final_discount_value) / 100;
                 }
                 // When overall discount exists, calculate tax on (Base Service Amount - Overall Discount)
                 $amountForTaxCalculation = $servicePrice - $overallDiscountAmount;
@@ -1362,20 +1362,20 @@ class BillingRecordController extends Controller
             $service_details['total_amount'] = $amountAfterServiceDiscount + $service_details['total_tax'] + $service_details['total_bed_charges'];
 
 
-            if (isset($data->final_discount) && $data->final_discount == 1 && isset($data->final_discount_value) && $data->final_discount_value > 0) {
-                $service_details['final_discount'] = $data->final_discount;
-                $service_details['final_discount_value'] = $data->final_discount_value;
-                $service_details['final_discount_type'] = $data->final_discount_type ?? 'percentage';
+            if (isset($dataModel->final_discount) && $dataModel->final_discount == 1 && isset($dataModel->final_discount_value) && $dataModel->final_discount_value > 0) {
+                $service_details['final_discount'] = $dataModel->final_discount;
+                $service_details['final_discount_value'] = $dataModel->final_discount_value;
+                $service_details['final_discount_type'] = $dataModel->final_discount_type ?? 'percentage';
 
                 // Overall discount is applied to base service amount only (not after service discount)
                 $amountForOverallDiscount = $servicePrice; // Base service price (not after service discount)
                 
                 // Apply overall discount on base service amount
-                if ($data->final_discount_type == 'fixed') {
-                    $service_details['final_discount_amount'] = $data->final_discount_value;
+                if ($dataModel->final_discount_type == 'fixed') {
+                    $service_details['final_discount_amount'] = $dataModel->final_discount_value;
                 } else {
                     // Percentage discount on base service amount
-                    $service_details['final_discount_amount'] = ($data->final_discount_value * $amountForOverallDiscount) / 100;
+                    $service_details['final_discount_amount'] = ($dataModel->final_discount_value * $amountForOverallDiscount) / 100;
                 }
                 
                 // Calculate amount after overall discount: Base Service Price - Overall Discount
