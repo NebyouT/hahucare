@@ -1219,8 +1219,8 @@ class BillingRecordController extends Controller
                     $totalBedCharges = $encounter->bedAllocations->charge ?? 0;
                 }
             }
-        } elseif (isset($data['bed_charges'])) {
-            $totalBedCharges = $data['bed_charges'] ?? 0;
+        } elseif (isset($dataModel['bed_charges'])) {
+            $totalBedCharges = $dataModel['bed_charges'] ?? 0;
         }
         
         \Log::info('Bed Charges Final Calculation', [
@@ -1228,12 +1228,12 @@ class BillingRecordController extends Controller
         ]);
 
         \Log::info('Checking billing items', [
-            'billingItem_exists' => isset($data->billingItem),
-            'billingItem_count' => $data->billingItem ? $data->billingItem->count() : 0,
-            'billingItem_is_collection' => $data->billingItem instanceof \Illuminate\Database\Eloquent\Collection,
+            'billingItem_exists' => isset($dataModel->billingItem),
+            'billingItem_count' => $dataModel->billingItem ? $dataModel->billingItem->count() : 0,
+            'billingItem_is_collection' => $dataModel->billingItem instanceof \Illuminate\Database\Eloquent\Collection,
         ]);
         
-        if (!empty($data->billingItem) && $data->billingItem->count() > 0) {
+        if (!empty($dataModel->billingItem) && $dataModel->billingItem->count() > 0) {
             
             // Calculate service price, inclusive tax, and service discount from billing items
             $servicePrice = 0;
