@@ -14,7 +14,7 @@ class LabOrderAPIController extends Controller
     {
         $perPage = $request->input('per_page', 10);
 
-        $query = LabOrder::with(['lab', 'clinic', 'doctor', 'labOrderItems'])
+        $query = LabOrder::with(['lab', 'clinic', 'doctor', 'labOrderItems.labResult'])
             ->where('patient_id', auth()->id())
             ->orderBy('created_at', 'desc');
 
@@ -39,7 +39,7 @@ class LabOrderAPIController extends Controller
             'id' => 'required|exists:lab_orders,id',
         ]);
 
-        $order = LabOrder::with(['lab', 'clinic', 'doctor', 'labOrderItems'])
+        $order = LabOrder::with(['lab', 'clinic', 'doctor', 'labOrderItems.labResult'])
             ->where('id', $request->id)
             ->where('patient_id', auth()->id())
             ->first();

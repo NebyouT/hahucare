@@ -13,7 +13,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('update-booking/{id}', [Modules\Appointment\Http\Controllers\Backend\AppointmentsController::class, 'update'])->middleware('api.permission:edit_appointment');
     Route::get('appointment-list', [AppointmentsController::class, 'appointmentList'])->middleware('api.permission:view_appointment');
     Route::get('appointment-detail', [AppointmentsController::class, 'appointmentDetails'])->middleware('api.permission:view_appointment');
-    Route::post('save-payment', [Modules\Appointment\Http\Controllers\Backend\AppointmentsController::class, 'savePayment'])->middleware('api.permission:edit_appointment');
+    Route::post('save-payment', [Modules\Appointment\Http\Controllers\Backend\AppointmentsController::class, 'savePayment']);
     Route::post('update-status/{id}', [Modules\Appointment\Http\Controllers\Backend\AppointmentsController::class, 'updateStatus'])->middleware('api.permission:edit_appointment');
     Route::post('reschedule-booking', [AppointmentsController::class, 'rescheduleBooking'])->middleware('api.permission:edit_appointment');
     Route::post('cancel-appointment/{id}', [AppointmentsController::class, 'cancelAppointment'])->middleware('api.permission:delete_appointment');
