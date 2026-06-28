@@ -1401,7 +1401,8 @@ class BillingRecordController extends Controller
         $service_details['total_bed_charges'] = $totalBedCharges;
         
         // Load lab billing details
-        $labBilling = \Modules\Appointment\Models\LabOrderBillingDetail::where('encounter_id', $encounter->id ?? $dataModel['encounter_id'])->first();
+        $encounterId = $encounter->id ?? $dataModel['encounter_id'];
+        $labBilling = \Modules\Appointment\Models\LabOrderBillingDetail::where('encounter_id', $encounterId)->first();
         $labBillingData = null;
         if ($labBilling) {
             $labBillingData = [
@@ -1412,8 +1413,9 @@ class BillingRecordController extends Controller
         }
         
         // Load lab orders for this encounter
-        $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $encounter->id ?? $dataModel['encounter_id'])->with('labOrderItems.labService')->get();
+        $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $encounterId)->with('labOrderItems.labService')->get();
         $labOrdersData = [];
+        $labOrdersSubtotal = 0;
         foreach ($labOrders as $order) {
             $items = [];
             foreach ($order->labOrderItems as $item) {
@@ -1423,6 +1425,7 @@ class BillingRecordController extends Controller
                     'price' => $item->price,
                     'final_price' => $item->final_price,
                 ];
+                $labOrdersSubtotal += $item->final_price ?? 0;
             }
             $labOrdersData[] = [
                 'id' => $order->id,
@@ -1431,6 +1434,15 @@ class BillingRecordController extends Controller
                 'items' => $items,
                 'total_amount' => $order->total_amount,
                 'final_amount' => $order->final_amount,
+            ];
+        }
+        
+        // If no lab billing detail saved yet, use the raw lab order subtotal
+        if (!$labBillingData && $labOrdersSubtotal > 0) {
+            $labBillingData = [
+                'total_amount' => $labOrdersSubtotal,
+                'exclusive_tax_amount' => 0,
+                'exclusive_tax' => null,
             ];
         }
 
@@ -1619,7 +1631,8 @@ class BillingRecordController extends Controller
         }
 
         // Load lab billing details
-        $labBilling = \Modules\Appointment\Models\LabOrderBillingDetail::where('encounter_id', $encounter->id ?? $data['encounter_id'])->first();
+        $encounterId = $encounter->id ?? $data['encounter_id'];
+        $labBilling = \Modules\Appointment\Models\LabOrderBillingDetail::where('encounter_id', $encounterId)->first();
         $labBillingData = null;
         if ($labBilling) {
             $labBillingData = [
@@ -1629,8 +1642,9 @@ class BillingRecordController extends Controller
             ];
         }
         
-        $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $encounter->id ?? $data['encounter_id'])->with('labOrderItems.labService')->get();
+        $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $encounterId)->with('labOrderItems.labService')->get();
         $labOrdersData = [];
+        $labOrdersSubtotal = 0;
         foreach ($labOrders as $order) {
             $items = [];
             foreach ($order->labOrderItems as $item) {
@@ -1640,6 +1654,7 @@ class BillingRecordController extends Controller
                     'price' => $item->price,
                     'final_price' => $item->final_price,
                 ];
+                $labOrdersSubtotal += $item->final_price ?? 0;
             }
             $labOrdersData[] = [
                 'id' => $order->id,
@@ -1648,6 +1663,15 @@ class BillingRecordController extends Controller
                 'items' => $items,
                 'total_amount' => $order->total_amount,
                 'final_amount' => $order->final_amount,
+            ];
+        }
+        
+        // If no lab billing detail saved yet, use the raw lab order subtotal
+        if (!$labBillingData && $labOrdersSubtotal > 0) {
+            $labBillingData = [
+                'total_amount' => $labOrdersSubtotal,
+                'exclusive_tax_amount' => 0,
+                'exclusive_tax' => null,
             ];
         }
 
