@@ -111,7 +111,7 @@ class LabOrder extends Model
     {
         $prefix = 'LAB';
         $date = now()->format('Ymd');
-        $lastOrder = self::whereDate('created_at', today())
+        $lastOrder = self::withTrashed()->whereDate('created_at', today())
             ->orderBy('id', 'desc')
             ->first();
         
