@@ -2017,7 +2017,62 @@ class BillingRecordController extends Controller
             'final_total_amount' => $billingData->final_total_amount,
         ]);
         
-        return response()->json([
+
+        // Lab Order Billing
+        try {
+            $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $data['encount_id'])->with('labOrderItems')->get();
+            if ($labOrders->isNotEmpty()) {
+                $labSubtotal = 0;
+                foreach ($labOrders as $order) {
+                    foreach ($order->labOrderItems as $item) {
+                        $labSubtotal += $item->final_price ?? 0;
+                    }
+                }
+
+                if (class_exists(\Modules\Tax\Models\Tax::class)) {
+                    $labTaxes = \Modules\Tax\Models\Tax::active()->where('category', 'services')->where('tax_type', 'exclusive')->get();
+                } else {
+                    $labTaxes = collect();
+                }
+
+                $exclusiveTaxAmount = 0;
+                $exclusiveTaxes = [];
+                foreach ($labTaxes as $tax) {
+                    $taxAmount = 0;
+                    if ($tax->type == 'percentage' || $tax->type == 'percent') {
+                        $taxAmount = ($labSubtotal * $tax->value) / 100;
+                    } else {
+                        $taxAmount = $tax->value ?? 0;
+                    }
+                    $exclusiveTaxAmount += $taxAmount;
+                    $exclusiveTaxes[] = [
+                        'title' => $tax->title ?? ('Tax'),
+                        'type' => $tax->type,
+                        'value' => $tax->value,
+                        'amount' => $taxAmount,
+                    ];
+                }
+
+                $labTotal = $labSubtotal + $exclusiveTaxAmount;
+
+                \Modules\Appointment\Models\LabOrderBillingDetail::updateOrCreate(
+                    ['encounter_id' => $data['encount_id']],
+                    [
+                        'exclusive_tax' => json_encode($exclusiveTaxes),
+                        'exclusive_tax_amount' => $exclusiveTaxAmount,
+                        'total_amount' => $labTotal,
+                    ]
+                );
+
+                if ($paymentStatus == 1) {
+                    \Modules\Appointment\Models\PatientEncounter::where('id', $data['encount_id'])->update(['lab_billing_status' => 1]);
+                }
+            }
+        } catch (\Exception $e) {
+            \Log::warning('Lab billing calculation failed: ' . $e->getMessage());
+        }
+
+                return response()->json([
             'message' => 'Billing details saved successfully',
             'status' => true,
             'encounter_closed' => $encounterClosedStatus,

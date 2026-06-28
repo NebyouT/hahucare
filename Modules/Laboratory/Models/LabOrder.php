@@ -72,6 +72,11 @@ class LabOrder extends Model
         return $this->belongsTo(User::class, 'doctor_id');
     }
 
+    public function encounter()
+    {
+        return $this->belongsTo(\Modules\Appointment\Models\PatientEncounter::class, 'encounter_id', 'id');
+    }
+
     public function labOrderItems()
     {
         return $this->hasMany(LabOrderItem::class, 'lab_order_id');

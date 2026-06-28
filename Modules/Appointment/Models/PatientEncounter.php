@@ -39,7 +39,7 @@ class PatientEncounter extends BaseModel
 
     protected $table = 'patient_encounters';
 
-    protected $fillable = ['encounter_date','user_id','clinic_id', 'pharma_id', 'doctor_id','vendor_id','appointment_id','encounter_template_id','description','status','prescription_status','prescription_payment_status'];
+    protected $fillable = ['encounter_date','user_id','clinic_id', 'pharma_id', 'doctor_id','vendor_id','appointment_id','encounter_template_id','description','status','prescription_status','prescription_payment_status','lab_billing_status'];
 
     protected $casts = [
         'user_id' => 'integer',
@@ -227,6 +227,16 @@ class PatientEncounter extends BaseModel
         return $this->hasOne(\Modules\Appointment\Models\EncounterPrescriptionBillingDetail::class, 'encounter_id', 'id');
     }
 
+    public function labBillingDetail()
+    {
+        return $this->hasOne(\Modules\Appointment\Models\LabOrderBillingDetail::class, 'encounter_id', 'id');
+    }
+
+    public function labOrders()
+    {
+        return $this->hasMany(\Modules\Laboratory\Models\LabOrder::class, 'encounter_id', 'id');
+    }
+
     public function encounterPrescription()
     {
         $relationship = $this->hasMany(EncounterPrescription::class, 'encounter_id')->with('billingDetail');
@@ -281,3 +291,4 @@ class PatientEncounter extends BaseModel
         return $query;
     }
 }
+
