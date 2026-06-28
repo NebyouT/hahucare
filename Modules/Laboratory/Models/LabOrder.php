@@ -115,8 +115,8 @@ class LabOrder extends Model
             ->orderBy('id', 'desc')
             ->first();
         
-        $sequence = $lastOrder ? ((int) substr($lastOrder->order_number, -4)) + 1 : 1;
+        $sequence = $lastOrder ? $lastOrder->id + 1 : 1;
         
-        return $prefix . $date . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+        return $prefix . $date . str_pad($sequence, 6, '0', STR_PAD_LEFT);
     }
 }
