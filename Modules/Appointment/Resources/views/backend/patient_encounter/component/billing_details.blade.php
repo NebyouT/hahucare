@@ -396,6 +396,15 @@
                                     </div>
                                 @endif
 
+                                {{-- Lab Charges Section --}}
+                                <div class="d-flex justify-content-between align-items-center form-control d-none" id="lab_charges_section">
+                                    <label class="form-label m-0">Lab Charges</label>
+                                    <div class="form-check" id="lab_charges_amount">
+                                        <input type="hidden" id="total_lab_charges" value="0">
+                                        {{ Currency::format(0) }}
+                                    </div>
+                                </div>
+
                                 @if (optional(optional($data['appointmentdetail'])->appointmenttransaction)->advance_payment_status == 1)
                                     <div class="d-flex justify-content-between align-items-center form-control">
                                         <label class="form-label m-0">{{ __('service.advance_payment_amount') }}
@@ -999,8 +1008,14 @@
                     // Total Payable Amount: (Service Amount - Discount) + Tax (WITHOUT bed charges)
                     const totalPayableAmount = amountAfterDiscount + taxAmount;
 
-                    // Final total including bed charges (for hidden input only)
-                    const grandTotal = totalPayableAmount + bedCharges;
+                    // Lab Charges
+                    let labCharges = 0;
+                    if (data.lab_billing && data.lab_billing.total_amount) {
+                        labCharges = parseFloat(data.lab_billing.total_amount) || 0;
+                    }
+
+                    // Final total including bed charges and lab charges (for hidden input only)
+                    const grandTotal = totalPayableAmount + bedCharges + labCharges;
                     const backendTotal = parseFloat(data.service_details.final_total_amount) || parseFloat(data
                         .service_details.total_amount) || 0;
 
@@ -1522,6 +1537,19 @@
                         // This will be handled by updateDiscount() call in initializeBillingCalculations
                     }
 
+                    // Lab Charges
+                    let labCharges = 0;
+                    if (data.lab_billing && data.lab_billing.total_amount) {
+                        labCharges = parseFloat(data.lab_billing.total_amount) || 0;
+                        $('#total_lab_charges').val(labCharges);
+                        $('#lab_charges_amount').text(currencyFormat(labCharges));
+                        $('#lab_charges_section').removeClass('d-none');
+                    } else {
+                        $('#total_lab_charges').val(0);
+                        $('#lab_charges_amount').text(currencyFormat(0));
+                        $('#lab_charges_section').addClass('d-none');
+                    }
+
                     // Calculate amount after discount: Service Amount - Discount
                     const amountAfterDiscount = totalServiceAmount - overallDiscountAmount;
 
@@ -1564,8 +1592,8 @@
                     // Total Payable Amount: (Service Amount - Discount) + Tax (WITHOUT bed charges)
                     const totalPayableAmount = amountAfterDiscount + taxAmountToUse;
 
-                    // Final total including bed charges (for hidden input only)
-                    const grandTotal = totalPayableAmount + bedCharges;
+                    // Final total including bed charges and lab charges (for hidden input only)
+                    const grandTotal = totalPayableAmount + bedCharges + labCharges;
 
                     // Use PHP-calculated total if available and different (PHP is source of truth)
                     const finalTotal = (phpCalculatedTotal > 0 && Math.abs(grandTotal - phpCalculatedTotal) >
@@ -1859,8 +1887,14 @@
                     // Total Payable Amount: (Service Amount - Discount) + Tax (WITHOUT bed charges)
                     const totalPayableAmount = amountAfterDiscount + taxAmount;
 
-                    // Final total including bed charges (for hidden input only)
-                    const grandTotal = totalPayableAmount + bedCharges;
+                    // Lab Charges
+                    let labCharges = 0;
+                    if (data.lab_billing && data.lab_billing.total_amount) {
+                        labCharges = parseFloat(data.lab_billing.total_amount) || 0;
+                    }
+
+                    // Final total including bed charges and lab charges (for hidden input only)
+                    const grandTotal = totalPayableAmount + bedCharges + labCharges;
 
                     // Use backend-calculated total as source of truth (it's already correct)
                     const backendTotal = parseFloat(data.service_details.final_total_amount) || parseFloat(data

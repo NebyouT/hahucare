@@ -1400,16 +1400,54 @@ class BillingRecordController extends Controller
         // Always set bed charges, even if no billing items
         $service_details['total_bed_charges'] = $totalBedCharges;
         
+        // Load lab billing details
+        $labBilling = \Modules\Appointment\Models\LabOrderBillingDetail::where('encounter_id', $encounter->id ?? $dataModel['encounter_id'])->first();
+        $labBillingData = null;
+        if ($labBilling) {
+            $labBillingData = [
+                'total_amount' => $labBilling->total_amount,
+                'exclusive_tax_amount' => $labBilling->exclusive_tax_amount,
+                'exclusive_tax' => $labBilling->exclusive_tax,
+            ];
+        }
+        
+        // Load lab orders for this encounter
+        $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $encounter->id ?? $dataModel['encounter_id'])->with('labOrderItems.labService')->get();
+        $labOrdersData = [];
+        foreach ($labOrders as $order) {
+            $items = [];
+            foreach ($order->labOrderItems as $item) {
+                $items[] = [
+                    'id' => $item->id,
+                    'service_name' => $item->service_name,
+                    'price' => $item->price,
+                    'final_price' => $item->final_price,
+                ];
+            }
+            $labOrdersData[] = [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'status' => $order->status,
+                'items' => $items,
+                'total_amount' => $order->total_amount,
+                'final_amount' => $order->final_amount,
+            ];
+        }
+
         \Log::info('Service Details Final', [
             'service_total' => $service_details['service_total'],
             'total_bed_charges' => $service_details['total_bed_charges'],
             'total_tax' => $service_details['total_tax'],
             'total_amount' => $service_details['total_amount'],
             'final_total_amount' => $service_details['final_total_amount'],
+            'lab_billing' => $labBillingData,
+            'lab_orders_count' => count($labOrdersData),
         ]);
 
         return response()->json([
             'service_details' => $service_details,
+            'lab_billing' => $labBillingData,
+            'lab_orders' => $labOrdersData,
         ]);
     }
 
@@ -1580,8 +1618,43 @@ class BillingRecordController extends Controller
             $service_details['total_amount'] = $service_details['final_total_amount'];
         }
 
+        // Load lab billing details
+        $labBilling = \Modules\Appointment\Models\LabOrderBillingDetail::where('encounter_id', $encounter->id ?? $data['encounter_id'])->first();
+        $labBillingData = null;
+        if ($labBilling) {
+            $labBillingData = [
+                'total_amount' => $labBilling->total_amount,
+                'exclusive_tax_amount' => $labBilling->exclusive_tax_amount,
+                'exclusive_tax' => $labBilling->exclusive_tax,
+            ];
+        }
+        
+        $labOrders = \Modules\Laboratory\Models\LabOrder::where('encounter_id', $encounter->id ?? $data['encounter_id'])->with('labOrderItems.labService')->get();
+        $labOrdersData = [];
+        foreach ($labOrders as $order) {
+            $items = [];
+            foreach ($order->labOrderItems as $item) {
+                $items[] = [
+                    'id' => $item->id,
+                    'service_name' => $item->service_name,
+                    'price' => $item->price,
+                    'final_price' => $item->final_price,
+                ];
+            }
+            $labOrdersData[] = [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'status' => $order->status,
+                'items' => $items,
+                'total_amount' => $order->total_amount,
+                'final_amount' => $order->final_amount,
+            ];
+        }
+
         return response()->json([
             'service_details' => $service_details,
+            'lab_billing' => $labBillingData,
+            'lab_orders' => $labOrdersData,
         ]);
     }
 
