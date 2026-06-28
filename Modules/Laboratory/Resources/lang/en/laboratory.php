@@ -77,4 +77,12 @@ return [
 
     // Pre-filled Information
     'pre_filled_information' => 'Pre-filled Information',
+
+    // Patient-facing API
+    'lab_orders_list' => 'Lab orders list',
+    'lab_order_detail' => 'Lab order detail',
+    'lab_order_not_found' => 'Lab order not found',
+    'no_lab_results' => 'No lab results found',
+    'my_lab_results' => 'My Lab Results',
+    'view_lab_result' => 'View Lab Result',
 ];
