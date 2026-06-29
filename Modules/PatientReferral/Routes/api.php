@@ -1,19 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
-    |--------------------------------------------------------------------------
-    | API Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register API routes for your application. These
-    | routes are loaded by the RouteServiceProvider within a group which
-    | is assigned the "api" middleware group. Enjoy building your API!
-    |
-*/
+use Modules\PatientReferral\Http\Controllers\API\PatientReferralAPIController;
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
-    Route::get('patientreferral', fn (Request $request) => $request->user())->name('patientreferral');
+    Route::get('patient-referrals', [PatientReferralAPIController::class, 'index'])->name('patientreferral.list');
+    Route::get('patient-referral-detail', [PatientReferralAPIController::class, 'show'])->name('patientreferral.detail');
 });
