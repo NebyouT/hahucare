@@ -362,10 +362,32 @@ class AppointmentsController extends Controller
         }
 
         // Add prescription and lab billing totals from separate billing streams
-        $prescriptionBilling = optional(optional($appointment->patientEncounter)->billingDetail);
-        $labBilling = optional(optional($appointment->patientEncounter)->labBillingDetail);
-        $appointmentDetailArray['prescription_total'] = $prescriptionBilling ? $prescriptionBilling->total_amount ?? 0 : 0;
-        $appointmentDetailArray['lab_total'] = $labBilling ? $labBilling->total_amount ?? 0 : 0;
+        // Try billing detail first, then fall back to summing individual order amounts
+        $prescription_total = 0;
+        $lab_total = 0;
+        
+        if ($appointment->patientEncounter) {
+            $encounter = $appointment->patientEncounter;
+            
+            // Prescription total: check billing detail first, then individual prescriptions
+            $prescriptionBilling = optional($encounter)->billingDetail;
+            if ($prescriptionBilling && $prescriptionBilling->total_amount > 0) {
+                $prescription_total = $prescriptionBilling->total_amount;
+            } elseif ($encounter->relationLoaded('prescriptions')) {
+                $prescription_total = $encounter->prescriptions->sum('total_amount') ?? 0;
+            }
+            
+            // Lab total: check billing detail first, then individual lab orders
+            $labBilling = optional($encounter)->labBillingDetail;
+            if ($labBilling && $labBilling->total_amount > 0) {
+                $lab_total = $labBilling->total_amount;
+            } elseif ($encounter->relationLoaded('labOrders')) {
+                $lab_total = $encounter->labOrders->sum('total_amount') ?? 0;
+            }
+        }
+        
+        $appointmentDetailArray['prescription_total'] = $prescription_total;
+        $appointmentDetailArray['lab_total'] = $lab_total;
         
         if($request->has('notification_id')){
             $notification = \App\Models\Notification::where('id', $request->notification_id)->first();

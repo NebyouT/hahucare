@@ -19,7 +19,7 @@ class PrescriptionRescource extends JsonResource
     
         return [
             'id'=> $this->id,
-            'medicine' => new MedicineResource($this->medicine),
+            'medicine' => $this->medicine ? new MedicineResource($this->medicine) : null,
             'quantity' => $this->quantity,
             'user_id'=> $this->user_id,
             'encounter_id'=>$this->user_id,
@@ -27,6 +27,7 @@ class PrescriptionRescource extends JsonResource
             'frequency'=>$this->frequency,
             'duration'=>$this->duration,
             'instruction'=>$this->instruction,
+            'total_amount' => $this->total_amount ?? 0,
             'medicine_amount' => $this->total_amount ?? 0,
             'created_by'=> $this->created_by,
             'updated_by'=> $this->updated_by,

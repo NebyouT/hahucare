@@ -68,6 +68,7 @@ class EncounterDashboardDetailsResource extends JsonResource
             'prescription_payment_status' => $this->prescription_payment_status ?? null,
             'prescription_exclusive_tax' => optional($this->billingDetail)->exclusive_tax_amount ?? 0,
             'prescription_amount' => optional($this->billingDetail)->total_amount ?? 0,
+            'lab_amount' => $this->labOrders->sum('total_amount') ?? 0,
             'other_details' => $other_details,
             'medical_report' => $medical_report,
             'bed_allocations' => $bed_allocations,
