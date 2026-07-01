@@ -307,7 +307,7 @@ public function encounterDashboardDetail(Request $request)
 {
     $encounter_id = $request->encounter_id;
     $encounterQuery = PatientEncounter::where('id',$encounter_id)
-        ->with('user','clinic','doctor','medicalHistroy','prescriptions','EncounterOtherDetails','medicalReport','bodyChart','soap','bedAllocations.bedMaster.bedType');
+        ->with('user','clinic','doctor','medicalHistroy','prescriptions','EncounterOtherDetails','medicalReport','bodyChart','soap','bedAllocations.bedMaster.bedType','labOrders.labOrderItems.labResult');
     
     // Only eager load medicine relationship if Medicine class exists
     if (class_exists('Modules\Pharma\Models\Medicine')) {
@@ -315,6 +315,16 @@ public function encounterDashboardDetail(Request $request)
     }
     
     $encounter_data = $encounterQuery->first();
+
+    // Fetch referrals linked to this encounter
+    if ($encounter_data && class_exists('Modules\PatientReferral\Models\PatientReferral')) {
+        $referrals = \Modules\PatientReferral\Models\PatientReferral::with(['referredByDoctor', 'referredToDoctor'])
+            ->where('patient_id', $encounter_data->user_id)
+            ->whereJsonContains('encounter_ids', (string)$encounter_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $encounter_data->referrals_collection = $referrals;
+    }
 
     $encounter_data['bed_type_name'] = '';
 

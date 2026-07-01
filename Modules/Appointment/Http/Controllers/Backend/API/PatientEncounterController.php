@@ -73,7 +73,7 @@ class PatientEncounterController extends Controller
     public function encounterInvoice(Request $request)
     {
         $id = $request->id;
-        $data = PatientEncounter::where('id', $id)->with('user', 'clinic', 'doctor', 'medicalHistroy', 'prescriptions', 'EncounterOtherDetails', 'medicalReport', 'appointmentdetail', 'billingrecord')->first();
+        $data = PatientEncounter::SetRole(auth()->user())->where('id', $id)->with('user', 'clinic', 'doctor', 'medicalHistroy', 'prescriptions', 'EncounterOtherDetails', 'medicalReport', 'appointmentdetail', 'billingrecord')->first();
 
         $data['selectedProblemList'] =  $data->medicalHistroy()->where('type', 'encounter_problem')->get();
         $data['selectedObservationList'] = $data->medicalHistroy()->where('type', 'encounter_observations')->get();
@@ -107,7 +107,7 @@ class PatientEncounterController extends Controller
     {
         $id = $request->id;
 
-        $data = PatientEncounter::where('id', $id)->with('pharma', 'user', 'clinic', 'doctor', 'medicalHistroy', 'prescriptions', 'EncounterOtherDetails', 'medicalReport', 'appointmentdetail', 'billingrecord')->first();
+        $data = PatientEncounter::SetRole(auth()->user())->where('id', $id)->with('pharma', 'user', 'clinic', 'doctor', 'medicalHistroy', 'prescriptions', 'EncounterOtherDetails', 'medicalReport', 'appointmentdetail', 'billingrecord')->first();
 
 
         $data['prescriptions'] = $data->prescriptions()->get();

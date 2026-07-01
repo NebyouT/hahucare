@@ -23,8 +23,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('update-encounter/{id}', [Modules\Appointment\Http\Controllers\Backend\PatientEncounterController::class, 'update'])->middleware('api.permission:edit_encounter');
     Route::post('delete-encounter/{id}', [Modules\Appointment\Http\Controllers\Backend\PatientEncounterController::class, 'destroy'])->middleware('api.permission:delete_encounter');
     Route::get('encounter-details', [PatientEncounterController::class, 'encounterList'])->middleware('api.permission:view_encounter');
-    Route::get('download-encounter-invoice', [PatientEncounterController::class, 'encounterInvoice'])->middleware('api.permission:view_encounter');
-    Route::get('download-prescription', [PatientEncounterController::class, 'downloadPrescription'])->middleware('api.permission:view_encounter');
+    Route::get('download-encounter-invoice', [PatientEncounterController::class, 'encounterInvoice']);
+    Route::get('download-prescription', [PatientEncounterController::class, 'downloadPrescription']);
 
     Route::get('encounter-dropdown-list', [EncounterDashboardController::class, 'encounterDropdownList']);
 

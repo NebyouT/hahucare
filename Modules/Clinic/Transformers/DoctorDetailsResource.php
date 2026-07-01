@@ -24,11 +24,13 @@ class DoctorDetailsResource extends JsonResource
         $doctor_services = $this->doctorService;
         $services = null;
 
-        foreach($doctor_services as $doctor_service){
+        foreach($doctor_services ?? [] as $doctor_service){
             $clinic_names = [];
             $clinics = optional($doctor_service->clinicservice)->ClinicServiceMapping;
-            foreach($clinics as $clinic){
-                $clinic_names[] = optional($clinic->center)->name;
+            if ($clinics) {
+                foreach($clinics as $clinic){
+                    $clinic_names[] = optional($clinic->center)->name;
+                }
             }
 
             $appointments_count = 0;

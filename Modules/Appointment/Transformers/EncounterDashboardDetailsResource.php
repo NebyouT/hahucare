@@ -5,6 +5,8 @@ namespace Modules\Appointment\Transformers;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Carbon\Carbon;
 use Modules\Appointment\Transformers\PrescriptionRescource;
+use Modules\Laboratory\Transformers\LabOrderResource;
+use Modules\PatientReferral\Transformers\PatientReferralResource;
 
 class EncounterDashboardDetailsResource extends JsonResource
 {
@@ -69,6 +71,8 @@ class EncounterDashboardDetailsResource extends JsonResource
             'other_details' => $other_details,
             'medical_report' => $medical_report,
             'bed_allocations' => $bed_allocations,
+            'lab_orders' => LabOrderResource::collection($this->labOrders),
+            'referrals' => $this->referrals_collection ? PatientReferralResource::collection($this->referrals_collection) : [],
             'appointment_id' => $this->appointment_id,
             'body_charts' => $this->bodyChart ?? null,
             'soap' => $this->soap ?? null,
