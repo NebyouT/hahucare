@@ -215,6 +215,8 @@ class AppointmentDetailResource extends JsonResource
             'service_amount' => $this->service_amount,
             'service_price' => $this->service_price,
             'service_total' => $service_price ?? 0,
+            'prescription_total' => optional(optional($this->patientEncounter)->billingDetail)->total_amount ?? 0,
+            'lab_total' => optional(optional($this->patientEncounter)->labBillingDetail)->total_amount ?? 0,
             'discount_type' => optional($this->appointmenttransaction)->discount_type,
             'discount_value' => optional($this->appointmenttransaction)->discount_value,
             'discount_amount' => optional($this->appointmenttransaction)->discount_amount,

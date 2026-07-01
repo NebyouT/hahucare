@@ -258,6 +258,10 @@ class AppointmentsController extends Controller
             'patientEncounter.bedAllocations.bedMaster',
             'patientEncounter.bedAllocations.bedMaster.bedType',
             'patientEncounter.bedAllocations.bedType',
+            'patientEncounter.billingDetail',
+            'patientEncounter.labBillingDetail',
+            'patientEncounter.labOrders.labOrderItems',
+            'patientEncounter.prescriptions.medicine',
             'cliniccenter',
             'bodyChart',
             'user',
@@ -356,6 +360,18 @@ class AppointmentsController extends Controller
             ]);
             // Continue with original data if recalculation fails
         }
+
+        // Add prescription and lab billing totals from separate billing streams
+        $prescriptionBilling = optional(optional($appointment->patientEncounter)->billingDetail);
+        $labBilling = optional(optional($appointment->patientEncounter)->labBillingDetail);
+        $appointmentDetailArray['prescription_total'] = $prescriptionBilling ? $prescriptionBilling->total_amount ?? 0 : 0;
+        $appointmentDetailArray['lab_total'] = $labBilling ? $labBilling->total_amount ?? 0 : 0;
+        $appointmentDetailArray['total_amount'] = ($appointmentDetailArray['total_amount'] ?? 0) +
+            (float)$appointmentDetailArray['prescription_total'] +
+            (float)$appointmentDetailArray['lab_total'];
+        $appointmentDetailArray['final_total_amount'] = ($appointmentDetailArray['final_total_amount'] ?? 0) +
+            (float)$appointmentDetailArray['prescription_total'] +
+            (float)$appointmentDetailArray['lab_total'];
         
         if($request->has('notification_id')){
             $notification = \App\Models\Notification::where('id', $request->notification_id)->first();
