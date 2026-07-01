@@ -366,12 +366,6 @@ class AppointmentsController extends Controller
         $labBilling = optional(optional($appointment->patientEncounter)->labBillingDetail);
         $appointmentDetailArray['prescription_total'] = $prescriptionBilling ? $prescriptionBilling->total_amount ?? 0 : 0;
         $appointmentDetailArray['lab_total'] = $labBilling ? $labBilling->total_amount ?? 0 : 0;
-        $appointmentDetailArray['total_amount'] = ($appointmentDetailArray['total_amount'] ?? 0) +
-            (float)$appointmentDetailArray['prescription_total'] +
-            (float)$appointmentDetailArray['lab_total'];
-        $appointmentDetailArray['final_total_amount'] = ($appointmentDetailArray['final_total_amount'] ?? 0) +
-            (float)$appointmentDetailArray['prescription_total'] +
-            (float)$appointmentDetailArray['lab_total'];
         
         if($request->has('notification_id')){
             $notification = \App\Models\Notification::where('id', $request->notification_id)->first();

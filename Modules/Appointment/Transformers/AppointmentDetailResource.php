@@ -7,6 +7,8 @@ use Modules\Appointment\Trait\AppointmentTrait;
 use Modules\Clinic\Transformers\DoctorReviewResource;
 use Modules\Appointment\Transformers\BodyChartResource;
 use Modules\Appointment\Transformers\BillingItemResource;
+use Modules\Appointment\Transformers\PrescriptionRescource;
+use Modules\Laboratory\Transformers\LabOrderResource;
 use Modules\Appointment\Models\BillingRecord;
 use Carbon\Carbon;
 
@@ -232,6 +234,8 @@ class AppointmentDetailResource extends JsonResource
             'price' => $price,
             'tax_data' => $tax_data,
             'billing_items' => ($billingItems && $billingItems->isNotEmpty()) ? BillingItemResource::collection($billingItems) : [],
+            'prescriptions' => PrescriptionRescource::collection(optional($this->patientEncounter)->prescriptions ?? collect()),
+            'lab_orders' => LabOrderResource::collection(optional($this->patientEncounter)->labOrders ?? collect()),
             'payment_status' => optional($this->appointmenttransaction)->payment_status,
             'is_enable_advance_payment' => optional($this->clinicservice)->is_enable_advance_payment,
             'advance_payment_amount' => $this->advance_payment_amount,
