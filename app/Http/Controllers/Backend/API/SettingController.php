@@ -199,6 +199,14 @@ class SettingController extends Controller
             }
         }
 
+        // Include Chapa credentials from config (stored in .env)
+        if ($request->is_authenticated == 1) {
+            $response['chapa_pay'] = [
+                'chapa_secret_key' => config('services.chapa.secret'),
+                'chapa_public_key' => config('services.chapa.public'),
+            ];
+        }
+
         $response['tax'] = $taxesData;
         $response['currency'] = $currencyData;
         $response['google_login_status'] = isset($settings['is_google_login']) ? (int)$settings['is_google_login'] : 0;
